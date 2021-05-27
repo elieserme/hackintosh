@@ -2,7 +2,7 @@
 
 This is the guide for **OpenCore 0.6.9** with **Big Sur 11.4** for an **iMac19,2** hackintosh build.
 
-**Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to understand the process and make any changes if you require different settings.
+**Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
 ## Why use iMac 19,2 model?
 
@@ -47,7 +47,7 @@ This is the parts list:
 
 ## Windows 10
 
-- If you plan to have Windows setup, it must be **installed first** in it's own disk;
+- If you plan to have Windows setup, it must be **installed first** on it's own disk;
 - Use your **motherboard and AMD drivers** supplied. For **WIFI/Bluetooth** drivers, [download](http://en.fenvi.com/en/download_zx.php) from Fenvi.
 
 ## MacOS 11 Big Sur
@@ -70,7 +70,7 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **config.pl
 - Inside the **config.plist** search and replace **AAAAAAAAAAAA** with your generated _SystemSerialNumber_ value, **BBBBBBBBBBBBBBBBBB** with _MLB_ value, **CCCCCC-CCCC-CCCC-CCCC-CCCCCCCCCCCC** with _SystemUUID_ value and **DDDDDDDD** with _ROM_ value.
 - Mount the **EFI partition** of the **USB** disk using [MountEFI](https://github.com/corpnewt/MountEFI) utility and **copy the EFI folder** inside **/Volumes/EFI**
 - **Boot** the target machine with **USB** disk you just made
-- Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below, but **note that hardcoded value is for F14a/b BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to recalculate this value** _(this command must run every time that BIOS is reflashed or CMOS clear)_
+- Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below, but **note that hardcoded value is for F14a/b BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to recalculate this value** _(this command must run every time that BIOS is reflashed or CMOS clear. Please note that some other motherboards can disable CFG Lock on BIOS settings without this hack)_
 ```bash
 setup_var_3 0x5A4 0x00
 ```
@@ -175,15 +175,54 @@ After all you will can boot MacOS, Windows and Recovery **just like a real Mac**
 
 ### USB Ports
 
-The included **USBPorts.kext** with USB mapping is for the **Gigabyte z370N WiFi 1.0 only** with some USB 3 ports and the USB type C enabled.
+The included **USBPorts.kext** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports and one **USB type C** enabled.
 
 - If you want to map your USB ports yourself, please read [this guide](https://www.tonymacx86.com/threads/the-new-beginners-guide-to-usb-port-configuration.286553/) for USB mapping;
 - Note that **you need Big Sur 11.2.3** to this guide work. Later versions do not work for port remapping;
-- The required **USBInjectAll.kext** is supplied but it's disabled in **config.plist**. You can enable it and disable USBPorts.kext to map the ports;
+- The required **USBInjectAll.kext** is supplied but it's disabled in **config.plist**. You can **enable it** and **disable USBPorts.kext** to map the ports;
+- Enable **USB Ports Limit** quirk:
+```xml
+<key>XhciPortLimit</key>
+<true/>
+```
+- After generate new **USBPorts.kext** using **Hackintool**, copy it to **Kexts folder** and **enable it** _(remind to disable USBInjectAll.kext and set XhciPortLimit to false)_.
+
+### MacPro7,1
+
+Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video production** acceleration. Follow the steps below:
+- **Disable iGPU** in **BIOS** settings, changing **Chipset &gt; Internal Graphics** to **DISABLED** 
+- Change **config.plist** and replace **SystemProductName** with MacPro7,1:
+```xml
+<key>SystemProductName</key>
+<string>MacPro7,1</string>
+```
+- Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for MacPro7,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **config.plist**;
+- **Remove this section** from your **config.plist** since you **don't have iGPU** anymore:
+```xml
+<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+<dict>
+	<key>AAPL,ig-platform-id</key>
+	<data>AwCSPg==</data>
+</dict>
+```
+
+- Edit **USBPorts.kext** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS:
+```xml
+<key>IOKitPersonalities</key>
+<dict>
+<key>MacPro7,1-XHC</key>
+```
+and
+```xml
+<key>model</key>
+<string>MacPro7,1</string>
+```
+- **Enable** the **CPUFriend.kext**, **CPUFriendDataProvider.kext** and **RestrictEvents.kext** in your **config.plist** _(this kexts are supplied but disabled by default)_
+- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS**.
 
 
 ### Brazilian ABNT2 keyboard
-- On Brazil, to make **ABNT 2 keyboard** default, change language and keyboard layout in your **config.plist** inside **NVRAM** key section:
+- On Brazil, to make your **ABNT 2 keyboard** default, change language and keyboard layout in your **config.plist** inside **NVRAM** key section:
 ```xml
 <key>prev-lang:kbd</key>
 <string>pt-BR:128</string>
