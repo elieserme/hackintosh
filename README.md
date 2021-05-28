@@ -5,11 +5,11 @@ This is the guide for **OpenCore 0.6.9** with **Big Sur 11.4** for an **iMac19,2
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
 ## Why use iMac 19,2 model?
-
-- **AMD GPU** and **iGPU** for balanced performance
-- **h264** and **h265** video **encoding** and **decoding** working
-- **Sidecar** working because **this iMac do not have T2 chip**
-- Note that are DRM issues with **Netflix**, **PrimeVideo** and **Apple TV+** in Big Sur until community finds a solution _(if you need DRM support, better use the MacPro7,1 SMBIOS)_
+- Native **Intel Cofee Lake** power management;
+- **AMD GPU** and **iGPU** for balanced performance;
+- **h264** and **h265** video **encoding** and **decoding** working;
+- **Sidecar** working because **this iMac do not have T2 chip**;
+- Note that are DRM issues with **Netflix**, **PrimeVideo** and **Apple TV+** in Big Sur until community finds a solution _(if you require DRM support, better use the iMacPro1,1 or MacPro7,1 SMBIOS and read this until the end for more information)_.
 
 ## Hardware
 
@@ -103,64 +103,61 @@ brigadier -m iMac19,2 -i
 ```
 ### Cleaning the EFI
 
-- Remove all **Tools** from menu _(if you need this tools again you can use your USB disk to boot)_. Edit your **config.plist** and find the following section:
-```xml
-<key>Tools</key>
-<array>
-	<dict>
-		<key>Comment</key>
-		<string>OpenShell.efi<string>
-		<key>Auxiliary</key>
-		<true/>
-		<key>Enabled</key>
-		<true/>
-		<key>Arguments</key>
-		<string></string>
-		<key>Path</key>
-		<string>OpenShell.efi<string>
-		<key>Name</key>
-		<string>OpenShell.efi<string>
-		<key>RealPath</key>
-		<false/>
-		<key>TextMode</key>
-		<false/>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string>modGRUBShell.efi<string>
-		<key>Auxiliary</key>
-		<true/>
-		<key>Enabled</key>
-		<true/>
-		<key>Arguments</key>
-		<string></string>
-		<key>Path</key>
-		<string>modGRUBShell.efi<string>
-		<key>Name</key>
-		<string>modGRUBShell.efi<string>
-		<key>RealPath</key>
-		<false/>
-		<key>TextMode</key>
-		<false/>
-	</dict>
-</array>
+- Remove all **Tools** from menu _(if you need this tools again you can use your USB disk to boot)_. Edit your **config.plist** and find the following section and disable:
+```diff
+	<key>Tools</key>
+	<array>
+		<dict>
+			<key>Comment</key>
+			<string>OpenShell.efi<string>
+			<key>Auxiliary</key>
+			<true/>
+			<key>Enabled</key>
+-			<true/>
++			<false/>
+			<key>Arguments</key>
+			<string></string>
+			<key>Path</key>
+			<string>OpenShell.efi<string>
+			<key>Name</key>
+			<string>OpenShell.efi<string>
+			<key>RealPath</key>
+			<false/>
+			<key>TextMode</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>modGRUBShell.efi<string>
+			<key>Auxiliary</key>
+			<true/>
+			<key>Enabled</key>
+-			<true/>
++			<false/>
+			<key>Arguments</key>
+			<string></string>
+			<key>Path</key>
+			<string>modGRUBShell.efi<string>
+			<key>Name</key>
+			<string>modGRUBShell.efi<string>
+			<key>RealPath</key>
+			<false/>
+			<key>TextMode</key>
+			<false/>
+		</dict>
+	</array>
 ```
-Just **change it** to:
-```xml
-<key>Tools</key>
-<array/>
-```
-After that, remove the **Tools folder** of your **EFI** volume.
-
 - Disable **Reset NVRAM** option too:
-```xml
-<key>AllowNvramReset</key>
-<false/>
+```diff
+	<key>AllowNvramReset</key>
+-	<true/>
++	<false/>
 ```
 - Disable **Boot Menu** to work like a real Mac:
-```xml
-<key>ShowPicker</key>
-<false/>
+```diff
+	<key>ShowPicker</key>
+-	<true/>
++	<false/>
 ```
 
 ## Notes 
@@ -171,58 +168,157 @@ After all you will can boot MacOS, Windows and Recovery **just like a real Mac**
 - Update your Mac using the **Apple Software Updates**;
 - Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
 
-## Supplemental
+## Other SMBIOS
 
-### USB Ports
+### iMacPro1,1
 
-The included **USBPorts.kext** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports and one **USB type C** enabled.
-
-- If you want to map your USB ports yourself, please read [this guide](https://www.tonymacx86.com/threads/the-new-beginners-guide-to-usb-port-configuration.286553/) for USB mapping;
-- Note that **you need Big Sur 11.2.3** to this guide work. Later versions do not work for port remapping;
-- The required **USBInjectAll.kext** is supplied but it's disabled in **config.plist**. You can **enable it** and **disable USBPorts.kext** to map the ports;
-- Enable **USB Ports Limit** quirk:
-```xml
-<key>XhciPortLimit</key>
-<true/>
+Use the MacPro1,1 SMBIOS if you **require full DRM support**. Follow the steps below:
+- **Disable iGPU** in **BIOS** settings, changing **Chipset &gt; Internal Graphics** to **DISABLED** 
+- Change **config.plist** and replace **SystemProductName** with iMacPro1,1:
+```diff
+	<key>SystemProductName</key>
+-	<string>iMac19,2</string>
++	<string>iMacPro1,1</string>
 ```
-- After generate new **USBPorts.kext** using **Hackintool**, copy it to **Kexts folder** and **enable it** _(remind to disable USBInjectAll.kext and set XhciPortLimit to false)_.
+- Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for iMacPro1,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **config.plist**;
+- **Remove this section** from your **config.plist** since you **don't have iGPU** anymore:
+```diff
+-	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+-	<dict>
+-		<key>AAPL,ig-platform-id</key>
+-		<data>AwCSPg==</data>
+-	</dict>
+```
+- Find and Enable **XHC1 to SHCI** patch in your **config.plist**:
+```diff
+	<key>Patch</key>
+	<array>
+		<dict>
+			<key>Comment</key>
+			<string>XHC1 to SHCI</string>
+			<key>Count</key>
+			<integer>0</integer>
+			<key>Enabled</key>
+-			<false/>
++			<true/>
+			<key>Find</key>
+			<data>WEhDMQ==</data>
+			<key>Limit</key>
+			<integer>0</integer>
+			<key>Mask</key>
+			<data></data>
+			<key>OemTableId</key>
+			<data></data>
+			<key>Replace</key>
+			<data>U0hDSQ==</data>
+			<key>ReplaceMask</key>
+			<data></data>
+			<key>Skip</key>
+			<integer>0</integer>
+			<key>TableLength</key>
+			<integer>0</integer>
+			<key>TableSignature</key>
+			<data></data>
+		</dict>
+	</array>
+```
+- Edit **USBPorts.kext** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS:
+```diff
+	<key>IOKitPersonalities</key>
+	<dict>
+-	<key>iMac19,2-XHC</key>
++	<key>iMacPro1,1-XHC</key>
+```
+and
+```diff
+	<key>model</key>
+-	<string>iMac19,2</string>
++	<string>iMacPro1,1</string>
+```
+- **Copy** the files **CPUFriend.kext** and **CPUFriendDataProvider.kext** from folder **other/imapro11** in this repo to your **Kexts** folder
+- **Enable** the **CPUFriend.kext** and **CPUFriendDataProvider.kext** and in your **config.plist** _(this kexts are supplied but disabled by default)_
+- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new iMacPro1,1 **prior to reboot MacOS** _(if you need to generate your own CPUFriendDataProvider.kext see the apendix below for instructions)_
 
 ### MacPro7,1
 
 Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video production** acceleration. Follow the steps below:
 - **Disable iGPU** in **BIOS** settings, changing **Chipset &gt; Internal Graphics** to **DISABLED** 
 - Change **config.plist** and replace **SystemProductName** with MacPro7,1:
-```xml
-<key>SystemProductName</key>
-<string>MacPro7,1</string>
+```diff
+	<key>SystemProductName</key>
+-	<string>iMac19,2</string>
++	<string>MacPro7,1</string>
 ```
 - Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for MacPro7,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **config.plist**;
 - **Remove this section** from your **config.plist** since you **don't have iGPU** anymore:
-```xml
-<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-<dict>
-	<key>AAPL,ig-platform-id</key>
-	<data>AwCSPg==</data>
-</dict>
+```diff
+-	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+-	<dict>
+-		<key>AAPL,ig-platform-id</key>
+-		<data>AwCSPg==</data>
+-	</dict>
 ```
-
 - Edit **USBPorts.kext** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS:
-```xml
-<key>IOKitPersonalities</key>
-<dict>
-<key>MacPro7,1-XHC</key>
+```diff
+	<key>IOKitPersonalities</key>
+	<dict>
+-	<key>iMac19,2-XHC</key>
++	<key>MacPro7,1-XHC</key>
 ```
 and
-```xml
-<key>model</key>
-<string>MacPro7,1</string>
+```diff
+	<key>model</key>
+-	<string>iMac19,2</string>
++	<string>MacPro7,1</string>
 ```
+- **Copy** the files **CPUFriend.kext** and **CPUFriendDataProvider.kext** from folder **other/mapro71** in this repo to your **Kexts** folder
 - **Enable** the **CPUFriend.kext**, **CPUFriendDataProvider.kext** and **RestrictEvents.kext** in your **config.plist** _(this kexts are supplied but disabled by default)_
-- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS**.
+- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own CPUFriendDataProvider.kext see the apendix below for instructions)_
 
+## Apendix
+
+### USB Ports
+
+The included **USBPorts.kext** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
+
+- If you want to map your USB ports yourself, **please read** [this guide](https://www.tonymacx86.com/threads/the-new-beginners-guide-to-usb-port-configuration.286553/) for USB mapping using [Hackintool](https://github.com/headkaze/Hackintool);
+- Note that **you need Big Sur 11.2.3** to this guide work. **Later versions do not work** for port remapping;
+- The required **USBInjectAll.kext** is supplied but it's disabled in **config.plist**. You can **enable it** and **disable USBPorts.kext** to map the ports;
+- Enable **USB Ports Limit** quirk:
+```diff
+	<key>XhciPortLimit</key>
+-	<false/>
++	<true/>
+```
+- **Follow the guide** and determine what ports you want to use _(must be 15 or less ports)_;
+- Generate new **USBPorts.kext** using **Hackintool**, copy it to **Kexts folder** and **enable it** _(remind to disable USBInjectAll.kext and set XhciPortLimit to false again)_.
+
+### CPUFriendDataProvider
+
+The **iMacPro1,1 and MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **iMacPro and MacPro uses Intel Xeon** CPUs and **power management will not work for your Intel Cofee Lake** or other CPUs. 
+
+This can be resolved using **CPUFriend.kext** and a **CPUFriendDataProvider.kext** _(frequency vectors)_ that are provided in repo for Cofee Lake CPUs. But if you need to generate this file yourself, you can use the [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) as described in [this guide](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#enabling-x86platformplugin).
+
+Another way is use the **Tools** that come with **CPUFriend.kext** to **generate CPUFriendDataProvider.kext** using the steps below on your MacOS:
+ 
+- Download the [CPUFriend](https://github.com/acidanthera/CPUFriend) repo:
+```bash
+git clone git@github.com:acidanthera/CPUFriend.git
+```
+- Go inside the **Tools** folder;
+- **Copy the relevant power management file from MacOS system**. In our case, we need **Cofee Lake** _(for i7 8700)_ so the best Mac model that fits this bill is **iMac19,2** _(you can search the model that match your processor if you use another generation)_. The file we need to copy is the **board-id** of Mac19,2 named **Mac-63001698E7A34814.plist** _(you must replace with board id of model you need)_:
+```bash
+sudo cp /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/PlugIns/X86PlatformPlugin.kext/Contents/Resources/Mac-63001698E7A34814.plist .
+```
+- Run the **ResourceConverter.sh** Tool using the **board-id file** that you copied to current folder:
+```bash
+sudo chmod +x ResourceConverter.sh
+./ResourceConverter.sh -k Mac-63001698E7A34814.plist
+```
+- The file **CPUFriendDataProvider.kext** will be generated. Just **copy this file to your Kext folder in your EFI volume**, the same folder of **CPUFriend.kext** file _(remind to enable this kexts in config.plist)_
 
 ### Brazilian ABNT2 keyboard
-- On Brazil, to make your **ABNT 2 keyboard** default, change language and keyboard layout in your **config.plist** inside **NVRAM** key section:
+On Brazil, to make your **ABNT 2 keyboard** default, change language and keyboard layout in your **config.plist** inside **NVRAM** key section:
 ```xml
 <key>prev-lang:kbd</key>
 <string>pt-BR:128</string>
