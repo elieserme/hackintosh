@@ -279,7 +279,47 @@ and
 +	<string>iMacPro1,1</string>
 ```
 - **Copy** the files **CPUFriend.kext** and **CPUFriendDataProvider.kext** from folder **other/imapro11** in this repo to your **Kexts** folder
-- **Enable** the **CPUFriend.kext** and **CPUFriendDataProvider.kext** and in your **config.plist** _(this kexts are supplied but disabled by default)_
+- **Enable** the **CPUFriend.kext** and **CPUFriendDataProvider.kext** and in your **config.plist** _(this kexts are supplied but disabled by default)_:
+```diff
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/CPUFriend</string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>CPUFriend.kext</string>
+	</dict>
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string></string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>CPUFriendDataProvider.kext</string>
+	</dict>
+```
 - Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new iMacPro1,1 **prior to reboot MacOS** _(if you need to generate your own CPUFriendDataProvider.kext see the apendix below for instructions)_
 
 ### MacPro7,1
@@ -315,8 +355,67 @@ and
 +	<string>MacPro7,1</string>
 ```
 - **Copy** the files **CPUFriend.kext** and **CPUFriendDataProvider.kext** from folder **other/mapro71** in this repo to your **Kexts** folder
-- **Enable** the **CPUFriend.kext**, **CPUFriendDataProvider.kext** and **RestrictEvents.kext** in your **config.plist** _(this kexts are supplied but disabled by default)_
-- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own CPUFriendDataProvider.kext see the apendix below for instructions)_
+- **Enable** the **CPUFriend.kext**, **CPUFriendDataProvider.kext** and **RestrictEvents.kext** in your **config.plist** _(this kexts are supplied but disabled by default):
+```diff
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/CPUFriend</string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>CPUFriend.kext</string>
+	</dict>
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string></string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>CPUFriendDataProvider.kext</string>
+	</dict>
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/RestrictEvents</string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>RestrictEvents.kext</string>
+	</dict>
+```
+- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own CPUFriendDataProvider.kext see the apendix below for instructions)_.
 
 ## Apendix
 
@@ -326,7 +425,47 @@ The included **USBPorts.kext** with USB mapping is for the **Gigabyte z370N WiFi
 
 - If you want to map your USB ports yourself, **please read** [this guide](https://www.tonymacx86.com/threads/the-new-beginners-guide-to-usb-port-configuration.286553/) for USB mapping using [Hackintool](https://github.com/headkaze/Hackintool);
 - Note that **you need Big Sur 11.2.3** to this guide work. **Later versions do not work** for port remapping;
-- The required **USBInjectAll.kext** is supplied but it's disabled in **config.plist**. You can **enable it** and **disable USBPorts.kext** to map the ports;
+- The required **USBInjectAll.kext** is supplied but it's disabled in **config.plist**. You can **enable it** and **disable USBPorts.kext** to map the ports:
+```diff
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/USBInjectAll</string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>USBInjectAll.kext</string>
+	</dict>
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<true/>
++		<false/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string></string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>USBPorts.kext</string>
+	</dict>
+```
 - Enable **USB Ports Limit** quirk:
 ```diff
 	<key>XhciPortLimit</key>
@@ -334,7 +473,47 @@ The included **USBPorts.kext** with USB mapping is for the **Gigabyte z370N WiFi
 +	<true/>
 ```
 - **Follow the guide** and determine what ports you want to use _(must be 15 or less ports)_;
-- Generate new **USBPorts.kext** using **Hackintool**, copy it to **Kexts folder** and **enable it** _(remind to disable USBInjectAll.kext and set XhciPortLimit to false again)_.
+- Generate new **USBPorts.kext** using **Hackintool**, copy it to **Kexts folder** and **enable it** _(remind to disable USBInjectAll.kext and set XhciPortLimit to false again)_:
+```diff
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
++		<false/>
+-		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/USBInjectAll</string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>USBInjectAll.kext</string>
+	</dict>
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
++		<true/>
+-		<false/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string></string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>USBPorts.kext</string>
+	</dict>
+```
 
 ### CPUFriendDataProvider
 
