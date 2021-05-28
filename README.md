@@ -213,6 +213,14 @@ After all you will can boot MacOS, Windows and Recovery **just like a real Mac**
 
 ## Other SMBIOS
 
+This build has some options:
+- The **most hardware compatible** and working out-of-the-box is **iMac19,2** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
+- **iMacPro1,1** will have **DRM decoding fully working**; but loss SideCar because no T2 chip;
+- **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar too because no T2 chip.
+
+You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to iMacPro or MacPro see instructions below.
+
+
 ### iMacPro1,1
 
 Use the MacPro1,1 SMBIOS if you **require full DRM support**. Follow the steps below:
@@ -423,8 +431,12 @@ and
 
 The included **USBPorts.kext** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
 
-- If you want to map your USB ports yourself, **please read** [this guide](https://www.tonymacx86.com/threads/the-new-beginners-guide-to-usb-port-configuration.286553/) for USB mapping using [Hackintool](https://github.com/headkaze/Hackintool);
-- Note that **you need Big Sur 11.2.3** to this guide work. **Later versions do not work** for port remapping;
+Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
+
+If you want to map your USB ports yourself, **please read** [this guide](https://www.tonymacx86.com/threads/the-new-beginners-guide-to-usb-port-configuration.286553/) for USB mapping using [Hackintool](https://github.com/headkaze/Hackintool).
+
+Note that **you need Big Sur 11.2.3** to this guide work. **Later versions do not work** for port remapping. After reading the guide, follow this instructions:
+
 - The required **USBInjectAll.kext** is supplied but it's disabled in **config.plist**. You can **enable it** and **disable USBPorts.kext** to map the ports:
 ```diff
 	<dict>
@@ -515,6 +527,32 @@ The included **USBPorts.kext** with USB mapping is for the **Gigabyte z370N WiFi
 	</dict>
 ```
 
+### 2nd Ethernet Port
+
+Gigabyte Z370N WIFI **has two gigabit ethernet ports**. By default, only Intel i219 is enabled in **config.plist** but you can activate the second port _(Intel i211)_ by enable **SmallTreeIntel82576.kext** in your **config.plist**:
+
+```diff
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/SmallTreeIntel82576</string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>SmallTreeIntel82576.kext</string>
+	</dict>
+```
+
 ### CPUFriendDataProvider
 
 The **iMacPro1,1 and MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **iMacPro and MacPro uses Intel Xeon** CPUs and **power management will not work for your Intel Cofee Lake** or other CPUs. 
@@ -523,12 +561,12 @@ This can be resolved using **CPUFriend.kext** and a **CPUFriendDataProvider.kext
 
 Another way is use the **Tools** that come with **CPUFriend.kext** to **generate CPUFriendDataProvider.kext** using the steps below on your MacOS:
  
-- Download the [CPUFriend](https://github.com/acidanthera/CPUFriend) repo:
+- **Download** the [CPUFriend](https://github.com/acidanthera/CPUFriend) repo:
 ```bash
 git clone git@github.com:acidanthera/CPUFriend.git
 ```
 - Go inside the **Tools** folder;
-- **Copy the relevant power management file from MacOS system**. In our case, we need **Cofee Lake** _(for i7 8700)_ so the best Mac model that fits this bill is **iMac19,2** _(you can search the model that match your processor if you use another generation)_. The file we need to copy is the **board-id** of Mac19,2 named **Mac-63001698E7A34814.plist** _(you must replace with board id of model you need)_:
+- **Copy the relevant power management file from MacOS system**. In our case, we need **Cofee Lake** _(for i7 8700)_ so the best Mac model that fits the bill is **iMac19,2** _(you can search the model that match your processor if you use another generation)_. The file we need to copy is the **board-id** of Mac19,2 named **Mac-63001698E7A34814.plist** _(you must replace with board id of model you need)_:
 ```bash
 sudo cp /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/PlugIns/X86PlatformPlugin.kext/Contents/Resources/Mac-63001698E7A34814.plist .
 ```
