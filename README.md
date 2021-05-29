@@ -552,6 +552,14 @@ Gigabyte Z370N WIFI **has two gigabit ethernet ports**. By default, only Intel i
 		<string>SmallTreeIntel82576.kext</string>
 	</dict>
 ```
+To have the fancy **name** of this ethernet port in **System Report**, you can inject the device name in properties inside **DeviceProperties**:
+```xml
+<key>PciRoot(0x0)/Pci(0x1C,0x5)/Pci(0x0,0x0)</key>
+<dict>
+	<key>model</key>
+	<string>Intel I211 PCI Express Gigabit Ethernet</string>
+</dict>
+```
 
 ### CPUFriendDataProvider
 
