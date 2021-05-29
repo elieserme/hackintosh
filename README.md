@@ -591,3 +591,5 @@ On Brazil, to make your **ABNT 2 keyboard** default, change language and keyboar
 <key>prev-lang:kbd</key>
 <string>pt-BR:128</string>
 ```
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=elieserme)](https://github.com/anuraghazra/github-readme-stats)
