@@ -565,9 +565,9 @@ To have the fancy **name** of this ethernet port in **System Report**, you can i
 
 The **iMacPro1,1 and MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **iMacPro and MacPro uses Intel Xeon** CPUs and **power management will not work for your Intel Cofee Lake** or other CPUs. 
 
-This can be resolved using **CPUFriend.kext** and a **CPUFriendDataProvider.kext** _(frequency vectors)_ that are provided in repo for Cofee Lake CPUs. But if you need to generate this file yourself, you can use the [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) as described in [this guide](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#enabling-x86platformplugin).
+**Method 1:** This can be resolved using **CPUFriend.kext** and a **CPUFriendDataProvider.kext** _(frequency vectors)_ that are provided in repo for Cofee Lake CPUs. But if you need to generate this file yourself, you can use the [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) as described in [this guide](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#enabling-x86platformplugin).
 
-Another way is use the **Tools** that come with **CPUFriend.kext** to **generate CPUFriendDataProvider.kext** using the steps below on your MacOS:
+**Method 2:** Another way is use the **Tools** that come with **CPUFriend.kext** to **generate CPUFriendDataProvider.kext** using the steps below on your MacOS:
  
 - **Download** the [CPUFriend](https://github.com/acidanthera/CPUFriend) repo:
 ```bash
@@ -591,5 +591,21 @@ On Brazil, to make your **ABNT 2 keyboard** default, change language and keyboar
 <key>prev-lang:kbd</key>
 <string>pt-BR:128</string>
 ```
+
+### Choices, choices and choices...
+
+For my build **I decided to go with iMacPro1,1** SMBIOS:
+- **Best timings for video render** using my RX590 GPU;
+- For some reason I don't known, **best WIFI/Bluetooth speeds** using my BCM94360NG card;
+- **NetFlix, PrimeVideo** and **AppleTV+** working with **full DRM support** even on Safari;
+- **Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working and tested _(but SideCar not)_
+- **Disabled iGPU** in BIOS;
+- Generated **CPUFriendDataProvider.kext** using **Method 2** above;
+- Computer **sleep working** with wake on events preserved _(iDevices proximity and PowerNap updates)_ as a real Mac;
+- Only **one ethernet port** enabled _(the Intel i219)_ like a real iMac;
+- **Disable boot menu** _(can be enabled using Option or ESC key on boot)_ like a real iMac;
+- **Enabled boot chyme** sound, connecting speakers to LineOut on motherboard _(enabling volume controls on keyboard too, because real Macs do not control volume for HDMI ou DisplayPort connections)_;
+
+
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=elieserme)](https://github.com/anuraghazra/github-readme-stats)
