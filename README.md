@@ -585,8 +585,16 @@ sudo chmod +x ResourceConverter.sh
 ```
 - The file **CPUFriendDataProvider.kext** will be generated. Just **copy this file to your Kext folder in your EFI volume**, the same folder of **CPUFriend.kext** file _(remind to enable this kexts in config.plist)_
 
-### Brazilian ABNT2 keyboard
-On Brazil, to make your **ABNT 2 keyboard** default, change language and keyboard layout in your **config.plist** inside **NVRAM** key section:
+### Sleep and Wake very often
+Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like updates and other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
+```bash
+sudo pmset powernap 0
+sudo pmset proximitywake 0
+sudo pmset tcpkeepalive 0
+```
+
+### ABNT2 keyboard on install MacOS
+To make your brazilian **ABNT2 keyboard** default when Install MacOS, change language and keyboard layout in your **config.plist** inside **NVRAM** key section:
 ```xml
 <key>prev-lang:kbd</key>
 <string>pt-BR:128</string>
