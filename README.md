@@ -592,7 +592,7 @@ On Brazil, to make your **ABNT 2 keyboard** default, change language and keyboar
 <string>pt-BR:128</string>
 ```
 
-### Choices, choices and choices...
+## Choices, choices and choices...
 
 For my build **I decided to go with iMacPro1,1** SMBIOS:
 - **Best timings for video render** using my RX590 GPU;
