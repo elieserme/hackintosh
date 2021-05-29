@@ -601,11 +601,11 @@ For my build **I decided to go with iMacPro1,1** SMBIOS:
 - **Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working and tested _(but SideCar not)_
 - **Disabled iGPU** in BIOS;
 - Generated **CPUFriendDataProvider.kext** using **Method 2** above;
-- Computer **sleep working** with wake on events preserved _(iDevices proximity and PowerNap updates)_ as a real Mac;
+- Computer **sleep working** with wakeup on events preserved _(iDevices proximity and PowerNap updates)_ as a real Mac;
 - Only **one ethernet port** enabled _(the Intel i219)_ like a real iMac;
 - **Disable boot menu** _(can be enabled using Option or ESC key on boot)_ like a real iMac;
 - **Enabled boot chyme** sound, connecting speakers to LineOut on motherboard _(enabling volume controls on keyboard too, because real Macs do not control volume for HDMI ou DisplayPort connections)_;
-
+- I feel that I have an iMac!
 
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=elieserme)](https://github.com/anuraghazra/github-readme-stats)
