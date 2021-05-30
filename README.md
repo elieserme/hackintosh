@@ -563,7 +563,7 @@ To have the fancy **name** of this ethernet port in **System Report**, you can i
 
 ### CPUFriendDataProvider
 
-The **iMacPro1,1 and MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **iMacPro and MacPro uses Intel Xeon** CPUs and **power management will not work for your Intel Cofee Lake** or other CPUs. 
+The **iMacPro1,1 and MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **iMacPro and MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
 
 **Method 1:** This can be resolved using **CPUFriend.kext** and a **CPUFriendDataProvider.kext** _(frequency vectors)_ that are provided in repo for Cofee Lake CPUs. But if you need to generate this file yourself, you can use the [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) as described in [this guide](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#enabling-x86platformplugin).
 
@@ -592,6 +592,9 @@ sudo pmset powernap 0
 sudo pmset proximitywake 0
 sudo pmset tcpkeepalive 0
 ```
+After this commands, **disable Find my Mac** on your iCloud settings.
+
+The setup above works on a real Mac computer too, if you want deep sleeps just follow the same steps.
 
 ### ABNT2 keyboard on install MacOS
 To make your brazilian **ABNT2 keyboard** default when Install MacOS, change language and keyboard layout in your **config.plist** inside **NVRAM** key section:
@@ -608,11 +611,11 @@ For my build **I decided to go with iMacPro1,1** SMBIOS:
 - **NetFlix, PrimeVideo** and **AppleTV+** working with **full DRM support** even on Safari;
 - **Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working and tested _(but SideCar not)_
 - **Disabled iGPU** in BIOS;
-- Generated **CPUFriendDataProvider.kext** using **Method 2** above;
-- Computer **sleep working** with wakeup on events preserved _(iDevices proximity and PowerNap updates)_ as a real Mac;
-- Only **one ethernet port** enabled _(the Intel i219)_ like a real iMac;
+- Disabled **CPUFriend.kext**, **CPUFriendDataProvider.kext**, **RestrictEvents.kext**, **USBInjectAll.kext** and **SmallTreeIntel82576.kext** as not needed;
+- Computer **sleep working** as a real Mac;
 - **Disable boot menu** _(can be enabled using Option or ESC key on boot)_ like a real iMac;
 - **Enabled boot chyme** sound, connecting speakers to LineOut on motherboard _(enabling volume controls on keyboard too, because real Macs do not control volume for HDMI ou DisplayPort connections)_;
+- Apple **Magic Keyboard** and **Magic TrackPad** fully working on **MacOS**, **Windows 10** and even in **BIOS** settins _(press FN+F12 to enter BIOS setup)_ with **BootCamp** installed on Windows;
 - I feel that I have an iMac!
 
 
