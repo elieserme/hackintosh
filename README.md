@@ -609,7 +609,7 @@ For my build **I decided to go with iMacPro1,1** SMBIOS:
 - **Best timings for video render** using my RX590 GPU;
 - For some reason I don't known, **best WIFI/Bluetooth speeds** using my BCM94360NG card;
 - **NetFlix, PrimeVideo** and **AppleTV+** working with **full DRM support** even on Safari;
-- **Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working and tested _(but SideCar not)_
+- **AirPlay, Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working and tested _(but SideCar not)_
 - **Disabled iGPU** in BIOS;
 - Disabled **CPUFriend.kext**, **CPUFriendDataProvider.kext**, **RestrictEvents.kext**, **USBInjectAll.kext** and **SmallTreeIntel82576.kext** as not needed;
 - Computer **sleep working** as a real Mac;
