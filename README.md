@@ -5,7 +5,7 @@ This is the guide for **OpenCore 0.6.9** with **Big Sur 11.4** for an **iMac19,2
 ## Table of Contents
 
 - [Warning](#warning)
-- [Why use iMac 19,2 model?](#why-use-imac-19,2-model)
+- [Why use iMac 19,2 model?](#why-use-imac-19,2-model?)
 - [Hardware](#hardware)
 
 ## Warning 
