@@ -5,13 +5,13 @@ This is the guide for **OpenCore 0.6.9** with **Big Sur 11.4** for an **iMac19,2
 ## Table of Contents
 
 - [Warning](#warning)
-- [Why use iMac 19,2 model?](#why-use-imac-19-2-model?)
+- [Why use iMac 19,2 model?](#why-use-imac-19-model)
 - [Hardware](#hardware)
 
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
-## Why use iMac 19,2 model?
+## Why use iMac 19 model
 - Native **Intel Cofee Lake** power management;
 - **AMD GPU** and **iGPU** for balanced performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
