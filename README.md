@@ -7,6 +7,24 @@ This is the guide for **OpenCore 0.6.9** with **Big Sur 11.4** for an **iMac19,2
 - [Warning](#warning)
 - [Why use iMac 19,2 model?](#why-use-imac-19-model)
 - [Hardware](#hardware)
+	- [BIOS settings](#bios-settings)
+- [Windows 10](#windows-10)
+- [MacOS 11 Big Sur](#macos-11-big-sur)
+- [Post Install](#post-install)
+	- [Windows and BootCamp](#windows-and-bootcamp)
+	- [Cleaning the EFI](#cleaning-the-efi)
+- [Other SMBIOS](#other-smbios)
+	- [iMacPro](#imacpro)
+	- [MacPro](#macpro)
+- [Notes](#notes)
+	- [USB Ports](#usb-ports)
+	- [2nd Ethernet port](#2nd-ethernet-port)
+	- [Power Management](#power-management)
+	- [Sleep and Wake](#sleep-and-wake)
+	- [ABNT2 keyboard](#abnt2-keyboard)
+	- [Final comments](#final-comments)
+- [My Build](#my-build)
+
 
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
@@ -31,7 +49,9 @@ This is the parts list:
 - **Wireless:** [BCM94360NG ](http://en.fenvi.com/en/download_zx.php) Bluetooth and WiFI replacement card
 - **Case:** [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX
 
-### Gigabyte Z370N WiFi BIOS F14b settings
+### BIOS settings
+
+Gigabyte z370N WIFI using BIOS version F14b
 
 - **Load optimised defaults**
 - MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
@@ -210,14 +230,6 @@ brigadier -m iMac19,2 -i
 +	<false/>
 ```
 
-## Notes 
-
-After all you will can boot MacOS, Windows and Recovery **just like a real Mac** computer:
-- Hold **Option** key (or **ESC** key) to show boot menu;
-- Use **System Preferences > Startup** disk to change boot to Windows and **BootCamp Control Panel** on Windows to change the boot to Mac;
-- Update your Mac using the **Apple Software Updates**;
-- Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
-
 ## Other SMBIOS
 
 This build has some options:
@@ -228,7 +240,7 @@ This build has some options:
 You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to iMacPro or MacPro see instructions below.
 
 
-### iMacPro1,1
+### iMacPro
 
 Use the MacPro1,1 SMBIOS if you **require full DRM support**. Follow the steps below:
 - **Disable iGPU** in **BIOS** settings, changing **Chipset &gt; Internal Graphics** to **DISABLED** 
@@ -337,7 +349,7 @@ and
 ```
 - Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new iMacPro1,1 **prior to reboot MacOS** _(if you need to generate your own CPUFriendDataProvider.kext see the apendix below for instructions)_
 
-### MacPro7,1
+### MacPro
 
 Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video production** acceleration. Follow the steps below:
 - **Disable iGPU** in **BIOS** settings, changing **Chipset &gt; Internal Graphics** to **DISABLED** 
@@ -432,7 +444,7 @@ and
 ```
 - Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own CPUFriendDataProvider.kext see the apendix below for instructions)_.
 
-## Apendix
+## Notes 
 
 ### USB Ports
 
@@ -568,7 +580,7 @@ To have the fancy **name** of this ethernet port in **System Report**, you can i
 </dict>
 ```
 
-### CPUFriendDataProvider
+### Power Management
 
 The **iMacPro1,1 and MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **iMacPro and MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
 
@@ -592,7 +604,7 @@ sudo chmod +x ResourceConverter.sh
 ```
 - The file **CPUFriendDataProvider.kext** will be generated. Just **copy this file to your Kext folder in your EFI volume**, the same folder of **CPUFriend.kext** file _(remind to enable this kexts in config.plist)_
 
-### Sleep and Wake very often
+### Sleep and Wake
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like updates and other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
 ```bash
 sudo pmset powernap 0
@@ -603,14 +615,22 @@ After this commands, **disable Find my Mac** on your iCloud settings.
 
 The setup above works on a real Mac computer too, if you want deep sleeps just follow the same steps.
 
-### ABNT2 keyboard on install MacOS
+### ABNT2 keyboard
 To make your brazilian **ABNT2 keyboard** default when Install MacOS, change language and keyboard layout in your **config.plist** inside **NVRAM** key section:
 ```xml
 <key>prev-lang:kbd</key>
 <string>pt-BR:128</string>
 ```
 
-## Choices, choices and choices...
+### Final comments
+
+After all you will can boot MacOS, Windows and Recovery **just like a real Mac** computer:
+- Hold **Option** key (or **ESC** key) to show boot menu;
+- Use **System Preferences > Startup** disk to change boot to Windows and **BootCamp Control Panel** on Windows to change the boot to Mac;
+- Update your Mac using the **Apple Software Updates**;
+- Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
+
+## My Build 
 
 For my build **I decided to go with iMacPro1,1** SMBIOS:
 - **Best timings for video render** using my RX590 GPU;
@@ -618,7 +638,7 @@ For my build **I decided to go with iMacPro1,1** SMBIOS:
 - **NetFlix, PrimeVideo** and **AppleTV+** working with **full DRM support** even on Safari;
 - **AirPlay, Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working and tested _(but SideCar not)_
 - **Disabled iGPU** in BIOS;
-- Disabled **CPUFriend.kext**, **CPUFriendDataProvider.kext**, **RestrictEvents.kext**, **USBInjectAll.kext** and **SmallTreeIntel82576.kext** as not needed;
+- Removed **CPUFriend.kext**, **CPUFriendDataProvider.kext**, **RestrictEvents.kext**, **USBInjectAll.kext** and **SmallTreeIntel82576.kext** from **config.plist** and delete from **Kexts** folder;
 - Computer **sleep working** as a real Mac;
 - **Disable boot menu** _(can be enabled using Option or ESC key on boot)_ like a real iMac;
 - **Enabled boot chyme** sound, connecting speakers to LineOut on motherboard _(enabling volume controls on keyboard too, because real Macs do not control volume for HDMI ou DisplayPort connections)_;
