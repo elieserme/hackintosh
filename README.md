@@ -171,6 +171,8 @@ git clone https://github.com/timsutton/brigadier
 cd brigadier
 brigadier -m iMac19,2 -i
 ```
+If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver inf file**. To complete the setup, **reboot Windows**.
+
 ### Cleaning the EFI
 
 - Remove all **Tools** from menu _(if you need this tools again you can use your USB disk to boot)_. Edit your **config.plist** and find the following section and disable:
@@ -639,10 +641,10 @@ For my build **I decided to go with iMacPro1,1** SMBIOS:
 - **AirPlay, Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working and tested _(but SideCar not)_
 - **Disabled iGPU** in BIOS;
 - Removed **CPUFriend.kext**, **CPUFriendDataProvider.kext**, **RestrictEvents.kext**, **USBInjectAll.kext** and **SmallTreeIntel82576.kext** from **config.plist** and delete from **Kexts** folder;
-- Computer **sleep working** as a real Mac;
+- Computer **sleep working** as a real Mac. I'm using the [deep sleep tip](#sleep-and-wake);
 - **Disable boot menu** _(can be enabled using Option or ESC key on boot)_ like a real iMac;
 - **Enabled boot chyme** sound, connecting speakers to LineOut on motherboard _(enabling volume controls on keyboard too, because real Macs do not control volume for HDMI ou DisplayPort connections)_;
-- Apple **Magic Keyboard** and **Magic TrackPad** fully working on **MacOS**, **Windows 10** and even in **BIOS** settins _(press FN+F12 to enter BIOS setup)_ with **BootCamp** installed on Windows;
+- Apple **Magic Keyboard** and **Magic TrackPad** fully working on **MacOS**, **Windows 10** and even in **BIOS** settings _(press FN+F12 to enter BIOS setup)_ with **BootCamp** installed on Windows;
 - I feel that I have an iMac!
 
 
