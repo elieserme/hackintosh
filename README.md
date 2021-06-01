@@ -175,7 +175,7 @@ If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, yo
 
 ### Cleaning the EFI
 
-- Remove all **Tools** from menu _(if you need this tools again you can use your USB disk to boot)_. Edit your **`config.plist`** and find the following section and disable:
+- Remove all **Tools** from menu _(if you need this tools again you can use your USB disk to boot)_. Remove the **`Tools`** folder and edit your **`config.plist`** on following section and disable:
 ```diff
 	<key>Tools</key>
 	<array>
@@ -264,13 +264,73 @@ If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, yo
 -		</dict>
 -	</array>
 ```
-- Disable **Reset NVRAM** option too:
+- If you **not using iMacPro1,1 or MacPro7,1** SMBIOS, remove **`CPUFriend.kext`** and **`CPUFriendDataProvider.kext`** from **`Kexts`** folder and from **`config.plist`** too:
+```diff
+-	<dict>
+-		<key>Comment</key>
+-		<string></string>
+-		<key>MaxKernel</key>
+-		<string></string>
+-		<key>PlistPath</key>
+-		<string>Contents/Info.plist</string>
+-		<key>Enabled</key>
+-		<false/>
+-		<key>MinKernel</key>
+-		<string></string>
+-		<key>ExecutablePath</key>
+-		<string>Contents/MacOS/CPUFriend</string>
+-		<key>Arch</key>
+-		<string>Any</string>
+-		<key>BundlePath</key>
+-		<string>CPUFriend.kext</string>
+-	</dict>
+-	<dict>
+-		<key>Comment</key>
+-		<string></string>
+-		<key>MaxKernel</key>
+-		<string></string>
+-		<key>PlistPath</key>
+-		<string>Contents/Info.plist</string>
+-		<key>Enabled</key>
+-		<false/>
+-		<key>MinKernel</key>
+-		<string></string>
+-		<key>ExecutablePath</key>
+-		<string></string>
+-		<key>Arch</key>
+-		<string>Any</string>
+-		<key>BundlePath</key>
+-		<string>CPUFriendDataProvider.kext</string>
+-	</dict>
+```
+- If **not using MacPro7,1** SMBIOS, remove the **`RestrictEvents.kext`** from the **`Kexts`** folder and from **`config.plist`** too:
+```diff
+-	<dict>
+-		<key>Comment</key>
+-		<string></string>
+-		<key>MaxKernel</key>
+-		<string></string>
+-		<key>PlistPath</key>
+-		<string>Contents/Info.plist</string>
+-		<key>Enabled</key>
+-		<false/>
+-		<key>MinKernel</key>
+-		<string></string>
+-		<key>ExecutablePath</key>
+-		<string>Contents/MacOS/RestrictEvents</string>
+-		<key>Arch</key>
+-		<string>Any</string>
+-		<key>BundlePath</key>
+-		<string>RestrictEvents.kext</string>
+-	</dict>
+```
+- Disable **Reset NVRAM** option in **`config.plist`** too:
 ```diff
 	<key>AllowNvramReset</key>
 -	<true/>
 +	<false/>
 ```
-- Disable **Boot Menu** to work like a real Mac:
+- Disable **Boot Menu** in **`config.plist`** to work like a real Mac:
 ```diff
 	<key>ShowPicker</key>
 -	<true/>
