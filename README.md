@@ -38,16 +38,16 @@ This is the guide for **OpenCore 0.6.9** with **Big Sur 11.4** for an **iMac19,2
 
 ## Hardware
 
-This is the parts list:
-
-- **CPU:** [Intel i7 8700 ](https://www.intel.com.br/content/www/br/pt/products/processors/core/core-vpro/i7-8700.html) 8th generation 6 cores and 12 threads 3,2GHz with Turbo Boost up to 4,6GHz
-- **Motherboard:** [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX
-- **RAM:** [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN
-- **SSD:** [Samsung EVO 970 Plus ](https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/) 250GB PCIe NVMe
-- **Power Supply:** [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit
-- **GPU:** [Gigabyte Radeon RX 590 8GB 1.0](https://www.gigabyte.com/br/Graphics-Card/GV-RX590GAMING-8GD-rev-10#kf) Dedicated Video Card
-- **Wireless:** [BCM94360NG ](http://en.fenvi.com/en/download_zx.php) Bluetooth and WiFI replacement card
-- **Case:** [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX
+| Type | Item |
+| ---- | ---- |
+| **CPU** | [Intel i7 8700 ](https://www.intel.com.br/content/www/br/pt/products/processors/core/core-vpro/i7-8700.html) 8th generation 6 cores and 12 threads 3,2GHz with Turbo Boost up to 4,6GHz |
+| **Motherboard** | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX |
+| **RAM** | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN |
+| **SSD** | [Samsung EVO 970 Plus ](https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/) 250GB PCIe NVMe |
+| **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit |
+| **GPU** | [Gigabyte Radeon RX 590 8GB 1.0](https://www.gigabyte.com/br/Graphics-Card/GV-RX590GAMING-8GD-rev-10#kf) Dedicated Video Card |
+| **Wireless** | [BCM94360NG ](http://en.fenvi.com/en/download_zx.php) Bluetooth and WiFI replacement card |
+| **Case** | [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX |
 
 ### BIOS settings
 
