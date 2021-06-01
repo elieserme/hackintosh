@@ -140,7 +140,7 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 
 - Mount the **EFI partition** of the **USB** disk using [MountEFI](https://github.com/corpnewt/MountEFI) utility and **copy the EFI folder** inside **`/Volumes/EFI`**
 - **Boot** the target machine with **USB** disk you just made
-- Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below, but **note that hardcoded value is for F14a/b BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to recalculate this value** _(this command must run every time that BIOS is reflashed or CMOS clear. Please note that some other motherboards can disable CFG Lock on BIOS settings without this hack)_
+- Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below, but **note that hardcoded value is for F14a/b BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Please note that some other motherboards can disable CFG Lock on BIOS settings without this hack)_
 ```bash
 setup_var_3 0x5A4 0x00
 ```
@@ -218,6 +218,51 @@ If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, yo
 			<false/>
 		</dict>
 	</array>
+```
+**If you prefer and if you will not use the Tools**, you can completely remove the **Tools** by left it as an empty array:
+```diff
+	<key>Tools</key>
++	<array/>
+-	<array>
+-		<dict>
+-			<key>Comment</key>
+-			<string>OpenShell.efi<string>
+-			<key>Auxiliary</key>
+-			<true/>
+-			<key>Enabled</key>
+-			<true/>
+-			<false/>
+-			<key>Arguments</key>
+-			<string></string>
+-			<key>Path</key>
+-			<string>OpenShell.efi<string>
+-			<key>Name</key>
+-			<string>OpenShell.efi<string>
+-			<key>RealPath</key>
+-			<false/>
+-			<key>TextMode</key>
+-			<false/>
+-		</dict>
+-		<dict>
+-			<key>Comment</key>
+-			<string>modGRUBShell.efi<string>
+-			<key>Auxiliary</key>
+-			<true/>
+-			<key>Enabled</key>
+-			<true/>
+-			<false/>
+-			<key>Arguments</key>
+-			<string></string>
+-			<key>Path</key>
+-			<string>modGRUBShell.efi<string>
+-			<key>Name</key>
+-			<string>modGRUBShell.efi<string>
+-			<key>RealPath</key>
+-			<false/>
+-			<key>TextMode</key>
+-			<false/>
+-		</dict>
+-	</array>
 ```
 - Disable **Reset NVRAM** option too:
 ```diff
@@ -641,6 +686,7 @@ For my build **I decided to go with iMacPro1,1** SMBIOS:
 - **AirPlay, Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working and tested _(but SideCar not)_
 - **Disabled iGPU** in BIOS;
 - Removed **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`**, **`RestrictEvents.kext`**, **`USBInjectAll.kext`** and **`SmallTreeIntel82576.kext`** from **`config.plist`** and delete from **`Kexts`** folder;
+- Removed **Tools** as described [here](#cleaning-the-efi);
 - Computer **sleep working** as a real Mac. I'm using the [deep sleep tip](#sleep-and-wake);
 - **Disable boot menu** _(can be enabled using Option or ESC key on boot)_ like a real iMac;
 - **Enabled boot chyme** sound, connecting speakers to LineOut on motherboard _(enabling volume controls on keyboard too, because real Macs do not control volume for HDMI ou DisplayPort connections)_;
