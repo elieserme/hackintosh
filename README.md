@@ -19,6 +19,7 @@ This is the guide for **OpenCore 0.6.9** with **Big Sur 11.4** for an **iMac19,2
 - [Notes](#notes)
 	- [USB Ports](#usb-ports)
 	- [2nd Ethernet port](#2nd-ethernet-port)
+	- [DRM Support](#drm-support)
 	- [Power Management](#power-management)
 	- [Sleep and Wake](#sleep-and-wake)
 	- [ABNT2 keyboard](#abnt2-keyboard)
@@ -685,6 +686,18 @@ To have the fancy **name** of this ethernet port in **System Report**, you can i
 	<key>model</key>
 	<string>Intel I211 PCI Express Gigabit Ethernet</string>
 </dict>
+```
+
+### DRM Support
+
+The **iMac19,2** SMBIOS **need some hack to have DRM support** _(Netflix, Prime Video, Apple TV+)_:
+- For **Catalina**, you need to add `shikigva=80` in your `boot-args` in **`config.plist`** file;
+- For **Big Sur**, there are [no definitive solution](https://dortania.github.io/OpenCore-Install-Guide/extras/big-sur/#known-issues). But you can watch Apple TV+ using the commands below:
+```bash
+defaults write com.apple.AppleGVA gvaForceAMDKE -bool YES
+defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -bool YES
+defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -bool YES
+defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -bool YES
 ```
 
 ### Power Management
