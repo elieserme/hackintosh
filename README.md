@@ -166,13 +166,15 @@ setup_var_3 0x5A4 0x00
 ### Windows and Bootcamp
 
 - If you don't plan to install BootCamp drivers, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
-- Or you can install **BootCamp** drivers with [Brigadier](https://github.com/timsutton/brigadier) utility after MacOS installed _(use this option if you plan to use Apple Magic Keyboard and Trackpad)_
+- Or you can install **BootCamp** drivers with [Brigadier](https://github.com/timsutton/brigadier) utility **after MacOS installed** _(use this option if you plan to use Apple Magic Keyboard and Trackpad)_
 ```bash
 git clone https://github.com/timsutton/brigadier
 cd brigadier
 brigadier -m iMac19,2 -i
 ```
-If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver inf file**. To complete the setup, **reboot Windows**.
+- If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver inf file**. To complete the setup, **reboot Windows**.
+
+One use of a Windows install is to **generate the files** on **`ACPI`** folder. You can follow [this guide](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#so-what-can-t-ssdttime-do) on how to use SSDTTime tool to generate **`SSDT-AWAC.aml`**, **`SSDT-EC.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_.
 
 ### Cleaning the EFI
 
@@ -699,6 +701,7 @@ defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -bool YES
 defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -bool YES
 defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -bool YES
 ```
+- If **you require full DRM support**, you must choose [other SMBIOS](#other-smbios) that provide it.
 
 ### Power Management
 
@@ -733,7 +736,7 @@ sudo pmset tcpkeepalive 0
 ```
 After this commands, **disable Find my Mac** on your iCloud settings.
 
-The setup above works on a real Mac computer too, if you want deep sleeps just follow the same steps.
+The setup above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
 
 ### ABNT2 keyboard
 To make your brazilian **ABNT2 keyboard** default when Install MacOS, change language and keyboard layout in your **`config.plist`** inside **NVRAM** key section:
