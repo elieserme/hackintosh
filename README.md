@@ -174,7 +174,8 @@ brigadier -m iMac19,2 -i
 ```
 - If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver inf file**. To complete the setup, **reboot Windows**.
 
-One use of a Windows install is to **generate the files** on **`ACPI`** folder. You can follow [this guide](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#so-what-can-t-ssdttime-do) on how to use SSDTTime tool to generate **`SSDT-AWAC.aml`**, **`SSDT-EC.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_.
+> **IMPORTANT**
+One valid use of a Windows install is to **generate the files** on **`ACPI`** folder. You can follow [this guide](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#so-what-can-t-ssdttime-do) on how to use SSDTTime tool to generate **`SSDT-AWAC.aml`**, **`SSDT-EC.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_.
 
 ### Cleaning the EFI
 
