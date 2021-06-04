@@ -348,7 +348,13 @@ This build has some options:
 - **iMacPro1,1** will have **DRM decoding fully working**; but loss SideCar because no T2 chip;
 - **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar too because no T2 chip.
 
-You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to iMacPro or MacPro see instructions below.
+| SMBIOS | Advantage | Loss |
+| ------ | --------- | ---- |
+| **iMac19,2** | _**Native CPU power management, no T2 chip, iGPU with IQSV encoding in 4k is fast**_ | _DRM support on Safari, Apple TV+_ |
+| **iMacPro1,1** | _Full DRM support, AppleTV+, AMD GPU encoding_ | _Need `CPUFriend` for power management, T2 absent_, `APGMInjector` for GPU |
+| **MacPro7,1** | _Full DRM support, AppleTV+, AMD GPU encoding, more hardware options_ | _Need `CPUFriend` for power management, T2 absent, `RestrictEvents` for warning messages_ |
+
+You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **iMacPro** or **MacPro** see instructions below.
 
 
 ### iMacPro
