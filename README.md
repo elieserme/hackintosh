@@ -350,9 +350,9 @@ This build has some options:
 
 | SMBIOS | Advantage | Loss |
 | ------ | --------- | ---- |
-| **iMac19,2** | _**Native CPU power management, no T2 chip, iGPU with IQSV encoding in 4k is fast**_ | _DRM support on Safari, Apple TV+_ |
-| **iMacPro1,1** | _Full DRM support, AppleTV+, AMD GPU encoding_ | _Need `CPUFriend` for power management, T2 absent_, `APGMInjector` for GPU |
-| **MacPro7,1** | _Full DRM support, AppleTV+, AMD GPU encoding, more hardware options_ | _Need `CPUFriend` for power management, T2 absent, `RestrictEvents` for warning messages_ |
+| **iMac19,2** | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_ | _DRM support on Safari, Apple TV+_ |
+| **iMacPro1,1** | _Full DRM support, AppleTV+, AMD GPU encoding_ | _SideCar, Need `CPUFriend` for power management, lack of T2 chip, `APGMInjector` for GPU_ |
+| **MacPro7,1** | Full DRM support, AppleTV+, AMD GPU encoding, more hardware options_ | _SideCar, Need `CPUFriend` for power management, lack of T2 chip, `RestrictEvents` for warning messages_ |
 
 You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **iMacPro** or **MacPro** see instructions below.
 
