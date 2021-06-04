@@ -307,6 +307,27 @@ One valid use of a Windows install is to **generate the files** on **`ACPI`** fo
 -		<string>CPUFriendDataProvider.kext</string>
 -	</dict>
 ```
+- If **not using iMacPro1,1** SMBIOS, remove the **`AGPMInjector.kext`** from the **`Kexts`** folder and from **`config.plist`** too:
+```diff
+-	<dict>
+-		<key>Comment</key>
+-		<string></string>
+-		<key>MaxKernel</key>
+-		<string></string>
+-		<key>PlistPath</key>
+-		<string>Contents/Info.plist</string>
+-		<key>Enabled</key>
+-		<false/>
+-		<key>MinKernel</key>
+-		<string></string>
+-		<key>ExecutablePath</key>
+-		<string></string>
+-		<key>Arch</key>
+-		<string>Any</string>
+-		<key>BundlePath</key>
+-		<string>AGPMInjector.kext</string>
+-	</dict>
+```
 - If **not using MacPro7,1** SMBIOS, remove the **`RestrictEvents.kext`** from the **`Kexts`** folder and from **`config.plist`** too:
 ```diff
 -	<dict>
@@ -752,6 +773,8 @@ sudo chmod +x ResourceConverter.sh
 ./ResourceConverter.sh -k Mac-63001698E7A34814.plist
 ```
 - The file **`CPUFriendDataProvider.kext`** will be generated. Just **copy this file to your `Kext` folder in your EFI volume**, the same folder of **`CPUFriend.kext`** file _(remind to enable this kexts in config.plist)_
+
+> **IMPORTANT!** On iMacPro1,1 SMBIOS if you need to generate a new `AGPMInjector.kext` for other GPU just use the [AGPMInjector app](#https://github.com/Pavo-IM/AGPMInjector) to generate this file and copy it to `Kexts`folder. 
 
 ### Sleep and Wake
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like updates and other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
