@@ -423,7 +423,7 @@ and
 +	<string>iMacPro1,1</string>
 ```
 - **Copy** the **`CPUFriendDataProvider.kext`** from folder **`other/imacpro11`** in this repo to your **`Kexts`** folder
-- **Enable** the **`AGPMInjector.kext`**, **`CPUFriend.kext`** and **`CPUFriendDataProvider.kext`** and in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
+- **Enable** the **`AGPMInjector.kext`**, **`CPUFriend.kext`** and **`CPUFriendDataProvider.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
 ```diff
 	<dict>
 		<key>Comment</key>
@@ -518,7 +518,7 @@ and
 +	<string>MacPro7,1</string>
 ```
 - **Copy** the **`CPUFriendDataProvider.kext`** from folder **`other/macpro71`** in this repo to your **`Kexts`** folder
-- **Enable** the **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default):
+- **Enable** the **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
 ```diff
 	<dict>
 		<key>Comment</key>
