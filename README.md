@@ -56,6 +56,8 @@ Gigabyte z370N WIFI using BIOS version F14b
 
 - **Load optimised defaults**
 - MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
+- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **ENABLED**
+
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
 - SmartFan &gt; Fan Stop &gt; **ENABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
@@ -373,7 +375,7 @@ This build has some options:
 | ------ | --------- | ---- |
 | **iMac19,2** | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_ | _DRM support on Safari, Apple TV+_ |
 | **iMacPro1,1** | _Full DRM support, AppleTV+, AMD GPU encoding_ | _SideCar, Need `CPUFriend` for power management, lack of T2 chip, `APGMInjector` for GPU_ |
-| **MacPro7,1** | Full DRM support, AppleTV+, AMD GPU encoding, more hardware options_ | _SideCar, Need `CPUFriend` for power management, lack of T2 chip, `RestrictEvents` for warning messages_ |
+| **MacPro7,1** | _Full DRM support, AppleTV+, AMD GPU encoding, more hardware options_ | _SideCar, Need `CPUFriend` for power management, lack of T2 chip, `RestrictEvents` for warning messages_ |
 
 You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **iMacPro** or **MacPro** see instructions below.
 
