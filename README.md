@@ -783,10 +783,7 @@ Sometimes after sleep the computer will **wake every few minutes**. Normal Macs 
 ```bash
 sudo pmset powernap 0
 sudo pmset proximitywake 0
-sudo pmset tcpkeepalive 0
 ```
-After this commands, **disable Find my Mac** on your iCloud settings.
-
 The setup above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
 
 ### ABNT2 keyboard
