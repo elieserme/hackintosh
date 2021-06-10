@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.6.9** with **Big Sur 11.4** for an **iMac19,2** hackintosh build.
+This is the guide for **OpenCore 0.7.0** with **Big Sur 11.4** for an **iMac19,2** hackintosh build.
 
 ## Table of Contents
 
@@ -109,7 +109,7 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 	<dict>
 		<key>MaxBIOSVersion</key>
 		<false/>
-		<key>AdviseWindows</key>
+		<key>AdviseFeatures</key>
 		<false/>
 		<key>SystemMemoryStatus</key>
 		<string>Auto</string>
