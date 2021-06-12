@@ -803,18 +803,18 @@ After all you will can boot MacOS, Windows and Recovery **just like a real Mac**
 
 ## My Build 
 
-For my build **I decided to go with iMac19,2** SMBIOS:
-- **Video render** using my RX590 GPU and iGPU;
-- **NetFlix** and **PrimeVideo** can be used in other browser than Safari;
-- **SideCar, AirPlay, Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working;
-- **T2 chip** not needed;
-- Removed **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`**, **`AGPMInjector.kext`**, **`RestrictEvents.kext`**, **`USBInjectAll.kext`** and **`SmallTreeIntel82576.kext`** from **`config.plist`** and delete from **`Kexts`** folder;
+For my build **I decided to go with MacPro7,1** SMBIOS:
+- **Fastest Video render** using my GPU;
+- **NetFlix**, **PrimeVideo** and **AppleTV+** working even in Safari;
+- **AirPlay, Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working;
+- Generated **`CPUFriendDataProvider.kext`** using **Method 2** above;
+- Removed **`AGPMInjector.kext`**, **`USBInjectAll.kext`** and **`SmallTreeIntel82576.kext`** from **`config.plist`** and delete from **`Kexts`** folder;
 - Removed **Tools** as described [here](#cleaning-the-efi);
 - Computer **sleep working** as a real Mac;
 - **Disable boot menu** _(can be enabled using Option or ESC key on boot)_ like a real iMac;
 - **Enabled boot chyme** sound, connecting speakers to LineOut on motherboard _(enabling volume controls on keyboard too, because real Macs do not control volume for HDMI ou DisplayPort connections)_;
 - Apple **Magic Keyboard** and **Magic TrackPad** fully working on **MacOS**, **Windows 10** and even in **BIOS** settings _(press FN+F12 to enter BIOS setup)_ with **BootCamp** installed on Windows;
-- I feel that I have an iMac!
+- I feel that I have a Mac Pro!
 
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=elieserme)](https://github.com/anuraghazra/github-readme-stats)
