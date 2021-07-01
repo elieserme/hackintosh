@@ -60,17 +60,18 @@ Gigabyte z370N WIFI using BIOS version F14b
 
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
 - SmartFan &gt; Fan Stop &gt; **ENABLED**
+- BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
-- Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
+- Peripherals &gt; Above 4G Decoding &gt; **DISABLED**
 - Peripherals &gt; Re-Size Bar &gt; **DISABLED**
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **Software Controlled**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
-- Chipset &gt; VT-d &gt; **DISABLED**
-- Chipset &gt; Internal Graphics &gt; **ENABLED** with min **64MB** and **MAX**; 
+- Chipset &gt; VT-d &gt; **ENABLED**
+- Chipset &gt; Internal Graphics &gt; **ENABLED** with min **64MB** and max **256MB**; 
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(disable on adapters too)_
 - Power &gt; ErP &gt; **ENABLED**
 - Save and restart
@@ -607,7 +608,7 @@ and
 
 ### USB Ports
 
-The included **`USBPorts.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
+The included **`USBPorts.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 2 and 3** ports, no **USB type C** and one **internal Bluetooth USB** port enabled.
 
 Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
