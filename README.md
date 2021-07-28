@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.0** with **Big Sur 11.4** for an **iMac19,2** hackintosh build.
+This is the guide for **OpenCore 0.7.1** with **Big Sur 11.4** for an **iMac19,2** hackintosh build.
 
 ## Table of Contents
 
@@ -782,7 +782,6 @@ sudo chmod +x ResourceConverter.sh
 ### Sleep and Wake
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like updates and other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
 ```bash
-sudo pmset powernap 0
 sudo pmset proximitywake 0
 ```
 The setup above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
