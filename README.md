@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.1** with **Big Sur 11.4** for an **iMac19,2** hackintosh build.
+This is the guide for **OpenCore 0.7.1** with **Big Sur 11.5.1** for an **iMac19,2** hackintosh build.
 
 ## Table of Contents
 
@@ -56,10 +56,8 @@ Gigabyte z370N WIFI using BIOS version F14b
 
 - **Load optimised defaults**
 - MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
-- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **ENABLED**
-
+- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **DISABLED**
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
-- SmartFan &gt; Fan Stop &gt; **ENABLED**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
@@ -71,7 +69,7 @@ Gigabyte z370N WIFI using BIOS version F14b
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
-- Chipset &gt; Internal Graphics &gt; **ENABLED** with min **64MB** and max **256MB**; 
+- Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **256MB** max; 
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(disable on adapters too)_
 - Power &gt; ErP &gt; **ENABLED**
 - Save and restart
