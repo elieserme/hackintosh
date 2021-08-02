@@ -749,11 +749,15 @@ defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -bool YES
 defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -bool YES
 defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -bool YES
 ```
+- For error `VDADecoderCreate failed. err: -12473` in Big Sur, forcing the AMD Decoder can help resolve this:
+```bash
+defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -bool YES
+```
 - If **you require full DRM support**, you must choose [other SMBIOS](#other-smbios) that provide it.
 
 ### Power Management
 
-The **iMacPro1,1 and MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **iMacPro and MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
+The **iMacPro1,1** and **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **iMacPro and MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
 
 **Method 1:** This can be resolved using **`CPUFriend.kext`** and a **`CPUFriendDataProvider.kext`** _(frequency vectors)_ that are provided in repo for Cofee Lake CPUs. But if you need to generate this file yourself, you can use the [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) as described in [this guide](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#enabling-x86platformplugin).
 
