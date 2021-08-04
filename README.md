@@ -21,7 +21,7 @@ This is the guide for **OpenCore 0.7.1** with **Big Sur 11.5.1** for an **iMac19
 	- [2nd Ethernet port](#2nd-ethernet-port)
 	- [DRM Support](#drm-support)
 	- [Power Management](#power-management)
-	- [Sleep and Wake](#sleep-and-wake)
+	- [Sleep and Hibernate](#sleep-and-hibernate)
 	- [ABNT2 keyboard](#abnt2-keyboard)
 	- [Final comments](#final-comments)
 - [My Build](#my-build)
@@ -781,12 +781,29 @@ sudo chmod +x ResourceConverter.sh
 
 > **IMPORTANT!** On iMacPro1,1 SMBIOS if you need to generate a new `AGPMInjector.kext` for other GPU just use the [AGPMInjector app](#https://github.com/Pavo-IM/AGPMInjector) to generate this file and copy it to `Kexts`folder. 
 
-### Sleep and Wake
+### Sleep and Hibernate
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like updates and other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
 ```bash
 sudo pmset proximitywake 0
 ```
-The setup above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
+If you want to control **how and when the computer hibernates** (save state and turn off) you need to customize some vars.
+
+**Example 1:** Computer sleeps and hibernates 2 hours after sleep:
+```bash
+sudo pmset -a hibernatemode 3
+sudo pmset -a standbydelaylow 7200
+sudo pmset -a standbydelayhigh 7200
+```
+**Example 2:** Computer just hibernate instead of sleep (saves more power, but takes longer to wake):
+```bash
+sudo pmset -a hibernatemode 25
+```
+If you want to **restore the default** factory settings:
+```bash
+sudo pmset -a restoredefaults
+```
+
+The commands above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
 
 ### ABNT2 keyboard
 To make your brazilian **ABNT2 keyboard** default when Install MacOS, change language and keyboard layout in your **`config.plist`** inside **NVRAM** key section:
