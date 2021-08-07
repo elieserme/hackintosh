@@ -35,7 +35,7 @@ cat >> ~/.zshrc << EZS3
 export M2_HOME=/usr/local/maven
 export MAVEN_HOME=/usr/local/maven
 export PATH=\${M2_HOME}/bin:/Library/PostgreSQL/13/bin:\${PATH}
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+export NVM_DIR="\$HOME/.nvm"
+[ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
 EZS3
 source ~/.zshrc

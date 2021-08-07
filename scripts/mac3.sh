@@ -36,13 +36,25 @@ brew install gh
 brew install libpq
 brew link --force libpq
 
+### vegeta
+brew install vegeta
+brew install --cask iterm2
+brew install rs/tap/jaggr
+brew install rs/tap/jplot
+
 ### apps
+brew install --cask authy
 brew install --cask gimp
 brew install --cask keka
 brew install --cask vlc
 brew install youtube-dl
 brew install ffmpeg
 brew install --cask handbrake
+brew install --cask skype
+brew install --cask zoom
+brew install --cask intel-power-gadget
+brew install --cask osxfuse
+brew install --cask veracrypt
 
 ### YOUTUBE DOWNLOAD SCRIPT
 sudo tee /usr/local/bin/youtube-download > /dev/null << YZS1
