@@ -56,7 +56,7 @@ Gigabyte z370N WIFI using BIOS version F14b
 
 - **Load optimised defaults**
 - MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
-- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **DISABLED**
+- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **ENABLED**
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
@@ -68,11 +68,27 @@ Gigabyte z370N WIFI using BIOS version F14b
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
+- Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
 - Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **256MB** max; 
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(disable on adapters too)_
 - Power &gt; ErP &gt; **ENABLED**
 - Save and restart
+
+#### MacOS only BIOS settings
+
+If you **don't plan to install Windows 10 on dual boot or BootCamp**, you can change the following settings from above config:
+
+- Peripherals &gt; Intel PTT &gt; **DISABLED**
+- Peripherals &gt; SGX &gt; **DISABLED**
+- Peripherals &gt; Trusted Computing &gt; **DISABLED**
+- Chipset &gt; VT-d &gt; **DISABLED**
+
+Remind to config **DisableIoMapper to false** in **`config.plist`** since you **disabled VT-d** setting:
+```xml
+<key>DisableIoMapper</key>
+<false/>
+```
 
 ## Windows 10
 
