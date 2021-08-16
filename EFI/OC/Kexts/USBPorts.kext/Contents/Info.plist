@@ -41,14 +41,14 @@
 				<key>kUSBSleepPortCurrentLimit</key>
 				<integer>2100</integer>
 				<key>kUSBSleepPowerSupply</key>
-				<integer>5100</integer>
+				<integer>4700</integer>
 				<key>kUSBWakePortCurrentLimit</key>
 				<integer>2100</integer>
 				<key>kUSBWakePowerSupply</key>
-				<integer>5100</integer>
+				<integer>4700</integer>
 				<key>port-count</key>
 				<data>
-				GAAAAA==
+				GgAAAA==
 				</data>
 				<key>ports</key>
 				<dict>
@@ -72,28 +72,6 @@
 						<key>port</key>
 						<data>
 						AgAAAA==
-						</data>
-					</dict>
-					<key>HS03</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>3</integer>
-						<key>name</key>
-						<string>HS03</string>
-						<key>port</key>
-						<data>
-						AwAAAA==
-						</data>
-					</dict>
-					<key>HS04</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>3</integer>
-						<key>name</key>
-						<string>HS04</string>
-						<key>port</key>
-						<data>
-						BAAAAA==
 						</data>
 					</dict>
 					<key>HS05</key>
@@ -215,6 +193,28 @@
 						<key>port</key>
 						<data>
 						GAAAAA==
+						</data>
+					</dict>
+					<key>SS09</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>10</integer>
+						<key>name</key>
+						<string>SS09</string>
+						<key>port</key>
+						<data>
+						GQAAAA==
+						</data>
+					</dict>
+					<key>SS10</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>10</integer>
+						<key>name</key>
+						<string>SS10</string>
+						<key>port</key>
+						<data>
+						GgAAAA==
 						</data>
 					</dict>
 				</dict>
