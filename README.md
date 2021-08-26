@@ -14,7 +14,6 @@ This is the guide for **OpenCore 0.7.2** with **Big Sur 11.5.1** for an **iMac19
 	- [Windows and BootCamp](#windows-and-bootcamp)
 	- [Cleaning the EFI](#cleaning-the-efi)
 - [Other SMBIOS](#other-smbios)
-	- [iMacPro](#imacpro)
 	- [MacPro](#macpro)
 - [Notes](#notes)
 	- [USB Ports](#usb-ports)
@@ -35,7 +34,7 @@ This is the guide for **OpenCore 0.7.2** with **Big Sur 11.5.1** for an **iMac19
 - **AMD GPU** and **iGPU** for balanced performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **Sidecar** working because **this iMac do not have T2 chip**;
-- Note that are DRM issues with **Netflix**, **PrimeVideo** and **Apple TV+** in Big Sur until community finds a solution _(if you require DRM support, better use the iMacPro1,1 or MacPro7,1 SMBIOS and read this until the end for more information)_.
+- Note that are DRM issues with **Netflix**, **PrimeVideo** and **Apple TV+** in Big Sur until community finds a solution _(if you require DRM support, better use the MacPro7,1 SMBIOS and read this until the end for more information)_.
 
 ## Hardware
 
@@ -54,9 +53,12 @@ This is the guide for **OpenCore 0.7.2** with **Big Sur 11.5.1** for an **iMac19
 
 Gigabyte z370N WIFI using BIOS version F14b
 
+> **IMPORTANT!**
+Be carefull enabling **MCE** or **Enhanced Multi-core Performance** with this motherboard. On my tests, it causes instability.
+
 - **Load optimised defaults**
 - MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
-- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **ENABLED**
+- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **AUTO**
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
@@ -66,12 +68,14 @@ Gigabyte z370N WIFI using BIOS version F14b
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **Software Controlled**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
+- Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
+- Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
 - Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **256MB** max; 
-- Chipset &gt; Wake On Lan &gt; **DISABLED** _(disable on adapters too)_
+- Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; ErP &gt; **ENABLED**
 - Save and restart
 
@@ -94,6 +98,9 @@ Remind to config **DisableIoMapper** to **`false`** in **`config.plist`** since 
 
 - If you plan to have Windows setup, it must be **installed first** on it's own disk;
 - Use your **motherboard and AMD drivers** supplied. For **WIFI/Bluetooth** drivers, [download](http://en.fenvi.com/en/download_zx.php) from Fenvi.
+
+> **IMPORTANT!**
+**Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID (unsupported).
 
 ## MacOS 11 Big Sur
 
@@ -183,16 +190,16 @@ setup_var_3 0x5A4 0x00
 ### Windows and Bootcamp
 
 - If you don't plan to install BootCamp drivers, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
-- Or you can install **BootCamp** drivers with [Brigadier](https://github.com/timsutton/brigadier) utility **after MacOS installed** _(use this option if you plan to use Apple Magic Keyboard and Trackpad)_
+- Or you can install **BootCamp** drivers with [Brigadier](https://github.com/timsutton/brigadier) utility **after MacOS installed** _(use this option if you plan to use Apple Magic Keyboard and Trackpad, but **you need to install BootCamp drivers before** pairing with Bluetooth on Windows)_
 ```bash
 git clone https://github.com/timsutton/brigadier
 cd brigadier
 brigadier -m iMac19,2 -i
 ```
-- If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver inf file**. To complete the setup, **reboot Windows**.
+- If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver `.inf` file**. To complete the setup, **reboot Windows**.
 
 > **IMPORTANT!**
-One valid use of a Windows install is to **generate the files** on **`ACPI`** folder. You can follow [this guide](https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#so-what-can-t-ssdttime-do) on how to use SSDTTime tool to generate **`SSDT-AWAC.aml`**,  **`SSDT-HPET.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_. The **`SSDT-EC-USBX.aml`** and **`SSDT-SBUS-MCHC.aml`** can be edited and compiled using **MaciASL** util. Sources are in **`other/acpi_src`** in this repo.
+One valid use of a Windows install is to **generate the files** on **`ACPI`** folder. You can use **SSDTTime** tool to generate **`SSDT-AWAC.aml`**,  **`SSDT-EC.aml`** , **`SSDT-HPET.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_. The **`SSDT-EC-USBW.aml`** and **`SSDT-SBUS-MCHC.aml`** can be edited and compiled using **MaciASL** util. Sources are in **`other/acpi_src`** in this repo.
 
 ### Cleaning the EFI
 
@@ -285,7 +292,7 @@ One valid use of a Windows install is to **generate the files** on **`ACPI`** fo
 -		</dict>
 -	</array>
 ```
-- If you **not using iMacPro1,1 or MacPro7,1** SMBIOS, remove **`CPUFriend.kext`** and **`CPUFriendDataProvider.kext`** from **`Kexts`** folder and from **`config.plist`** too:
+- If you **not using MacPro7,1** SMBIOS, remove **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** from **`Kexts`** folder and from **`config.plist`** too:
 ```diff
 -	<dict>
 -		<key>Comment</key>
@@ -323,30 +330,6 @@ One valid use of a Windows install is to **generate the files** on **`ACPI`** fo
 -		<key>BundlePath</key>
 -		<string>CPUFriendDataProvider.kext</string>
 -	</dict>
-```
-- If **not using iMacPro1,1** SMBIOS, remove the **`AGPMInjector.kext`** from the **`Kexts`** folder and from **`config.plist`** too:
-```diff
--	<dict>
--		<key>Comment</key>
--		<string></string>
--		<key>MaxKernel</key>
--		<string></string>
--		<key>PlistPath</key>
--		<string>Contents/Info.plist</string>
--		<key>Enabled</key>
--		<false/>
--		<key>MinKernel</key>
--		<string></string>
--		<key>ExecutablePath</key>
--		<string></string>
--		<key>Arch</key>
--		<string>Any</string>
--		<key>BundlePath</key>
--		<string>AGPMInjector.kext</string>
--	</dict>
-```
-- If **not using MacPro7,1** SMBIOS, remove the **`RestrictEvents.kext`** from the **`Kexts`** folder and from **`config.plist`** too:
-```diff
 -	<dict>
 -		<key>Comment</key>
 -		<string></string>
@@ -383,145 +366,14 @@ One valid use of a Windows install is to **generate the files** on **`ACPI`** fo
 
 This build has some options:
 - The **most hardware compatible** and working out-of-the-box is **iMac19,2** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
-- **iMacPro1,1** will have **DRM decoding fully working**; but loss SideCar because no T2 chip;
 - **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar too because no T2 chip.
 
 | SMBIOS | Advantage | Loss |
 | ------ | --------- | ---- |
-| **iMac19,2** | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_ | _DRM support on Safari, Apple TV+_ |
-| **iMacPro1,1** | _Full DRM support, AppleTV+, AMD GPU encoding_ | _SideCar, Need `CPUFriend` for power management, lack of T2 chip, `APGMInjector` for GPU_ |
-| **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar, Need `CPUFriend` for power management, lack of T2 chip, `RestrictEvents` for warning messages_ |
+| **iMac19,2** | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_ | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
+| **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar_ |
 
-You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **iMacPro** or **MacPro** see instructions below.
-
-
-### iMacPro
-
-Use the MacPro1,1 SMBIOS if you **require full DRM support**. Follow the steps below:
-- **Disable iGPU** in **BIOS** settings, changing **Chipset &gt; Internal Graphics** to **DISABLED** 
-- Change **`config.plist`** and replace **SystemProductName** with iMacPro1,1:
-```diff
-	<key>SystemProductName</key>
--	<string>iMac19,2</string>
-+	<string>iMacPro1,1</string>
-```
-- Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for iMacPro1,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **`config.plist`**;
-- **Remove this section** from your **`config.plist`** since you **don't have iGPU** anymore:
-```diff
--	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
--	<dict>
--		<key>AAPL,ig-platform-id</key>
--		<data>AwCSPg==</data>
--	</dict>
-```
-- Find and Enable **XHC1 to SHCI** patch in your **`config.plist`**:
-```diff
-	<key>Patch</key>
-	<array>
-		<dict>
-			<key>Comment</key>
-			<string>XHC1 to SHCI</string>
-			<key>Count</key>
-			<integer>0</integer>
-			<key>Enabled</key>
--			<false/>
-+			<true/>
-			<key>Find</key>
-			<data>WEhDMQ==</data>
-			<key>Limit</key>
-			<integer>0</integer>
-			<key>Mask</key>
-			<data></data>
-			<key>OemTableId</key>
-			<data></data>
-			<key>Replace</key>
-			<data>U0hDSQ==</data>
-			<key>ReplaceMask</key>
-			<data></data>
-			<key>Skip</key>
-			<integer>0</integer>
-			<key>TableLength</key>
-			<integer>0</integer>
-			<key>TableSignature</key>
-			<data></data>
-		</dict>
-	</array>
-```
-- Edit **`USBPorts.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS:
-```diff
-	<key>IOKitPersonalities</key>
-	<dict>
--	<key>iMac19,2-XHC</key>
-+	<key>iMacPro1,1-XHC</key>
-```
-and
-```diff
-	<key>model</key>
--	<string>iMac19,2</string>
-+	<string>iMacPro1,1</string>
-```
-- **Copy** the **`CPUFriendDataProvider.kext`** from folder **`other/imacpro11`** in this repo to your **`Kexts`** folder
-- **Enable** the **`AGPMInjector.kext`**, **`CPUFriend.kext`** and **`CPUFriendDataProvider.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
-```diff
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string></string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>AGPMInjector.kext</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/CPUFriend</string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>CPUFriend.kext</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string></string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>CPUFriendDataProvider.kext</string>
-	</dict>
-```
-- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new iMacPro1,1 **prior to reboot MacOS** _(if you need to generate your own `CPUFriendDataProvider.kext` see the apendix below for instructions)_
+You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **MacPro** see instructions below.
 
 ### MacPro
 
@@ -622,13 +474,26 @@ and
 
 ### USB Ports
 
-The included **`USBPorts.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 2 and 3** ports, no **USB type C** and one **internal Bluetooth USB** port enabled.
+The included **`USBPorts.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
 
-Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
+Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality, and USB Type C has different ports for each side... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
-If you want to map your USB ports yourself, **please read** [this guide](https://www.tonymacx86.com/threads/the-new-beginners-guide-to-usb-port-configuration.286553/) for USB mapping using [Hackintool](https://github.com/headkaze/Hackintool).
+| Name | Type | Comment |
+| ---- | ---- | ------- |
+| HS01, **SS01** | 3 | _Front 1_ |
+| HS02, **SS02** | 3 | _Front 2_ |
+| HS05, **SS05** | 3 | _Rear 1_ |
+| HS06, **SS06** | 3 | _Rear 2_ |
+| HS07, **SS07** | 3 | _Rear 3_ |
+| HS08, **SS08** | 3 | _Rear 4_ |
+| HS10       | 255 | _Bluetooth_ |
+| **SS09**, **SS10** | 10 | _Rear C_ | 
 
-Note that **you need Big Sur 11.2.3** to this guide work. **Later versions do not work** for port remapping. After reading the guide, follow this instructions:
+| Ports disabled |
+| -------------- |
+| _HS03, HS04, HS09, HS11, HS12, HS13, HS14, USR1, USR2, SS03, SS04_
+
+If you want to map your USB ports yourself,  use [Hackintool](https://github.com/headkaze/Hackintool) and follow this instructions:
 
 - The required **`USBInjectAll.kext`** is supplied but it's disabled in **`config.plist`**. You can **enable it** and **disable `USBPorts.kext`** to map the ports:
 ```diff
@@ -671,14 +536,18 @@ Note that **you need Big Sur 11.2.3** to this guide work. **Later versions do no
 		<string>USBPorts.kext</string>
 	</dict>
 ```
-- Enable **USB Ports Limit** quirk:
-```diff
-	<key>XhciPortLimit</key>
--	<false/>
-+	<true/>
+- **Reboot** and **use Hackintool to test USB ports you want to use** (using a pendrive or other USB 2.0 device). **Take note** on what ports you **do not want** to use.
+- Include in `boot-args` on **`config.plist`** the parameter `uia_exclude` to disable the ports you do not want. **Example below will exclude 2 USB 2.0 ports named HS03 and HS04**:
 ```
-- **Follow the guide** and determine what ports you want to use _(must be 15 or less ports)_;
-- Generate new **`USBPorts.kext`** using **Hackintool**, copy it to **`Kexts` folder** and **enable it** _(remind to disable `USBInjectAll.kext` and set XhciPortLimit to false again)_:
+uia_exclude=HS03;HS04
+```
+- **Reboot** and do the step above again, **until you have only 15 ports** active. As example, my final boot-args directive was like this:
+
+```
+uia_exclude=HS03;HS04;HS09;HS11;HS12;HS13;HS14;USR1;USR2;SS03;SS04
+```
+- After that, export the **`USBPorts.kext`** using Hackintool and place it on **`Kexts`** folder. 
+- Remind to **disable** **`USBInjectAll.kext`** and **enable `USBPorts.kext`** in **`config.plist`**:
 ```diff
 	<dict>
 		<key>Comment</key>
@@ -719,8 +588,10 @@ Note that **you need Big Sur 11.2.3** to this guide work. **Later versions do no
 		<string>USBPorts.kext</string>
 	</dict>
 ```
-
+ 
 ### 2nd Ethernet Port
+
+> **IMPORTANT!** Due to some instabilty on _SmallTreeIntel82576.kext_ I decided to disable it and not use the 2nd ethernet port on this motherboard. Please make tests using it on your config. 
 
 Gigabyte Z370N WIFI **has two gigabit ethernet ports**. By default, only Intel i219 is enabled in **`config.plist`** but you can activate the second port _(Intel i211)_ by enable **`SmallTreeIntel82576.kext`** in your **`config.plist`**:
 
@@ -773,11 +644,9 @@ defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -bool YES
 
 ### Power Management
 
-The **iMacPro1,1** and **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **iMacPro and MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
+The **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
 
-**Method 1:** This can be resolved using **`CPUFriend.kext`** and a **`CPUFriendDataProvider.kext`** _(frequency vectors)_ that are provided in repo for Cofee Lake CPUs. But if you need to generate this file yourself, you can use the [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) as described in [this guide](https://dortania.github.io/OpenCore-Post-Install/universal/pm.html#enabling-x86platformplugin).
-
-**Method 2:** Another way is use the **Tools** that come with **`CPUFriend.kext`** to **generate `CPUFriendDataProvider.kext`** using the steps below on your MacOS:
+- Use the **`Tools`** folder that come with **`CPUFriend.kext`** to **generate `CPUFriendDataProvider.kext`** using the steps below on your MacOS:
  
 - **Download** the [CPUFriend](https://github.com/acidanthera/CPUFriend) repo:
 ```bash
@@ -794,8 +663,6 @@ sudo chmod +x ResourceConverter.sh
 ./ResourceConverter.sh -k Mac-63001698E7A34814.plist
 ```
 - The file **`CPUFriendDataProvider.kext`** will be generated. Just **copy this file to your `Kext` folder in your EFI volume**, the same folder of **`CPUFriend.kext`** file _(remind to enable this kexts in config.plist)_
-
-> **IMPORTANT!** On iMacPro1,1 SMBIOS if you need to generate a new `AGPMInjector.kext` for other GPU just use the [AGPMInjector app](#https://github.com/Pavo-IM/AGPMInjector) to generate this file and copy it to `Kexts`folder. 
 
 ### Sleep and Hibernate
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like updates and other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
@@ -817,6 +684,11 @@ sudo pmset -a hibernatemode 25
 If you want to **restore the default** factory settings:
 ```bash
 sudo pmset -a restoredefaults
+```
+
+To **verify the current values** on your computer and **see what services are preventing the system to sleep**, use the following command:
+```bash
+pmset -g live
 ```
 
 The commands above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
@@ -841,7 +713,7 @@ After all you will can boot MacOS, Windows and Recovery **just like a real Mac**
 For my build **I decided to go with iMac19,2** SMBIOS:
 - **Fast Video render** using my GPU and iGPU;
 - **SideCar, AirPlay, Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working;
-- Removed **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`**, **`AGPMInjector.kext`**, **`USBInjectAll.kext`** and **`SmallTreeIntel82576.kext`** from **`config.plist`** and delete from **`Kexts`** folder;
+- Removed **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`**,  **`USBInjectAll.kext`** and **`SmallTreeIntel82576.kext`** from **`config.plist`** and delete from **`Kexts`** folder;
 - Removed **Tools** as described [here](#cleaning-the-efi);
 - Computer **sleep working** as a real Mac;
 - **Disable boot menu** _(can be enabled using Option or ESC key on boot)_ like a real iMac;
