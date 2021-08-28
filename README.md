@@ -21,9 +21,9 @@ This is the guide for **OpenCore 0.7.2** with **Big Sur 11.5.1** for an **iMac19
 	- [DRM Support](#drm-support)
 	- [Power Management](#power-management)
 	- [Sleep and Hibernate](#sleep-and-hibernate)
+	- [Power button](#power-button)
 	- [ABNT2 keyboard](#abnt2-keyboard)
-	- [Final comments](#final-comments)
-- [My Build](#my-build)
+- [Final comments](#final-comments)
 
 
 ## Warning 
@@ -468,7 +468,7 @@ and
 		<string>RestrictEvents.kext</string>
 	</dict>
 ```
-- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own `CPUFriendDataProvider.kext` see the apendix below for instructions)_.
+- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own `CPUFriendDataProvider.kext` see the [notes](#power-management) below for instructions)_.
 
 ## Notes 
 
@@ -693,6 +693,12 @@ pmset -g live
 
 The commands above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
 
+### Power button
+You know that **Power Button can turn on and wake the computer** from Sleep and Hibernate modes. But you can make the Power Button **works for turn off the display and sleep like a real Mac too** with the following command:
+```bash
+defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool yes
+```
+
 ### ABNT2 keyboard
 To make your brazilian **ABNT2 keyboard** default when Install MacOS, change language and keyboard layout in your **`config.plist`** inside **NVRAM** key section:
 ```xml
@@ -700,26 +706,13 @@ To make your brazilian **ABNT2 keyboard** default when Install MacOS, change lan
 <string>pt-BR:128</string>
 ```
 
-### Final comments
+## Final comments
 
 After all you will can boot MacOS, Windows and Recovery **just like a real Mac** computer:
 - Hold **Option** key (or **ESC** key) to show boot menu;
 - Use **System Preferences > Startup** disk to change boot to Windows and **BootCamp Control Panel** on Windows to change the boot to Mac;
 - Update your Mac using the **Apple Software Updates**;
 - Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
-
-## My Build 
-
-For my build **I decided to go with iMac19,2** SMBIOS:
-- **Fast Video render** using my GPU and iGPU;
-- **SideCar, AirPlay, Handoff, Airdrop, iPhone Cellular Calls, SMS Forwarding and Universal Clipboard** working;
-- Removed **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`**,  **`USBInjectAll.kext`** and **`SmallTreeIntel82576.kext`** from **`config.plist`** and delete from **`Kexts`** folder;
-- Removed **Tools** as described [here](#cleaning-the-efi);
-- Computer **sleep working** as a real Mac;
-- **Disable boot menu** _(can be enabled using Option or ESC key on boot)_ like a real iMac;
-- **Enabled boot chyme** sound, connecting speakers to LineOut on motherboard _(enabling volume controls on keyboard too, because real Macs do not control volume for HDMI ou DisplayPort connections)_;
-- Apple **Magic Keyboard** and **Magic TrackPad** fully working on **MacOS**, **Windows 10** and even in **BIOS** settings _(press FN+F12 to enter BIOS setup)_ with **BootCamp** installed on Windows;
-- I feel that I have an iMac!
 
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=elieserme)](https://github.com/anuraghazra/github-readme-stats)
