@@ -43,18 +43,26 @@ brew install rs/tap/jaggr
 brew install rs/tap/jplot
 
 ### apps
+brew install --cask geekbench
+brew install --cask fliqlo
 brew install --cask authy
 brew install --cask gimp
 brew install --cask keka
 brew install --cask vlc
 brew install youtube-dl
 brew install ffmpeg
+brew install libdvdcss
 brew install --cask handbrake
 brew install --cask skype
 brew install --cask zoom
 brew install --cask intel-power-gadget
 brew install --cask osxfuse
 brew install --cask veracrypt
+
+### awscli
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
+rm AWSCLIV2.pkg
 
 ### YOUTUBE DOWNLOAD SCRIPT
 sudo tee /usr/local/bin/youtube-download > /dev/null << YZS1
