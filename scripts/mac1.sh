@@ -7,6 +7,7 @@
 
 git config --global user.name "Me"
 git config --global user.email "me@me.com"
+git config --global init.defaultBranch main
 
 ### nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
