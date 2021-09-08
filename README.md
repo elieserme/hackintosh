@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.2** with **Big Sur 11.5.1** for an **iMac19,2** hackintosh build.
+This is the guide for **OpenCore 0.7.3** with **Big Sur 11.5.1** for an **iMac19,2** hackintosh build.
 
 ## Table of Contents
 
