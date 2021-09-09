@@ -361,6 +361,12 @@ One valid use of a Windows install is to **generate the files** on **`ACPI`** fo
 -	<true/>
 +	<false/>
 ```
+- If you have a **HiDPI, 4K** or **Retina Display** change the **UIScale** in your **`config.plist`**:
+```diff
+	<key>UIScale</key>
+-	<data>AQ==</data>
++	<data>Ag==</data>
+```
 
 ## Other SMBIOS
 
