@@ -43,6 +43,7 @@ brew install rs/tap/jaggr
 brew install rs/tap/jplot
 
 ### apps
+brew install --cask lunar
 brew install --cask geekbench
 brew install --cask fliqlo
 brew install --cask authy
@@ -53,11 +54,12 @@ brew install youtube-dl
 brew install ffmpeg
 brew install libdvdcss
 brew install --cask handbrake
-brew install --cask skype
 brew install --cask zoom
-brew install --cask intel-power-gadget
-brew install --cask osxfuse
-brew install --cask veracrypt
+
+### removed for stability - do not use unless you really need it
+# brew install --cask intel-power-gadget
+# brew install --cask osxfuse
+# brew install --cask veracrypt
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
