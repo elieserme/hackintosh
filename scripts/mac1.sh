@@ -10,10 +10,10 @@ git config --global user.email "me@me.com"
 git config --global init.defaultBranch main
 
 ### nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 ### maven
-curl -L https://www-us.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -o maven.tar.gz
+curl -L https://dlcdn.apache.org/maven/maven-3/3.8.2/binaries/apache-maven-3.8.2-bin.tar.gz -o maven.tar.gz
 sudo tar xf maven.tar.gz -C /usr/local
 sudo ln -s /usr/local/apache-maven-3.6.3 /usr/local/maven
 
