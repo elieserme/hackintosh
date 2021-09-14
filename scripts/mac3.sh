@@ -43,6 +43,7 @@ brew install rs/tap/jaggr
 brew install rs/tap/jplot
 
 ### apps
+brew install --cask appcleaner
 brew install --cask lunar
 brew install --cask geekbench
 brew install --cask fliqlo
