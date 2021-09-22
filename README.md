@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.3** with **Big Sur 11.5.1** for an **iMac19,2** hackintosh build.
+This is the guide for **OpenCore 0.7.3** with **Big Sur 11.6** for an **iMac19,2** hackintosh build.
 
 ## Table of Contents
 
@@ -74,7 +74,7 @@ Be carefull enabling **MCE** or **Enhanced Multi-core Performance** with this mo
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
-- Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **256MB** max; 
+- Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **128MB** max; 
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; ErP &gt; **ENABLED**
 - Save and restart
