@@ -35,6 +35,8 @@ brew install --cask github
 brew install gh
 brew install libpq
 brew link --force libpq
+brew install --cask flutter
+sudo gem install cocoapods
 
 ### vegeta
 brew install vegeta
