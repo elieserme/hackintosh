@@ -8,7 +8,7 @@
 git config --global user.name "Me"
 git config --global user.email "me@me.com"
 git config --global init.defaultBranch main
-git config pull.rebase false
+git config --global pull.rebase false
 
 ### nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
