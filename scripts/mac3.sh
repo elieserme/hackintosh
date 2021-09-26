@@ -19,7 +19,6 @@ brew install --cask transmission
 
 ### development
 brew install --cask visual-studio-code
-brew install --cask android-studio
 brew install --cask imageoptim
 brew install --cask insomnia
 brew tap homebrew/cask-fonts
@@ -35,8 +34,13 @@ brew install --cask github
 brew install gh
 brew install libpq
 brew link --force libpq
+
+### mobile dev
+brew install --cask android-studio
 brew install --cask flutter
 sudo gem install cocoapods
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+sudo xcodebuild -runFirstLaunch
 
 ### vegeta
 brew install vegeta
