@@ -2,9 +2,10 @@
 source ~/.zshrc
 
 # ZSH SETUP
+# AGNOSTER DEFAULT, SPACESHIP AS AN OPTION
 git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
 ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-sed -i'.zshrc_backup' 's/robbyrussell/spaceship/g' ~/.zshrc
+sed -i'.zshrc_backup' 's/robbyrussell/agnoster/g' ~/.zshrc
 cat >> ~/.zshrc << EZSH
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
@@ -24,6 +25,7 @@ SPACESHIP_USER_SHOW=always
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯"
 SPACESHIP_CHAR_SUFFIX=" "
+export DEFAULT_USER=\$USER
 EZSH
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 cat >> ~/.zshrc << EZS2
