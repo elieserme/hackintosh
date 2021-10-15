@@ -241,7 +241,7 @@
 			<key>SignalAppleOS</key>
 			<false/>
 			<key>SyncRuntimePermissions</key>
-			<true/>
+			<false/>
 		</dict>
 	</dict>
 	<key>DeviceProperties</key>
@@ -958,7 +958,9 @@
 		<array>
 			<dict>
 				<key>Path</key>
-				<string>HfsPlus.efi</string>
+				<string>OpenHfsPlus.efi</string>
+				<key>Comment</key>
+				<string>HFS+ Driver</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Arguments</key>
@@ -967,6 +969,8 @@
 			<dict>
 				<key>Path</key>
 				<string>OpenRuntime.efi</string>
+				<key>Comment</key>
+				<string></string>
 				<key>Enabled</key>
 				<true/>
 				<key>Arguments</key>
@@ -975,6 +979,8 @@
 			<dict>
 				<key>Path</key>
 				<string>OpenCanopy.efi</string>
+				<key>Comment</key>
+				<string></string>
 				<key>Enabled</key>
 				<true/>
 				<key>Arguments</key>
@@ -983,6 +989,8 @@
 			<dict>
 				<key>Path</key>
 				<string>AudioDxe.efi</string>
+				<key>Comment</key>
+				<string></string>
 				<key>Enabled</key>
 				<true/>
 				<key>Arguments</key>
