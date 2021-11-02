@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.3** with **Big Sur 11.6** for an **iMac19,2** hackintosh build.
+This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an **iMac19,2** hackintosh build.
 
 ## Table of Contents
 
@@ -8,8 +8,8 @@ This is the guide for **OpenCore 0.7.3** with **Big Sur 11.6** for an **iMac19,2
 - [Why use iMac 19,2 model?](#why-use-imac-19-model)
 - [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
-- [Windows 10](#windows-10)
-- [MacOS 11 Big Sur](#macos-11-big-sur)
+- [Windows 11](#windows-11)
+- [MacOS Monterey 12](#macos-monterey-12)
 - [Post Install](#post-install)
 	- [Windows and BootCamp](#windows-and-bootcamp)
 	- [Cleaning the EFI](#cleaning-the-efi)
@@ -34,7 +34,7 @@ This is the guide for **OpenCore 0.7.3** with **Big Sur 11.6** for an **iMac19,2
 - **AMD GPU** and **iGPU** for balanced performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **Sidecar** working because **this iMac do not have T2 chip**;
-- Note that are DRM issues with **Netflix**, **PrimeVideo** and **Apple TV+** in Big Sur until community finds a solution _(if you require DRM support, better use the MacPro7,1 SMBIOS and read this until the end for more information)_.
+- Note that are DRM issues with **Netflix**, **PrimeVideo** and **Apple TV+** in **Big Sur** and **Monterey** until community finds a solution _(if you require DRM support, better use the MacPro7,1 SMBIOS and read this until the end for more information)_.
 
 ## Hardware
 
@@ -81,7 +81,7 @@ Be carefull enabling **MCE** or **Enhanced Multi-core Performance** with this mo
 
 #### MacOS only BIOS settings
 
-If you **don't plan to install Windows 10 on dual boot or BootCamp**, you can change the following settings from above config:
+If you **don't plan to install Windows 11 on dual boot or BootCamp**, you can change the following settings from above config:
 
 - Peripherals &gt; Intel PTT &gt; **DISABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
@@ -94,7 +94,7 @@ Remind to config **DisableIoMapper** to **`false`** in **`config.plist`** since 
 <false/>
 ```
 
-## Windows 10
+## Windows 11
 
 - If you plan to have Windows setup, it must be **installed first** on it's own disk;
 - Use your **motherboard and AMD drivers** supplied. For **WIFI/Bluetooth** drivers, [download](http://en.fenvi.com/en/download_zx.php) from Fenvi.
@@ -102,12 +102,12 @@ Remind to config **DisableIoMapper** to **`false`** in **`config.plist`** since 
 > **IMPORTANT!**
 **Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID (unsupported).
 
-## MacOS 11 Big Sur
+## MacOS Monterey 12
 
-- Can be direct downloaded from Apple using [App Store](https://apps.apple.com/br/app/macos-big-sur/id1526878132?mt=12) on a regular MacOS computer; 
-- Make a **USB** install disk _(the example below uses a USB device named USB and makes Big Sur installation disk)_:
+- Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/monterey/) on a regular MacOS computer; 
+- Make a **USB** install disk _(the example below uses a USB device named USB and makes Monterey installation disk)_:
 ```bash
-sudo /Applications/Install\ macOS\ Big\ Sur.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
+sudo /Applications/Install\ macOS\ Monterey.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
 ```
 - Use [git repo](https://github.com/elieserme/hackintosh/) to download the **EFI** folder 
 
@@ -172,18 +172,6 @@ setup_var_3 0x5A4 0x00
 - Use **Clear NVRAM** and reboot to make a clean install
 - Use **Disk Utility** to erase a **APFS GUI** volume and **install MacOS**
 - Finish **normal** MacOS setup
-- Install **App Store** applications, including **Xcode**
-- Install [HomeBrew ](https://brew.sh) package management tool and run the **Scripts** for install tools _(can skip this step if you don't plan to use development tools)_
-- System Preferences &gt; Software Updates &gt; **Uncheck**
-- System Preferences &gt; General &gt; Show Scrollbars &gt; **When scrolling**
-- System Preferences &gt; Notifications &gt; **Check disable between 22h and 7h**
-- System Preferences &gt; Monitors &gt; NightShift &gt; **Sunset to Sunrise**
-- System Preferences &gt; Security &gt; Privacy &gt; **Check system locations service**
-- System Preferences &gt; Security &gt; **activate Filevalt**
-- Finder &gt; Preferences &gt; Start in **Documents** folder
-- Finder &gt; Preferences &gt; Show **Home Folder**
-- Finder &gt; View &gt; Show **Status Bar**
-- Desktop &gt; Right click &gt; **Use Stacks**
 
 ## Post install
 
@@ -196,7 +184,7 @@ git clone https://github.com/timsutton/brigadier
 cd brigadier
 brigadier -m iMac19,2 -i
 ```
-- If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver `.inf` file**. To complete the setup, **reboot Windows**.
+- If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver `.inf` file**. To complete the setup, **reboot Windows**. You may need to run **`Apple Software Update`** program some times to update the Magic Trackpad driver to high precision touch device.
 
 > **IMPORTANT!**
 One valid use of a Windows install is to **generate the files** on **`ACPI`** folder. You can use **SSDTTime** tool to generate **`SSDT-AWAC.aml`**,  **`SSDT-EC.aml`** , **`SSDT-HPET.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_. The **`SSDT-EC-USBW.aml`** and **`SSDT-SBUS-MCHC.aml`** can be edited and compiled using **MaciASL** util. Sources are in **`other/acpi_src`** in this repo.
@@ -635,7 +623,7 @@ To have the fancy **name** of this ethernet port in **System Report**, you can i
 
 The **iMac19,2** SMBIOS **need some hack to have DRM support** _(Netflix, Prime Video, Apple TV+)_:
 - For **Catalina**, you need to add `shikigva=80` in your `boot-args` in **`config.plist`** file;
-- For **Big Sur**, there are [no definitive solution](https://dortania.github.io/OpenCore-Install-Guide/extras/big-sur/#known-issues). But you can watch Apple TV+ using the commands below:
+- For **Big Sur** and **Monterey**, there are [no definitive solution](https://dortania.github.io/OpenCore-Install-Guide/extras/big-sur/#known-issues). But you can watch Apple TV+ using the commands below:
 ```bash
 defaults write com.apple.AppleGVA gvaForceAMDKE -bool YES
 defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -bool YES
