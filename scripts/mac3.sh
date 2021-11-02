@@ -42,16 +42,9 @@ sudo gem install cocoapods
 sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
 sudo xcodebuild -runFirstLaunch
 
-### vegeta
-brew install vegeta
-brew install --cask iterm2
-brew install rs/tap/jaggr
-brew install rs/tap/jplot
-
 ### apps
 brew install --cask appcleaner
 brew install --cask lunar
-brew install --cask geekbench
 brew install --cask fliqlo
 brew install --cask authy
 brew install --cask gimp
@@ -63,10 +56,8 @@ brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
 
-### removed for stability - do not use unless you really need it
+### use only you really need it
 # brew install --cask intel-power-gadget
-# brew install --cask osxfuse
-# brew install --cask veracrypt
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
