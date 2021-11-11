@@ -17,7 +17,6 @@ This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an *
 	- [MacPro](#macpro)
 - [Notes](#notes)
 	- [USB Ports](#usb-ports)
-	- [2nd Ethernet port](#2nd-ethernet-port)
 	- [DRM Support](#drm-support)
 	- [Power Management](#power-management)
 	- [Sleep and Hibernate](#sleep-and-hibernate)
@@ -365,9 +364,77 @@ This build has some options:
 | SMBIOS | Advantage | Loss |
 | ------ | --------- | ---- |
 | **iMac19,2** | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_ | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
+| **iMacPro1,1** | **_Full DRM support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding_** | _SideCar_ |
 | **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar_ |
 
 You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **MacPro** see instructions below.
+
+### iMacPro
+
+Use the iMacPro1,1 SMBIOS if you **require full DRM support** and **best video production** acceleration. Follow the steps below:
+- **Disable iGPU** in **BIOS** settings, changing **Chipset &gt; Internal Graphics** to **DISABLED** 
+- Change **`config.plist`** and replace **SystemProductName** with iMacPro1,1:
+```diff
+	<key>SystemProductName</key>
+-	<string>iMac19,2</string>
++	<string>iMacPro1,1</string>
+```
+- Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for iMacPro1,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **`config.plist`**;
+- **Remove this section** from your **`config.plist`** since you **don't have iGPU** anymore:
+```diff
+-	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+-	<dict>
+-		<key>AAPL,ig-platform-id</key>
+-		<data>AwCSPg==</data>
+-	</dict>
+```
+- **Enable the XHC1 to SHC1 rename** in your **`config.plist`**:
+```diff
+	<dict>
+		<key>Base</key>
+		<string></string>
+		<key>BaseSkip</key>
+		<integer>0</integer>
+		<key>Comment</key>
+		<string>XHC1 to SHCI need for iMacPro1,1</string>
+		<key>Count</key>
+		<integer>0</integer>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>Find</key>
+		<data>WEhDMQ==</data>
+		<key>Limit</key>
+		<integer>0</integer>
+		<key>Mask</key>
+		<data></data>
+		<key>OemTableId</key>
+		<data></data>
+		<key>Replace</key>
+		<data>U0hDSQ==</data>
+		<key>ReplaceMask</key>
+		<data></data>
+		<key>Skip</key>
+		<integer>0</integer>
+		<key>TableLength</key>
+		<integer>0</integer>
+		<key>TableSignature</key>
+		<data></data>
+	</dict>
+```
+- Edit **`USBPorts.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS:
+```diff
+	<key>IOKitPersonalities</key>
+	<dict>
+-	<key>iMac19,2-XHC</key>
++	<key>iMacPro1,1-XHC</key>
+```
+and
+```diff
+	<key>model</key>
+-	<string>iMac19,2</string>
++	<string>iMacPro1,1</string>
+```
 
 ### MacPro
 
@@ -583,42 +650,6 @@ uia_exclude=HS03;HS04;HS09;HS11;HS12;HS13;HS14;USR1;USR2;SS03;SS04
 	</dict>
 ```
  
-### 2nd Ethernet Port
-
-> **IMPORTANT!** Due to some instabilty on _SmallTreeIntel82576.kext_ I decided to disable it and not use the 2nd ethernet port on this motherboard. Please make tests using it on your config. 
-
-Gigabyte Z370N WIFI **has two gigabit ethernet ports**. By default, only Intel i219 is enabled in **`config.plist`** but you can activate the second port _(Intel i211)_ by enable **`SmallTreeIntel82576.kext`** in your **`config.plist`**:
-
-```diff
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/SmallTreeIntel82576</string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>SmallTreeIntel82576.kext</string>
-	</dict>
-```
-To have the fancy **name** of this ethernet port in **System Report**, you can inject the device name in properties inside **DeviceProperties**:
-```xml
-<key>PciRoot(0x0)/Pci(0x1C,0x5)/Pci(0x0,0x0)</key>
-<dict>
-	<key>model</key>
-	<string>Intel I211 PCI Express Gigabit Ethernet</string>
-</dict>
-```
-
 ### DRM Support
 
 The **iMac19,2** SMBIOS **need some hack to have DRM support** _(Netflix, Prime Video, Apple TV+)_:
