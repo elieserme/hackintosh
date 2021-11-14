@@ -3,11 +3,11 @@ source ~/.zshrc
 
 # ZSH SETUP
 # AGNOSTER DEFAULT
-sed -i'.zshrc_backup' 's/robbyrussell/agnoster/g' ~/.zshrc
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+sed -i'.zshrc_backup1' 's/plugins=(git)/plugins=(git zsh-autosuggestions)/g' ~/.zshrc
+sed -i'.zshrc_backup2' 's/robbyrussell/agnoster/g' ~/.zshrc
 cat >> ~/.zshrc << EZS3
-export M2_HOME=/usr/local/maven
-export MAVEN_HOME=/usr/local/maven
-export PATH=\${M2_HOME}/bin:/Library/PostgreSQL/13/bin:\${PATH}
+export PATH=/Library/PostgreSQL/13/bin:\${PATH}
 export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
 export ANDROID_SDK=/Users/$USER/Library/Android/sdk

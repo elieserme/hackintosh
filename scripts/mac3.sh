@@ -56,8 +56,8 @@ brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
 
-### use only you really need it
-# brew install --cask intel-power-gadget
+### use if you want monitor like iStatMenus
+brew install --cask intel-power-gadget
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
