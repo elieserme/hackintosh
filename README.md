@@ -14,7 +14,8 @@ This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an *
 	- [Windows and BootCamp](#windows-and-bootcamp)
 	- [Cleaning the EFI](#cleaning-the-efi)
 - [Other SMBIOS](#other-smbios)
-	- [MacPro](#macpro)
+	- [iMac Pro](#imacpro)
+	- [Mac Pro](#macpro)
 - [Notes](#notes)
 	- [USB Ports](#usb-ports)
 	- [DRM Support](#drm-support)
@@ -422,7 +423,7 @@ Use the iMacPro1,1 SMBIOS if you **require full DRM support** and **best video p
 		<data></data>
 	</dict>
 ```
-- Edit **`USBPorts.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS:
+- Edit **`USBPorts.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS and **USB Power** settings:
 ```diff
 	<key>IOKitPersonalities</key>
 	<dict>
@@ -434,6 +435,19 @@ and
 	<key>model</key>
 -	<string>iMac19,2</string>
 +	<string>iMacPro1,1</string>
+```
+and
+```diff
+	<key>kUSBSleepPortCurrentLimit</key>
+	<integer>2100</integer>
+	<key>kUSBSleepPowerSupply</key>
+-	<integer>4700</integer>
++	<integer>5100</integer>
+	<key>kUSBWakePortCurrentLimit</key>
+	<integer>2100</integer>
+	<key>kUSBWakePowerSupply</key>
+-	<integer>4700</integer>
++	<integer>5100</integer>
 ```
 
 ### MacPro
@@ -455,7 +469,7 @@ Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video pr
 -		<data>AwCSPg==</data>
 -	</dict>
 ```
-- Edit **`USBPorts.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS:
+- Edit **`USBPorts.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS and **USB Power** settings:
 ```diff
 	<key>IOKitPersonalities</key>
 	<dict>
@@ -467,6 +481,19 @@ and
 	<key>model</key>
 -	<string>iMac19,2</string>
 +	<string>MacPro7,1</string>
+```
+and
+```diff
+	<key>kUSBSleepPortCurrentLimit</key>
+	<integer>2100</integer>
+	<key>kUSBSleepPowerSupply</key>
+-	<integer>4700</integer>
++	<integer>5100</integer>
+	<key>kUSBWakePortCurrentLimit</key>
+	<integer>2100</integer>
+	<key>kUSBWakePowerSupply</key>
+-	<integer>4700</integer>
++	<integer>5100</integer>
 ```
 - **Copy** the **`CPUFriendDataProvider.kext`** from folder **`other/macpro71`** in this repo to your **`Kexts`** folder
 - **Enable** the **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
