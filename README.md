@@ -572,14 +572,15 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 | HS02, **SS02** | 3 | _Front 2_ |
 | HS05, **SS05** | 3 | _Rear 1_ |
 | HS06, **SS06** | 3 | _Rear 2_ |
-| HS07, **SS07** | 3 | _Rear 3_ |
+| HS07 | 3 | _Rear 3  (webcam)_ |
 | HS08, **SS08** | 3 | _Rear 4_ |
-| HS10       | 255 | _Bluetooth_ |
-| **SS09**, **SS10** | 10 | _Rear C_ | 
+| HS09 | 8 | _Rear C (USB 2)_ |
+| HS10       | 255 | _Internal (bluetooth)_ |
+| **SS09**, **SS10** | 10 | _Rear C (USB 3)_ | 
 
 | Ports disabled |
 | -------------- |
-| _HS03, HS04, HS09, HS11, HS12, HS13, HS14, USR1, USR2, SS03, SS04_
+| _HS03, HS04, HS11, HS12, HS13, HS14, USR1, USR2, SS03, SS04, SS07_
 
 If you want to map your USB ports yourself,  use [Hackintool](https://github.com/headkaze/Hackintool) and follow this instructions:
 
@@ -632,7 +633,7 @@ uia_exclude=HS03;HS04
 - **Reboot** and do the step above again, **until you have only 15 ports** active. As example, my final boot-args directive was like this:
 
 ```
-uia_exclude=HS03;HS04;HS09;HS11;HS12;HS13;HS14;USR1;USR2;SS03;SS04
+uia_exclude=HS03;HS04;HS11;HS12;HS13;HS14;USR1;USR2;SS03;SS04;SS07
 ```
 - After that, export the **`USBPorts.kext`** using Hackintool and place it on **`Kexts`** folder. 
 - Remind to **disable** **`USBInjectAll.kext`** and **enable `USBPorts.kext`** in **`config.plist`**:
