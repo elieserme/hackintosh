@@ -7,6 +7,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 sed -i'.zshrc_backup1' 's/plugins=(git)/plugins=(git zsh-autosuggestions)/g' ~/.zshrc
 sed -i'.zshrc_backup2' 's/robbyrussell/agnoster/g' ~/.zshrc
 cat >> ~/.zshrc << EZS3
+export DEFAULT_USER=\$USER
 export PATH=/Library/PostgreSQL/13/bin:\${PATH}
 export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
