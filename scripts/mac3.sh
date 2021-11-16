@@ -57,7 +57,7 @@ brew install --cask handbrake
 brew install --cask zoom
 
 ### use if you want monitor like iStatMenus
-brew install --cask intel-power-gadget
+# brew install --cask intel-power-gadget
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
