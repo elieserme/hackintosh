@@ -1,11 +1,11 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an **iMac19,2** hackintosh build.
+This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an **iMac 2019** hackintosh build.
 
 ## Table of Contents
 
 - [Warning](#warning)
-- [Why use iMac 19,2 model?](#why-use-imac-19-model)
+- [Why use iMac 2019 model?](#why-use-imac-2019-model)
 - [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
 - [Windows 11](#windows-11)
@@ -29,7 +29,7 @@ This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an *
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
-## Why use iMac 19 model
+## Why use iMac 2019 model
 - Native **Intel Cofee Lake** power management;
 - **AMD GPU** and **iGPU** for balanced performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
@@ -43,10 +43,11 @@ This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an *
 | **CPU** | [Intel i7 8700 ](https://www.intel.com.br/content/www/br/pt/products/processors/core/core-vpro/i7-8700.html) 8th generation 6 cores and 12 threads 3,2GHz with Turbo Boost up to 4,6GHz |
 | **Motherboard** | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX |
 | **RAM** | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN |
-| **SSD** | [Samsung EVO 970 Plus ](https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/) 250GB PCIe NVMe |
+| **SSD** | [Samsung EVO 970 Plus ](https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/) 250GB PCIe NVMe (Macintosh HD) |
+| **SSD** | [ADATA XPG SX6000 Pro ](https://www.adata.com/pt/xpg/580) 1TB PCIe NVMe (Windows) |
 | **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit |
 | **GPU** | [Gigabyte Radeon RX 590 8GB 1.0](https://www.gigabyte.com/br/Graphics-Card/GV-RX590GAMING-8GD-rev-10#kf) Dedicated Video Card |
-| **Wireless** | [BCM94360NG ](http://en.fenvi.com/en/download_zx.php) Bluetooth and WiFI replacement card |
+| **Wireless** | [BCM94360CS2 ](https://github.com/elieserme/hackintosh/blob/main/other/windows11/wireless_apple/bcm94360cs2.zip) Bluetooth and WiFI replacement card |
 | **Case** | [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX |
 
 ### BIOS settings
@@ -144,7 +145,7 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 		<key>SpoofVendor</key>
 		<true/>
 		<key>SystemProductName</key>
-		<string>iMac19,2</string>
+		<string>iMac19,1</string>
 		<key>SystemSerialNumber</key>
 		<string>AAAAAAAAAAAA</string>
 		<key>SystemUUID</key>
@@ -177,12 +178,15 @@ setup_var_3 0x5A4 0x00
 
 ### Windows and Bootcamp
 
-- If you don't plan to install BootCamp drivers, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
-- Or you can install **BootCamp** drivers with [Brigadier](https://github.com/timsutton/brigadier) utility **after MacOS installed** _(use this option if you plan to use Apple Magic Keyboard and Trackpad, but **you need to install BootCamp drivers before** pairing with Bluetooth on Windows)_
+You can **isolate Windows** from Mac and vice versa (by choose boot drive in BIOS) or **integrate with BootCamp** like a real Mac:
+  1. To isolate Windows, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
+	This setup allows you use BitLocker to encrypt your Windows disk and enable [BitLocker PIN on Windows Statup](https://www.dell.com/support/kbdoc/pt-br/000142382/como-usar-o-bitlocker-com-pin) for enhanced Windows security.
+	You may need to remove Windows drive from OpenCore picker by setting **ScanPolicy** to **19858179** in your **`config.plist`**
+	2. Or you can use **BootCamp** drivers with [Brigadier](https://github.com/timsutton/brigadier) utility **after MacOS installed** _(use this option if you plan to use Apple Magic Keyboard and Trackpad, but **you need to install BootCamp drivers and update Apple Software before** pairing with Bluetooth on Windows)_. After all set, you can use OpenCore picker to start Windows or MacOS:
 ```bash
 git clone https://github.com/timsutton/brigadier
 cd brigadier
-brigadier -m iMac19,2 -i
+brigadier -m iMac19,1 -i
 ```
 - If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver `.inf` file**. To complete the setup, **reboot Windows**. You may need to run **`Apple Software Update`** program some times to update the Magic Trackpad driver to high precision touch device.
 
@@ -359,12 +363,13 @@ One valid use of a Windows install is to **generate the files** on **`ACPI`** fo
 ## Other SMBIOS
 
 This build has some options:
-- The **most hardware compatible** and working out-of-the-box is **iMac19,2** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
+- The **most hardware compatible** and working out-of-the-box is **iMac19,1** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
+- **iMacPro1,1** will give you **full DRM support** and **best video processing speed**; but loss SideCar because you have no T2 chip;
 - **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar too because no T2 chip.
 
 | SMBIOS | Advantage | Loss |
 | ------ | --------- | ---- |
-| **iMac19,2** | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_ | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
+| **iMac19,1** | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_ | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
 | **iMacPro1,1** | **_Full DRM support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding_** | _SideCar_ |
 | **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar_ |
 
@@ -377,7 +382,7 @@ Use the iMacPro1,1 SMBIOS if you **require full DRM support** and **best video p
 - Change **`config.plist`** and replace **SystemProductName** with iMacPro1,1:
 ```diff
 	<key>SystemProductName</key>
--	<string>iMac19,2</string>
+-	<string>iMac19,1</string>
 +	<string>iMacPro1,1</string>
 ```
 - Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for iMacPro1,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **`config.plist`**;
@@ -427,13 +432,13 @@ Use the iMacPro1,1 SMBIOS if you **require full DRM support** and **best video p
 ```diff
 	<key>IOKitPersonalities</key>
 	<dict>
--	<key>iMac19,2-XHC</key>
+-	<key>iMac19,1-XHC</key>
 +	<key>iMacPro1,1-XHC</key>
 ```
 and
 ```diff
 	<key>model</key>
--	<string>iMac19,2</string>
+-	<string>iMac19,1</string>
 +	<string>iMacPro1,1</string>
 ```
 and
@@ -457,7 +462,7 @@ Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video pr
 - Change **`config.plist`** and replace **SystemProductName** with MacPro7,1:
 ```diff
 	<key>SystemProductName</key>
--	<string>iMac19,2</string>
+-	<string>iMac19,1</string>
 +	<string>MacPro7,1</string>
 ```
 - Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for MacPro7,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **`config.plist`**;
@@ -473,13 +478,13 @@ Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video pr
 ```diff
 	<key>IOKitPersonalities</key>
 	<dict>
--	<key>iMac19,2-XHC</key>
+-	<key>iMac19,1-XHC</key>
 +	<key>MacPro7,1-XHC</key>
 ```
 and
 ```diff
 	<key>model</key>
--	<string>iMac19,2</string>
+-	<string>iMac19,1</string>
 +	<string>MacPro7,1</string>
 ```
 and
@@ -495,7 +500,6 @@ and
 -	<integer>4700</integer>
 +	<integer>5100</integer>
 ```
-- **Copy** the **`CPUFriendDataProvider.kext`** from folder **`other/macpro71`** in this repo to your **`Kexts`** folder
 - **Enable** the **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
 ```diff
 	<dict>
@@ -556,27 +560,27 @@ and
 		<string>RestrictEvents.kext</string>
 	</dict>
 ```
-- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own `CPUFriendDataProvider.kext` see the [notes](#power-management) below for instructions)_.
+- Remind to **Reset NVRAM** if you are changing from iMac19,1 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own `CPUFriendDataProvider.kext` see the [notes](#power-management) below for instructions)_.
 
 ## Notes 
 
 ### USB Ports
 
-The included **`USBPorts.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
+The included **`USBPorts.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
 
 Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality, and USB Type C has different ports for each side... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
 | Name | Type | Comment |
 | ---- | ---- | ------- |
-| HS01, **SS01** | 3 | _Front 1_ |
-| HS02, **SS02** | 3 | _Front 2_ |
-| HS05, **SS05** | 3 | _Rear 1_ |
-| HS06, **SS06** | 3 | _Rear 2_ |
-| HS07 | 3 | _Rear 3  (webcam)_ |
-| HS08, **SS08** | 3 | _Rear 4_ |
-| HS09 | 8 | _Rear C (USB 2)_ |
-| HS10       | 255 | _Internal (bluetooth)_ |
-| **SS09**, **SS10** | 10 | _Rear C (USB 3)_ | 
+| HS01, **SS01** | 3 | _USB 2 & 3 front 1_ |
+| HS02, **SS02** | 3 | _USB 2 & 3 front 2_ |
+| HS05, **SS05** | 3 | _USB 2 & 3 rear 1_ |
+| HS06, **SS06** | 3 | _USB 2 & 3 rear 2_ |
+| HS07 | 3 | _USB 2 only rear 3  (webcam)_ |
+| HS08, **SS08** | 3 | _USB 2 & 3 rear 4_ |
+| HS09 | 8 | _USB 2 only rear C_ |
+| HS10       | 255 | _USB 2 internal (bluetooth)_ |
+| **SS09**, **SS10** | 10 | _USB 3 rear C_ | 
 
 | Ports disabled |
 | -------------- |
@@ -680,7 +684,7 @@ uia_exclude=HS03;HS04;HS11;HS12;HS13;HS14;USR1;USR2;SS03;SS04;SS07
  
 ### DRM Support
 
-The **iMac19,2** SMBIOS **need some hack to have DRM support** _(Netflix, Prime Video, Apple TV+)_:
+The **iMac19,1** SMBIOS **need some hack to have DRM support** _(Netflix, Prime Video, Apple TV+)_:
 - For **Catalina**, you need to add `shikigva=80` in your `boot-args` in **`config.plist`** file;
 - For **Big Sur** and **Monterey**, there are [no definitive solution](https://dortania.github.io/OpenCore-Install-Guide/extras/big-sur/#known-issues). But you can watch Apple TV+ using the commands below:
 ```bash
@@ -706,7 +710,7 @@ The **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics 
 git clone git@github.com:acidanthera/CPUFriend.git
 ```
 - Go inside the **`Tools`** folder;
-- **Copy the relevant power management file from MacOS system**. In our case, we need **Cofee Lake** _(for i7 8700)_ so the best Mac model that fits the bill is **iMac19,2** _(you can search the model that match your processor if you use another generation)_. The file we need to copy is the **board-id** of Mac19,2 named **`Mac-63001698E7A34814.plist`** _(you must replace with board id of model you need)_:
+- **Copy the relevant power management file from MacOS system**. In our case, we need **Cofee Lake** _(for i7 8700)_ so the best Mac model that fits the bill is **iMac19,1** _(you can search the model that match your processor if you use another generation)_. The file we need to copy is the **board-id** of Mac19,1 named **`Mac-63001698E7A34814.plist`** _(you must replace with board id of model you need)_:
 ```bash
 sudo cp /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/PlugIns/X86PlatformPlugin.kext/Contents/Resources/Mac-63001698E7A34814.plist .
 ```
