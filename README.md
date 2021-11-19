@@ -182,6 +182,7 @@ You can **isolate Windows** from Mac and vice versa (by choose boot drive in BIO
   1. To isolate Windows, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
 	This setup allows you use BitLocker to encrypt your Windows disk and enable [BitLocker PIN on Windows Statup](https://www.dell.com/support/kbdoc/pt-br/000142382/como-usar-o-bitlocker-com-pin) for enhanced Windows security.
 	You may need to remove Windows drive from OpenCore picker by setting **ScanPolicy** to **19858179** in your **`config.plist`**
+	
 	2. Or you can use **BootCamp** drivers with [Brigadier](https://github.com/timsutton/brigadier) utility **after MacOS installed** _(use this option if you plan to use Apple Magic Keyboard and Trackpad, but **you need to install BootCamp drivers and update Apple Software before** pairing with Bluetooth on Windows)_. After all set, you can use OpenCore picker to start Windows or MacOS:
 ```bash
 git clone https://github.com/timsutton/brigadier
