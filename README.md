@@ -710,14 +710,14 @@ The **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics 
 git clone git@github.com:acidanthera/CPUFriend.git
 ```
 - Go inside the **`Tools`** folder;
-- **Copy the relevant power management file from MacOS system**. In our case, we need **Cofee Lake** _(for i7 8700)_ so the best Mac model that fits the bill is **iMac19,1** _(you can search the model that match your processor if you use another generation)_. The file we need to copy is the **board-id** of Mac19,1 named **`Mac-63001698E7A34814.plist`** _(you must replace with board id of model you need)_:
+- **Copy the relevant power management file from MacOS system**. In our case, we need **Cofee Lake** _(for i7 8700)_ so the best Mac model that fits the bill is **iMac19,1** _(you can search the model that match your processor if you use another generation)_. The file we need to copy is the **board-id** of Mac19,1 named **`Mac-AA95B1DDAB278B95.plist`** _(you must replace with board id of model you need)_:
 ```bash
-sudo cp /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/PlugIns/X86PlatformPlugin.kext/Contents/Resources/Mac-63001698E7A34814.plist .
+sudo cp /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/PlugIns/X86PlatformPlugin.kext/Contents/Resources/Mac-AA95B1DDAB278B95.plist .
 ```
 - Run the **`ResourceConverter.sh`** Tool using the **board-id file** that you copied to current folder:
 ```bash
 sudo chmod +x ResourceConverter.sh
-./ResourceConverter.sh -k Mac-63001698E7A34814.plist
+./ResourceConverter.sh -k Mac-AA95B1DDAB278B95.plist
 ```
 - The file **`CPUFriendDataProvider.kext`** will be generated. Just **copy this file to your `Kext` folder in your EFI volume**, the same folder of **`CPUFriend.kext`** file _(remind to enable this kexts in config.plist)_
 
