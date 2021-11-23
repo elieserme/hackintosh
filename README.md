@@ -578,7 +578,7 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 | HS06, **SS06** | 3 | _USB 2.0 & **3.1** rear 2_ |
 | HS07 | 3 | _USB 2.0 only rear 3  (webcam)_ |
 | HS08, **SS08** | 3 | _USB 2.0 & **3.1** rear 4_ |
-| HS09 | 8 | _USB 2.0 only rear C_ |
+| HS09 | 3 | _USB 2.0 only rear C_ |
 | HS10       | 255 | _USB 2.0 internal (bluetooth)_ |
 | **SS09**, **SS10** | 10 | _USB **3.1** only rear C_ | 
 
