@@ -23,6 +23,7 @@ This is the guide for **OpenCore 0.7.6** with **MacOS Monterey 12.1** for an **i
 	- [Power button](#power-button)
 	- [ABNT2 keyboard](#abnt2-keyboard)
 - [Final comments](#final-comments)
+- [Build images](#build-images)
 
 
 ## Warning 
@@ -653,6 +654,26 @@ After all you will can boot MacOS, Windows and Recovery **just like a real Mac**
 - Use **System Preferences > Startup** disk to change boot to Windows and **BootCamp Control Panel** on Windows to change the boot to Mac;
 - Update your Mac using the **Apple Software Updates**;
 - Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
+
+## Build images
+
+**NVMe drive installation on z370N WiFi Motherboard**
+
+![NVMe](/images/nvme.png)
+
+**WiFi/Bluetooth NGFF card replacement (replace original Intel with Apple BCM94360CS2)**
+
+![NVMe](/images/bt1.png)
+
+![NVMe](/images/bt2.png)
+
+![NVMe](/images/bt3.png)
+
+**Logitech Unifying dongle on HS11 internal port inside the case**
+
+![NVMe](/images/usb1.png)
+
+![NVMe](/images/usb2.png)
 
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=elieserme)](https://github.com/anuraghazra/github-readme-stats)
