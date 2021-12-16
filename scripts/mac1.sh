@@ -3,7 +3,7 @@
 ### INSTALL FIRST
 ### XCODE WITH COMMAND LINE TOOLS
 ### JAVA 11, PYTHON 3.9.7 AND PGSQL 13.4
-### CHANGE TO ZSH: chsh -s /bin/zsh
+### CHANGE TO ZSH (on older OSX): chsh -s /bin/zsh
 
 git config --global user.name "Me"
 git config --global user.email "me@me.com"

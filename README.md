@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an **iMac 2019** hackintosh build.
+This is the guide for **OpenCore 0.7.6** with **MacOS Monterey 12.1** for an **iMac 2019** hackintosh build.
 
 ## Table of Contents
 
@@ -14,7 +14,6 @@ This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an *
 	- [Windows and BootCamp](#windows-and-bootcamp)
 	- [Cleaning the EFI](#cleaning-the-efi)
 - [Other SMBIOS](#other-smbios)
-	- [iMac Pro](#imacpro)
 	- [Mac Pro](#macpro)
 - [Notes](#notes)
 	- [USB Ports](#usb-ports)
@@ -43,8 +42,8 @@ This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an *
 | **CPU** | [Intel i7 8700 ](https://www.intel.com.br/content/www/br/pt/products/processors/core/core-vpro/i7-8700.html) 8th generation 6 cores and 12 threads 3,2GHz with Turbo Boost up to 4,6GHz |
 | **Motherboard** | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX |
 | **RAM** | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN |
-| **SSD** | [Samsung EVO 970 Plus ](https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/) 250GB PCIe NVMe _(Windows)_ |
-| **SSD** | [ADATA XPG SX6000 Pro ](https://www.adata.com/pt/xpg/580) 1TB PCIe NVMe _(MacOS)_ |
+| **SSD** | [Samsung EVO 970 Plus ](https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/) 250GB PCIe NVMe _(Macintosh HD)_ |
+| **SSD** | [ADATA XPG SX6000 Pro ](https://www.adata.com/pt/xpg/580) 1TB PCIe NVMe _(Windows)_ |
 | **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit |
 | **GPU** | [Gigabyte Radeon RX 590 8GB 1.0](https://www.gigabyte.com/br/Graphics-Card/GV-RX590GAMING-8GD-rev-10#kf) Dedicated Video Card |
 | **Wireless** | [BCM94360CS2 ](https://github.com/elieserme/hackintosh/blob/main/other/windows11/wireless_apple/bcm94360cs2.zip) Bluetooth and WiFI replacement card |
@@ -55,7 +54,7 @@ This is the guide for **OpenCore 0.7.5** with **MacOS Monterey 12.0.1** for an *
 Gigabyte z370N WIFI using BIOS version F14b
 
 > **IMPORTANT!**
-Be carefull enabling **MCE** or **Enhanced Multi-core Performance** with this motherboard. On my tests, it causes instability.
+Be carefull enabling **MCE** or **Enhanced Multi-core Performance** with this motherboard... it causes instability in some cases.
 
 - **Load optimised defaults**
 - MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
@@ -67,7 +66,7 @@ Be carefull enabling **MCE** or **Enhanced Multi-core Performance** with this mo
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
 - Peripherals &gt; Re-Size Bar &gt; **DISABLED**
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
-- Peripherals &gt; SGX &gt; **Software Controlled**
+- Peripherals &gt; SGX &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
@@ -182,7 +181,7 @@ You can **isolate Windows** from Mac and vice versa (by choose boot drive in BIO
 
 To isolate Windows, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
 
-This setup allows you use BitLocker to encrypt your Windows disk and enable [BitLocker PIN on Windows Statup](https://www.dell.com/support/kbdoc/pt-br/000142382/como-usar-o-bitlocker-com-pin) for enhanced Windows security.
+This setup allows you use **BitLocker** to encrypt your Windows disk and enable [BitLocker PIN on Windows Statup](https://www.dell.com/support/kbdoc/pt-br/000142382/como-usar-o-bitlocker-com-pin) for enhanced Windows security.
 
 You may need to remove Windows drive from OpenCore picker by setting **ScanPolicy** to **19858179** in your **`config.plist`**
 
@@ -353,107 +352,19 @@ One valid use of a Windows install is to **generate the files** on **`ACPI`** fo
 -	<true/>
 +	<false/>
 ```
-- If you have a **HiDPI, 4K** or **Retina Display** change the **UIScale** in your **`config.plist`**:
-```diff
-	<key>UIScale</key>
--	<data>AQ==</data>
-+	<data>Ag==</data>
-```
 
 ## Other SMBIOS
 
 This build has some options:
 - The **most hardware compatible** and working out-of-the-box is **iMac19,2** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
-- **iMacPro1,1** will give you **full DRM support** and **best video processing speed**; but loss SideCar because you have no T2 chip;
 - **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar too because no T2 chip.
 
 | SMBIOS | Advantage | Loss |
 | ------ | --------- | ---- |
 | **iMac19,2** | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_ | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
-| **iMacPro1,1** | **_Full DRM support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding_** | _SideCar_ |
 | **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar_ |
 
 You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **MacPro** see instructions below.
-
-### iMacPro
-
-Use the iMacPro1,1 SMBIOS if you **require full DRM support** and **best video production** acceleration. Follow the steps below:
-- **Disable iGPU** in **BIOS** settings, changing **Chipset &gt; Internal Graphics** to **DISABLED** 
-- Change **`config.plist`** and replace **SystemProductName** with iMacPro1,1:
-```diff
-	<key>SystemProductName</key>
--	<string>iMac19,2</string>
-+	<string>iMacPro1,1</string>
-```
-- Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for iMacPro1,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **`config.plist`**;
-- **Remove this section** from your **`config.plist`** since you **don't have iGPU** anymore:
-```diff
--	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
--	<dict>
--		<key>AAPL,ig-platform-id</key>
--		<data>AwCSPg==</data>
--	</dict>
-```
-- **Enable the XHC1 to SHC1 rename** in your **`config.plist`**:
-```diff
-	<dict>
-		<key>Base</key>
-		<string></string>
-		<key>BaseSkip</key>
-		<integer>0</integer>
-		<key>Comment</key>
-		<string>XHC1 to SHCI need for iMacPro1,1</string>
-		<key>Count</key>
-		<integer>0</integer>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>Find</key>
-		<data>WEhDMQ==</data>
-		<key>Limit</key>
-		<integer>0</integer>
-		<key>Mask</key>
-		<data></data>
-		<key>OemTableId</key>
-		<data></data>
-		<key>Replace</key>
-		<data>U0hDSQ==</data>
-		<key>ReplaceMask</key>
-		<data></data>
-		<key>Skip</key>
-		<integer>0</integer>
-		<key>TableLength</key>
-		<integer>0</integer>
-		<key>TableSignature</key>
-		<data></data>
-	</dict>
-```
-- Edit **`USBPorts.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS and **USB Power** settings:
-```diff
-	<key>IOKitPersonalities</key>
-	<dict>
--	<key>iMac19,2-XHC</key>
-+	<key>iMacPro1,1-XHC</key>
-```
-and
-```diff
-	<key>model</key>
--	<string>iMac19,2</string>
-+	<string>iMacPro1,1</string>
-```
-and
-```diff
-	<key>kUSBSleepPortCurrentLimit</key>
-	<integer>2100</integer>
-	<key>kUSBSleepPowerSupply</key>
--	<integer>4700</integer>
-+	<integer>5100</integer>
-	<key>kUSBWakePortCurrentLimit</key>
-	<integer>2100</integer>
-	<key>kUSBWakePowerSupply</key>
--	<integer>4700</integer>
-+	<integer>5100</integer>
-```
 
 ### MacPro
 
@@ -486,19 +397,6 @@ and
 	<key>model</key>
 -	<string>iMac19,2</string>
 +	<string>MacPro7,1</string>
-```
-and
-```diff
-	<key>kUSBSleepPortCurrentLimit</key>
-	<integer>2100</integer>
-	<key>kUSBSleepPowerSupply</key>
--	<integer>4700</integer>
-+	<integer>5100</integer>
-	<key>kUSBWakePortCurrentLimit</key>
-	<integer>2100</integer>
-	<key>kUSBWakePowerSupply</key>
--	<integer>4700</integer>
-+	<integer>5100</integer>
 ```
 - **Enable** the **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
 ```diff
@@ -576,15 +474,15 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 | HS02, **SS02** | 3 | _USB 2.0 & **3.1** front 2_ |
 | HS05, **SS05** | 3 | _USB 2.0 & **3.1** rear 1_ |
 | HS06, **SS06** | 3 | _USB 2.0 & **3.1** rear 2_ |
-| HS07 | 3 | _USB 2.0 only rear 3  (webcam)_ |
 | HS08, **SS08** | 3 | _USB 2.0 & **3.1** rear 4_ |
-| HS09 | 3 | _USB 2.0 only rear C_ |
+| HS09 | 3 | _USB 2.0 only rear *Type C* port_ |
 | HS10       | 255 | _USB 2.0 internal (bluetooth)_ |
-| **SS09**, **SS10** | 10 | _USB **3.1** only rear C_ | 
+| HS11       | 3 | _USB 2.0 internal (wireless Keyboard or mouse dongle)_ |
+| **SS09**, **SS10** | 10 | _USB **3.1** only rear *Type C* port_ | 
 
 | Ports disabled |
 | -------------- |
-| _HS03, HS04, HS11, HS12, HS13, HS14, USR1, USR2, SS03, SS04, SS07_
+| _HS03, HS04, HS07, HS12, HS13, HS14, USR1, USR2, SS03, SS04, SS07_
 
 If you want to map your USB ports yourself,  use [Hackintool](https://github.com/headkaze/Hackintool) and follow this instructions:
 
@@ -637,7 +535,7 @@ uia_exclude=HS03;HS04
 - **Reboot** and do the step above again, **until you have only 15 ports** active. As example, my final boot-args directive was like this:
 
 ```
-uia_exclude=HS03;HS04;HS11;HS12;HS13;HS14;USR1;USR2;SS03;SS04;SS07
+uia_exclude=HS03;HS04;HS07;HS12;HS13;HS14;USR1;USR2;SS03;SS04;SS07
 ```
 - After that, export the **`USBPorts.kext`** using Hackintool and place it on **`Kexts`** folder. 
 - Remind to **disable** **`USBInjectAll.kext`** and **enable `USBPorts.kext`** in **`config.plist`**:
@@ -703,23 +601,7 @@ defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -bool YES
 
 The **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
 
-- Use the **`Tools`** folder that come with **`CPUFriend.kext`** to **generate `CPUFriendDataProvider.kext`** using the steps below on your MacOS:
- 
-- **Download** the [CPUFriend](https://github.com/acidanthera/CPUFriend) repo:
-```bash
-git clone git@github.com:acidanthera/CPUFriend.git
-```
-- Go inside the **`Tools`** folder;
-- **Copy the relevant power management file from MacOS system**. In our case, we need **Cofee Lake** _(for i7 8700)_ so the best Mac model that fits the bill is **iMac19,2** _(you can search the model that match your processor if you use another generation)_. The file we need to copy is the **board-id** of Mac19,2 named **`Mac-63001698E7A34814.plist`** _(you must replace with board id of model you need)_:
-```bash
-sudo cp /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/PlugIns/X86PlatformPlugin.kext/Contents/Resources/Mac-63001698E7A34814.plist .
-```
-- Run the **`ResourceConverter.sh`** Tool using the **board-id file** that you copied to current folder:
-```bash
-sudo chmod +x ResourceConverter.sh
-./ResourceConverter.sh -k Mac-63001698E7A34814.plist
-```
-- The file **`CPUFriendDataProvider.kext`** will be generated. Just **copy this file to your `Kext` folder in your EFI volume**, the same folder of **`CPUFriend.kext`** file _(remind to enable this kexts in config.plist)_
+You can use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to generate a new **CPUFriendDataProvider.kext** file to your needs.
 
 ### Sleep and Hibernate
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like updates and other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
@@ -728,7 +610,7 @@ sudo pmset proximitywake 0
 ```
 If you want to control **how and when the computer hibernates** (save state and turn off) you need to customize some vars.
 
-**Example 1:** Computer sleeps and hibernates 2 hours after sleep:
+**Example 1:** Computer sleeps and hibernates 2 hours after sleep _(only iMac19,2 SMBIOS support)_:
 ```bash
 sudo pmset -a hibernatemode 3
 sudo pmset -a standbydelaylow 7200
@@ -767,6 +649,7 @@ To make your brazilian **ABNT2 keyboard** default when Install MacOS, change lan
 
 After all you will can boot MacOS, Windows and Recovery **just like a real Mac** computer:
 - Hold **Option** key (or **ESC** key) to show boot menu;
+- Press **Space Bar** on boot menu to show advanced options _(like NVRAM reset)_
 - Use **System Preferences > Startup** disk to change boot to Windows and **BootCamp Control Panel** on Windows to change the boot to Mac;
 - Update your Mac using the **Apple Software Updates**;
 - Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.

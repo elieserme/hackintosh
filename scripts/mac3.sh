@@ -29,6 +29,7 @@ brew install --cask figma
 brew install --cask brave-browser
 brew install --cask intellij-idea-ce
 brew install --cask pycharm-ce
+brew install --cask microsoft-teams
 brew install gettext
 brew install --cask github
 brew install gh
@@ -44,7 +45,7 @@ sudo xcodebuild -runFirstLaunch
 
 ### apps
 brew install --cask appcleaner
-brew install --cask lunar
+brew install --cask monitorcontrol
 brew install --cask fliqlo
 brew install --cask authy
 brew install --cask gimp
@@ -56,8 +57,9 @@ brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
 
-### use if you want monitor like iStatMenus
-# brew install --cask intel-power-gadget
+### monitoring
+brew install --cask intel-power-gadget
+brew install --cask istat-menus
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"

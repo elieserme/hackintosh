@@ -336,14 +336,17 @@ class PlistWindow(tk.Toplevel):
         self._tree.bind("<Escape>", self.deselect)
         self.bind("<FocusIn>", self.got_focus)
 
+        self.recent_menu = None
         # Setup menu bar (hopefully per-window) - only happens on non-mac systems
         if not str(sys.platform) == "darwin":
             key="Control"
             main_menu = tk.Menu(self)
             file_menu = tk.Menu(self, tearoff=0)
+            self.recent_menu = tk.Menu(self, tearoff=0)
             main_menu.add_cascade(label="File", menu=file_menu)
             file_menu.add_command(label="New", command=self.controller.new_plist, accelerator="Ctrl+N")
             file_menu.add_command(label="Open", command=self.controller.open_plist, accelerator="Ctrl+O")
+            file_menu.add_cascade(label="Open Recent", menu=self.recent_menu)
             file_menu.add_command(label="Save", command=self.controller.save_plist, accelerator="Ctrl+S")
             file_menu.add_command(label="Save As...", command=self.controller.save_plist_as, accelerator="Ctrl+Shift+S")
             file_menu.add_command(label="Duplicate", command=self.controller.duplicate_plist, accelerator="Ctrl+D")
@@ -934,11 +937,11 @@ class PlistWindow(tk.Toplevel):
         #  | +- SomeFolder
         #  | | +- SomeOtherTool.efi
         
-        oc_acpi    = os.path.join(oc_folder,"ACPI")
-        oc_drivers = os.path.join(oc_folder,"Drivers")
-        oc_kexts   = os.path.join(oc_folder,"Kexts")
-        oc_tools   = os.path.join(oc_folder,"Tools")
-        oc_efi     = os.path.join(oc_folder,"OpenCore.efi")
+        oc_acpi    = os.path.normpath(os.path.join(oc_folder,"ACPI"))
+        oc_drivers = os.path.normpath(os.path.join(oc_folder,"Drivers"))
+        oc_kexts   = os.path.normpath(os.path.join(oc_folder,"Kexts"))
+        oc_tools   = os.path.normpath(os.path.join(oc_folder,"Tools"))
+        oc_efi     = os.path.normpath(os.path.join(oc_folder,"OpenCore.efi"))
 
         for x in (oc_acpi,oc_drivers,oc_kexts):
             if not os.path.exists(x):
@@ -1941,9 +1944,10 @@ class PlistWindow(tk.Toplevel):
             # Nothing to paste
             return 'break'
         node = "" if not len(self._tree.selection()) else self._tree.selection()[0]
+        to_open = self._tree.item(node,"open")
         # Verify the type - or get the parent
         t = self.get_check_type(node).lower()
-        if not node == "" and not t in ("dictionary","array"):
+        if not node == "" and not (t in ("dictionary","array") and self._tree.item(node,"open")):
             node = self._tree.parent(node)
         node = self.get_root_node() if node == "" else node # Force Root node if need be
         t = self.get_check_type(node).lower()
@@ -1978,7 +1982,7 @@ class PlistWindow(tk.Toplevel):
                     names.append(key)
                 last = self.add_node(val, node, key)
                 add_list.append({"type":"add","cell":last})
-                self._tree.item(last,open=True)
+                self._tree.item(last,open=to_open)
         first = self.get_root_node() if not len(add_list) else add_list[0].get("cell")
         self.add_undo(add_list)
         if not self.edited:
