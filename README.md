@@ -4,26 +4,29 @@ This is the guide for **OpenCore 0.7.6** with **MacOS Monterey 12.1** for an **i
 
 ## Table of Contents
 
-- [Warning](#warning)
-- [Why use iMac 2019 model?](#why-use-imac-2019-model)
-- [Hardware](#hardware)
-	- [BIOS settings](#bios-settings)
-- [Windows 11](#windows-11)
-- [MacOS Monterey 12](#macos-monterey-12)
-- [Post Install](#post-install)
-	- [Windows and BootCamp](#windows-and-bootcamp)
-	- [Cleaning the EFI](#cleaning-the-efi)
-- [Other SMBIOS](#other-smbios)
-	- [Mac Pro](#macpro)
-- [Notes](#notes)
-	- [USB Ports](#usb-ports)
-	- [DRM Support](#drm-support)
-	- [Power Management](#power-management)
-	- [Sleep and Hibernate](#sleep-and-hibernate)
-	- [Power button](#power-button)
-	- [ABNT2 keyboard](#abnt2-keyboard)
-- [Final comments](#final-comments)
-- [Build images](#build-images)
+- [Hackintosh](#hackintosh)
+	- [Table of Contents](#table-of-contents)
+	- [Warning](#warning)
+	- [Why use iMac 2019 model](#why-use-imac-2019-model)
+	- [Hardware](#hardware)
+		- [BIOS settings](#bios-settings)
+			- [MacOS only BIOS settings](#macos-only-bios-settings)
+	- [Windows 11](#windows-11)
+	- [MacOS Monterey 12](#macos-monterey-12)
+	- [Post install](#post-install)
+		- [Windows and Bootcamp](#windows-and-bootcamp)
+		- [Cleaning the EFI](#cleaning-the-efi)
+	- [Other SMBIOS](#other-smbios)
+		- [MacPro](#macpro)
+	- [Notes](#notes)
+		- [USB Ports](#usb-ports)
+		- [DRM Support](#drm-support)
+		- [Power Management](#power-management)
+		- [Sleep and Hibernate](#sleep-and-hibernate)
+		- [Power button](#power-button)
+		- [ABNT2 keyboard](#abnt2-keyboard)
+	- [Final comments](#final-comments)
+	- [Build images](#build-images)
 
 
 ## Warning 
@@ -52,7 +55,7 @@ This is the guide for **OpenCore 0.7.6** with **MacOS Monterey 12.1** for an **i
 
 ### BIOS settings
 
-Gigabyte z370N WIFI using BIOS version F14b
+Gigabyte z370N WIFI using BIOS version F14
 
 > **IMPORTANT!**
 Be carefull enabling **MCE** or **Enhanced Multi-core Performance** with this motherboard... it causes instability in some cases.
@@ -166,7 +169,7 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 
 - Mount the **EFI partition** of the **USB** disk using [MountEFI](https://github.com/corpnewt/MountEFI) utility and **copy the EFI folder** inside **`/Volumes/EFI`**
 - **Boot** the target machine with **USB** disk you just made
-- Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below, but **note that hardcoded value is for F14a/b BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Please note that some other motherboards can disable CFG Lock on BIOS settings without this hack)_
+- Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below, but **note that hardcoded value is for F14 BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Please note that some other motherboards can disable CFG Lock on BIOS settings without this hack)_
 ```bash
 setup_var_3 0x5A4 0x00
 ```
