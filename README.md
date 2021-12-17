@@ -169,10 +169,17 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 
 - Mount the **EFI partition** of the **USB** disk using [MountEFI](https://github.com/corpnewt/MountEFI) utility and **copy the EFI folder** inside **`/Volumes/EFI`**
 - **Boot** the target machine with **USB** disk you just made
-- Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below, but **note that hardcoded value is for F14 BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Please note that some other motherboards can disable CFG Lock on BIOS settings without this hack)_
+- Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below:
 ```bash
 setup_var_3 0x5A4 0x00
 ```
+**Please note that hardcoded value is for F14 BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Some other motherboards can disable CFG Lock on BIOS settings without this hack)_. Below is the offset table for my tested BIOS versions:
+
+| Gigabyte Z370N WiFi BIOS | Offset |
+| ---- | ---- |
+| **F10** | _0x0585_ |
+| **F14** | _Ox05A4_ |
+
 - Use **Clear NVRAM** and reboot to make a clean install
 - Use **Disk Utility** to erase a **APFS GUI** volume and **install MacOS**
 - Finish **normal** MacOS setup
@@ -361,7 +368,7 @@ One valid use of a Windows install is to **generate the files** on **`ACPI`** fo
 
 This build has some options:
 - The **most hardware compatible** and working out-of-the-box is **iMac19,2** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
-- **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar too because no T2 chip.
+- **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar because your hack will not have a T2 chip.
 
 | SMBIOS | Advantage | Loss |
 | ------ | --------- | ---- |
@@ -542,7 +549,7 @@ uia_exclude=HS03;HS04
 uia_exclude=HS03;HS04;HS07;HS12;HS13;HS14;USR1;USR2;SS03;SS04;SS07
 ```
 - After that, export the **`USBPorts.kext`** using Hackintool and place it on **`Kexts`** folder. 
-- Remind to **disable** **`USBInjectAll.kext`** and **enable `USBPorts.kext`** in **`config.plist`**:
+- Remind to **disable** **`USBInjectAll.kext`** and **enable `USBPorts.kext`** in **`config.plist`** and remove **`uia_exclude`** directive from `boot-args`:
 ```diff
 	<dict>
 		<key>Comment</key>
