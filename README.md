@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.6** with **MacOS Monterey 12.1** for an **iMac 2019** hackintosh build.
+This is the guide for **OpenCore 0.7.6** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX590 | 32GB RAM | running **MacOS Monterey 12.1** like a  **iMac 2019**.
 
 ## Table of Contents
 
@@ -479,21 +479,31 @@ The included **`USBPorts.kext`** with USB mapping is for the **Gigabyte z370N Wi
 
 Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality, and USB Type C has different ports for each side... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
-| Name | Type | Comment |
-| ---- | ---- | ------- |
-| HS01, **SS01** | 3 | _USB 2.0 & **3.1** front 1_ |
-| HS02, **SS02** | 3 | _USB 2.0 & **3.1** front 2_ |
-| HS05, **SS05** | 3 | _USB 2.0 & **3.1** rear 1_ |
-| HS06, **SS06** | 3 | _USB 2.0 & **3.1** rear 2_ |
-| HS08, **SS08** | 3 | _USB 2.0 & **3.1** rear 4_ |
-| HS09 | 3 | _USB 2.0 only rear *Type C* port_ |
-| HS10       | 255 | _USB 2.0 internal (bluetooth)_ |
-| HS11       | 3 | _USB 2.0 internal (wireless Keyboard or mouse dongle)_ |
-| **SS09**, **SS10** | 10 | _USB **3.1** only rear *Type C* port_ | 
+![Motherboard](/images/motherboard.png)
 
-| Ports disabled |
-| -------------- |
-| _HS03, HS04, HS07, HS12, HS13, HS14, USR1, USR2, SS03, SS04, SS07_
+**List of Ports ENABLED**:
+
+| Label | Name | Type | Comment |
+| ----- | ---- | ---- | ------- |
+| **I** | HS01, **SS01** | 3 | _USB 2.0 & **3.1** front 1_ |
+| **I** | HS02, **SS02** | 3 | _USB 2.0 & **3.1** front 2_ |
+| **C** | HS05, **SS05** | 3 | _USB 2.0 & **3.1** rear 1_ |
+| **D** | HS06, **SS06** | 3 | _USB 2.0 & **3.1** rear 2_ |
+| **B** | HS08, **SS08** | 3 | _USB 2.0 & **3.1** rear 4_ |
+| **E** | HS09 | 3 | _USB 2.0 only rear **Type C**_ |
+| **H** | HS10       | 255 | _USB 2.0 **internal** (bluetooth)_ |
+| **J** | HS11       | 3 | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
+| **E** | **SS09**, **SS10** | 10 | _USB **3.1** only rear **Type C**_ | 
+
+**List of Ports DISABLED**:
+
+| Label | Port |
+| ----- | ---- |
+| **F** | _HS03, SS03_ |
+| **G** | _HS04, SS04_ |
+| **A** | _HS07, SS07_ |
+| **J** | _HS12_ |
+| _internal_ | _HS13, HS14, USR1, USR2_ |
 
 If you want to map your USB ports yourself,  use [Hackintool](https://github.com/headkaze/Hackintool) and follow this instructions:
 
@@ -614,19 +624,26 @@ The **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics 
 
 You can use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to generate a new **CPUFriendDataProvider.kext** file to your needs.
 
+> **TIP**
+_Just for your record, when running **CPUFriendFriend** I choose base clock **0B** (1100Mhz), Performance **00** and Bias **01** options. This enable my MacPro7,1 SMBIOS to sleep well with my hardware. You may need to test what values are more appropriated for your hardware._
+
 ### Sleep and Hibernate
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like updates and other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
 ```bash
 sudo pmset proximitywake 0
 ```
-If you want to control **how and when the computer hibernates** (save state and turn off) you need to customize some vars.
+If you want to control **how and when the computer hibernates** _(save state and turn off)_ you need to customize some vars.
 
-**Example 1:** Computer sleeps and hibernates 2 hours after sleep _(only iMac19,2 SMBIOS support)_:
+> **IMPORTANT!**
+_Hibernate will only work on iMac19,2 SMBIOS. If you choose the MacPro7,1 SMBIOS there is no hibernate var to change._
+
+**Example 1:** Computer sleeps and hibernates 2 hours after sleep:
 ```bash
 sudo pmset -a hibernatemode 3
 sudo pmset -a standbydelaylow 7200
 sudo pmset -a standbydelayhigh 7200
 ```
+
 **Example 2:** Computer just hibernate instead of sleep (saves more power, but takes longer to wake):
 ```bash
 sudo pmset -a hibernatemode 25
