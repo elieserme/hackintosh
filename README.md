@@ -618,7 +618,7 @@ The **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics 
 
 You can use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to generate a new **CPUFriendDataProvider.kext** file to your needs.
 
-> **TIP**
+> **TIP!**
 _Just for your record, when running **CPUFriendFriend** I choose base clock **0B** (1100Mhz), Performance **00** and Bias **01** options. This enable my MacPro7,1 SMBIOS to sleep well with my hardware. You may need to test what values are more appropriated for your hardware._
 
 ### Sleep and Hibernate
