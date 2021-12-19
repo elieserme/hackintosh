@@ -42,7 +42,7 @@ This is the guide for **OpenCore 0.7.6** Hackintosh build based on i7 8700 | Gig
 ## Hardware
 
 | Type | Item |
-| ---- | ---- |
+| :----: | ---- |
 | **CPU** | [Intel i7 8700 ](https://www.intel.com.br/content/www/br/pt/products/processors/core/core-vpro/i7-8700.html) 8th generation 6 cores and 12 threads 3,2GHz with Turbo Boost up to 4,6GHz |
 | **Motherboard** | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX |
 | **RAM** | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN |
@@ -176,7 +176,7 @@ setup_var_3 0x5A4 0x00
 **Please note that hardcoded value is for F14 BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Some other motherboards can disable CFG Lock on BIOS settings without this hack)_. Below is the offset table for my tested BIOS versions:
 
 | Gigabyte Z370N WiFi BIOS | Offset |
-| ---- | ---- |
+| :----: | ---- |
 | **F10** | _0x0585_ |
 | **F14** | _Ox05A4_ |
 
@@ -351,12 +351,6 @@ One valid use of a Windows install is to **generate the files** on **`ACPI`** fo
 -		<string>RestrictEvents.kext</string>
 -	</dict>
 ```
-- Disable **Reset NVRAM** option in **`config.plist`** too:
-```diff
-	<key>AllowNvramReset</key>
--	<true/>
-+	<false/>
-```
 - Disable **Boot Menu** in **`config.plist`** to work like a real Mac:
 ```diff
 	<key>ShowPicker</key>
@@ -481,10 +475,10 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 
 ![Motherboard](/images/motherboard.png)
 
-**List of Ports ENABLED**:
+**List of the 15 ports ENABLED**:
 
 | Label | Name | Type | Comment |
-| ----- | ---- | ---- | ------- |
+| :-----: | ---- | :----: | ------- |
 | **I** | HS01, **SS01** | 3 | _USB 2.0 & **3.1** front 1_ |
 | **I** | HS02, **SS02** | 3 | _USB 2.0 & **3.1** front 2_ |
 | **C** | HS05, **SS05** | 3 | _USB 2.0 & **3.1** rear 1_ |
@@ -495,10 +489,10 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 | **J** | HS11       | 3 | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
 | **E** | **SS09**, **SS10** | 10 | _USB **3.1** only rear **Type C**_ | 
 
-**List of Ports DISABLED**:
+**List of ports DISABLED**:
 
 | Label | Port |
-| ----- | ---- |
+| :-----: | ---- |
 | **F** | _HS03, SS03_ |
 | **G** | _HS04, SS04_ |
 | **A** | _HS07, SS07_ |
