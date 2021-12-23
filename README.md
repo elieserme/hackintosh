@@ -481,23 +481,25 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 | :-----: | ---- | :----: | ------- |
 | **I** | HS01, **SS01** | 3 | _USB 2.0 & **3.1** front 1_ |
 | **I** | HS02, **SS02** | 3 | _USB 2.0 & **3.1** front 2_ |
-| **C** | HS05, **SS05** | 3 | _USB 2.0 & **3.1** rear 1_ |
-| **D** | HS06, **SS06** | 3 | _USB 2.0 & **3.1** rear 2_ |
-| **B** | HS08, **SS08** | 3 | _USB 2.0 & **3.1** rear 4_ |
-| **E** | HS09 | 3 | _USB 2.0 only rear **Type C**_ |
-| **H** | HS10       | 255 | _USB 2.0 **internal** (bluetooth)_ |
-| **J** | HS11       | 3 | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
+| **F** | HS03, **SS03** | 3 | _USB 2.0 & **3.1** rear 5_ |
+| **G** | HS04, **SS04** | 3 | _USB 2.0 & **3.1** rear 6_ |
+| **C** | HS05 | 3 | _USB 2.0 rear 3_ |
+| **D** | HS06 | 3 | _USB 2.0 rear 4_ |
+| **E** | HS09 | 8 | _USB 2.0 only rear **Type C**_ |
+| **H** | HS10 | 255 | _USB 2.0 **internal** (bluetooth)_ |
+| **J** | HS11 | 255 | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
 | **E** | **SS09**, **SS10** | 10 | _USB **3.1** only rear **Type C**_ | 
 
 **List of ports DISABLED**:
 
 | Label | Port |
 | :-----: | ---- |
-| **F** | _HS03, SS03_ |
-| **G** | _HS04, SS04_ |
+| **C** | _SS05_ |
+| **D** | _SS06_ |
 | **A** | _HS07, SS07_ |
+| **B** | _HS08, SS08_ |
 | **J** | _HS12_ |
-| _internal_ | _HS13, HS14, USR1, USR2_ |
+| _hidden_ | _HS13, HS14, USR1, USR2_ |
 
 If you want to map your USB ports yourself,  use [Hackintool](https://github.com/headkaze/Hackintool) and follow this instructions:
 
@@ -550,7 +552,7 @@ uia_exclude=HS03;HS04
 - **Reboot** and do the step above again, **until you have only 15 ports** active. As example, my final boot-args directive was like this:
 
 ```
-uia_exclude=HS03;HS04;HS07;HS12;HS13;HS14;USR1;USR2;SS03;SS04;SS07
+uia_exclude=HS07;HS08;HS12;HS13;HS14;USR1;USR2;SS05;SS06;SS07;SS08
 ```
 - After that, export the **`USBPorts.kext`** using Hackintool and place it on **`Kexts`** folder. 
 - Remind to **disable** **`USBInjectAll.kext`** and **enable `USBPorts.kext`** in **`config.plist`** and remove **`uia_exclude`** directive from `boot-args`:
@@ -599,7 +601,7 @@ uia_exclude=HS03;HS04;HS07;HS12;HS13;HS14;USR1;USR2;SS03;SS04;SS07
 
 The **iMac19,2** SMBIOS **need some hack to have DRM support** _(Netflix, Prime Video, Apple TV+)_:
 - For **Catalina**, you need to add `shikigva=80` in your `boot-args` in **`config.plist`** file;
-- For **Big Sur** and **Monterey**, there are [no definitive solution](https://dortania.github.io/OpenCore-Install-Guide/extras/big-sur/#known-issues). But you can watch Apple TV+ using the commands below:
+- For **Big Sur** and **Monterey**, there are [no definitive solution](https://dortania.github.io/OpenCore-Install-Guide/extras/big-sur/#known-issues). But in some cases you can watch Apple TV+ using the commands below:
 ```bash
 defaults write com.apple.AppleGVA gvaForceAMDKE -bool YES
 defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -bool YES
@@ -622,7 +624,7 @@ You can use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to ge
 _Just for your record, when running **CPUFriendFriend** I choose base clock **0B** (1100Mhz), Performance **00** and Bias **01** options. This enable my MacPro7,1 SMBIOS to sleep well with my hardware. You may need to test what values are more appropriated for your hardware._
 
 ### Sleep and Hibernate
-Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like updates and other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
+Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
 ```bash
 sudo pmset proximitywake 0
 ```
