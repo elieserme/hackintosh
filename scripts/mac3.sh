@@ -26,6 +26,7 @@ brew install --cask font-fira-code
 brew tap heroku/brew && brew install heroku
 brew install --cask dbeaver-community
 brew install --cask figma
+brew install --cask sketch
 brew install --cask brave-browser
 brew install --cask intellij-idea-ce
 brew install --cask pycharm-ce
@@ -42,6 +43,14 @@ brew install --cask flutter
 sudo gem install cocoapods
 sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
 sudo xcodebuild -runFirstLaunch
+sudo xcodebuild -license accept
+
+### git instead of apple git
+brew install git
+git config --global user.name "Me"
+git config --global user.email "me@me.com"
+git config --global init.defaultBranch main
+git config --global pull.rebase false
 
 ### apps
 brew install --cask appcleaner
