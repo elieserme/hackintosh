@@ -67,8 +67,8 @@ brew install --cask handbrake
 brew install --cask zoom
 
 ### monitoring
-brew install --cask intel-power-gadget
-brew install --cask istat-menus
+# brew install --cask intel-power-gadget
+# brew install --cask istat-menus
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
