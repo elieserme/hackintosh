@@ -64,6 +64,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
+- BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
 - Peripherals &gt; Re-Size Bar &gt; **DISABLED**
 - Peripherals &gt; Intel PTT &gt; **DISABLED**
