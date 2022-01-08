@@ -10,8 +10,7 @@ This is the guide for **OpenCore 0.7.6** Hackintosh build based on i7 8700 | Gig
 	- [Why use iMac 2019 model](#why-use-imac-2019-model)
 	- [Hardware](#hardware)
 		- [BIOS settings](#bios-settings)
-			- [MacOS only BIOS settings](#macos-only-bios-settings)
-	- [Windows 11](#windows-11)
+			- [Windows BIOS settings](#windows-bios-settings)
 	- [MacOS Monterey 12](#macos-monterey-12)
 	- [Post install](#post-install)
 		- [Windows and Bootcamp](#windows-and-bootcamp)
@@ -41,70 +40,67 @@ This is the guide for **OpenCore 0.7.6** Hackintosh build based on i7 8700 | Gig
 
 ## Hardware
 
-| Type | Item |
-| :----: | ---- |
-| **CPU** | [Intel i7 8700 ](https://www.intel.com.br/content/www/br/pt/products/processors/core/core-vpro/i7-8700.html) 8th generation 6 cores and 12 threads 3,2GHz with Turbo Boost up to 4,6GHz |
-| **Motherboard** | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX |
-| **RAM** | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN |
-| **SSD** | [Samsung EVO 970 Plus ](https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/) 250GB PCIe NVMe _(Macintosh HD)_ |
-| **SSD** | [ADATA XPG SX6000 Pro ](https://www.adata.com/pt/xpg/580) 1TB PCIe NVMe _(Windows)_ |
-| **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit |
-| **GPU** | [Gigabyte Radeon RX 590 8GB 1.0](https://www.gigabyte.com/br/Graphics-Card/GV-RX590GAMING-8GD-rev-10#kf) Dedicated Video Card |
-| **Wireless** | [BCM94360CS2 ](https://github.com/elieserme/hackintosh/blob/main/other/windows11/wireless_apple/bcm94360cs2.zip) Bluetooth and WiFI replacement card |
-| **Case** | [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX |
+|       Type       | Item                                                                                                                                                                                    |
+| :--------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     **CPU**      | [Intel i7 8700 ](https://www.intel.com.br/content/www/br/pt/products/processors/core/core-vpro/i7-8700.html) 8th generation 6 cores and 12 threads 3,2GHz with Turbo Boost up to 4,6GHz |
+| **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                       |
+|     **RAM**      | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN                                                          |
+|     **SSD**      | [Samsung EVO 970 Plus ](https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/) 250GB PCIe NVMe _(Macintosh HD)_                                               |
+|     **SSD**      | [ADATA XPG SX6000 Pro ](https://www.adata.com/pt/xpg/580) 1TB PCIe NVMe _(Windows)_                                                                                                     |
+| **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit                                  |
+|     **GPU**      | [Gigabyte Radeon RX 590 8GB 1.0](https://www.gigabyte.com/br/Graphics-Card/GV-RX590GAMING-8GD-rev-10#kf) Dedicated Video Card                                                           |
+|   **Wireless**   | [BCM94360CS2 ](https://github.com/elieserme/hackintosh/blob/main/other/windows11/wireless_apple/bcm94360cs2.zip) Bluetooth and WiFI replacement card                                    |
+|     **Case**     | [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX                                                                                                      |
 
 ### BIOS settings
 
 Gigabyte z370N WIFI using BIOS version F14
 
-> **IMPORTANT!**
-Be carefull enabling **MCE** or **Enhanced Multi-core Performance** with this motherboard... it causes instability in some cases.
-
 - **Load optimised defaults**
 - MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
-- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **AUTO**
+- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **ENABLED**
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
+- SmartFan &gt; Auto Stop &gt; **ENABLED**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
 - Peripherals &gt; Re-Size Bar &gt; **DISABLED**
-- Peripherals &gt; Intel PTT &gt; **ENABLED**
+- Peripherals &gt; Intel PTT &gt; **DISABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **ENABLED**
+- Peripherals &gt; Trusted Computing &gt; **DISABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **ENABLED**
+- Chipset &gt; VT-d &gt; **DISABLED**
 - Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **128MB** max; 
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; ErP &gt; **ENABLED**
+- Power &gt; Power Loading &gt; **DISABLED**
 - Save and restart
 
-#### MacOS only BIOS settings
+#### Windows BIOS settings
 
-If you **don't plan to install Windows 11 on dual boot or BootCamp**, you can change the following settings from above config:
+If you **plan to install Windows 11 on dual boot**, you can change the following settings from above config:
 
-- Peripherals &gt; Intel PTT &gt; **DISABLED**
-- Peripherals &gt; SGX &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **DISABLED**
+- Peripherals &gt; Intel PTT &gt; **ENABLED**
+- Peripherals &gt; SGX &gt; **AUTO**
+- Peripherals &gt; Trusted Computing &gt; **ENABLED**
+- Chipset &gt; VT-d &gt; **ENABLED**
 
-Remind to config **DisableIoMapper** to **`false`** in **`config.plist`** since you **disabled VT-d** setting:
+Remind to config **DisableIoMapper** to **`true`** in **`config.plist`** since you **enabled VT-d** setting:
 ```xml
 <key>DisableIoMapper</key>
-<false/>
+<true/>
 ```
 
-## Windows 11
-
-- If you plan to have Windows setup, it must be **installed first** on it's own disk;
-- Use your **motherboard and AMD drivers** supplied. For **WIFI/Bluetooth** drivers, [download](http://en.fenvi.com/en/download_zx.php) from Fenvi.
+> **IMPORTANT!**
+Be carefull enabling **Intel PTT** and **Trusted Computing** with this motherboard, it causes issues with _sleep and wake_.
 
 > **IMPORTANT!**
-**Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID (unsupported).
+**Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID _(unsupported)_.
 
 ## MacOS Monterey 12
 
@@ -175,10 +171,10 @@ setup_var_3 0x5A4 0x00
 ```
 **Please note that hardcoded value is for F14 BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Some other motherboards can disable CFG Lock on BIOS settings without this hack)_. Below is the offset table for my tested BIOS versions:
 
-| Gigabyte Z370N WiFi BIOS | Offset |
-| :----: | ---- |
-| **F10** | _0x0585_ |
-| **F14** | _Ox05A4_ |
+| Gigabyte Z370N WiFi BIOS | Offset   |
+| :----------------------: | -------- |
+|         **F10**          | _0x0585_ |
+|         **F14**          | _Ox05A4_ |
 
 - Use **Clear NVRAM** and reboot to make a clean install
 - Use **Disk Utility** to erase a **APFS GUI** volume and **install MacOS**
@@ -192,15 +188,7 @@ You can **isolate Windows** from Mac and vice versa (by choose boot drive in BIO
 
 To isolate Windows, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
 
-This setup allows you use **BitLocker** to encrypt your Windows disk and enable [BitLocker PIN on Windows Statup](https://www.dell.com/support/kbdoc/pt-br/000142382/como-usar-o-bitlocker-com-pin) for enhanced Windows security.
-
-You may need to remove Windows drive from OpenCore picker by setting **ScanPolicy** to **19858179** in your **`config.plist`**
-
-Other option you can use **BootCamp** drivers with [Brigadier](https://github.com/timsutton/brigadier) utility **after MacOS installed** _(use this option if you plan to use Apple Magic Keyboard and Trackpad, but **you need to install BootCamp drivers and update Apple Software before** pairing with Bluetooth on Windows)_. After all set, you can use OpenCore picker to start Windows or MacOS.
-
-If your **Magic Trackpad don't appear in BootCamp Control Panel** in Windows, you will need to install the driver manually. Go to downloaded BootCamp drivers folder, find the Trackpad driver folder, **right click and install the driver `.inf` file**. To complete the setup, **reboot Windows**. You may need to run **`Apple Software Update`** program some times to update the Magic Trackpad driver to high precision touch device.
-
-> **IMPORTANT!**
+> **TIP!**
 One valid use of a Windows install is to **generate the files** on **`ACPI`** folder. You can use **SSDTTime** tool to generate **`SSDT-AWAC.aml`**,  **`SSDT-EC.aml`** , **`SSDT-HPET.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_. The **`SSDT-EC-USBW.aml`** and **`SSDT-SBUS-MCHC.aml`** can be edited and compiled using **MaciASL** util. Sources are in **`other/acpi_src`** in this repo.
 
 ### Cleaning the EFI
@@ -364,10 +352,10 @@ This build has some options:
 - The **most hardware compatible** and working out-of-the-box is **iMac19,2** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
 - **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar because your hack will not have a T2 chip.
 
-| SMBIOS | Advantage | Loss |
-| ------ | --------- | ---- |
-| **iMac19,2** | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_ | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
-| **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar_ |
+| SMBIOS        | Advantage                                                                                                                                      | Loss                                                     |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| **iMac19,2**  | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_                                                          | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
+| **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar_                                                |
 
 You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **MacPro** see instructions below.
 
@@ -477,28 +465,28 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 
 **List of the 15 ports ENABLED**:
 
-| Label | Name | Type | Comment |
-| :-----: | ---- | :----: | ------- |
-| **I** | HS01, **SS01** | 3 | _USB 2.0 & **3.1** front 1_ |
-| **I** | HS02, **SS02** | 3 | _USB 2.0 & **3.1** front 2_ |
-| **F** | HS03, **SS03** | 3 | _USB 2.0 & **3.1** rear 5_ |
-| **G** | HS04, **SS04** | 3 | _USB 2.0 & **3.1** rear 6_ |
-| **C** | HS05 | 3 | _USB 2.0 rear 3_ |
-| **D** | HS06 | 3 | _USB 2.0 rear 4_ |
-| **E** | HS09 | 8 | _USB 2.0 only rear **Type C**_ |
-| **H** | HS10 | 255 | _USB 2.0 **internal** (bluetooth)_ |
-| **J** | HS11 | 255 | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
-| **E** | **SS09**, **SS10** | 10 | _USB **3.1** only rear **Type C**_ | 
+| Label | Name               | Type  | Comment                                                    |
+| :---: | ------------------ | :---: | ---------------------------------------------------------- |
+| **I** | HS01, **SS01**     |   3   | _USB 2.0 & **3.1** front 1_                                |
+| **I** | HS02, **SS02**     |   3   | _USB 2.0 & **3.1** front 2_                                |
+| **F** | HS03, **SS03**     |   3   | _USB 2.0 & **3.1** rear 5_                                 |
+| **G** | HS04, **SS04**     |   3   | _USB 2.0 & **3.1** rear 6_                                 |
+| **C** | HS05               |   3   | _USB 2.0 rear 3_                                           |
+| **D** | HS06               |   3   | _USB 2.0 rear 4_                                           |
+| **E** | HS09               |   3   | _USB 2.0 only rear **Type C**_                             |
+| **H** | HS10               |  255  | _USB 2.0 **internal** (bluetooth)_                         |
+| **J** | HS11               |   3   | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
+| **E** | **SS09**, **SS10** |  10   | _USB **3.1** only rear **Type C**_                         |
 
 **List of ports DISABLED**:
 
-| Label | Port |
-| :-----: | ---- |
-| **C** | _SS05_ |
-| **D** | _SS06_ |
-| **A** | _HS07, SS07_ |
-| **B** | _HS08, SS08_ |
-| **J** | _HS12_ |
+|  Label   | Port                     |
+| :------: | ------------------------ |
+|  **C**   | _SS05_                   |
+|  **D**   | _SS06_                   |
+|  **A**   | _HS07, SS07_             |
+|  **B**   | _HS08, SS08_             |
+|  **J**   | _HS12_                   |
 | _hidden_ | _HS13, HS14, USR1, USR2_ |
 
 If you want to map your USB ports yourself,  use [Hackintool](https://github.com/headkaze/Hackintool) and follow this instructions:
@@ -599,20 +587,7 @@ uia_exclude=HS07;HS08;HS12;HS13;HS14;USR1;USR2;SS05;SS06;SS07;SS08
  
 ### DRM Support
 
-The **iMac19,2** SMBIOS **need some hack to have DRM support** _(Netflix, Prime Video, Apple TV+)_:
-- For **Catalina**, you need to add `shikigva=80` in your `boot-args` in **`config.plist`** file;
-- For **Big Sur** and **Monterey**, there are [no definitive solution](https://dortania.github.io/OpenCore-Install-Guide/extras/big-sur/#known-issues). But in some cases you can watch Apple TV+ using the commands below:
-```bash
-defaults write com.apple.AppleGVA gvaForceAMDKE -bool YES
-defaults write com.apple.AppleGVA gvaForceAMDAVCEncode -bool YES
-defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -bool YES
-defaults write com.apple.AppleGVA gvaForceAMDHEVCDecode -bool YES
-```
-- For error `VDADecoderCreate failed. err: -12473` in Big Sur, forcing the AMD Decoder can help resolve this:
-```bash
-defaults write com.apple.AppleGVA gvaForceAMDAVCDecode -bool YES
-```
-- If **you require full DRM support**, you must choose [other SMBIOS](#other-smbios) that provide it.
+If **you require full DRM support**, you must choose [other SMBIOS](#other-smbios) that provide it.
 
 ### Power Management
 
