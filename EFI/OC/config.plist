@@ -230,6 +230,11 @@
 				<key>layout-id</key>
 				<integer>5</integer>
 			</dict>
+			<key>PciRoot(0x0)/Pci(0x1C,0x5)/Pci(0x0,0x0)</key>
+			<dict>
+				<key>class-name</key>
+				<data>/////w==</data>
+			</dict>
 		</dict>
 		<key>Delete</key>
 		<dict/>
