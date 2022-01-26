@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.6** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX590 | 32GB RAM | running **MacOS Monterey 12.1** like a  **iMac 2019**.
+This is the guide for **OpenCore 0.7.7** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX590 | 32GB RAM | running **MacOS Monterey 12.1** like a  **iMac 2019**.
 
 ## Table of Contents
 
@@ -10,10 +10,9 @@ This is the guide for **OpenCore 0.7.6** Hackintosh build based on i7 8700 | Gig
 	- [Why use iMac 2019 model](#why-use-imac-2019-model)
 	- [Hardware](#hardware)
 		- [BIOS settings](#bios-settings)
-			- [Windows BIOS settings](#windows-bios-settings)
 	- [MacOS Monterey 12](#macos-monterey-12)
 	- [Post install](#post-install)
-		- [Windows and Bootcamp](#windows-and-bootcamp)
+		- [Windows](#windows)
 		- [Cleaning the EFI](#cleaning-the-efi)
 	- [Other SMBIOS](#other-smbios)
 		- [MacPro](#macpro)
@@ -45,10 +44,10 @@ This is the guide for **OpenCore 0.7.6** Hackintosh build based on i7 8700 | Gig
 |     **CPU**      | [Intel i7 8700 ](https://www.intel.com.br/content/www/br/pt/products/processors/core/core-vpro/i7-8700.html) 8th generation 6 cores and 12 threads 3,2GHz with Turbo Boost up to 4,6GHz |
 | **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                       |
 |     **RAM**      | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN                                                          |
-|     **SSD**      | [Samsung EVO 970 Plus ](https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/970evoplus/) 250GB PCIe NVMe _(Macintosh HD)_                                               |
+|     **SSD**      | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(Macintosh HD)_                                   |
 |     **SSD**      | [ADATA XPG SX6000 Pro ](https://www.adata.com/pt/xpg/580) 1TB PCIe NVMe _(Windows)_                                                                                                     |
 | **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit                                  |
-|     **GPU**      | [Gigabyte Radeon RX 590 8GB 1.0](https://www.gigabyte.com/br/Graphics-Card/GV-RX590GAMING-8GD-rev-10#kf) Dedicated Video Card                                                           |
+|     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                |
 |   **Wireless**   | [BCM94360CS2 ](https://github.com/elieserme/hackintosh/blob/main/other/windows11/wireless_apple/bcm94360cs2.zip) Bluetooth and WiFI replacement card                                    |
 |     **Case**     | [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX                                                                                                      |
 
@@ -58,7 +57,7 @@ Gigabyte z370N WIFI using BIOS version F14
 
 - **Load optimised defaults**
 - MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
-- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **ENABLED**
+- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **AUTO**
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
 - SmartFan &gt; Auto Stop &gt; **ENABLED**
 - BIOS &gt; FastBoot &gt; **DISABLED**
@@ -66,42 +65,23 @@ Gigabyte z370N WIFI using BIOS version F14
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
 - BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
-- Peripherals &gt; Re-Size Bar &gt; **DISABLED**
-- Peripherals &gt; Intel PTT &gt; **DISABLED**
+- Peripherals &gt; Re-Size Bar &gt; **AUTO**
+- Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **DISABLED**
+- Peripherals &gt; Trusted Computing &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **DISABLED**
-- Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **128MB** max; 
+- Chipset &gt; VT-d &gt; **ENABLED**
+- Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **256MB** max; 
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; ErP &gt; **ENABLED**
+- Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items PEG, PCH and DMI ASPM)_
+- Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Power &gt; Power Loading &gt; **DISABLED**
 - Save and restart
-
-#### Windows BIOS settings
-
-If you **plan to install Windows 11 on dual boot**, you can change the following settings from above config:
-
-- Peripherals &gt; Intel PTT &gt; **ENABLED**
-- Peripherals &gt; SGX &gt; **AUTO**
-- Peripherals &gt; Trusted Computing &gt; **ENABLED**
-- Chipset &gt; VT-d &gt; **ENABLED**
-
-Remind to config **DisableIoMapper** to **`true`** in **`config.plist`** since you **enabled VT-d** setting:
-```xml
-<key>DisableIoMapper</key>
-<true/>
-```
-
-> **IMPORTANT!**
-Be carefull enabling **Intel PTT** and **Trusted Computing** with this motherboard, it causes issues with _sleep and wake_.
-
-> **IMPORTANT!**
-**Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID _(unsupported)_.
 
 ## MacOS Monterey 12
 
@@ -183,7 +163,10 @@ setup_var_3 0x5A4 0x00
 
 ## Post install
 
-### Windows and Bootcamp
+### Windows 
+
+> **IMPORTANT!**
+**Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID _(unsupported)_.
 
 You can **isolate Windows** from Mac and vice versa _(by choose boot drive in BIOS)_.
 
@@ -340,7 +323,7 @@ One valid use of Windows beyond gamming is to **generate the files** on **`ACPI`
 -		<string>RestrictEvents.kext</string>
 -	</dict>
 ```
-- Disable **Boot Menu** in **`config.plist`** to work like a real Mac:
+- If you **do not want** to install Windows 11, disable **Boot Menu** in **`config.plist`** to work like a real Mac:
 ```diff
 	<key>ShowPicker</key>
 -	<true/>
@@ -371,13 +354,19 @@ Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video pr
 +	<string>MacPro7,1</string>
 ```
 - Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for MacPro7,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **`config.plist`**;
-- **Remove this section** from your **`config.plist`** since you **don't have iGPU** anymore:
+- **Update this section** from your **`config.plist`** since you **will not use iGPU** anymore:
 ```diff
--	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
--	<dict>
+	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+	<dict>
 -		<key>AAPL,ig-platform-id</key>
 -		<data>AwCSPg==</data>
--	</dict>
++		<key>class-code</key>
++		<data>/////w==</data>
++		<key>name</key>
++		<string>#display</string>
++		<key>IOName</key>
++		<string>#display</string>
+	</dict>
 ```
 - Edit **`USBPorts.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS and **USB Power** settings:
 ```diff
@@ -468,15 +457,15 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 
 | Label | Name               | Type  | Comment                                                    |
 | :---: | ------------------ | :---: | ---------------------------------------------------------- |
-| **I** | HS01, **SS01**     |   3   | _USB 2.0 & **3.1** front 1_                                |
-| **I** | HS02, **SS02**     |   3   | _USB 2.0 & **3.1** front 2_                                |
-| **F** | HS03, **SS03**     |   3   | _USB 2.0 & **3.1** rear 5_                                 |
-| **G** | HS04, **SS04**     |   3   | _USB 2.0 & **3.1** rear 6_                                 |
-| **C** | HS05               |   3   | _USB 2.0 rear 3_                                           |
-| **D** | HS06               |   3   | _USB 2.0 rear 4_                                           |
-| **E** | HS09               |   3   | _USB 2.0 only rear **Type C**_                             |
+| **I** | HS01, **SS01**     | 0, 3  | _USB 2.0 & **3.1** front 1_                                |
+| **I** | HS02, **SS02**     | 0, 3  | _USB 2.0 & **3.1** front 2_                                |
+| **F** | HS03, **SS03**     | 0, 3  | _USB 2.0 & **3.1** rear 5_                                 |
+| **G** | HS04, **SS04**     | 0, 3  | _USB 2.0 & **3.1** rear 6_                                 |
+| **C** | HS05               |   0   | _USB 2.0 rear 3_                                           |
+| **D** | HS06               |   0   | _USB 2.0 rear 4_                                           |
+| **E** | HS09               |   0   | _USB 2.0 only rear **Type C**_                             |
 | **H** | HS10               |  255  | _USB 2.0 **internal** (bluetooth)_                         |
-| **J** | HS11               |   3   | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
+| **J** | HS11               |   0   | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
 | **E** | **SS09**, **SS10** |  10   | _USB **3.1** only rear **Type C**_                         |
 
 **List of ports DISABLED**:
@@ -604,22 +593,6 @@ Sometimes after sleep the computer will **wake every few minutes**. Normal Macs 
 ```bash
 sudo pmset proximitywake 0
 ```
-If you want to control **how and when the computer hibernates** _(save state and turn off)_ you need to customize some vars.
-
-> **IMPORTANT!**
-_Hibernate will only work on iMac19,2 SMBIOS. If you choose the MacPro7,1 SMBIOS there is no hibernate var to change._
-
-**Example 1:** Computer sleeps and hibernates 2 hours after sleep:
-```bash
-sudo pmset -a hibernatemode 3
-sudo pmset -a standbydelaylow 7200
-sudo pmset -a standbydelayhigh 7200
-```
-
-**Example 2:** Computer just hibernate instead of sleep (saves more power, but takes longer to wake):
-```bash
-sudo pmset -a hibernatemode 25
-```
 If you want to **restore the default** factory settings:
 ```bash
 sudo pmset -a restoredefaults
@@ -648,8 +621,8 @@ To make your brazilian **ABNT2 keyboard** default when Install MacOS, change lan
 ## Final comments
 
 After all you will can boot MacOS, Windows and Recovery **just like a real Mac** computer:
-- Hold **Option** key (or **ESC** key) to show boot menu;
-- Press **Space Bar** on boot menu to show advanced options _(like NVRAM reset)_
+- Hold **Option** key (or **ESC** key) to show boot menu _(if you hide it)_;
+- Press **Space Bar** on boot menu to show advanced options _(like NVRAM reset)_;
 - Use **System Preferences > Startup** disk to change boot to Windows and **BootCamp Control Panel** on Windows to change the boot to Mac;
 - Update your Mac using the **Apple Software Updates**;
 - Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.

@@ -54,7 +54,8 @@ git config --global pull.rebase false
 
 ### apps
 brew install --cask appcleaner
-brew install --cask lunar
+brew install --cask monitorcontrol
+brew install --cask istat-menus
 brew install --cask fliqlo
 brew install --cask authy
 brew install --cask gimp
@@ -65,10 +66,6 @@ brew install ffmpeg
 brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
-
-### monitoring
-# brew install --cask intel-power-gadget
-# brew install --cask istat-menus
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
