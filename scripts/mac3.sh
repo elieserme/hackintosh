@@ -55,7 +55,6 @@ git config --global pull.rebase false
 ### apps
 brew install --cask appcleaner
 brew install --cask monitorcontrol
-brew install --cask istat-menus
 brew install --cask fliqlo
 brew install --cask authy
 brew install --cask gimp
