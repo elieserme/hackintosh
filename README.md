@@ -71,6 +71,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
+- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(number of port you are using)_ &gt; Hot Plug &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
@@ -177,95 +178,6 @@ One valid use of Windows beyond gamming is to **generate the files** on **`ACPI`
 
 ### Cleaning the EFI
 
-- Remove all **Tools** from menu _(if you need this tools again you can use your USB disk to boot)_. Remove the **`Tools`** folder and edit your **`config.plist`** on following section and disable:
-```diff
-	<key>Tools</key>
-	<array>
-		<dict>
-			<key>Comment</key>
-			<string>OpenShell.efi<string>
-			<key>Auxiliary</key>
-			<true/>
-			<key>Enabled</key>
--			<true/>
-+			<false/>
-			<key>Arguments</key>
-			<string></string>
-			<key>Path</key>
-			<string>OpenShell.efi<string>
-			<key>Name</key>
-			<string>OpenShell.efi<string>
-			<key>RealPath</key>
-			<false/>
-			<key>TextMode</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>Comment</key>
-			<string>modGRUBShell.efi<string>
-			<key>Auxiliary</key>
-			<true/>
-			<key>Enabled</key>
--			<true/>
-+			<false/>
-			<key>Arguments</key>
-			<string></string>
-			<key>Path</key>
-			<string>modGRUBShell.efi<string>
-			<key>Name</key>
-			<string>modGRUBShell.efi<string>
-			<key>RealPath</key>
-			<false/>
-			<key>TextMode</key>
-			<false/>
-		</dict>
-	</array>
-```
-**If you prefer and if you will not use the Tools**, you can completely remove the **Tools** by left it as an empty array:
-```diff
-	<key>Tools</key>
-+	<array/>
--	<array>
--		<dict>
--			<key>Comment</key>
--			<string>OpenShell.efi<string>
--			<key>Auxiliary</key>
--			<true/>
--			<key>Enabled</key>
--			<true/>
--			<false/>
--			<key>Arguments</key>
--			<string></string>
--			<key>Path</key>
--			<string>OpenShell.efi<string>
--			<key>Name</key>
--			<string>OpenShell.efi<string>
--			<key>RealPath</key>
--			<false/>
--			<key>TextMode</key>
--			<false/>
--		</dict>
--		<dict>
--			<key>Comment</key>
--			<string>modGRUBShell.efi<string>
--			<key>Auxiliary</key>
--			<true/>
--			<key>Enabled</key>
--			<true/>
--			<false/>
--			<key>Arguments</key>
--			<string></string>
--			<key>Path</key>
--			<string>modGRUBShell.efi<string>
--			<key>Name</key>
--			<string>modGRUBShell.efi<string>
--			<key>RealPath</key>
--			<false/>
--			<key>TextMode</key>
--			<false/>
--		</dict>
--	</array>
-```
 - If you **not using MacPro7,1** SMBIOS, remove **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** from **`Kexts`** folder and from **`config.plist`** too:
 ```diff
 -	<dict>
@@ -346,7 +258,6 @@ You can decide **what features are more important to your work and choice** the 
 ### MacPro
 
 Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video production** acceleration. Follow the steps below:
-- **Disable iGPU** in **BIOS** settings, changing **Chipset &gt; Internal Graphics** to **DISABLED** 
 - Change **`config.plist`** and replace **SystemProductName** with MacPro7,1:
 ```diff
 	<key>SystemProductName</key>
@@ -455,18 +366,18 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 
 **List of the 15 ports ENABLED**:
 
-| Label | Name               | Type  | Comment                                                    |
-| :---: | ------------------ | :---: | ---------------------------------------------------------- |
-| **I** | HS01, **SS01**     | 0, 3  | _USB 2.0 & **3.1** front 1_                                |
-| **I** | HS02, **SS02**     | 0, 3  | _USB 2.0 & **3.1** front 2_                                |
-| **F** | HS03, **SS03**     | 0, 3  | _USB 2.0 & **3.1** rear 5_                                 |
-| **G** | HS04, **SS04**     | 0, 3  | _USB 2.0 & **3.1** rear 6_                                 |
-| **C** | HS05               |   0   | _USB 2.0 rear 3_                                           |
-| **D** | HS06               |   0   | _USB 2.0 rear 4_                                           |
-| **E** | HS09               |   0   | _USB 2.0 only rear **Type C**_                             |
-| **H** | HS10               |  255  | _USB 2.0 **internal** (bluetooth)_                         |
-| **J** | HS11               |   0   | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
-| **E** | **SS09**, **SS10** |  10   | _USB **3.1** only rear **Type C**_                         |
+| Label | Name               |  Type  | Comment                                                    |
+| :---: | ------------------ | :----: | ---------------------------------------------------------- |
+| **I** | HS01, **SS01**     |  0, 3  | _USB 2.0 & **3.1** front 1_                                |
+| **I** | HS02, **SS02**     |  0, 3  | _USB 2.0 & **3.1** front 2_                                |
+| **F** | HS03, **SS03**     |  0, 3  | _USB 2.0 & **3.1** rear 5_                                 |
+| **G** | HS04, **SS04**     |  0, 3  | _USB 2.0 & **3.1** rear 6_                                 |
+| **C** | HS05               |   0    | _USB 2.0 rear 3_                                           |
+| **D** | HS06               |   0    | _USB 2.0 rear 4_                                           |
+| **E** | HS09               |   0    | _USB 2.0 only rear **Type C**_                             |
+| **H** | HS10               |  255   | _USB 2.0 **internal** (bluetooth)_                         |
+| **J** | HS11               |   0    | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_ |
+| **E** | **SS09**, **SS10** | 10, 10 | _USB **3.1** only rear **Type C**_                         |
 
 **List of ports DISABLED**:
 
@@ -592,6 +503,10 @@ _Just for your record, when running **CPUFriendFriend** I choose base clock **0B
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
 ```bash
 sudo pmset proximitywake 0
+```
+This is a desktop machine, you may want to **disable hibernation**:
+```bash
+sudo pmset hibernatemode 0
 ```
 If you want to **restore the default** factory settings:
 ```bash
