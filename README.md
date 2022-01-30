@@ -71,7 +71,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
-- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(number of port you are using)_ &gt; Hot Plug &gt; **ENABLED**
+- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hot Plug &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
@@ -79,7 +79,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **256MB** max; 
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; ErP &gt; **ENABLED**
-- Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items PEG, PCH and DMI ASPM)_
+- Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Power &gt; Power Loading &gt; **DISABLED**
 - Save and restart
