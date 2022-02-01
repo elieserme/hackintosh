@@ -24,6 +24,7 @@ brew install --cask insomnia
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code
 brew tap heroku/brew && brew install heroku
+brew install --cask discord
 brew install --cask dbeaver-community
 brew install --cask figma
 brew install --cask sketch
