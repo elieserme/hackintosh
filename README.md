@@ -211,7 +211,7 @@ Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video pr
 +		<string>#display</string>
 	</dict>
 ```
-- Edit **`USBPorts.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS and **USB Power** settings:
+- Edit **`USBMap.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS and **USB Power** settings:
 ```diff
 	<key>IOKitPersonalities</key>
 	<dict>
@@ -231,8 +231,27 @@ You can use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to ge
 > **TIP!**
 _Just for your record, when running **CPUFriendFriend** I choose base clock **0B** (1100Mhz), Performance **00** and Bias **01** options. This enable my MacPro7,1 SMBIOS to sleep well with my hardware. You may need to test what values are more appropriated for your hardware._
 
-- **Enable** the **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
+- **Enable** the **`AGPMInjector.kext`**, **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
 ```diff
+	<dict>
+		<key>BundlePath</key>
+		<string>AGPMInjector.kext</string>
+		<key>Comment</key>
+		<string>AGPMInjector.kext</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>ExecutablePath</key>
+		<string></string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>MinKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+	</dict>
 	<dict>
 		<key>Comment</key>
 		<string></string>
@@ -295,7 +314,7 @@ _Just for your record, when running **CPUFriendFriend** I choose base clock **0B
 
 ## USB Ports
 
-The included **`USBPorts.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
+The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
 
 Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality, and USB Type C has different ports for each side... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
@@ -329,7 +348,7 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 
 If you want to map your USB ports yourself,  use [Hackintool](https://github.com/headkaze/Hackintool) and follow this instructions:
 
-- The required **`USBInjectAll.kext`** is supplied but it's disabled in **`config.plist`**. You can **enable it** and **disable `USBPorts.kext`** to map the ports:
+- The required **`USBInjectAll.kext`** is supplied but it's disabled in **`config.plist`**. You can **enable it** and **disable `USBMap.kext`** to map the ports:
 ```diff
 	<dict>
 		<key>Comment</key>
@@ -367,7 +386,7 @@ If you want to map your USB ports yourself,  use [Hackintool](https://github.com
 		<key>Arch</key>
 		<string>Any</string>
 		<key>BundlePath</key>
-		<string>USBPorts.kext</string>
+		<string>USBMap.kext</string>
 	</dict>
 ```
 - **Reboot** and **use Hackintool to test USB ports you want to use** (using a pendrive or other USB 2.0 device). **Take note** on what ports you **do not want** to use.
@@ -380,8 +399,8 @@ uia_exclude=HS03;HS04
 ```
 uia_exclude=HS07;HS08;HS12;HS13;HS14;USR1;USR2;SS05;SS06;SS07;SS08
 ```
-- After that, export the **`USBPorts.kext`** using Hackintool and place it on **`Kexts`** folder. 
-- Remind to **disable** **`USBInjectAll.kext`** and **enable `USBPorts.kext`** in **`config.plist`** and remove **`uia_exclude`** directive from `boot-args`:
+- After that, export the **`USBMap.kext`** using Hackintool and place it on **`Kexts`** folder. 
+- Remind to **disable** **`USBInjectAll.kext`** and **enable `USBMap.kext`** in **`config.plist`** and remove **`uia_exclude`** directive from `boot-args`:
 ```diff
 	<dict>
 		<key>Comment</key>
@@ -419,7 +438,7 @@ uia_exclude=HS07;HS08;HS12;HS13;HS14;USR1;USR2;SS05;SS06;SS07;SS08
 		<key>Arch</key>
 		<string>Any</string>
 		<key>BundlePath</key>
-		<string>USBPorts.kext</string>
+		<string>USBMap.kext</string>
 	</dict>
 ```
 
@@ -451,8 +470,26 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 ## Cleaning the EFI
 
-- If you **not using MacPro7,1** SMBIOS, remove **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** from **`Kexts`** folder and from **`config.plist`** too:
+- If you **not using MacPro7,1** SMBIOS, remove **`AGPMInjector.kext`**, **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** from **`Kexts`** folder and from **`config.plist`** too:
 ```diff
+-	<dict>
+-		<key>BundlePath</key>
+-		<string>AGPMInjector.kext</string>
+-		<key>Comment</key>
+-		<string>AGPMInjector.kext</string>
+-		<key>Enabled</key>
+-		<false/>
+-		<key>ExecutablePath</key>
+-		<string></string>
+-		<key>Arch</key>
+-		<string>Any</string>
+-		<key>MaxKernel</key>
+-		<string></string>
+-		<key>MinKernel</key>
+-		<string></string>
+-		<key>PlistPath</key>
+-		<string>Contents/Info.plist</string>
+-	</dict>
 -	<dict>
 -		<key>Comment</key>
 -		<string></string>
