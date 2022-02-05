@@ -54,10 +54,10 @@
 		</dict>
 		<key>SortedOrder</key>
 		<array>
-			<string>SSDT-HPET.aml</string>
 			<string>SSDT-EC.aml</string>
-			<string>SSDT-PLUG.aml</string>
+			<string>SSDT-PMC.aml</string>
 			<string>SSDT-AWAC.aml</string>
+			<string>SSDT-HPET.aml</string>
 		</array>
 	</dict>
 </dict>
