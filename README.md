@@ -12,10 +12,10 @@ This is the guide for **OpenCore 0.7.7** Hackintosh build based on i7 8700 | Gig
 	- [BIOS settings](#bios-settings)
 	- [Windows 11](#windows-11)
 	- [MacOS Monterey 12](#macos-monterey-12)
-	- [Other SMBIOS](#other-smbios)
-	- [Mac Pro](#mac-pro)
 	- [USB Ports](#usb-ports)
 	- [Sleep and Hibernate](#sleep-and-hibernate)
+	- [Other SMBIOS](#other-smbios)
+		- [Mac Pro](#mac-pro)
 	- [Cleaning the EFI](#cleaning-the-efi)
 	- [Final comments](#final-comments)
 	- [Build images](#build-images)
@@ -174,144 +174,6 @@ setup_var_3 0x5A4 0x00
 - Use **Disk Utility** to erase a **APFS GUI** volume and **install MacOS**
 - Finish **normal** MacOS setup
 
-## Other SMBIOS
-
-This build has some options:
-- The **most hardware compatible** and working out-of-the-box is **iMac19,2** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
-- **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar because your hack will not have a T2 chip like a real Mac Pro.
-
-| SMBIOS        | Advantage                                                                                                                                      | Loss                                                     |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| **iMac19,2**  | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_                                                          | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
-| **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar_                                                |
-
-You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **Mac Pro** see instructions below.
-
-## Mac Pro
-
-Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video production** acceleration. Follow the steps below:
-- Change **`config.plist`** and replace **SystemProductName** with MacPro7,1:
-```diff
-	<key>SystemProductName</key>
--	<string>iMac19,2</string>
-+	<string>MacPro7,1</string>
-```
-- Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for MacPro7,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **`config.plist`**;
-- **Update this section** from your **`config.plist`** since you **will not use iGPU** anymore:
-```diff
-	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-	<dict>
--		<key>AAPL,ig-platform-id</key>
--		<data>AwCSPg==</data>
-+		<key>class-code</key>
-+		<data>/////w==</data>
-+		<key>name</key>
-+		<string>#display</string>
-+		<key>IOName</key>
-+		<string>#display</string>
-	</dict>
-```
-- Edit **`USBMap.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS and **USB Power** settings:
-```diff
-	<key>IOKitPersonalities</key>
-	<dict>
--	<key>iMac19,2-XHC</key>
-+	<key>MacPro7,1-XHC</key>
-```
-and
-```diff
-	<key>model</key>
--	<string>iMac19,2</string>
-+	<string>MacPro7,1</string>
-```
-The **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
-
-You can use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to generate a new **CPUFriendDataProvider.kext** file to your needs.
-
-> **TIP!**
-_Just for your record, when running **CPUFriendFriend** I choose base clock **0B** (1100Mhz), Performance **00** and Bias **01** options. This enable my MacPro7,1 SMBIOS to sleep well with my hardware. You may need to test what values are more appropriated for your hardware._
-
-- **Enable** the **`AGPMInjector.kext`**, **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
-```diff
-	<dict>
-		<key>BundlePath</key>
-		<string>AGPMInjector.kext</string>
-		<key>Comment</key>
-		<string>AGPMInjector.kext</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>ExecutablePath</key>
-		<string></string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>MinKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/CPUFriend</string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>CPUFriend.kext</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string></string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>CPUFriendDataProvider.kext</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/RestrictEvents</string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>RestrictEvents.kext</string>
-	</dict>
-```
-- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own `CPUFriendDataProvider.kext` see the [notes](#power-management) below for instructions)_.
-
 ## USB Ports
 
 The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
@@ -467,6 +329,144 @@ pmset -g live
 ```
 
 The commands above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
+
+## Other SMBIOS
+
+This build has some options:
+- The **most hardware compatible** and working out-of-the-box is **iMac19,2** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
+- **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar because your hack will not have a T2 chip like a real Mac Pro.
+
+| SMBIOS        | Advantage                                                                                                                                      | Loss                                                     |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| **iMac19,2**  | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_                                                          | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
+| **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar_                                                |
+
+You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **Mac Pro** see instructions below.
+
+### Mac Pro
+
+Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video production** acceleration. Follow the steps below:
+- Change **`config.plist`** and replace **SystemProductName** with MacPro7,1:
+```diff
+	<key>SystemProductName</key>
+-	<string>iMac19,2</string>
++	<string>MacPro7,1</string>
+```
+- Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for MacPro7,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **`config.plist`**;
+- **Update this section** from your **`config.plist`** since you **will not use iGPU** anymore:
+```diff
+	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+	<dict>
+-		<key>AAPL,ig-platform-id</key>
+-		<data>AwCSPg==</data>
++		<key>class-code</key>
++		<data>/////w==</data>
++		<key>name</key>
++		<string>#display</string>
++		<key>IOName</key>
++		<string>#display</string>
+	</dict>
+```
+- Edit **`USBMap.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS and **USB Power** settings:
+```diff
+	<key>IOKitPersonalities</key>
+	<dict>
+-	<key>iMac19,2-XHC</key>
++	<key>MacPro7,1-XHC</key>
+```
+and
+```diff
+	<key>model</key>
+-	<string>iMac19,2</string>
++	<string>MacPro7,1</string>
+```
+The **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
+
+You can use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to generate a new **CPUFriendDataProvider.kext** file to your needs.
+
+> **TIP!**
+_Just for your record, when running **CPUFriendFriend** I choose base clock **0B** (1100Mhz), Performance **00** and Bias **01** options. This enable my MacPro7,1 SMBIOS to sleep well with my hardware. You may need to test what values are more appropriated for your hardware._
+
+- **Enable** the **`AGPMInjector.kext`**, **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
+```diff
+	<dict>
+		<key>BundlePath</key>
+		<string>AGPMInjector.kext</string>
+		<key>Comment</key>
+		<string>AGPMInjector.kext</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>ExecutablePath</key>
+		<string></string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>MinKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+	</dict>
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/CPUFriend</string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>CPUFriend.kext</string>
+	</dict>
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string></string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>CPUFriendDataProvider.kext</string>
+	</dict>
+	<dict>
+		<key>Comment</key>
+		<string></string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>MinKernel</key>
+		<string></string>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/RestrictEvents</string>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>RestrictEvents.kext</string>
+	</dict>
+```
+- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own `CPUFriendDataProvider.kext` see the [notes](#power-management) below for instructions)_.
 
 ## Cleaning the EFI
 
