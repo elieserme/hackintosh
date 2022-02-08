@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.7** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS Monterey 12.2** like a  **iMac 2019**.
+This is the guide for **OpenCore 0.7.8** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS Monterey 12.2** like a  **iMac 2019**.
 
 ## Table of Contents
 
