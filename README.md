@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.8** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS Monterey 12.2.1** like a  **iMac 2019**.
+This is the guide for **OpenCore 0.7.8** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.2.1 Monterey** like a  **iMac 2019**.
 
 ## Table of Contents
 
@@ -11,7 +11,7 @@ This is the guide for **OpenCore 0.7.8** Hackintosh build based on i7 8700 | Gig
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
 	- [Windows 11](#windows-11)
-	- [MacOS Monterey 12](#macos-monterey-12)
+	- [MacOS 12 Monterey](#macos-12-monterey)
 	- [USB Ports](#usb-ports)
 	- [Sleep and Hibernate](#sleep-and-hibernate)
 	- [Other SMBIOS](#other-smbios)
@@ -94,7 +94,7 @@ To correct date and time, you need patch registry for **time sync** with MacOS, 
 > **TIP!**
 One valid use of Windows setup beyond gamming is to **generate the files** on **`ACPI`** folder. You can use **SSDTTime** tool to generate **`SSDT-AWAC.aml`**,  **`SSDT-EC.aml`** , **`SSDT-HPET.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_. The **`SSDT-EC-USBW.aml`** and **`SSDT-SBUS-MCHC.aml`** can be edited and compiled using **MaciASL** util. Sources are in **`other/acpi_src`** in this repo.
 
-## MacOS Monterey 12
+## MacOS 12 Monterey
 
 - Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/monterey/) on a regular MacOS computer; 
 - Make a **USB** install disk _(the example below uses a USB device named USB and makes Monterey installation disk)_:
