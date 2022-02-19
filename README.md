@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.8** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS Monterey 12.2** like a  **iMac 2019**.
+This is the guide for **OpenCore 0.7.8** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS Monterey 12.2.1** like a  **iMac 2019**.
 
 ## Table of Contents
 
@@ -40,8 +40,9 @@ This is the guide for **OpenCore 0.7.8** Hackintosh build based on i7 8700 | Gig
 |     **RAM**      | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
 |   **Wireless**   | [BCM94360CS2 ](https://github.com/elieserme/hackintosh/blob/main/other/windows11/wireless_apple/bcm94360cs2.zip) Original Apple part with adaptor to replace motherboard Bluetooth and WiFI card |
-|     **SSD**      | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(macOS)_                                                   |
-|     **SSD**      | [ADATA XPG SX6000 Pro ](https://www.adata.com/pt/xpg/580) 1TB PCIe NVMe _(Windows)_                                                                                                              |
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(macOS)_                                                   |
+|     **NVMe**     | [ADATA XPG SX6000 Pro ](https://www.adata.com/pt/xpg/580) 1TB PCIe NVMe _(Windows)_                                                                                                              |
+|     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD _(Time Machine backup)_                                                 |
 |  **CPU Cooler**  | [Noctua NH-L9x65 ](https://noctua.at/en/nh-l9x65) low profile and small form factor cooler                                                                                                       |
 | **Case Cooler**  | [Scythe KF1425FD18-P ](https://www.scythe.co.jp/product/fan/kf1425fd18-p/) 140mm case cooler                                                                                                     |
 | **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit                                           |
@@ -59,6 +60,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
 - BIOS &gt; Secure Boot &gt; **DISABLED**
+- Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
 - Peripherals &gt; Re-Size Bar &gt; **AUTO**
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
@@ -77,7 +79,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - Power &gt; ErP &gt; **ENABLED**
 - Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Power &gt; Power Loading &gt; **DISABLED**
-- Power &gt; Render RC6 State &gt; **DISABLED**
+- Power &gt; RC6 (Render Standby) &gt; **DISABLED**
 - Save and restart
 
 ## Windows 11 
