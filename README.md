@@ -1,21 +1,19 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.8** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.2.1 Monterey** like a  **iMac 2019**.
+This is the guide for **OpenCore 0.7.9** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.2.1 Monterey** like a  **iMac 2019**.
 
 ## Table of Contents
 
 - [Hackintosh](#hackintosh)
 	- [Table of Contents](#table-of-contents)
 	- [Warning](#warning)
-	- [Why use iMac 2019 model](#why-use-imac-2019-model)
+	- [Why use iMacPro model](#why-use-imacpro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
 	- [Windows 11](#windows-11)
 	- [MacOS 12 Monterey](#macos-12-monterey)
 	- [USB Ports](#usb-ports)
 	- [Sleep and Hibernate](#sleep-and-hibernate)
-	- [Other SMBIOS](#other-smbios)
-		- [Mac Pro](#mac-pro)
 	- [Cleaning the EFI](#cleaning-the-efi)
 	- [Final comments](#final-comments)
 	- [Build images](#build-images)
@@ -24,12 +22,10 @@ This is the guide for **OpenCore 0.7.8** Hackintosh build based on i7 8700 | Gig
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
-## Why use iMac 2019 model
-- Native **Intel Cofee Lake** power management;
-- **AMD GPU** and **iGPU** for balanced performance;
+## Why use iMacPro model
+- **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
-- **Sidecar** working because **this iMac do not have T2 chip**;
-- Note that are DRM issues with **Netflix**, **PrimeVideo** and **Apple TV+** in **Big Sur** and **Monterey** _(if you require DRM support, better use the MacPro7,1 SMBIOS as explained further)_.
+- **No DRM issues** _(you can use Apple TV+ and Safari for Netflix and PrimeVideo)_.
 
 ## Hardware
 
@@ -73,7 +69,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
-- Chipset &gt; Internal Graphics &gt; **ENABLED** with **64MB** min and **256MB** max; 
+- Chipset &gt; Internal Graphics &gt; **DISABLED**
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Power &gt; ErP &gt; **ENABLED**
@@ -136,7 +132,7 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 		<key>SpoofVendor</key>
 		<true/>
 		<key>SystemProductName</key>
-		<string>iMac19,2</string>
+		<string>iMacPro1,1</string>
 		<key>SystemSerialNumber</key>
 		<string>AAAAAAAAAAAA</string>
 		<key>SystemUUID</key>
@@ -178,7 +174,7 @@ setup_var_3 0x5A4 0x00
 
 ## USB Ports
 
-The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMac19,2 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
+The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMacPro1,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
 
 Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality, and USB Type C has different ports for each side... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
@@ -210,101 +206,7 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 |  **J**   | _HS12_                   | _Not used in macOS_           |
 | _hidden_ | _HS13, HS14, USR1, USR2_ | _Not used in macOS_           |
 
-If you want to map your USB ports yourself,  use [Hackintool](https://github.com/headkaze/Hackintool) and follow this instructions:
 
-- The required **`USBInjectAll.kext`** is supplied but it's disabled in **`config.plist`**. You can **enable it** and **disable `USBMap.kext`** to map the ports:
-```diff
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/USBInjectAll</string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>USBInjectAll.kext</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<true/>
-+		<false/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string></string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>USBMap.kext</string>
-	</dict>
-```
-- **Reboot** and **use Hackintool to test USB ports you want to use** (using a pendrive or other USB 2.0 device). **Take note** on what ports you **do not want** to use.
-- Include in `boot-args` on **`config.plist`** the parameter `uia_exclude` to disable the ports you do not want. **Example below will exclude 2 USB 2.0 ports named HS03 and HS04**:
-```
-uia_exclude=HS03;HS04
-```
-- **Reboot** and do the step above again, **until you have only 15 ports** active. As example, my final boot-args directive was like this:
-
-```
-uia_exclude=HS07;HS08;HS12;HS13;HS14;USR1;USR2;SS05;SS06;SS07;SS08
-```
-- After that, export the **`USBMap.kext`** using Hackintool and place it on **`Kexts`** folder. 
-- Remind to **disable** **`USBInjectAll.kext`** and **enable `USBMap.kext`** in **`config.plist`** and remove **`uia_exclude`** directive from `boot-args`:
-```diff
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
-+		<false/>
--		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/USBInjectAll</string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>USBInjectAll.kext</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
-+		<true/>
--		<false/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string></string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>USBMap.kext</string>
-	</dict>
-```
 
 ## Sleep and Hibernate
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
@@ -332,221 +234,8 @@ pmset -g live
 
 The commands above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
 
-## Other SMBIOS
-
-This build has some options:
-- The **most hardware compatible** and working out-of-the-box is **iMac19,2** by default, but have DRM issues with Safari, Netflix, Prime Video, Apple TV+ and possible others;
-- **MacPro7,1** is more like a PC because you can **add GPUs and upgrade parts**. It will give you **full DRM support** and **best video processing speed**; but loss SideCar because your hack will not have a T2 chip like a real Mac Pro.
-
-| SMBIOS        | Advantage                                                                                                                                      | Loss                                                     |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| **iMac19,2**  | _**Native CPU power management, no T2 chip, GPU + iGPU with IQSV encoding, SideCar**_                                                          | _DRM support (Netflix, PrimeVideo) on Safari, Apple TV+_ |
-| **MacPro7,1** | **_Full DRM support, HDR display support, Netflix and Prime Video on Safari, AppleTV+, Fast AMD GPU encoding, more hardware upgrade options_** | _SideCar_                                                |
-
-You can decide **what features are more important to your work and choice** the right SMBIOS. If you decide go to **Mac Pro** see instructions below.
-
-### Mac Pro
-
-Use the MacPro7,1 SMBIOS if you **require full DRM support** and **best video production** acceleration. Follow the steps below:
-- Change **`config.plist`** and replace **SystemProductName** with MacPro7,1:
-```diff
-	<key>SystemProductName</key>
--	<string>iMac19,2</string>
-+	<string>MacPro7,1</string>
-```
-- Generate a new **MLB**, **SystemSerialNumber** and **SystemUUID** for MacPro7,1 using [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS) and **replace this values** in your **`config.plist`**;
-- **Update this section** from your **`config.plist`** since you **will not use iGPU** anymore:
-```diff
-	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-	<dict>
--		<key>AAPL,ig-platform-id</key>
--		<data>AwCSPg==</data>
-+		<key>class-code</key>
-+		<data>/////w==</data>
-+		<key>name</key>
-+		<string>#display</string>
-+		<key>IOName</key>
-+		<string>#display</string>
-	</dict>
-```
-- Edit **`USBMap.kext`** _(on Mac you need to right click and Show Package Contents, edit info.plist inside de Contents folder)_ and change in **two places** the new SMBIOS and **USB Power** settings:
-```diff
-	<key>IOKitPersonalities</key>
-	<dict>
--	<key>iMac19,2-XHC</key>
-+	<key>MacPro7,1-XHC</key>
-```
-and
-```diff
-	<key>model</key>
--	<string>iMac19,2</string>
-+	<string>MacPro7,1</string>
-```
-The **MacPro7,1** SMBIOS redirect all graphics processing to dedicated graphics card (your AMD GPU). This can increase graphics processing and bypass DRM issues. But in real life, **MacPro uses Intel Xeon** CPUs and **power management may not work for your Intel Cofee Lake** or other CPUs. 
-
-You can use [CPUFriendFriend](https://github.com/corpnewt/CPUFriendFriend) to generate a new **CPUFriendDataProvider.kext** file to your needs.
-
-> **TIP!**
-_Just for your record, when running **CPUFriendFriend** I choose base clock **0B** (1100Mhz), Performance **00** and Bias **01** options. This enable my MacPro7,1 SMBIOS to sleep well with my hardware. You may need to test what values are more appropriated for your hardware._
-
-- **Enable** the **`AGPMInjector.kext`**, **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** in your **`config.plist`** _(this kexts are supplied but disabled by default)_:
-```diff
-	<dict>
-		<key>BundlePath</key>
-		<string>AGPMInjector.kext</string>
-		<key>Comment</key>
-		<string>AGPMInjector.kext</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>ExecutablePath</key>
-		<string></string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>MinKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/CPUFriend</string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>CPUFriend.kext</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string></string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>CPUFriendDataProvider.kext</string>
-	</dict>
-	<dict>
-		<key>Comment</key>
-		<string></string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>MinKernel</key>
-		<string></string>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/RestrictEvents</string>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>RestrictEvents.kext</string>
-	</dict>
-```
-- Remind to **Reset NVRAM** if you are changing from iMac19,2 running to new MacPro7,1 **prior to reboot MacOS** _(if you need to generate your own `CPUFriendDataProvider.kext` see the [notes](#power-management) below for instructions)_.
-
 ## Cleaning the EFI
 
-- If you **not using MacPro7,1** SMBIOS, remove **`AGPMInjector.kext`**, **`CPUFriend.kext`**, **`CPUFriendDataProvider.kext`** and **`RestrictEvents.kext`** from **`Kexts`** folder and from **`config.plist`** too:
-```diff
--	<dict>
--		<key>BundlePath</key>
--		<string>AGPMInjector.kext</string>
--		<key>Comment</key>
--		<string>AGPMInjector.kext</string>
--		<key>Enabled</key>
--		<false/>
--		<key>ExecutablePath</key>
--		<string></string>
--		<key>Arch</key>
--		<string>Any</string>
--		<key>MaxKernel</key>
--		<string></string>
--		<key>MinKernel</key>
--		<string></string>
--		<key>PlistPath</key>
--		<string>Contents/Info.plist</string>
--	</dict>
--	<dict>
--		<key>Comment</key>
--		<string></string>
--		<key>MaxKernel</key>
--		<string></string>
--		<key>PlistPath</key>
--		<string>Contents/Info.plist</string>
--		<key>Enabled</key>
--		<false/>
--		<key>MinKernel</key>
--		<string></string>
--		<key>ExecutablePath</key>
--		<string>Contents/MacOS/CPUFriend</string>
--		<key>Arch</key>
--		<string>Any</string>
--		<key>BundlePath</key>
--		<string>CPUFriend.kext</string>
--	</dict>
--	<dict>
--		<key>Comment</key>
--		<string></string>
--		<key>MaxKernel</key>
--		<string></string>
--		<key>PlistPath</key>
--		<string>Contents/Info.plist</string>
--		<key>Enabled</key>
--		<false/>
--		<key>MinKernel</key>
--		<string></string>
--		<key>ExecutablePath</key>
--		<string></string>
--		<key>Arch</key>
--		<string>Any</string>
--		<key>BundlePath</key>
--		<string>CPUFriendDataProvider.kext</string>
--	</dict>
--	<dict>
--		<key>Comment</key>
--		<string></string>
--		<key>MaxKernel</key>
--		<string></string>
--		<key>PlistPath</key>
--		<string>Contents/Info.plist</string>
--		<key>Enabled</key>
--		<false/>
--		<key>MinKernel</key>
--		<string></string>
--		<key>ExecutablePath</key>
--		<string>Contents/MacOS/RestrictEvents</string>
--		<key>Arch</key>
--		<string>Any</string>
--		<key>BundlePath</key>
--		<string>RestrictEvents.kext</string>
--	</dict>
-```
 - If you **do not want** to install Windows 11, disable **Boot Menu** in **`config.plist`** to work like a real Mac:
 ```diff
 	<key>ShowPicker</key>

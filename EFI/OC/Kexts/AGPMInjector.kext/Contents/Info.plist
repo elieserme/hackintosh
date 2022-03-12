@@ -36,7 +36,7 @@
 			<string>IOPlatformPluginDevice</string>
 			<key>Machines</key>
 			<dict>
-				<key>MacPro7,1</key>
+				<key>iMacPro1,1</key>
 				<dict>
 					<key>Vendor1002Device73ff</key>
 					<dict>
