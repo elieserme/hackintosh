@@ -83,7 +83,7 @@ Gigabyte z370N WIFI using BIOS version F14
 > **IMPORTANT!**
 **Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID _(unsupported)_.
 
-You can **isolate Windows** from Mac and vice versa _(by choose in boot menu)_. I'm not using BootCamp because my Windows activation and other software are linked to my motherboard.
+You can **isolate Windows** from Mac and vice versa _(by choose in BIOS what operating system will start)_. I'm not using BootCamp because my Windows activation and other software are linked to my motherboard.
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
 
@@ -247,7 +247,7 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 After all you will can boot MacOS, Windows and Recovery **just like a real Mac** computer:
 - Hold **Option** key (or **ESC** key) to show boot menu _(if you hide it)_;
-- Press **Space Bar** on boot menu to show advanced options _(like NVRAM reset)_;
+- Press **Space Bar** on boot menu to show advanced options _(like Recovery and NVRAM reset)_;
 - Update your Mac using the **Apple Software Updates**;
 - Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
 
