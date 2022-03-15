@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.9** Hackintosh build based on i7 8700 | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.2.1 Monterey** like an **iMac Pro**.
+This is the guide for **OpenCore 0.7.9** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.2.1 Monterey** like an **iMac Pro**.
 
 ## Table of Contents
 
@@ -31,7 +31,7 @@ This is the guide for **OpenCore 0.7.9** Hackintosh build based on i7 8700 | Gig
 
 |       Type       | Item                                                                                                                                                                                             |
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|     **CPU**      | [Intel i7 8700 ](https://www.intel.com.br/content/www/br/pt/products/processors/core/core-vpro/i7-8700.html) 8th generation 6 cores and 12 threads 3,2GHz with Turbo Boost up to 4,6GHz          |
+|     **CPU**      | [Intel i7 9700KF ](https://www.intel.com.br/content/www/br/pt/products/sku/190885/intel-core-i79700kf-processor-12m-cache-up-to-4-90-ghz/specifications.html) 9th generation 8 cores 3,6GHz with Turbo Boost up to 4,9GHz          |
 | **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
 |     **RAM**      | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
@@ -50,7 +50,6 @@ Gigabyte z370N WIFI using BIOS version F14
 
 - **Load optimised defaults**
 - MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
-- MIT &gt; Advanced CPU Core Settings &gt; Enhanced Multi-core Performance &gt; **ENABLED**
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
@@ -69,7 +68,6 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
-- Chipset &gt; Internal Graphics &gt; **DISABLED**
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Power &gt; ErP &gt; **ENABLED**
@@ -236,7 +234,7 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 ## Cleaning the EFI
 
-- If you **do not want** to install Windows 11, disable **Boot Menu** in **`config.plist`** to work like a real Mac:
+- If you **do not want** the **Boot Menu**, disable it in **`config.plist`** to boot like a real Mac:
 ```diff
 	<key>ShowPicker</key>
 -	<true/>
