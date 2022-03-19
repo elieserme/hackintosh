@@ -54,19 +54,49 @@ class EntryPopup(tk.Entry):
             self.bind("<Control-a>", self.select_all)
             self.bind("<Control-c>", self.copy)
             self.bind("<Control-v>", self.paste)
-        self.bind("<Escape>", self.cancel)
-        self.bind("<Return>", self.confirm)
-        self.bind("<KP_Enter>", self.confirm)
-        self.bind("<Up>", self.goto_start)
-        self.bind("<Down>", self.goto_end)
-        self.bind("<Tab>", self.next_field)
+        self.bind("<Key>",self.reveal)
+        self.bind("<Escape>", lambda x:[self.reveal(x),self.cancel(x)])
+        self.bind("<Return>", lambda x:[self.reveal(x),self.confirm(x)])
+        self.bind("<KP_Enter>", lambda x:[self.reveal(x),self.confirm(x)])
+        self.bind("<Up>", lambda x:[self.reveal(x),self.goto_start(x)])
+        self.bind("<Down>", lambda x:[self.reveal(x),self.goto_end(x)])
+        self.bind("<Tab>", lambda x:[self.reveal(x),self.next_field(x)])
+        self.bind("<FocusOut>", self.focus_out)
 
-    def cancel(self, event):
-        # Force the parent focus then destroy self
-        self.parent.focus_force()
+    def reveal(self, event=None):
+        # Make sure we're visible if editing
+        self.parent.see(self.cell)
+        self.relocate()
+
+    def focus_out(self, event=None):
+        if self.master.focus_get():
+            # Pass True as the event to allow the bell() when our window still
+            # has focus (means we're actively editing)
+            self.confirm(event=True)
+        else:
+            # Pass None as the event to prevent the bell()
+            self.confirm(no_prompt=True)
+
+    def relocate(self, event=None):
+        # Helper called when the window is scrolled to move the popup
+        bbox = self.parent.bbox(self.cell, column=self.column)
+        if bbox:
+            # Move the entry to accommodate the new cell bbox
+            x,y,width,height = bbox
+            pady = height//2
+            self.place(x=x,y=y+pady,anchor="w",width=width)
+        elif self.winfo_viewable():
+            # Entry left the visible area, and our popup is still visible,
+            # hide it
+            self.place_forget()
+
+    def cancel(self, event=None):
+        # Destroy ourself, then force the parent to focus
         self.destroy()
+        self.master.entry_popup = None
+        self.parent.focus_force()
 
-    def next_field(self, event):
+    def next_field(self, event=None):
         # We need to determine if our other field can be edited
         # and if so - trigger another double click event there
         edit_col = None
@@ -90,24 +120,21 @@ class EntryPopup(tk.Entry):
             x,y,width,height = self.master._tree.bbox(self.cell, edit_col)
             # Create an event
             e = tk.Event
-            e.x = x+5
-            e.y = y+5
-            e.x_root = 0
-            e.y_root = 0
+            e.x, e.y, e.x_root, e.y_root = x+5, y+5, 0, 0
             self.master.on_double_click(e)
             return 'break'
 
-    def goto_start(self, event):
+    def goto_start(self, event=None):
         self.selection_range(0, 0)
         self.icursor(0)
         return 'break'
 
-    def goto_end(self, event):
+    def goto_end(self, event=None):
         self.selection_range(0, 0)
         self.icursor(len(self.get()))
         return 'break'
 
-    def copy(self, event):
+    def copy(self, event=None):
         try:
             get = self.selection_get()
         except:
@@ -119,7 +146,7 @@ class EntryPopup(tk.Entry):
         self.update()
         return 'break'
 
-    def paste(self, event):
+    def paste(self, event=None):
         try:
             contents = self.clipboard_get()
         except:
@@ -144,7 +171,9 @@ class EntryPopup(tk.Entry):
         # returns 'break' to interrupt default key-bindings
         return 'break'
 
-    def confirm(self, event):
+    def confirm(self, event=None, no_prompt = False):
+        if not self.winfo_exists():
+            return
         if self.column == "#0":
             # First we make sure that no other siblings
             # have the same name - as dict names need to be
@@ -159,11 +188,11 @@ class EntryPopup(tk.Entry):
                 # keys
                 if text == self.parent.item(child, "text"):
                     # Have a match, beep and bail
-                    if not event == None:
-                        self.bell()
-                        if not mb.askyesno("Invalid Key Name","That key name already exists in that dict.\n\nWould you like to keep editing?",parent=self.parent):
-                            self.destroy()
-                    return
+                    if event: self.bell() # Only bell when we have a real event (i.e. return was pressed)
+                    if no_prompt or not mb.askyesno("Invalid Key Name","That key name already exists in that dict.\n\nWould you like to keep editing?",parent=self.parent):
+                        return self.cancel(event)
+                    # no_prompt is false and we wanted to continue editing - set focus again and return
+                    return self.focus_force()
             # Add to undo stack
             self.master.add_undo({"type":"edit","cell":self.cell,"text":self.parent.item(self.cell,"text"),"values":self.parent.item(self.cell,"values")})
             # No matches, should be safe to set
@@ -187,11 +216,11 @@ class EntryPopup(tk.Entry):
             output = self.master.qualify_value(value,type_value)
             if output[0] == False:
                 # Didn't pass the test - show the error and prompt for edit continuing
-                if not event == None:
-                    self.bell()
-                    if not mb.askyesno(output[1],output[2]+"\n\nWould you like to keep editing?",parent=self.parent):
-                        self.destroy()
-                return
+                if event: self.bell() # Only bell when we have a real event (i.e. return was pressed)
+                if no_prompt or not mb.askyesno(output[1],output[2]+"\n\nWould you like to keep editing?",parent=self.parent):
+                    return self.cancel(event)
+                # no_prompt is false and we wanted to continue editing - set focus again and return
+                return self.focus_force()
             # Set the value to the new output
             value = output[1]
             # Add to undo stack
@@ -200,7 +229,8 @@ class EntryPopup(tk.Entry):
             values[index-1] = value
             # Set the values
             self.parent.item(self.cell, values=values)
-        self.cancel(None)
+        # Call cancel to close the popup as we're done editing
+        self.cancel(event)
 
 class PlistWindow(tk.Toplevel):
     def __init__(self, controller, root, **kw):
@@ -227,19 +257,20 @@ class PlistWindow(tk.Toplevel):
         self.menu_code = u"\u21D5"
         #self.drag_code = u"\u2630"
         self.drag_code = u"\u2261"
+        self.safe_path_length = 128 # OC_STORAGE_SAFE_PATH_MAX from Include/Acidanthera/Library/OcStorageLib.h in OpenCorePkg
 
         # self = tk.Toplevel(self.root)
         try:
-            w = int(self.controller.settings.get("last_window_width",640))
+            w = int(self.controller.settings.get("last_window_width",730))
             h = int(self.controller.settings.get("last_window_height",480))
         except:
             # wut - who be breakin dis?
-            w = 640
+            w = 730
             h = 480
         # Save the previous states for comparison
         self.previous_height = h
         self.previous_width = w
-        self.minsize(width=640,height=480)
+        self.minsize(width=730,height=480)
         self.protocol("WM_DELETE_WINDOW", self.close_window)
         # Let's also center the window
         x = self.winfo_screenwidth() // 2 - w // 2
@@ -276,6 +307,20 @@ class PlistWindow(tk.Toplevel):
         self.style = ttk.Style()
         # Treeview theming is horribly broken in Windows for whatever reasons...
         self.style_name = "Corp.TLabel" if os.name=="nt" else "Corp.Treeview"
+        # Attempt to set the color of the headers
+        if not "Corp.Treeheading.border" in self.style.element_names():
+            self.style.element_create("Corp.Treeheading.border", "from", "default")
+        self.style.layout(self.style_name+".Heading", [
+            ("Corp.Treeheading.cell", {'sticky': 'nswe'}),
+            ("Corp.Treeheading.border", {'sticky':'nswe', 'children': [
+                ("Corp.Treeheading.padding", {'sticky':'nswe', 'children': [
+                    ("Corp.Treeheading.image", {'side':'right', 'sticky':''}),
+                    ("Corp.Treeheading.text", {'sticky':'we'})
+                ]})
+            ]}),
+        ])
+        self.style.configure(self.style_name+".Heading",borderwidth=1,relief="groove")
+        self.style.map(self.style_name+".Heading",relief=[('active','raised'),('pressed','sunken')])
 
         # Fix font height for High-DPI displays
         self.font = Font(font='TkTextFont')
@@ -308,8 +353,8 @@ class PlistWindow(tk.Toplevel):
         self._tree.bind("<{}-v>".format(key), self.paste_selection)
 
         # Create the scrollbar
-        vsb = ttk.Scrollbar(self._tree_frame, orient='vertical', command=self._tree.yview)
-        self._tree.configure(yscrollcommand=vsb.set)
+        self.vsb = ttk.Scrollbar(self._tree_frame,orient='vertical',command=self._tree.yview)
+        self._tree.configure(yscrollcommand=self.scrollbar_set)
 
         # Bind right click
         if str(sys.platform) == "darwin":
@@ -362,7 +407,7 @@ class PlistWindow(tk.Toplevel):
             file_menu.add_command(label="Settings",command=lambda:self.controller.show_window(self.controller.settings_window), accelerator="Ctrl+,")
             file_menu.add_separator()
             file_menu.add_command(label="Toggle Find/Replace Pane",command=self.hide_show_find, accelerator="Ctrl+F")
-            file_menu.add_command(label="Toggle Plist/Data/Int Type Pane",command=self.hide_show_type, accelerator="Ctrl+P")
+            file_menu.add_command(label="Toggle Plist/Data/Int/Bool Type Pane",command=self.hide_show_type, accelerator="Ctrl+P")
             file_menu.add_separator()
             file_menu.add_command(label="Quit", command=self.controller.quit, accelerator="Ctrl+Q")
             self.config(menu=main_menu)
@@ -385,8 +430,8 @@ class PlistWindow(tk.Toplevel):
             self.display_frame.columnconfigure(x,weight=1)
         pt_label = tk.Label(self.display_frame,text="Plist Type:")
         dt_label = tk.Label(self.display_frame,text="Display Data as:")
-        in_label = tk.Label(self.display_frame,text="Display Integers as:")
-        bl_label = tk.Label(self.display_frame,text="Display Booleans as:")
+        in_label = tk.Label(self.display_frame,text="Display Ints as:")
+        bl_label = tk.Label(self.display_frame,text="Display Bools as:")
         self.plist_type_string = tk.StringVar(self.display_frame)
         self.plist_type_menu = tk.OptionMenu(self.display_frame, self.plist_type_string, *self.controller.allowed_types, command=self.change_plist_type)
         self.plist_type_string.set(self.controller.allowed_types[0])
@@ -399,14 +444,14 @@ class PlistWindow(tk.Toplevel):
         self.bool_type_string = tk.StringVar(self.display_frame)
         self.bool_type_menu = tk.OptionMenu(self.display_frame, self.bool_type_string, *self.controller.allowed_bool, command=self.change_bool_type)
         self.bool_type_string.set(self.controller.allowed_bool[0])
-        pt_label.grid(row=1,column=1,padx=10,pady=(0,5),sticky="w")
-        dt_label.grid(row=1,column=3,padx=10,pady=(0,5),sticky="w")
-        in_label.grid(row=1,column=5,padx=10,pady=(0,5),sticky="w")
-        bl_label.grid(row=1,column=7,padx=10,pady=(0,5),sticky="w")
-        self.plist_type_menu.grid(row=1,column=2,padx=10,pady=10,sticky="we")
-        self.data_type_menu.grid(row=1,column=4,padx=10,pady=10,sticky="we")
-        self.int_type_menu.grid(row=1,column=6,padx=10,pady=10,sticky="we")
-        self.bool_type_menu.grid(row=1,column=8,padx=10,pady=10,sticky="we")
+        pt_label.grid(row=1,column=1,pady=10,sticky="w")
+        dt_label.grid(row=1,column=3,pady=10,sticky="w")
+        in_label.grid(row=1,column=5,pady=10,sticky="w")
+        bl_label.grid(row=1,column=7,pady=10,sticky="w")
+        self.plist_type_menu.grid(row=1,column=2,pady=10,padx=5,sticky="we")
+        self.data_type_menu.grid(row=1,column=4,pady=10,padx=5,sticky="we")
+        self.int_type_menu.grid(row=1,column=6,pady=10,padx=5,sticky="we")
+        self.bool_type_menu.grid(row=1,column=8,pady=10,padx=5,sticky="we")
         
         # Create our find/replace view
         self.find_frame = tk.Frame(self,height=20)
@@ -447,10 +492,17 @@ class PlistWindow(tk.Toplevel):
         self.f_case.grid(row=0,column=5,sticky="w")
 
         # Add the scroll bars and show the treeview
-        vsb.pack(side="right",fill="y")
+        self.vsb.pack(side="right",fill="y")
         self._tree.pack(side="bottom",fill="both",expand=True)
         self.draw_frames()
         self.entry_popup = None
+
+    def scrollbar_set(self, *args):
+        # Intercepted scrollbar set method to set where our
+        # entry_popup is (if any)
+        self.vsb.set(*args)
+        if not self.entry_popup: return
+        self.entry_popup.relocate()
 
     def set_font_size(self):
         self.font["size"] = self.controller.font_string.get() if self.controller.custom_font.get() else self.controller.default_font["size"]
@@ -466,6 +518,7 @@ class PlistWindow(tk.Toplevel):
         self.set_font_size() # Necessary because turning off 'custom font' option seems to fallback to font_size of '9'.
 
     def window_resize(self, event=None, obj=None):
+        if self.entry_popup: self.entry_popup.relocate()
         if not event or not obj: return
         if self.winfo_height() == self.previous_height and self.winfo_width() == self.previous_width: return
         self.previous_height = self.winfo_height()
@@ -916,6 +969,24 @@ class PlistWindow(tk.Toplevel):
     def oc_clean_snapshot(self, event = None):
         self.oc_snapshot(event,True)
 
+    def check_path_length(self, item):
+        paths_too_long = []
+        if isinstance(item,dict):
+            # Get the last path component of the Path or BundlePath values for the name
+            name = os.path.basename(item.get("Path",item.get("BundlePath","Unknown Name")))
+            # Check the keys containing "path"
+            for key in item:
+                if "path" in key.lower() and isinstance(item[key],str) and len(item[key])>self.safe_path_length:
+                    paths_too_long.append(key) # Too long - keep a reference of the key
+        elif isinstance(item,str):
+            name = os.path.basename(item) # Retain the last path component as the name
+            # Checking the item itself
+            if len(item)>self.safe_path_length:
+                paths_too_long.append(item)
+        else: return paths_too_long # Empty list
+        if not paths_too_long: return [] # Return an empty array to allow .extend()
+        return [(item,name,paths_too_long)] # Return a list containing a tuple of the original item, and which paths are too long
+
     def oc_snapshot(self, event = None, clean = False):
         target_dir = os.path.dirname(self.current_plist) if self.current_plist and os.path.exists(os.path.dirname(self.current_plist)) else None
         oc_folder = fd.askdirectory(title="Select OC Folder:",initialdir=target_dir)
@@ -1000,6 +1071,8 @@ class PlistWindow(tk.Toplevel):
         tool_add   = select_snap.get("tool_add",{})
         driver_add = select_snap.get("driver_add",{})
 
+        long_paths = [] # We'll add any paths that exceed the OC_STORAGE_SAFE_PATH_MAX of 128 chars
+
         # ACPI is first, we'll iterate the .aml files we have and add what is missing
         # while also removing what exists in the plist and not in the folder.
         # If something exists in the table already, we won't touch it.  This leaves the
@@ -1042,6 +1115,8 @@ class PlistWindow(tk.Toplevel):
                 # Not there, skip
                 continue
             new_add.append(aml)
+            # Check path length
+            long_paths.extend(self.check_path_length(aml))
         tree_dict["ACPI"]["Add"] = new_add
 
         # Now we need to walk the kexts
@@ -1161,6 +1236,8 @@ class PlistWindow(tk.Toplevel):
         duplicate_bundles = []
         duplicates_disabled = []
         for kext in ordered_kexts:
+            # Check path length
+            long_paths.extend(self.check_path_length(kext))
             temp_kext = {}
             # Shallow copy the kext entry to avoid changing it in ordered_kexts
             for x in kext: temp_kext[x] = kext[x]
@@ -1235,6 +1312,8 @@ class PlistWindow(tk.Toplevel):
                     # Not there, skip it
                     continue
                 new_tools.append(tool)
+                # Check path length
+                long_paths.extend(self.check_path_length(tool))
             tree_dict["Misc"]["Tools"] = new_tools
         else:
             # Make sure our Tools list is empty
@@ -1287,6 +1366,8 @@ class PlistWindow(tk.Toplevel):
                         # Not there, skip it
                         continue
                 new_drivers.append(driver)
+                # Check path length
+                long_paths.extend(self.check_path_length(driver))
             tree_dict["UEFI"]["Drivers"] = new_drivers
         else:
             # Make sure our Drivers list is empty
@@ -1330,6 +1411,24 @@ class PlistWindow(tk.Toplevel):
             self.title(self.title()+" - Edited")
         self.update_all_children()
         self.alternate_colors()
+        # Check if we have any paths that are too long
+        if long_paths:
+            formatted = []
+            for entry in long_paths:
+                item,name,keys = entry
+                if isinstance(item,str): # It's an older string path
+                    formatted.append(name)
+                elif isinstance(item,dict):
+                    formatted.append("{} -> {}".format(name,", ".join(keys)))
+            # Show the dialog warning of lengthy paths
+            mb.showwarning(
+                "Potentially Unsafe Paths".format(self.safe_path_length),
+                "The following exceed the {:,} character safe path max declared by OpenCore and may not work as intended:\n\n{}".format(
+                    self.safe_path_length,
+                    "\n".join(formatted)
+                ),
+                parent=self
+            )
 
     def get_check_type(self, cell=None, string=None):
         if not cell == None:
@@ -1352,39 +1451,79 @@ class PlistWindow(tk.Toplevel):
         if rowid and self._tree.bbox(rowid):
             # Mouse down in a valid node
             self.clicked_drag = True
+    
+    def _change_display(self,new_display,target_funct):
+        # Walks the nodes, undo, and redo stacks and runs
+        # the target funct accordingly
+        target_funct(self.iter_nodes(False),new_display)
+        for u in self.undo_stack:
+            target_funct(u,new_display)
+        for r in self.redo_stack:
+            target_funct(r,new_display)
 
-    def change_int_display(self, new_display="Decimal"):
+    def _qualify_node(self,node,type_check):
+        # Helper function to qualify a passed node - or check if it's
+        # an undo/redo entry.  Returns (None,None,None) if it doesn't qualify,
+        # or a tuple of (node,task,values)
+        task = None
+        if isinstance(node,dict): # Should be an undo/redo action
+            if node.get("type") in ("move","add"): return (None,None,None) # Handled by the nodes loop
+            task = node
+            node = task.get("cell")
+        if not node: return (None,None,None) # Broken formatting?
+        if task and task.get("type") == "edit":
+            values = list(task.get("values",[]))
+            if len(values) < 2: return (None,None,None) # Broken :(
+        else:
+            values = self.get_padded_values(node,3)
+        t = self.get_check_type(cell=None,string=values[0]).lower()
+        if t != type_check: return (None,None,None)
+        return (node,task,values)
+
+    def change_int_display(self,new_display="Decimal"):
         if new_display == self.last_int: return
         self.int_type_string.set(new_display[0].upper()+new_display[1:])
-        nodes = self.iter_nodes(False)
-        for node in nodes:
-            t = self.get_check_type(node).lower()
-            if t == "number":
-                values = self.get_padded_values(node,3)
-                value = values[1]
-                if new_display.lower() == "hex":
-                    try:
-                        value = int(value)
-                        assert value >= 0
-                        value = "0x"+hex(value).upper()[2:].rjust(2,"0")
-                    except: pass
-                else:
-                    if value.lower().startswith("0x"):
-                        value = str(int(value,16))
-                values[1] = value
+        self._change_display(new_display,self._change_int_display)
+
+    def _change_int_display(self,node_list,new_display="Decimal"):
+        if not isinstance(node_list,(list,tuple)): node_list = [node_list]
+        for node in node_list:
+            node,task,values = self._qualify_node(node,"number")
+            if task == False or values is None: continue # Didn't qualify
+            value = values[1]
+            if new_display.lower() == "hex":
+                try:
+                    value = int(value)
+                    assert value >= 0
+                    value = "0x"+hex(value).upper()[2:].rjust(2,"0")
+                except: pass
+            else:
+                if value.lower().startswith("0x"):
+                    value = str(int(value,16))
+            values[1] = value
+            if task and task.get("type") == "edit":
+                task["values"] = values
+            else:
                 self._tree.item(node,values=values)
 
     def change_bool_display(self,new_display="True/False"):
         if new_display == self.last_bool: return
         self.bool_type_string.set(new_display)
-        nodes = self.iter_nodes(False)
+        # Walk all nodes, then walk the undo/redo stack to ensure
+        # all bool values are updated.
+        self._change_display(new_display,self._change_bool_display)
+
+    def _change_bool_display(self,node_list,new_display="True/False"):
+        if not isinstance(node_list,(list,tuple)): node_list = [node_list]
         on,off = new_display.split("/")
         on_list = [x.split("/")[0] for x in self.controller.allowed_bool]
-        for node in nodes:
-            values = self.get_padded_values(node,3)
-            t = self.get_check_type(node).lower()
-            if t == "boolean":
-                values[1] = on if values[1] in on_list else off
+        for node in node_list:
+            node,task,values = self._qualify_node(node,"boolean")
+            if task == False or values is None: continue # Didn't qualify
+            values[1] = on if values[1] in on_list else off
+            if task and task.get("type") == "edit":
+                task["values"] = values
+            else:
                 self._tree.item(node,values=values)
 
     def change_data_display(self,new_display="Hex"):
@@ -1392,34 +1531,49 @@ class PlistWindow(tk.Toplevel):
         self.data_type_string.set(new_display[0].upper()+new_display[1:])
         # This will change how data is displayed - we do this by converting all our existing
         # data values to bytes, then reconverting and displaying appropriately
-        nodes = self.iter_nodes(False)
-        for node in nodes:
-            values = self.get_padded_values(node,3)
-            t = self.get_check_type(node).lower()
+        self._change_display(new_display,self._change_data_display)
+
+    def _change_data_display(self,node_list,new_display="Hex"):
+        if not isinstance(node_list,(list,tuple)): node_list = [node_list]
+        for node in node_list:
+            node,task,values = self._qualify_node(node,"data")
+            if values is None: continue # Didn't qualify
             value = values[1]
-            if t == "data":
-                # We need to adjust how it is displayed, load the bytes first
-                if new_display.lower() == "hex":
-                    # Convert to hex
-                    if sys.version_info < (3,0):
-                        value = binascii.hexlify(base64.b64decode(value))
-                    else:
-                        value = binascii.hexlify(base64.b64decode(value.encode("utf-8"))).decode("utf-8")
-                    # format the hex
-                    value = "<{}>".format(" ".join((value[0+i:8+i] for i in range(0, len(value), 8))).upper())
+            # We need to adjust how it is displayed, load the bytes first
+            if new_display.lower() == "hex":
+                # Convert to hex
+                if sys.version_info < (3,0):
+                    value = binascii.hexlify(base64.b64decode(value))
                 else:
-                    # Assume base64
-                    if sys.version_info < (3, 0):
-                        value = base64.b64encode(binascii.unhexlify(value.replace("<","").replace(">","").replace(" ","")))
-                    else:
-                        value = base64.b64encode(binascii.unhexlify(value.replace("<","").replace(">","").replace(" ","").encode("utf-8"))).decode("utf-8")
-                values[1] = value
+                    value = binascii.hexlify(base64.b64decode(value.encode("utf-8"))).decode("utf-8")
+                # format the hex
+                value = "<{}>".format(" ".join((value[0+i:8+i] for i in range(0, len(value), 8))).upper())
+            else:
+                # Assume base64
+                if sys.version_info < (3, 0):
+                    value = base64.b64encode(binascii.unhexlify(value.replace("<","").replace(">","").replace(" ","")))
+                else:
+                    value = base64.b64encode(binascii.unhexlify(value.replace("<","").replace(">","").replace(" ","").encode("utf-8"))).decode("utf-8")
+            values[1] = value
+            if task and task.get("type") == "edit":
+                task["values"] = values
+            else:
                 self._tree.item(node,values=values)
 
     def add_undo(self, action):
         if not isinstance(action,list):
             action = [action]
+        try: # Get the max undo items
+            max_undo = int(self.controller.undo_max_text.get())
+            assert max_undo >= 0
+        except:
+            max_undo = self.controller.max_undo
         self.undo_stack.append(action)
+        # See if we need to limit the undo_stack
+        if max_undo > 0:
+            # Pop the first item until we're at/under max
+            while len(self.undo_stack) > max_undo:
+                self.undo_stack.pop(0)
         self.redo_stack = [] # clear the redo stack
 
     def reundo(self, event=None, undo = True, single_undo = None):
@@ -1451,6 +1605,9 @@ class PlistWindow(tk.Toplevel):
             self.bell()
             # Nothing to undo/redo
             return
+        # Check if we have any open EntryPopups and cancel them
+        if self.entry_popup:
+            self.entry_popup.cancel()
         # Retain the original selection
         selected,nodes = self.preselect()
         task_list = u.pop(-1)
@@ -1533,6 +1690,8 @@ class PlistWindow(tk.Toplevel):
             self.lift()
 
     def move_selection(self, event):
+        # Check if we have a entry_popup - and relocate it
+        if self.entry_popup: self.entry_popup.relocate()
         # Verify we had clicked in the drag column
         if not self.clicked_drag:
             # Nope, ignore
@@ -1750,6 +1909,39 @@ class PlistWindow(tk.Toplevel):
         # Pass the current plist to the save_plist_as function
         return self.save_plist_as(event, self.current_plist)
 
+    def _format_data_string(self,plist_text):
+        # Helper method to format <data> tags inline
+        if not isinstance(plist_text,(list,tuple)):
+            # Split it if it's not already a list
+            plist_text = plist_text.split("\n")
+        new_plist = []
+        data_tag = ""
+        types = ("</array>","</dict>")
+        for i,x in enumerate(plist_text):
+            x_stripped = x.strip()
+            try:
+                type_check = types[types.index(x_stripped)].replace("</","<")
+                if plist_text[i-1].strip() == type_check:
+                    new_plist[-1] = x.replace("</","<").replace(">","/>")
+                    data_tag = ""
+                    continue
+            except (ValueError, IndexError) as e:
+                pass
+            if x_stripped == "<data>":
+                data_tag = x
+                continue
+            if not len(data_tag):
+                # Not primed, and wasn't <data>
+                new_plist.append(x)
+                continue
+            data_tag += x_stripped
+            # Check for the end
+            if x_stripped == "</data>":
+                # Found the end, append it and reset
+                new_plist.append(data_tag)
+                data_tag = ""
+        return "\n".join(new_plist)
+
     def save_plist_as(self, event=None, path=None):
         if path == None:
             # Get the file dialog
@@ -1777,40 +1969,13 @@ class PlistWindow(tk.Toplevel):
                     plist.dump(plist_data,f,sort_keys=self.controller.settings.get("sort_dict",False))
             else:
                 # Dump to a string first
-                plist_text = plist.dumps(plist_data,sort_keys=self.controller.settings.get("sort_dict",False)).split("\n")
-                new_plist = []
-                data_tag = ""
-                types = ("</array>","</dict>")
-                for i,x in enumerate(plist_text):
-                    x_stripped = x.strip()
-                    try:
-                        type_check = types[types.index(x_stripped)].replace("</","<")
-                        if plist_text[i-1].strip() == type_check:
-                            new_plist[-1] = x.replace("</","<").replace(">","/>")
-                            data_tag = ""
-                            continue
-                    except (ValueError, IndexError) as e:
-                        pass
-                    if x_stripped == "<data>":
-                        data_tag = x
-                        continue
-                    if not len(data_tag):
-                        # Not primed, and wasn't <data>
-                        new_plist.append(x)
-                        continue
-                    data_tag += x_stripped
-                    # Check for the end
-                    if x_stripped == "</data>":
-                        # Found the end, append it and reset
-                        new_plist.append(data_tag)
-                        data_tag = ""
+                plist_text = self._format_data_string(plist.dumps(plist_data,sort_keys=self.controller.settings.get("sort_dict",False)))
                 # At this point, we have a list of lines - with all <data> tags on the same line
                 # let's write to file
                 with open(temp_file,"wb") as f:
-                    temp_string = "\n".join(new_plist)
                     if sys.version_info >= (3,0):
-                        temp_string = temp_string.encode("utf-8")
-                    f.write(temp_string)
+                        plist_text = plist_text.encode("utf-8")
+                    f.write(plist_text)
             # Copy the temp over
             shutil.copy(temp_file,path)
         except Exception as e:
@@ -1859,7 +2024,7 @@ class PlistWindow(tk.Toplevel):
             # User cancelled or we failed to save, bail
             return None
         # See if we're the only window left, and close the session after
-        windows = self.stackorder(self.root)
+        windows = self.controller.stackorder(self.root)
         if len(windows) == 1 and windows[0] == self:
             # Last and closing
             self.controller.close_window(event,check_close=check_close)
@@ -1874,6 +2039,8 @@ class PlistWindow(tk.Toplevel):
             return
         try:
             clipboard_string = plist.dumps(self.nodes_to_values(node,None),sort_keys=self.controller.settings.get("sort_dict",False))
+            if self.controller.settings.get("xcode_data",True):
+                clipboard_string = self._format_data_string(clipboard_string)
             # Get just the values
             self.clipboard_clear()
             self.clipboard_append(clipboard_string)
@@ -1902,6 +2069,8 @@ class PlistWindow(tk.Toplevel):
     def copy_all(self, event = None):
         try:
             clipboard_string = plist.dumps(self.nodes_to_values(self.get_root_node(),None),sort_keys=self.controller.settings.get("sort_dict",False))
+            if self.controller.settings.get("xcode_data",True):
+                clipboard_string = self._format_data_string(clipboard_string)
             # Get just the values
             self.clipboard_clear()
             self.clipboard_append(clipboard_string)
@@ -1990,13 +2159,6 @@ class PlistWindow(tk.Toplevel):
             self.title(self.title()+" - Edited")
         self.update_all_children()
         self.select(first)
-
-    def stackorder(self, root):
-        """return a list of root and toplevel windows in stacking order (topmost is last)"""
-        c = root.children
-        s = root.tk.eval('wm stackorder {}'.format(root))
-        L = [x.lstrip('.') for x in s.split()]
-        return [(c[x] if x else root) for x in L]
 
     ###                                             ###
     # Converstion to/from Dict and Treeview Functions #
@@ -2640,6 +2802,7 @@ class PlistWindow(tk.Toplevel):
         # Get selected node
         cell = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         self._tree.item(cell,open=True)
+        self.alternate_colors()
 
     def collapse_node(self):
         # Get selected node
@@ -2694,12 +2857,8 @@ class PlistWindow(tk.Toplevel):
             return "break"
         # clicked row parent id
         parent = self._tree.parent(rowid)
-        # get column position info
-        x,y,width,height = self._tree.bbox(rowid, column)
         # get the actual item name we're editing
         tv_item = self._tree.identify('item', event.x, event.y)
-        # y-axis offset
-        pady = height // 2
         # Get the actual text
         index = int(column.replace("#",""))
         try:
@@ -2750,7 +2909,7 @@ class PlistWindow(tk.Toplevel):
             text = text.replace("<","").replace(">","")
         # place Entry popup properly
         self.entry_popup = EntryPopup(self._tree, self, text, tv_item, column)
-        self.entry_popup.place( x=x, y=y+pady, anchor="w", width=width)
+        self.entry_popup.relocate()
         if not self.edited:
             self.edited = True
             self.title(self.title()+" - Edited")
@@ -2820,10 +2979,16 @@ class PlistWindow(tk.Toplevel):
         self.r2 = self.controller.r2_canvas["background"]
         self.hl = self.controller.hl_canvas["background"]
         self.bg = self.controller.bg_canvas["background"]
+        if self.controller.ig_bg_check.get() or not self.controller.should_set_header_text():
+            # Ignoring background color when updating header text
+            self.bgt = "white" if self.controller.bg_inv_check.get() else "black"
+        else:
+            self.bgt = self.controller.text_color(self.bg,invert=self.controller.bg_inv_check.get())
         self.r1t = self.controller.text_color(self.r1,invert=self.controller.r1_inv_check.get())
         self.r2t = self.controller.text_color(self.r2,invert=self.controller.r2_inv_check.get())
         self.hlt = self.controller.text_color(self.hl,invert=self.controller.hl_inv_check.get())
         self.style.configure(self.style_name, background=self.bg, fieldbackground=self.bg)
+        self.style.configure(self.style_name+".Heading", background=self.bg, foreground=self.bgt)
         self.style.map(self.style_name, background=[("selected", self.hl)], foreground=[("selected", self.hlt)])
         self._tree.tag_configure('even', foreground=self.r1t, background=self.r1)
         self._tree.tag_configure('odd', foreground=self.r2t, background=self.r2)
