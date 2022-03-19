@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.9** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.2.1 Monterey** like an **iMac Pro**.
+This is the guide for **OpenCore 0.7.9** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.3 Monterey** like an **iMac Pro**.
 
 ## Table of Contents
 
@@ -251,23 +251,34 @@ After all you will can boot MacOS, Windows and Recovery **just like a real Mac**
 
 ## Build images
 
-**NVMe drive installation on z370N WiFi Motherboard**
+**Intel i7 9700KF CPU**
 
-![NVMe](/images/nvme.png)
+![CPU](/images/cpu.png)
+
+**Windows 11 NVMe drive installation on z370N WiFi Motherboard**
+
+![NVMe1](/images/nvme.png)
+
+**MacOS NVMe drive installation on the back of z370N WiFi Motherboard**
+
+![NVMe2](/images/nvme2.png)
 
 **WiFi/Bluetooth NGFF card replacement (replace original Intel with Apple BCM94360CS2)**
 
-![NVMe](/images/bt1.png)
+![WiFi1](/images/bt1.png)
 
-![NVMe](/images/bt2.png)
+![WiFi2](/images/bt2.png)
 
-![NVMe](/images/bt3.png)
+![WiFi3](/images/bt3.png)
 
 **Logitech Unifying dongle on HS11 internal port inside the case**
 
-![NVMe](/images/usb1.png)
+![Logi1](/images/usb1.png)
 
-![NVMe](/images/usb2.png)
+![Logi2](/images/usb2.png)
 
+**Final Build**
+
+![Logi1](/images/final.png)
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=elieserme)](https://github.com/anuraghazra/github-readme-stats)
