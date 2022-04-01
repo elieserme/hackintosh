@@ -35,6 +35,7 @@ brew install --cask microsoft-teams
 brew install gettext
 brew install --cask github
 brew install gh
+brew install pyenv
 brew install libpq
 brew link --force libpq
 
@@ -66,6 +67,9 @@ brew install ffmpeg
 brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
+
+### sdkman
+curl -s "https://get.sdkman.io" | bash
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
