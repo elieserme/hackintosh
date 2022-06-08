@@ -52,6 +52,13 @@ def gather_python(show_all=False,path_list=None):
         # Get the version of python first
         path = path.strip()
         if not os.path.isfile(path): continue
+        if path == "/usr/bin/python3":
+            # Check if we're running 10.15 or newer - and try running "xcode-select -p"
+            # If it errors - we need to skip this path - as it's just a stub.
+            if get_os_version() >= "10.15": # At least Catalina
+                p = subprocess.Popen(["xcode-select","-p"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                p.communicate()
+                if p.returncode != 0: continue # Not setup - skip
         p = subprocess.Popen([path,"-V"], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         c = p.communicate()
         pv = (_decode(c[0]) + _decode(c[1])).strip().split(" ")[-1]
@@ -64,7 +71,7 @@ def gather_python(show_all=False,path_list=None):
         if test_load_tk:
             command = "import {} as tk; tk.Tk()".format(tk_string)
             p = subprocess.Popen([path,"-c",command], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            c = p.communicate()
+            p.communicate()
             if p.returncode != 0:
                 # Failed to run correctly - skip it
                 continue
@@ -165,10 +172,10 @@ def main(use_current=False,path_list=None):
         f.write("\n".join(ptcom))
     # chmod +x
     p = subprocess.Popen(["chmod","+x","ProperTree.app/Contents/MacOS/ProperTree.command"], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    c = p.communicate()
+    p.communicate()
     # Copy everything else
     for x in os.listdir("Scripts"):
-        if x.startswith(".") or not x.lower().endswith((".py",".plist",".icns")):
+        if x.startswith(".") or not x.lower().endswith((".py",".plist",".icns","version.json")):
             continue
         print(" - "+x)
         target = "ProperTree.app/Contents/Resources" if x.lower().endswith(".icns") else "ProperTree.app/Contents/MacOS/Scripts"

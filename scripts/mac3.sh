@@ -26,6 +26,7 @@ brew install --cask font-fira-code
 brew tap heroku/brew && brew install heroku
 brew install --cask discord
 brew install --cask dbeaver-community
+brew install --cask sequel-pro
 brew install --cask figma
 brew install --cask sketch
 brew install --cask brave-browser
@@ -33,11 +34,24 @@ brew install --cask intellij-idea-ce
 brew install --cask pycharm-ce
 brew install --cask microsoft-teams
 brew install gettext
-brew install --cask github
-brew install gh
-brew install pyenv
+brew install neofetch
+brew install neovim
+
+### postgresql client
 brew install libpq
 brew link --force libpq
+
+### oracle client
+brew tap InstantClientTap/instantclient
+brew install instantclient-sqlplus
+brew install sqlcl
+
+### python
+brew install pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+brew install pipenv
 
 ### mobile dev
 brew install --cask android-studio
@@ -53,6 +67,9 @@ git config --global user.name "Me"
 git config --global user.email "me@me.com"
 git config --global init.defaultBranch main
 git config --global pull.rebase false
+brew install git-crypt
+brew install --cask github
+brew install gh
 
 ### apps
 brew install --cask appcleaner
@@ -67,14 +84,16 @@ brew install ffmpeg
 brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
-
-### sdkman
-curl -s "https://get.sdkman.io" | bash
+brew install --cask istat-menus
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
 rm AWSCLIV2.pkg
+
+### veracrypt
+brew install --cask macfuse
+brew install --cask veracrypt
 
 ### YOUTUBE DOWNLOAD SCRIPT
 sudo tee /usr/local/bin/youtube-download > /dev/null << YZS1
