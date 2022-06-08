@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.7.9** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.3 Monterey** like an **iMac Pro**.
+This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.4 Monterey** like an **iMac Pro**.
 
 ## Table of Contents
 
@@ -35,11 +35,12 @@ This is the guide for **OpenCore 0.7.9** Hackintosh build based on i7 9700KF | G
 | **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
 |     **RAM**      | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
-|   **Wireless**   | [BCM94360CS2 ](https://github.com/elieserme/hackintosh/blob/main/other/windows11/wireless_apple/bcm94360cs2.zip) Original Apple part with adaptor to replace motherboard Bluetooth and WiFI card |
+|   **Wireless**   | [Intel AC 8265 ](https://www.intel.com.br/content/www/br/pt/products/sku/94150/intel-dual-band-wirelessac-8265/specifications.html) Motherboard Wi-Fi and Bluetooth card |
 |     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(macOS)_                                                   |
-|     **NVMe**     | [ADATA XPG SX6000 Pro ](https://www.adata.com/pt/xpg/580) 1TB PCIe NVMe _(Windows)_                                                                                                              |
-|     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD _(Time Machine backup)_                                                 |
-|  **CPU Cooler**  | [Noctua NH-L9x65 ](https://noctua.at/en/nh-l9x65) low profile and small form factor cooler                                                                                                       |
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(Windows)_                                                                                                              |
+|     **HDD**      | [Western Digital Blue WDC WD10EZEX-75WN4A0](https://www.westerndigital.com/pt-br/products/internal-drives/wd-blue-desktop-sata-hdd#WD5000AZLX) 1TB HDD _(Time Machine backup)_                                                 |
+|     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD _(Archives)_                                                 |
+|  **CPU Cooler**  | [Scythe Big Shuriken 3 ](https://www.scythe-eu.com/produkte/cpu-kuehler/big-shuriken-3.html) low profile and small form factor cooler                                                                                                       |
 | **Case Cooler**  | [Scythe KF1425FD18-P ](https://www.scythe.co.jp/product/fan/kf1425fd18-p/) 140mm case cooler                                                                                                     |
 | **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit                                           |
 |     **Case**     | [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX                                                                                                               |
@@ -250,32 +251,6 @@ After all you will can boot MacOS, Windows and Recovery **just like a real Mac**
 - Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
 
 ## Build images
-
-**Intel i7 9700KF CPU**
-
-![CPU](/images/cpu.png)
-
-**Windows 11 NVMe drive installation on z370N WiFi Motherboard**
-
-![NVMe1](/images/nvme.png)
-
-**MacOS NVMe drive installation on the back of z370N WiFi Motherboard**
-
-![NVMe2](/images/nvme2.png)
-
-**WiFi/Bluetooth NGFF card replacement (replace original Intel with Apple BCM94360CS2)**
-
-![WiFi1](/images/bt1.png)
-
-![WiFi2](/images/bt2.png)
-
-![WiFi3](/images/bt3.png)
-
-**Logitech Unifying dongle on HS11 internal port inside the case**
-
-![Logi1](/images/usb1.png)
-
-![Logi2](/images/usb2.png)
 
 **Final Build**
 

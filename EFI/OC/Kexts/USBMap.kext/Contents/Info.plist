@@ -91,7 +91,7 @@
 					<key>HS09</key>
 					<dict>
 						<key>UsbConnector</key>
-						<integer>8</integer>
+						<integer>0</integer>
 						<key>port</key>
 						<data>CQAAAA==</data>
 					</dict>
