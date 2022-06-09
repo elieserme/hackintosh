@@ -1,13 +1,13 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.4 Monterey** like an **iMac Pro**.
+This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.4 Monterey** like an **Mac Pro (2019)**.
 
 ## Table of Contents
 
 - [Hackintosh](#hackintosh)
 	- [Table of Contents](#table-of-contents)
 	- [Warning](#warning)
-	- [Why use iMacPro model](#why-use-imacpro-model)
+	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
 	- [Windows 11](#windows-11)
@@ -22,7 +22,8 @@ This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | G
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
-## Why use iMacPro model
+## Why use Mac Pro model
+- **The Last Intel Mac** ever! Long live to Hackintosh!
 - **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **No DRM issues** _(you can use Apple TV+ and Safari for Netflix and PrimeVideo)_.
@@ -131,7 +132,7 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 		<key>SpoofVendor</key>
 		<true/>
 		<key>SystemProductName</key>
-		<string>iMacPro1,1</string>
+		<string>MacPro7,1</string>
 		<key>SystemSerialNumber</key>
 		<string>AAAAAAAAAAAA</string>
 		<key>SystemUUID</key>
@@ -173,7 +174,7 @@ setup_var_3 0x5A4 0x00
 
 ## USB Ports
 
-The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMacPro1,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
+The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and MacPro7,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
 
 Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality, and USB Type C has different ports for each side... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
