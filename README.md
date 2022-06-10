@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.4 Monterey** like an **Mac Pro (2019)**.
+This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.4 Monterey** like a **Mac Pro (2019)**.
 
 ## Table of Contents
 
