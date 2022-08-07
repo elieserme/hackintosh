@@ -1,16 +1,16 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.4 Monterey** like a **Mac Pro (2019)**.
+This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.5 Monterey** like a **iMac Pro**.
 
 ## Table of Contents
 
 - [Hackintosh](#hackintosh)
 	- [Table of Contents](#table-of-contents)
 	- [Warning](#warning)
-	- [Why use Mac Pro model](#why-use-mac-pro-model)
+	- [Why use iMac Pro model](#why-use-imac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
-	- [Windows 11](#windows-11)
+	- [Windows 10](#windows-10)
 	- [MacOS 12 Monterey](#macos-12-monterey)
 	- [USB Ports](#usb-ports)
 	- [Sleep and Hibernate](#sleep-and-hibernate)
@@ -22,8 +22,7 @@ This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | G
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
-## Why use Mac Pro model
-- **The Last Intel Mac** ever! Long live to Hackintosh!
+## Why use iMac Pro model
 - **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **No DRM issues** _(you can use Apple TV+ and Safari for Netflix and PrimeVideo)_.
@@ -36,9 +35,9 @@ This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | G
 | **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
 |     **RAM**      | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
-|   **Wireless**   | [Intel AC 8265 ](https://www.intel.com.br/content/www/br/pt/products/sku/94150/intel-dual-band-wirelessac-8265/specifications.html) Motherboard Wi-Fi and Bluetooth card |
-|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(macOS)_                                                   |
-|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(Windows)_                                                                                                              |
+|   **Wireless**   | [Apple BCM943602CDPAX_2](https://everymac.com/ultimate-mac-lookup/?search_keywords=A1419) Orginal Apple Wi-Fi and Bluetooth card pulled from iMac 2017 - A1419 Model (iMac18,3). Used an adapter to replace the Intel card that comes with motherboard|
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(Windows)_                                                   |
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(MacOS)_                                                                                                              |
 |     **HDD**      | [Western Digital Blue WD10EZEX-75WN4A0](https://www.westerndigital.com/pt-br/products/internal-drives/wd-blue-desktop-sata-hdd#WD5000AZLX) 1TB HDD _(Time Machine backup)_                                                 |
 |     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD _(Archives)_                                                 |
 |  **CPU Cooler**  | [Scythe Big Shuriken 3 ](https://www.scythe-eu.com/produkte/cpu-kuehler/big-shuriken-3.html) low profile and small form factor cooler                                                                                                       |
@@ -51,7 +50,13 @@ This is the guide for **OpenCore 0.8.1** Hackintosh build based on i7 9700KF | G
 Gigabyte z370N WIFI using BIOS version F14
 
 - **Load optimised defaults**
-- MIT &gt; Advanced Memory Settings &gt; XMP &gt; **Profile 1**
+- MIT &gt; Enhanced Multi-Core Performance &gt; **Enabled**
+- MIT &gt; FCLK Frequency for Early Power On &gt; **Normal (800Mhz)**
+- MIT &gt; Extreme Memory Profile(X.M.P.) &gt; **Disabled**
+- MIT &gt; System Memory Multiplier &gt; **26.66** _(use plus and minus keys to update)_
+- MIT &gt; Memory Ref Clock &gt; **133**
+- MIT &gt; Memory Boot Mode &gt; **Enable Fast Boot**
+- MIT &gt; Memory Enhancement Settings &gt; **Enhanced Performance**
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
@@ -59,26 +64,27 @@ Gigabyte z370N WIFI using BIOS version F14
 - BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
-- Peripherals &gt; Re-Size Bar &gt; **AUTO**
-- Peripherals &gt; Intel PTT &gt; **ENABLED**
+- Peripherals &gt; Re-Size Bar &gt; **DISABLED**
+- Peripherals &gt; Intel PTT &gt; **DISABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **ENABLED**
+- Peripherals &gt; Trusted Computing &gt; **DISABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hot Plug &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **ENABLED**
+- Chipset &gt; VT-d &gt; **DISABLED**
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
+- Power &gt; AC BACK &gt; **Always Off**
 - Power &gt; ErP &gt; **ENABLED**
-- Power &gt; CEC 2019 Ready &gt; **DISABLED**
+- Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
 - Power &gt; Power Loading &gt; **DISABLED**
-- Power &gt; RC6 (Render Standby) &gt; **DISABLED**
+- Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Save and restart
 
-## Windows 11 
+## Windows 10 
 
 > **IMPORTANT!**
 **Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID _(unsupported)_.
@@ -190,7 +196,7 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 | **G** | HS04, **SS04**     |  0, 3  | _USB 2.0 & **3.1** rear 6_                                          |
 | **C** | HS05               |   0    | _USB 2.0 rear 3_                                                    |
 | **D** | HS06               |   0    | _USB 2.0 rear 4_                                                    |
-| **E** | HS09               |   8    | _USB 2.0 only rear **Type C**_                                      |
+| **E** | HS09               |   0    | _USB 2.0 only rear **Type C**_                                      |
 | **H** | HS10               |  255   | _USB 2.0 **internal** (bluetooth)_                                  |
 | **J** | HS11               |   0    | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_          |
 | **E** | **SS09**, **SS10** | 10, 10 | _USB **3.1** only rear **Type C** (for each side of the connector)_ |
