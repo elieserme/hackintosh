@@ -57,7 +57,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
-- Peripherals &gt; Re-Size Bar &gt; **DISABLED**
+- Peripherals &gt; Re-Size Bar &gt; **AUTO**
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
@@ -67,11 +67,11 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **DISABLED**
+- Chipset &gt; VT-d &gt; **ENABLED**
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Power &gt; AC BACK &gt; **Always Off**
-- Power &gt; ErP &gt; **DISABLED**
+- Power &gt; ErP &gt; **ENABLED**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
 - Power &gt; Power Loading &gt; **DISABLED**
 - Power &gt; CEC 2019 Ready &gt; **DISABLED**
