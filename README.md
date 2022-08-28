@@ -10,7 +10,7 @@ This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | G
 	- [Why use iMac Pro model](#why-use-imac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
-	- [Windows 10](#windows-10)
+	- [Windows 11](#windows-11)
 	- [MacOS 12 Monterey](#macos-12-monterey)
 	- [USB Ports](#usb-ports)
 	- [Sleep and Hibernate](#sleep-and-hibernate)
