@@ -33,6 +33,7 @@ brew install --cask brave-browser
 brew install --cask intellij-idea-ce
 brew install --cask pycharm-ce
 brew install --cask microsoft-teams
+brew install --cask etrecheckpro
 brew install gettext
 brew install neofetch
 brew install neovim

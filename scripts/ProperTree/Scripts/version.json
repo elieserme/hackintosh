@@ -1,4 +1,4 @@
 {
-    "version": "0.0.6",
-    "changes": "Fix cosmetic issue where pressing escape causes the selected node's text to change to the deselected color."
+    "version": "0.1.1",
+    "changes": "- Compare temp and saved file hashes.\n- Account for Misc -> Tools -> FullNvramAccess schema in OC 0.8.4 prerelease."
 }

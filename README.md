@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.5 Monterey** like a **iMac Pro**.
+This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.5.1 Monterey** like a **iMac Pro**.
 
 ## Table of Contents
 
@@ -50,13 +50,6 @@ This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | G
 Gigabyte z370N WIFI using BIOS version F14
 
 - **Load optimised defaults**
-- MIT &gt; Enhanced Multi-Core Performance &gt; **Enabled**
-- MIT &gt; FCLK Frequency for Early Power On &gt; **Normal (800Mhz)**
-- MIT &gt; Extreme Memory Profile(X.M.P.) &gt; **Disabled**
-- MIT &gt; System Memory Multiplier &gt; **26.66** _(use plus and minus keys to update)_
-- MIT &gt; Memory Ref Clock &gt; **133**
-- MIT &gt; Memory Boot Mode &gt; **Enable Fast Boot**
-- MIT &gt; Memory Enhancement Settings &gt; **Enhanced Performance**
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
@@ -65,9 +58,9 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
 - Peripherals &gt; Re-Size Bar &gt; **DISABLED**
-- Peripherals &gt; Intel PTT &gt; **DISABLED**
+- Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **DISABLED**
+- Peripherals &gt; Trusted Computing &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hot Plug &gt; **DISABLED**
@@ -78,23 +71,35 @@ Gigabyte z370N WIFI using BIOS version F14
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Power &gt; AC BACK &gt; **Always Off**
-- Power &gt; ErP &gt; **ENABLED**
+- Power &gt; ErP &gt; **DISABLED**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
 - Power &gt; Power Loading &gt; **DISABLED**
 - Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Save and restart
 
-## Windows 10 
+## Windows 11 
 
 > **IMPORTANT!**
 **Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID _(unsupported)_.
 
-You can **isolate Windows** from Mac and vice versa _(by choose in BIOS what operating system will start)_. I'm not using BootCamp because my Windows activation and other software are linked to my motherboard.
+This setup was designed to **isolate Windows** from Mac and vice versa. This will preserve Windows activation and other software licenses linked to motherboard. It's safe to use OpenCore Picker menu to select between Windows and MacOS at boot.
 
-To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
+To correct date and time, you need patch registry for **time sync** with MacOS, run **prompt as Administrator** and execute:
+
+```bash
+reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
+```
+
+You are highly recommended to inject the **original Windows system UUID** to `PlatformInfo -> Generic -> SystemUUID` in **`config.plist`**. To get the system UUID run the command below and take note:
+
+```bash
+wmic csproduct get UUID
+```
+> **Apple Wi-Fi/Bluetooth!**
+To install the original Apple Wi-Fi and Bluetooth drivers if you replaced the Intel card that comes with motherboard by an Apple original card, use the drivers provided in BootCamp. Just open **Device Manager** on Windows, right click missing device drivers and select **Update driver**. Then just indicate te unzipped BootCamp folder and Windows will install de correct drivers.
 
 > **TIP!**
-One valid use of Windows setup beyond gamming is to **generate the files** on **`ACPI`** folder. You can use **SSDTTime** tool to generate **`SSDT-AWAC.aml`**,  **`SSDT-EC.aml`** , **`SSDT-HPET.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_. The **`SSDT-EC-USBW.aml`** and **`SSDT-SBUS-MCHC.aml`** can be edited and compiled using **MaciASL** util. Sources are in **`other/acpi_src`** in this repo.
+One valid use of Windows setup beyond gamming is to **generate the files** on **`ACPI`** folder. You can use **SSDTTime** tool to generate **`SSDT-AWAC.aml`**,  **`SSDT-EC.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_. The **`SSDT-EC-USBW.aml`** and **`SSDT-SBUS-MCHC.aml`** can be edited and compiled using **MaciASL** util. Sources are in **`other/acpi_src`** in this repo.
 
 ## MacOS 12 Monterey
 
@@ -113,6 +118,7 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 - **MLB**, **SystemSerialNumber** and **SystemUUID** can be generated by [GenSMBIOS utility](https://github.com/corpnewt/GenSMBIOS);
 - Before use a generated **SystemSerialNumber**, check it on [Apple Database](https://checkcoverage.apple.com) _(If it is valid, generate another and repeat if necessary until find an invalid and unused one)_; 
 - **ROM** is the Mac address of the **en0** network adapter _(on Gigabyte z370N WIFI 1.0 is the Intel i219v gigabit port)_. Use the **Network Settings > Advanced > Hardware** panel to copy the Mac address _(only numbers and letters, without the : chars)_;
+- The **System UUID** can be used if you will not dual boot with Windows. **If you plan to dual boot use the Windows system UUID noted in the step above** installing Windows; 
 - Inside the **`config.plist`** search and replace **AAAAAAAAAAAA** with your generated _SystemSerialNumber_ value, **BBBBBBBBBBBBBBBBBB** with _MLB_ value, **CCCCCC-CCCC-CCCC-CCCC-CCCCCCCCCCCC** with _SystemUUID_ value and **DDDDDDDD** with _ROM_ value:
 ```xml
 <key>PlatformInfo</key>
@@ -172,7 +178,7 @@ setup_var_3 0x5A4 0x00
 | Gigabyte Z370N WiFi BIOS | CFG Lock offset |
 | :----------------------: | --------------- |
 |         **F10**          | _0x0585_        |
-|         **F14**          | _Ox05A4_        |
+|         **F12, F13 and F14**          | _Ox05A4_        |
 
 - Use **Clear NVRAM** and reboot to make a clean install
 - Use **Disk Utility** to erase a **APFS GUI** volume and **install MacOS**
@@ -196,7 +202,7 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 | **G** | HS04, **SS04**     |  0, 3  | _USB 2.0 & **3.1** rear 6_                                          |
 | **C** | HS05               |   0    | _USB 2.0 rear 3_                                                    |
 | **D** | HS06               |   0    | _USB 2.0 rear 4_                                                    |
-| **E** | HS09               |   0    | _USB 2.0 only rear **Type C**_                                      |
+| **E** | HS09               |   8    | _USB 2.0 only rear **Type C**_                                      |
 | **H** | HS10               |  255   | _USB 2.0 **internal** (bluetooth)_                                  |
 | **J** | HS11               |   0    | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_          |
 | **E** | **SS09**, **SS10** | 10, 10 | _USB **3.1** only rear **Type C** (for each side of the connector)_ |

@@ -63,12 +63,16 @@ class EntryPopup(tk.Entry):
         self.bind("<Tab>", lambda x:[self.reveal(x),self.next_field(x)])
         self.bind("<FocusOut>", self.focus_out)
 
+        # Lock to avoid prematurely cancelling on focus_out
+        self.confirming = False
+
     def reveal(self, event=None):
         # Make sure we're visible if editing
         self.parent.see(self.cell)
         self.relocate()
 
     def focus_out(self, event=None):
+        if self.confirming: return # Don't do anything if we're still confirming
         if self.master.focus_get():
             # Pass True as the event to allow the bell() when our window still
             # has focus (means we're actively editing)
@@ -170,9 +174,15 @@ class EntryPopup(tk.Entry):
         # returns 'break' to interrupt default key-bindings
         return 'break'
 
+    def confirm_clear_and_focus(self):
+        # Helper to clear confirming, then focus the widget
+        self.confirming = False
+        return self.focus_force()
+
     def confirm(self, event=None, no_prompt = False):
         if not self.winfo_exists():
             return
+        self.confirming = True # Lock confirming
         if self.column == "#0":
             # First we make sure that no other siblings
             # have the same name - as dict names need to be
@@ -191,7 +201,7 @@ class EntryPopup(tk.Entry):
                     if no_prompt or not mb.askyesno("Invalid Key Name","That key name already exists in that dict.\n\nWould you like to keep editing?",parent=self.parent):
                         return self.cancel(event)
                     # no_prompt is false and we wanted to continue editing - set focus again and return
-                    return self.focus_force()
+                    return self.confirm_clear_and_focus()
             # Add to undo stack
             self.master.add_undo({"type":"edit","cell":self.cell,"text":self.parent.item(self.cell,"text"),"values":self.parent.item(self.cell,"values")})
             # No matches, should be safe to set
@@ -219,7 +229,7 @@ class EntryPopup(tk.Entry):
                 if no_prompt or not mb.askyesno(output[1],output[2]+"\n\nWould you like to keep editing?",parent=self.parent):
                     return self.cancel(event)
                 # no_prompt is false and we wanted to continue editing - set focus again and return
-                return self.focus_force()
+                return self.confirm_clear_and_focus()
             # Set the value to the new output
             value = output[1]
             # Add to undo stack
@@ -980,6 +990,21 @@ class PlistWindow(tk.Toplevel):
         if not paths_too_long: return [] # Return an empty array to allow .extend()
         return [(item,name,paths_too_long)] # Return a list containing a tuple of the original item, and which paths are too long
 
+    def get_hash(self,path,block_size=65536):
+        if not os.path.exists(path):
+            return ""
+        hasher = hashlib.md5()
+        try:
+            with open(path,"rb") as f:
+                while True:
+                    buffer = f.read(block_size)
+                    if not buffer: break
+                    hasher.update(buffer)
+            return hasher.hexdigest()
+        except:
+            pass
+        return "" # Couldn't determine hash :(
+
     def oc_snapshot(self, event = None, clean = False):
         target_dir = os.path.dirname(self.current_plist) if self.current_plist and os.path.exists(os.path.dirname(self.current_plist)) else None
         oc_folder = fd.askdirectory(title="Select OC Folder:",initialdir=target_dir)
@@ -1010,23 +1035,17 @@ class PlistWindow(tk.Toplevel):
         for x in (oc_acpi,oc_drivers,oc_kexts):
             if not os.path.exists(x):
                 self.bell()
-                mb.showerror("Incorrect OC Folder Struction", "{} does not exist.".format(x), parent=self)
+                mb.showerror("Incorrect OC Folder Structure", "{} does not exist.\nPlease make sure you're selecting a valid OC folder.".format(x), parent=self)
                 return
             if x != oc_efi and not os.path.isdir(x):
                 self.bell()
-                mb.showerror("Incorrect OC Folder Struction", "{} exists, but is not a directory.".format(x), parent=self)
+                mb.showerror("Incorrect OC Folder Structure", "{} exists, but is not a directory.\nPlease make sure you're selecting a valid OC folder.".format(x), parent=self)
                 return
 
         # Folders are valid - lets work through each section
 
         # Let's get the hash of OpenCore.efi, compare to a known list, and then compare that version to our snapshot_version if found
-        hasher = hashlib.md5()
-        try:
-            with open(oc_efi,"rb") as f:
-                hasher.update(f.read())
-            oc_hash = hasher.hexdigest()
-        except:
-            oc_hash = "" # Couldn't determine hash :(
+        oc_hash = self.get_hash(oc_efi)
         # Let's get the version of the snapshot that matches our target, and that matches our hash if any
         latest_snap = {} # Highest min_version
         target_snap = {} # Matches our hash
@@ -1098,7 +1117,7 @@ class PlistWindow(tk.Toplevel):
             }
             # Add our snapshot custom entries, if any
             for x in acpi_add: new_aml_entry[x] = acpi_add[x]
-            add.append(new_aml_entry)
+            add.append(OrderedDict(sorted(new_aml_entry.items(),key=lambda x: str(x[0]).lower())))
         new_add = []
         for aml in add:
             if not isinstance(aml,dict):
@@ -1162,7 +1181,7 @@ class PlistWindow(tk.Toplevel):
                 except Exception as e: 
                     continue # Something else broke here - bail
                 # Should have something valid here
-                kext_list.append((kdict,kinfo))
+                kext_list.append((OrderedDict(sorted(kdict.items(),key=lambda x: str(x[0]).lower())),kinfo))
 
         bundle_list = [x[0].get("BundlePath","") for x in kext_list]
         kexts = [] if clean else tree_dict["Kernel"]["Add"]
@@ -1188,9 +1207,9 @@ class PlistWindow(tk.Toplevel):
         for x in new_kexts:
             x = next((y for y in kext_list if y[0].get("BundlePath","") == x.get("BundlePath","")),None)
             if not x: continue
-            parents = [next((z for z in new_kexts if z.get("BundlePath","") == y[0].get("BundlePath","")),[]) for y in kext_list if y[1].get("CFBundleIdentifier",None) in x[1].get("OSBundleLibraries",[])]
+            parents = [next(((z,y[1]) for z in new_kexts if z.get("BundlePath","") == y[0].get("BundlePath","")),[]) for y in kext_list if y[1].get("CFBundleIdentifier",None) in x[1].get("OSBundleLibraries",[])]
             children = [next((z for z in new_kexts if z.get("BundlePath","") == y[0].get("BundlePath","")),[]) for y in kext_list if x[1].get("CFBundleIdentifier",None) in y[1].get("OSBundleLibraries",[])]
-            parents = [y for y in parents if not y in children and not y.get("BundlePath","") == x[0].get("BundlePath","")]
+            parents = [y for y in parents if not y[0] in children and not y[0].get("BundlePath","") == x[0].get("BundlePath","")]
             unordered_kexts.append({
                 "kext":x[0],
                 "parents":parents
@@ -1200,8 +1219,21 @@ class PlistWindow(tk.Toplevel):
         while len(unordered_kexts): # This could be dangerous if things aren't properly prepared above
             kext = unordered_kexts.pop(0)
             if len(kext["parents"]):
-                disabled_parents.extend([x.get("BundlePath","") for x in kext["parents"] if x.get("Enabled",True) == False and not x.get("BundlePath","") in disabled_parents])
-                if not all(x in ordered_kexts for x in kext["parents"]):
+                # Gather a list of enabled/disabled parents - and ensure we properly populate
+                # our disabled_parents list
+                enabled_parents = [x[1].get("CFBundleIdentifier") for x in kext["parents"] if x[0].get("Enabled")]
+                disabled_add = [x for x in kext["parents"] if x[0].get("Enabled") == False and not x[1].get("CFBundleIdentifier") in enabled_parents and not any((x[1].get("CFBundleIdentifier")==y[1].get("CFBundleIdentifier") for y in disabled_parents))]
+                # Get any existing kext we're referencing
+                k = next((x for x in original_kexts if x.get("BundlePath")==kext["kext"].get("BundlePath")),None)
+                if not k or k.get("Enabled"):
+                    for p in kext["parents"]:
+                        p_cf = p[1].get("CFBundleIdentifier")
+                        if not p_cf: continue # Broken - can't check
+                        if p_cf in enabled_parents: continue # Already have an enabled copy
+                        if any((p_cf == x[1].get("CFBundleIdentifier") for x in disabled_parents)):
+                            continue # Already have a warning copy
+                        disabled_parents.append(p)
+                if not all(x[0] in ordered_kexts for x in kext["parents"]):
                     unordered_kexts.append(kext)
                     continue
             ordered_kexts.append(next(x for x in new_kexts if x.get("BundlePath","") == kext["kext"].get("BundlePath","")))
@@ -1221,9 +1253,9 @@ class PlistWindow(tk.Toplevel):
             if not mb.askyesno("Incorrect Kext Load Order","Correct the following kext load inheritance issues?\n\n{}".format("\n".join(rearranged)),parent=self):
                 ordered_kexts = original_kexts # We didn't want to update it
         if len(disabled_parents):
-            if mb.askyesno("Disabled Parent Kexts","Enable the following disabled parent kexts?\n\n{}".format("\n".join(disabled_parents)),parent=self):
+            if mb.askyesno("Disabled Parent Kexts","Enable the following disabled parent kexts?\n\n{}".format("\n".join([x[0].get("BundlePath","") for x in disabled_parents])),parent=self):
                 for x in ordered_kexts: # Walk our kexts and enable the parents
-                    if x.get("BundlePath","") in disabled_parents: x["Enabled"] = True
+                    if any((x.get("BundlePath","") == y[0].get("BundlePath","") for y in disabled_parents)): x["Enabled"] = True
         # Finally - we walk the kexts and ensure that we're not loading the same CFBundleIdentifier more than once
         enabled_kexts = []
         duplicate_bundles = []
@@ -1231,7 +1263,7 @@ class PlistWindow(tk.Toplevel):
         for kext in ordered_kexts:
             # Check path length
             long_paths.extend(self.check_path_length(kext))
-            temp_kext = {}
+            temp_kext = OrderedDict() if isinstance(kext,OrderedDict) else {}
             # Shallow copy the kext entry to avoid changing it in ordered_kexts
             for x in kext: temp_kext[x] = kext[x]
             duplicates_disabled.append(temp_kext)
@@ -1263,7 +1295,6 @@ class PlistWindow(tk.Toplevel):
         if len(duplicate_bundles):
             if mb.askyesno("Duplicate CFBundleIdentifiers","Disable the following kexts with duplicate CFBundleIdentifiers?\n\n{}".format("\n".join(duplicate_bundles)),parent=self):
                 ordered_kexts = duplicates_disabled
-
         tree_dict["Kernel"]["Add"] = ordered_kexts
 
         # Let's walk the Tools folder if it exists
@@ -1288,7 +1319,7 @@ class PlistWindow(tk.Toplevel):
                         }
                         # Add our snapshot custom entries, if any
                         for x in tool_add: new_tool_entry[x] = tool_add[x]
-                        tools_list.append(new_tool_entry)
+                        tools_list.append(OrderedDict(sorted(new_tool_entry.items(),key=lambda x:str(x[0]).lower())))
             tools = [] if clean else tree_dict["Misc"]["Tools"]
             for tool in sorted(tools_list, key=lambda x: x.get("Path","").lower()):
                 if tool["Path"].lower() in [x.get("Path","").lower() for x in tools if isinstance(x,dict)]:
@@ -1334,7 +1365,7 @@ class PlistWindow(tk.Toplevel):
                             }
                             # Add our snapshot custom entries, if any - include the name of the .efi driver if the Comment
                             for x in driver_add: new_driver_entry[x] = name if x.lower() == "comment" else driver_add[x]
-                            drivers_list.append(new_driver_entry)
+                            drivers_list.append(OrderedDict(sorted(new_driver_entry.items(),key=lambda x:str(x[0]).lower())))
             drivers = [] if clean else tree_dict["UEFI"]["Drivers"]
             for driver in sorted(drivers_list, key=lambda x: x.get("Path","").lower() if driver_add else x):
                 if not driver_add: # Old way
@@ -1487,8 +1518,7 @@ class PlistWindow(tk.Toplevel):
             if new_display.lower() == "hex":
                 try:
                     value = int(value)
-                    assert value >= 0
-                    value = "0x"+hex(value).upper()[2:].rjust(2,"0")
+                    if value >= 0: value = "0x"+hex(value).upper()[2:].rjust(2,"0")
                 except: pass
             else:
                 if value.lower().startswith("0x"):
@@ -1971,6 +2001,13 @@ class PlistWindow(tk.Toplevel):
                     f.write(plist_text)
             # Copy the temp over
             shutil.copy(temp_file,path)
+            # Let's ensure the md5 of the temp file and saved file are the same
+            # There have been some reports of file issues when saving directly to an ESP
+            temp_hash = self.get_hash(temp_file)
+            save_hash = self.get_hash(path)
+            if not temp_hash == save_hash: # Some issue occurred - let's throw an exception
+                self.bell()
+                mb.showerror("Saved MD5 Hash Mismatch","The saved and temp file hashes do not match - which suggests that copying from the temp directory to the destination was unsuccessful.\n\nIf the destination volume is an ESP, try first saving to your Desktop, then copying the file over manually.",parent=self)
         except Exception as e:
             # Had an issue, throw up a display box
             self.bell()
@@ -2206,8 +2243,7 @@ class PlistWindow(tk.Toplevel):
             v_type = self.get_type(value)
             try:
                 value = int(value)
-                assert value >= 0
-                value = "0x"+hex(value).upper()[2:].rjust(2,"0")
+                if value >= 0: value = "0x"+hex(value).upper()[2:].rjust(2,"0")
             except: value = "0x00" # Default to 0
             self._tree.item(i, values=(v_type,value,"" if parentNode == "" else self.drag_code,))
         elif isinstance(value, bool):
