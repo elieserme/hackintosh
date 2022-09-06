@@ -33,7 +33,7 @@ This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | G
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |     **CPU**      | [Intel i7 9700KF ](https://www.intel.com.br/content/www/br/pt/products/sku/190885/intel-core-i79700kf-processor-12m-cache-up-to-4-90-ghz/specifications.html) 9th generation 8 cores 3,6GHz with Turbo Boost up to 4,9GHz          |
 | **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
-|     **RAM**      | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN                                                                   |
+|     **RAM**      | [HyperX HX426C16FB ](https://www.kingston.com/dataSheets/HX426C16FB_16.pdf) 32GB DDR4 2666MHz _(native jedec speed)_                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
 |   **Wireless**   | [Apple BCM943602CDPAX_2](https://everymac.com/ultimate-mac-lookup/?search_keywords=A1419) Orginal Apple Wi-Fi and Bluetooth card pulled from iMac 2017 - A1419 Model (iMac18,3). Used an adapter to replace the Intel card that comes with motherboard|
 |     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(Windows)_                                                   |
@@ -76,6 +76,9 @@ Gigabyte z370N WIFI using BIOS version F14
 - Power &gt; Power Loading &gt; **DISABLED**
 - Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Save and restart
+
+> **Memory Note!**
+**Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio**.
 
 ## Windows 11 
 
