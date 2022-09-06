@@ -1,13 +1,13 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | RX 6600XT | 32GB RAM | running **MacOS 12.5.1 Monterey** like a **iMac Pro**.
+This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 12.5.1 Monterey** like a **Mac Pro (2019)**.
 
 ## Table of Contents
 
 - [Hackintosh](#hackintosh)
 	- [Table of Contents](#table-of-contents)
 	- [Warning](#warning)
-	- [Why use iMac Pro model](#why-use-imac-pro-model)
+	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
 	- [Windows 11](#windows-11)
@@ -22,7 +22,8 @@ This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | G
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
-## Why use iMac Pro model
+## Why use Mac Pro model
+- The **last Intel Mac** standing up to the ARM architecture and the **last one to retire** and become history _(and a legend for the hackintosh community)_
 - **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **No DRM issues** _(you can use Apple TV+ and Safari for Netflix and PrimeVideo)_.
@@ -36,10 +37,9 @@ This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | G
 |     **RAM**      | [G.SKILL 32GB ](https://www.gskill.com/product/165/326/1562838932/F4-3200C16D-32GTZN-Overview) DDR4 3200MHz F4-3200C16D-32GTZN                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
 |   **Wireless**   | [Apple BCM943602CDPAX_2](https://everymac.com/ultimate-mac-lookup/?search_keywords=A1419) Orginal Apple Wi-Fi and Bluetooth card pulled from iMac 2017 - A1419 Model (iMac18,3). Used an adapter to replace the Intel card that comes with motherboard|
-|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(Windows)_                                                   |
-|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(MacOS)_                                                                                                              |
-|     **HDD**      | [Western Digital Blue WD10EZEX-75WN4A0](https://www.westerndigital.com/pt-br/products/internal-drives/wd-blue-desktop-sata-hdd#WD5000AZLX) 1TB HDD _(Time Machine backup)_                                                 |
-|     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD _(Archives)_                                                 |
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(MacOS)_                                                   |
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(Windows 11 and Games)_                                                                                                              |
+|     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD _(Archives and Time Machine)_                                                 |
 |  **CPU Cooler**  | [Scythe Big Shuriken 3 ](https://www.scythe-eu.com/produkte/cpu-kuehler/big-shuriken-3.html) low profile and small form factor cooler                                                                                                       |
 | **Case Cooler**  | [Scythe KF1425FD18-P ](https://www.scythe.co.jp/product/fan/kf1425fd18-p/) 140mm case cooler                                                                                                     |
 | **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit                                           |
