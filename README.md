@@ -1,19 +1,19 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 12.5.1 Monterey** like a **Mac Pro (2019)**.
+This is the guide for **OpenCore 0.8.5** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 13 Ventura** like an **iMac Pro**.
 
 ## Table of Contents
 
 - [Hackintosh](#hackintosh)
 	- [Table of Contents](#table-of-contents)
 	- [Warning](#warning)
-	- [Why use Mac Pro model](#why-use-mac-pro-model)
+	- [Why use iMac Pro model](#why-use-imac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
 	- [Windows 11](#windows-11)
-	- [MacOS 12 Monterey](#macos-12-monterey)
+	- [MacOS 13 Ventura](#macos-13-ventura)
 	- [USB Ports](#usb-ports)
-	- [Sleep and Hibernate](#sleep-and-hibernate)
+	- [Sleep](#sleep)
 	- [Cleaning the EFI](#cleaning-the-efi)
 	- [Final comments](#final-comments)
 	- [Build images](#build-images)
@@ -22,8 +22,7 @@ This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | G
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
-## Why use Mac Pro model
-- The **last Intel Mac** standing up to the ARM architecture and the **last one to retire** and become history _(and a legend for the hackintosh community)_
+## Why use iMac Pro model
 - **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **No DRM issues** _(you can use Apple TV+ and Safari for Netflix and PrimeVideo)_.
@@ -34,14 +33,14 @@ This is the guide for **OpenCore 0.8.3** Hackintosh build based on i7 9700KF | G
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |     **CPU**      | [Intel i7 9700KF ](https://www.intel.com.br/content/www/br/pt/products/sku/190885/intel-core-i79700kf-processor-12m-cache-up-to-4-90-ghz/specifications.html) 9th generation 8 cores 3,6GHz with Turbo Boost up to 4,9GHz          |
 | **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
-|     **RAM**      | [HyperX HX426C16FB ](https://www.kingston.com/dataSheets/HX426C16FB_16.pdf) 32GB DDR4 2666MHz _(native jedec speed)_                                                                   |
+|     **RAM**      | [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf) **2 x 16GB** DDR4 2666MHz _(native jedec speed)_                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
-|   **Wireless**   | [Apple BCM943602CDPAX_2](https://everymac.com/ultimate-mac-lookup/?search_keywords=A1419) Orginal Apple Wi-Fi and Bluetooth card pulled from iMac 2017 - A1419 Model (iMac18,3). Used an adapter to replace the Intel card that comes with motherboard|
-|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(MacOS)_                                                   |
-|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(Windows 11 and Games)_                                                                                                              |
-|     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD _(Archives and Time Machine)_                                                 |
-|  **CPU Cooler**  | [Scythe Big Shuriken 3 ](https://www.scythe-eu.com/produkte/cpu-kuehler/big-shuriken-3.html) low profile and small form factor cooler                                                                                                       |
-| **Case Cooler**  | [Scythe KF1425FD18-P ](https://www.scythe.co.jp/product/fan/kf1425fd18-p/) 140mm case cooler                                                                                                     |
+|   **Wireless**   | [Apple BCM943602CDPAX_2](https://everymac.com/ultimate-mac-lookup/?search_keywords=A1419) Genuine Apple Wi-Fi and Bluetooth card pulled from iMac Model A1419 (iMac18,3). _Used an adapter to replace the Intel card that comes with the motherboard_|
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(Windows and Flight Simulator)_                                                   |
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(MacOS)_                                                                                                              |
+|     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) **2 x 2TB** HDD _(Archives and Time Machine - use the Disk Util RAID Assistant to make a drive array)_                                                 |
+|  **CPU Cooler**  | [Noctua NH-L9x65](https://noctua.at/en/nh-l9x65) Low profile CPU cooler                                                                                                       |
+| **Case Cooler**  | [Noctua NF-A12x25](https://noctua.at/en/nf-a12x25-pwm) 120mm case cooler _(System Fan 1)_                                                                                                    |
 | **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit                                           |
 |     **Case**     | [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX                                                                                                               |
 
@@ -73,7 +72,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - Power &gt; AC BACK &gt; **Always Off**
 - Power &gt; ErP &gt; **ENABLED**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
-- Power &gt; Power Loading &gt; **DISABLED**
+- Power &gt; Power Loading &gt; **AUTO**
 - Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Save and restart
 
@@ -85,7 +84,7 @@ Gigabyte z370N WIFI using BIOS version F14
 > **IMPORTANT!**
 **Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID _(unsupported)_.
 
-This setup was designed to **isolate Windows** from Mac and vice versa. This will preserve Windows activation and other software licenses linked to motherboard. It's safe to use OpenCore Picker menu to select between Windows and MacOS at boot.
+This setup was designed to **isolate Windows** from Mac and vice versa. This will preserve Windows activation and other software licenses linked to motherboard. Use the **BIOS boot menu** to select between Windows and MacOS at start.
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **prompt as Administrator** and execute:
 
@@ -93,23 +92,16 @@ To correct date and time, you need patch registry for **time sync** with MacOS, 
 reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
 ```
 
-You are highly recommended to inject the **original Windows system UUID** to `PlatformInfo -> Generic -> SystemUUID` in **`config.plist`**. To get the system UUID run the command below and take note:
-
-```bash
-wmic csproduct get UUID
-```
 > **Apple Wi-Fi/Bluetooth!**
 To install the original Apple Wi-Fi and Bluetooth drivers if you replaced the Intel card that comes with motherboard by an Apple original card, use the drivers provided in BootCamp. Just open **Device Manager** on Windows, right click missing device drivers and select **Update driver**. Then just indicate te unzipped BootCamp folder and Windows will install de correct drivers.
 
-> **TIP!**
-One valid use of Windows setup beyond gamming is to **generate the files** on **`ACPI`** folder. You can use **SSDTTime** tool to generate **`SSDT-AWAC.aml`**,  **`SSDT-EC.aml`** and **`SSDT-PLUG.aml`** files _(or other ACPI files your specific motherboard need)_. The **`SSDT-EC-USBW.aml`** and **`SSDT-SBUS-MCHC.aml`** can be edited and compiled using **MaciASL** util. Sources are in **`other/acpi_src`** in this repo.
 
-## MacOS 12 Monterey
+## MacOS 13 Ventura
 
-- Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/monterey/) on a regular MacOS computer; 
-- Make a **USB** install disk _(the example below uses a USB device named USB and makes Monterey installation disk)_:
+- Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/Ventura/) on a regular MacOS computer; 
+- Make a **USB** install disk _(the example below uses a USB device named USB and makes Ventura installation disk)_:
 ```bash
-sudo /Applications/Install\ macOS\ Monterey.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
+sudo /Applications/Install\ macOS\ Ventura.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
 ```
 - Use [git repo](https://github.com/elieserme/hackintosh/) to download the **EFI** folder 
 
@@ -176,12 +168,7 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 ```bash
 setup_var_3 0x5A4 0x00
 ```
-**Please note that hardcoded value is for F14 BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Some other motherboards can disable CFG Lock on BIOS settings without this hack)_. Below is the offset table for my tested BIOS versions:
-
-| Gigabyte Z370N WiFi BIOS | CFG Lock offset |
-| :----------------------: | --------------- |
-|         **F10**          | _0x0585_        |
-|         **F12, F13 and F14**          | _Ox05A4_        |
+**Please note that hardcoded value is for F14 BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Some other motherboards can disable CFG Lock on BIOS settings without this hack)_. 
 
 - Use **Clear NVRAM** and reboot to make a clean install
 - Use **Disk Utility** to erase a **APFS GUI** volume and **install MacOS**
@@ -189,7 +176,7 @@ setup_var_3 0x5A4 0x00
 
 ## USB Ports
 
-The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and MacPro7,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
+The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMacPro1,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
 
 Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality, and USB Type C has different ports for each side... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
@@ -199,16 +186,16 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 
 | Label | Name               |  Type  | Comment                                                             |
 | :---: | ------------------ | :----: | ------------------------------------------------------------------- |
-| **I** | HS01, **SS01**     |  0, 3  | _USB 2.0 & **3.1** front 1_                                         |
-| **I** | HS02, **SS02**     |  0, 3  | _USB 2.0 & **3.1** front 2_                                         |
-| **F** | HS03, **SS03**     |  0, 3  | _USB 2.0 & **3.1** rear 5_                                          |
-| **G** | HS04, **SS04**     |  0, 3  | _USB 2.0 & **3.1** rear 6_                                          |
-| **C** | HS05               |   0    | _USB 2.0 rear 3_                                                    |
-| **D** | HS06               |   0    | _USB 2.0 rear 4_                                                    |
-| **E** | HS09               |   8    | _USB 2.0 only rear **Type C**_                                      |
+| **I** | HS01, **SS01**     |  3  | _USB 2.0 & **3.1** front 1_                                         |
+| **I** | HS02, **SS02**     |  3  | _USB 2.0 & **3.1** front 2_                                         |
+| **F** | HS03, **SS03**     |  3  | _USB 2.0 & **3.1** rear 5_                                          |
+| **G** | HS04, **SS04**     |  3  | _USB 2.0 & **3.1** rear 6_                                          |
+| **C** | HS05               |   3    | _USB 2.0 rear 3_                                                    |
+| **D** | HS06               |   3    | _USB 2.0 rear 4_                                                    |
+| **E** | HS09               |   9    | _USB 2.0 only rear **Type C**_                                      |
 | **H** | HS10               |  255   | _USB 2.0 **internal** (bluetooth)_                                  |
-| **J** | HS11               |   0    | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_          |
-| **E** | **SS09**, **SS10** | 10, 10 | _USB **3.1** only rear **Type C** (for each side of the connector)_ |
+| **J** | HS11               |   3    | _USB 2.0 **internal** (wireless keyboard or mouse dongle)_          |
+| **E** | **SS09**, **SS10** | 10 | _USB **3.1** only rear **Type C** (for each side of the connector)_ |
 
 **List of ports DISABLED**:
 
@@ -223,7 +210,7 @@ Keep in mind that **you have to choose what ports to enable**, because **MacOS h
 
 
 
-## Sleep and Hibernate
+## Sleep
 Sometimes after sleep the computer will **wake every few minutes**. Normal Macs do this for several reasons, like other devices near. If you require a deep sleep without random wakeups, use the commands below to **disable this features**:
 ```bash
 sudo pmset proximitywake 0
