@@ -23,7 +23,7 @@ brew install --cask imageoptim
 brew install --cask insomnia
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code
-brew tap heroku/brew && brew install heroku
+# brew tap heroku/brew && brew install heroku
 brew install --cask discord
 brew install --cask dbeaver-community
 brew install --cask sequel-pro
@@ -33,7 +33,7 @@ brew install --cask brave-browser
 brew install --cask intellij-idea-ce
 brew install --cask pycharm-ce
 brew install --cask microsoft-teams
-brew install --cask etrecheckpro
+# brew install --cask etrecheckpro
 brew install gettext
 brew install neofetch
 brew install neovim
@@ -85,7 +85,7 @@ brew install ffmpeg
 brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
-brew install --cask istat-menus
+# brew install --cask istat-menus
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
