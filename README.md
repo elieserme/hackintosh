@@ -101,7 +101,7 @@ To install the original Apple Wi-Fi and Bluetooth drivers if you replaced the In
 - Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/Ventura/) on a regular MacOS computer; 
 - Make a **USB** install disk _(the example below uses a USB device named USB and makes Ventura installation disk)_:
 ```bash
-sudo /Applications/Install\ macOS\ Ventura.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
+sudo /Applications/Install\ macOS\ Ventura\ Installer.app/Contents/Resources/createinstallmedia –volume /Volumes/USB –nointeraction
 ```
 - Use [git repo](https://github.com/elieserme/hackintosh/) to download the **EFI** folder 
 
