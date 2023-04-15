@@ -63,7 +63,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hot Plug &gt; **ENABLED**
-- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hardware Key Presents &gt; **DISABLED**
+- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hardware Key Present &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
