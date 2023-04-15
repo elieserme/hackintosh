@@ -1,16 +1,15 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.8.5** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 13 Ventura** like an **iMac Pro**.
+This is the guide for **OpenCore 0.9.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 13.3.1 Ventura** like an **Mac Pro**.
 
 ## Table of Contents
 
 - [Hackintosh](#hackintosh)
 	- [Table of Contents](#table-of-contents)
 	- [Warning](#warning)
-	- [Why use iMac Pro model](#why-use-imac-pro-model)
+	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
-	- [Windows 11](#windows-11)
 	- [MacOS 13 Ventura](#macos-13-ventura)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
@@ -22,7 +21,8 @@ This is the guide for **OpenCore 0.8.5** Hackintosh build based on i7 9700KF | G
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
-## Why use iMac Pro model
+## Why use Mac Pro model
+- **Last Intel Mac** standings;
 - **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **No DRM issues** _(you can use Apple TV+ and Safari for Netflix and PrimeVideo)_.
@@ -35,7 +35,7 @@ This is the guide for **OpenCore 0.8.5** Hackintosh build based on i7 9700KF | G
 | **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
 |     **RAM**      | [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf) **2 x 16GB** DDR4 2666MHz _(native jedec speed)_                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
-|   **Wireless**   | [Apple BCM943602CDPAX_2](https://everymac.com/ultimate-mac-lookup/?search_keywords=A1419) Genuine Apple Wi-Fi and Bluetooth card pulled from iMac Model A1419 (iMac18,3). _Used an adapter to replace the Intel card that comes with the motherboard_|
+|   **Wireless**   | [Apple BCM943602CDPAX_2](https://everymac.com/ultimate-mac-lookup/?search_keywords=A1419) Genuine Apple Wi-Fi and Bluetooth card pulled from Mac Model A1419 (Mac18,3). _Used an adapter to replace the Intel card that comes with the motherboard_|
 |     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(Windows and Flight Simulator)_                                                   |
 |     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(MacOS)_                                                                                                              |
 |     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) **2 x 2TB** HDD _(Archives and Time Machine - use the Disk Util RAID Assistant to make a drive array)_                                                 |
@@ -57,44 +57,28 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
 - Peripherals &gt; Re-Size Bar &gt; **AUTO**
-- Peripherals &gt; Intel PTT &gt; **ENABLED**
+- Peripherals &gt; Intel PTT &gt; **DISABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **ENABLED**
+- Peripherals &gt; Trusted Computing &gt; **DISABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
-- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hot Plug &gt; **DISABLED**
+- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hot Plug &gt; **ENABLED**
+- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hardware Key Presents &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **ENABLED**
+- Chipset &gt; VT-d &gt; **DISABLED**
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Power &gt; AC BACK &gt; **Always Off**
 - Power &gt; ErP &gt; **ENABLED**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
-- Power &gt; Power Loading &gt; **AUTO**
-- Power &gt; CEC 2019 Ready &gt; **DISABLED**
-- Save and restart
+- Power &gt; Power Loading &gt; **DISABLED**
+- Power &gt; CEC 2019 Ready &gt; **ENABLED**
+- Save and restarts
 
 > **Memory Note!**
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio**.
-
-## Windows 11 
-
-> **IMPORTANT!**
-**Do not install Intel RST or Optane drivers** on Windows, because it changes the operation of SATA ports in BIOS from **AHCI (required)** to RAID _(unsupported)_.
-
-This setup was designed to **isolate Windows** from Mac and vice versa. This will preserve Windows activation and other software licenses linked to motherboard. Use the **BIOS boot menu** to select between Windows and MacOS at start.
-
-To correct date and time, you need patch registry for **time sync** with MacOS, run **prompt as Administrator** and execute:
-
-```bash
-reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
-```
-
-> **Apple Wi-Fi/Bluetooth!**
-To install the original Apple Wi-Fi and Bluetooth drivers if you replaced the Intel card that comes with motherboard by an Apple original card, use the drivers provided in BootCamp. Just open **Device Manager** on Windows, right click missing device drivers and select **Update driver**. Then just indicate te unzipped BootCamp folder and Windows will install de correct drivers.
-
 
 ## MacOS 13 Ventura
 
@@ -157,11 +141,6 @@ Use [ProperTree](https://github.com/corpnewt/ProperTree) to edit the **`config.p
 	<false/>
 </dict>
 ```
-- To make your brazilian **ABNT2 keyboard** default when Install MacOS, change language and keyboard layout in your **`config.plist`** inside **NVRAM** key section:
-```xml
-<key>prev-lang:kbd</key>
-<string>pt-BR:128</string>
-```
 - Mount the **EFI partition** of the **USB** disk using [MountEFI](https://github.com/corpnewt/MountEFI) utility and **copy the EFI folder** inside **`/Volumes/EFI`**
 - **Boot** the target machine with **USB** disk you just made
 - Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below:
@@ -176,7 +155,7 @@ setup_var_3 0x5A4 0x00
 
 ## USB Ports
 
-The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMacPro1,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
+The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and MacPro1,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
 
 Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality, and USB Type C has different ports for each side... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
@@ -248,8 +227,6 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 ## Final comments
 
 After all you will can boot MacOS, Windows and Recovery **just like a real Mac** computer:
-- Hold **Option** key (or **ESC** key) to show boot menu _(if you hide it)_;
-- Press **Space Bar** on boot menu to show advanced options _(like Recovery and NVRAM reset)_;
 - Update your Mac using the **Apple Software Updates**;
 - Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
 
