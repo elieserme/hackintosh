@@ -23,7 +23,6 @@ brew install --cask imageoptim
 brew install --cask insomnia
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code
-# brew tap heroku/brew && brew install heroku
 brew install --cask discord
 brew install --cask dbeaver-community
 brew install --cask sequel-pro
@@ -33,10 +32,19 @@ brew install --cask brave-browser
 brew install --cask intellij-idea-ce
 brew install --cask pycharm-ce
 brew install --cask microsoft-teams
-# brew install --cask etrecheckpro
+brew install --cask microsoft-edge
 brew install gettext
 brew install neofetch
-brew install neovim
+brew install --cask teamviewer
+brew install asdf
+brew install webp
+brew install parallel
+
+### asdf plugins 
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin-add java https://github.com/halcyon/asdf-java.git
+asdf plugin-add python
+asdf plugin add quarkus
 
 ### postgresql client
 brew install libpq
@@ -46,13 +54,6 @@ brew link --force libpq
 brew tap InstantClientTap/instantclient
 brew install instantclient-sqlplus
 brew install sqlcl
-
-### python
-brew install pyenv
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-echo 'eval "$(pyenv init -)"' >> ~/.zshrc
-brew install pipenv
 
 ### mobile dev
 brew install --cask android-studio
@@ -79,13 +80,19 @@ brew install --cask fliqlo
 brew install --cask authy
 brew install --cask gimp
 brew install --cask keka
-brew install --cask vlc
+brew install --cask iina
 brew install youtube-dl
 brew install ffmpeg
 brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
-# brew install --cask istat-menus
+brew install --cask istat-menus
+brew install docker
+brew install docker-compose
+
+### hackintosh
+brew install --cask hackintool
+brew install --cask maciasl
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
@@ -110,9 +117,3 @@ youtube-dl -x --audio-format mp3 \$1
 YZS1
 sudo chmod +x /usr/local/bin/youtube-music-download
 
-### GPU MONITOR SCRIPT
-sudo tee /usr/local/bin/gpu-monitor > /dev/null << YZS1
-#!/bin/bash
-while sleep 1; do clear;ioreg -l |grep \\"PerformanceStatistics\\" | cut -d '{' -f 2 | tr '|' ',' | tr -d '}' | tr ',' '\\n'|grep 'Temp\\|Fan\\|Clock'; done
-YZS1
-sudo chmod +x /usr/local/bin/gpu-monitor
