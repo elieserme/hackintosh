@@ -50,13 +50,15 @@ Gigabyte z370N WIFI using BIOS version F14
 
 - **Load optimised defaults**
 - SmartFan &gt; Fan Control Mode &gt; **PWM**
+- M.I.T. &gt; Advanced Frequency Settings &gt; Enhanced Multi-Core Performance &gt; **ENABLED**
+- M.I.T. &gt; Advanced Memory Settings &gt; Memory Enhancement Settings &gt; **Enhanced Performance**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
 - BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
-- Peripherals &gt; Re-Size Bar &gt; **AUTO**
+- Peripherals &gt; Re-Size BAR Support &gt; **DISABLED**
 - Peripherals &gt; Intel PTT &gt; **DISABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **DISABLED**
