@@ -37,8 +37,6 @@ brew install gettext
 brew install neofetch
 brew install --cask teamviewer
 brew install asdf
-brew install webp
-brew install parallel
 
 ### asdf plugins 
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git

@@ -332,6 +332,11 @@ class PlistWindow(tk.Toplevel):
         self.dragging = False
         self.drag_start = None
         self.drag_open = None
+        self.key_history = ""
+        self.last_key = 0
+        self.last_node_result = None
+        self.last_key_threhsold = 1 # Ignore after 1 second
+        self.mod_bitmask = self.get_mod_bitmask() # Get a bit mask for excluded modifier keys
         self.show_find_replace = False
         self.show_type = False
         self.type_menu = tk.Menu(self, tearoff=0)
@@ -342,6 +347,7 @@ class PlistWindow(tk.Toplevel):
         self.type_menu.add_command(label="Data", command=lambda:self.change_type(self.menu_code + " Data"))
         self.type_menu.add_command(label="Date", command=lambda:self.change_type(self.menu_code + " Date"))
         self.type_menu.add_command(label="Number", command=lambda:self.change_type(self.menu_code + " Number"))
+        self.type_menu.add_command(label="UID", command=lambda:self.change_type(self.menu_code + " UID"))
         self.type_menu.add_command(label="String", command=lambda:self.change_type(self.menu_code + " String"))
 
         # Set up the Root node type menu - only supports Array and Dict
@@ -418,14 +424,18 @@ class PlistWindow(tk.Toplevel):
         self._tree.bind("<B1-Motion>", self.move_selection)
         self._tree.bind("<ButtonRelease-1>",self.confirm_drag)
         self._tree.bind("<Button-1>",self.clicked)
-        self._tree.bind("=", self.new_row)
-        self._tree.bind("+", self.new_row)
-        self._tree.bind("-", self.remove_row)
+        self._tree.bind("<{}-equal>".format(key), self.new_row)
+        self._tree.bind("<{}-plus>".format(key), self.new_row)
+        self._tree.bind("<{}-KP_Add>".format(key), self.new_row)
+        self._tree.bind("<{}-minus>".format(key), self.remove_row)
+        self._tree.bind("<{}-underscore>".format(key), self.remove_row)
+        self._tree.bind("<{}-KP_Subtract>".format(key), self.remove_row)
         self._tree.bind("<Delete>", self.remove_row)
         self._tree.bind("<BackSpace>", self.remove_row)
         self._tree.bind("<Return>", self.start_editing)
         self._tree.bind("<KP_Enter>", self.start_editing)
         self.bind("<FocusIn>", self.got_focus)
+        self._tree.bind("<KeyPress>", self.quick_search)
 
         # Set type and bool bindings
         self._tree.bind("<{}-Up>".format(key), lambda x:self.cycle_type(increment=False))
@@ -521,7 +531,7 @@ class PlistWindow(tk.Toplevel):
         f_label.grid(row=0,column=0,sticky="e")
         r_label = tk.Label(self.find_frame, text="Replace:")
         r_label.grid(row=1,column=0,sticky="e")
-        self.f_options = ["Key", "Boolean", "Data", "Date", "Number", "String"]
+        self.f_options = ["Key", "Boolean", "Data", "Date", "Number", "UID", "String"]
         self.find_type = self.f_options[0]
         self.f_text = EntryPlus(self.find_frame,self)
         self.f_text.bind("<Return>", self.find_next)
@@ -570,6 +580,100 @@ class PlistWindow(tk.Toplevel):
         self.draw_frames()
         self.entry_popup = None
         self.controller.set_window_opacity(window=self)
+
+    def get_mod_bitmask(self):
+        # Helper to return a bitmask for modifier keys based on the OS we're running
+        bit_mask = 0xFFFFFFFF # Start with a full mask, then whitelist as we go
+        if os.name == "nt": # Windows
+            bit_mask -= 0x1 # Shift
+            bit_mask -= 0x2 # Caps Lock
+            # bit_mask -= 0x4 # Ctrl, don't whitelist - used for keybinds
+            bit_mask -= 0x8 # Num Lock
+            # bit_mask -= 0x20000 # Alt, don't whitelist - used for File keybinds
+        elif sys.platform == "darwin": # macOS
+            bit_mask -= 0x1 # Shift
+            bit_mask -= 0x2 # Caps Lock
+            bit_mask -= 0x4 # Ctrl
+            # bit_mask -= 0x8 # Cmd, don't whitelist - used for keybinds
+            bit_mask -= 0x10 # Alt
+            bit_mask -= 0x20 # Num Lock - any key pressed on the numpad uses this state
+        else: # Assume Linux at this point
+            bit_mask -= 0x1 # Shift
+            bit_mask -= 0x2 # Caps Lock
+            # bit_mask -= 0x4 # Ctrl, don't whitelist - used for keybinds
+            bit_mask -= 0x8 # Alt
+            bit_mask -= 0x10 # Num Lock
+            bit_mask -= 0x40 # Winkey
+        return bit_mask
+
+    def quick_search(self, event=None):
+        if event.state & self.mod_bitmask:
+            return # Some disallowed modifier was held - bail
+        # Check if we have a char, or a tab
+        char = getattr(event,"char",None)
+        if not char:
+            if event.keysym=="Tab":
+                char = "\t"
+            else:
+                return # No key we care about was pressed
+        event_time = time.time()
+        # Helper to match key starts, case-insensitively
+        def get_match(nodes,text,full=False):
+            for node in nodes:
+                parent_type = self.get_check_type(self._tree.parent(node)).lower()
+                if parent_type == "array": continue
+                # We can check the name
+                name = self._tree.item(node,"text")
+                if (full and name.lower() == text.lower()) or (not full and name.lower().startswith(text.lower())):
+                    # Got a match - return the first
+                    return node
+            return None # Found nothing
+        # Get all the visible nodes
+        nodes  = self.iter_nodes()
+        # Gather our event info
+        if event_time - self.last_key >= self.last_key_threhsold:
+            # We're beyond our time - reset the search
+            self.key_history = char.strip("\t")
+            # Reset the node
+            self.last_node_result = self._tree.focus()
+        else:
+            # Just append - still within our threshold
+            self.key_history += char.strip("\t")
+        # Ensure we have a node result set
+        self.last_node_result = self.last_node_result or self._tree.focus()
+        # Save the new event_time
+        self.last_key = event_time
+        reverse = False
+        # Check if we just pressed tab this time
+        if char == "\t":
+            if event.state & 0x0001: # Shift+tab, reverse the search
+                reverse = True
+            # We're just tab searching - override the last node result
+            self.last_node_result = self._tree.focus()
+            # Set the key history to the last node's key if we don't have a search result
+            if not self.key_history:
+                parent_type = self.get_check_type(self._tree.parent(self.last_node_result)).lower()
+                if parent_type == "array":
+                    return # Bail - can't tab through arrays
+                self.key_history = self._tree.item(self.last_node_result,"text")
+        # Build the search list to focus on the next item
+        before = []
+        after = []
+        found = False
+        for n in nodes:
+            if n == self.last_node_result:
+                found = True
+                continue # Skip the current node so we don't try to match it
+            if not found:
+                before.append(n)
+            else:
+                after.append(n)
+        # Set our starting point at the current node's index - omitting the current node
+        search = after+before
+        # Search for the next match
+        m = get_match(search[::-1] if reverse else search,self.key_history)
+        if m: # Got something - select it
+            self.select(m,see=True,alternate=False)
 
     def _get_menu_commands(self, menu = None, label = False):
         if not menu: return []
@@ -654,7 +758,7 @@ class PlistWindow(tk.Toplevel):
         return b
 
     def set_find_type_by_index(self, index = None, zero_based = False):
-        if not isinstance(index,int):
+        if not isinstance(index,(int,long)):
             # Try to get the keysym
             try: index = int(getattr(index,"keysym",None).replace("KP_",""))
             except: return # Borked value
@@ -728,7 +832,7 @@ class PlistWindow(tk.Toplevel):
                     except:
                         return (False,"Invalid Number Data","Couldn't convert to an integer or float.")
             # Check if we're saving an integer that's out of range
-            if isinstance(value,int) and not (-1 << 63 <= value < 1 << 63):
+            if isinstance(value,(int,long)) and not (-1 << 63 <= value < 1 << 63):
                 # Convert it to a float which will force it into scientific notation
                 value = float(value)
             if self.int_type_string.get().lower() == "hex" and not isinstance(value,float) and value >= 0:
@@ -739,6 +843,22 @@ class PlistWindow(tk.Toplevel):
             if not value.lower() in self.all_b(lower=True):
                 return (False,"Invalid Boolean Data","Booleans can only be {}.".format(", ".join(self.all_b())))
             value = self.b_true() if value.lower() in self.all_b_true(lower=True) else self.b_false()
+        elif value_type == "uid":
+            # UIDs are not stored as hex, but we'll allow hex input
+            if value.lower().startswith("0x"):
+                try:
+                    value = int(value,16)
+                except:
+                    return (False,"Invalid Hex Data", "Couldn't convert the passed hex string to an integer.")
+            else:
+                value = value.replace(",","")
+                try:
+                    value = int(value)
+                except:
+                    return (False,"Invalid Integer Data","Couldn't convert the passed string to an integer.")
+            if not 0 <= value < 1 << 32:
+                return (False,"Invalid Integer Value","UIDs cannot not be negative, and must be less than 2**32 (4294967296)")
+            value = str(value)
         return (True,value)
 
     def draw_frames(self, event=None, changed=None):
@@ -910,9 +1030,9 @@ class PlistWindow(tk.Toplevel):
         elif node_type == "string":
             if (text in value if case_sensitive else text.lower() in value.lower()):
                 return True
-        elif node_type in ("date","boolean","number"):
+        elif node_type in ("date","boolean","number","uid"):
             if text.lower() == value.lower():
-                # Can only return if we find the same date
+                # Can only return if we find the same value
                 return True
         # If we got here, we didn't find it
         return False
@@ -1207,7 +1327,7 @@ class PlistWindow(tk.Toplevel):
         #
         # Let's make sure we have the ACPI -> Add sections in our config
 
-        tree_dict = self.nodes_to_values()
+        tree_dict = self.nodes_to_values(binary=False)
         # We're going to replace the whole list
         if not "ACPI" in tree_dict or not isinstance(tree_dict["ACPI"],dict):
             tree_dict["ACPI"] = {"Add":[]}
@@ -1304,7 +1424,7 @@ class PlistWindow(tk.Toplevel):
 
         bundle_list = [x[0].get("BundlePath","") for x in kext_list]
         kexts = [] if clean else tree_dict["Kernel"]["Add"]
-        original_kexts = [x for x in kexts if x.get("BundlePath","") in bundle_list] # get the original load order for comparison purposes - but omit any that no longer exist
+        original_kexts = [x for x in kexts if isinstance(x,dict) and x.get("BundlePath","") in bundle_list] # get the original load order for comparison purposes - but omit any that no longer exist
         for kext,info in kext_list:
             if kext["BundlePath"].lower() in [x.get("BundlePath","").lower() for x in kexts if isinstance(x,dict)]:
                 # Already have it, skip
@@ -1313,12 +1433,18 @@ class PlistWindow(tk.Toplevel):
             kexts.append(kext)
         new_kexts = []
         for kext in kexts:
-            if not isinstance(kext,dict):
-                # Not a dict - skip it
+            if not isinstance(kext,dict) or not kext.get("BundlePath"):
+                # Not a dict, or missing BundlePath - skip it
                 continue
-            if not kext.get("BundlePath","").lower() in [x[0]["BundlePath"].lower() for x in kext_list]:
+            # Get our first match based on BundlePath which should be unique
+            kext_match = next((k for k,i in kext_list if k["BundlePath"].lower() == kext["BundlePath"].lower()),None)
+            if kext_match is None:
                 # Not there, skip it
                 continue
+            # Make sure the ExecutablePath and PlistPath are updated if different
+            for check in ("ExecutablePath","PlistPath"):
+                if kext.get(check,"") != kext_match.get(check,""):
+                    kext[check] = kext_match.get(check,"")
             new_kexts.append(kext)
         # Let's check inheritance via the info
         # We need to ensure that no 2 kexts consider each other as parents
@@ -1840,7 +1966,6 @@ class PlistWindow(tk.Toplevel):
             # Let's set the drag start globals
             self.drag_start = (event.x, event.y)
             self.drag_undo = None
-            self.dragging = True
             return
         # Find how far we've drug so far
         if not self.dragging:
@@ -1849,6 +1974,8 @@ class PlistWindow(tk.Toplevel):
             if drag_distance < self.controller.drag_scale.get():
                 # Not drug enough
                 return
+            # We've passed the threshold, start dragging
+            self.dragging = True
         # Save a reference to the item
         if not self.drag_undo:
             self.drag_undo = {"from":self._tree.parent(target),"index":self._tree.index(target),"name":self._tree.item(target,"text")}
@@ -1858,8 +1985,11 @@ class PlistWindow(tk.Toplevel):
         else:
             move_to = self._tree.index(self._tree.identify_row(event.y))
         tv_item = self._tree.identify('item', event.x, event.y)
-        tv_item = self.get_root_node() if tv_item == "" else tv_item # Force Root node as needed
-        if not self.get_check_type(tv_item).lower() in ("dictionary","array") or not self._tree.item(tv_item,"open"):
+        tv_item = tv_item or self.get_root_node() # Force Root node as needed
+        # Check if it's not a collection - or if it is, if it has children and is closed,
+        # then keep it a sibling.
+        if not self.get_check_type(tv_item).lower() in ("dictionary","array") \
+        or (len(self._tree.get_children(tv_item)) and not self._tree.item(tv_item,"open")):
             # Keep it a sibling
             if not tv_item == self.get_root_node():
                 tv_item = self._tree.parent(tv_item)
@@ -1871,13 +2001,16 @@ class PlistWindow(tk.Toplevel):
             try:
                 x,y,width,height = self._tree.bbox(rowid, column)
             except:
-                # We drug outside the possible bounds - ignore this
+                # We drug outside the possible bounds
+                if move_to == len(self.iter_nodes()): # Drug down
+                    self._tree.move(target,self.get_root_node(),move_to)
                 return
             if y+(height/2)<=event.y<y+height and self._tree.parent(tv_item) != "":
                 # Just above should add as a sibling
                 tv_item = self._tree.parent(tv_item)
             else:
-                # Just below should add it at item 0
+                # Just below should add it at item 0 and make sure the element is opened
+                self._tree.item(tv_item,open=True)
                 move_to = 0
         # Retain the open state, and make sure the selected node is closed
         if self.drag_open is None: self.drag_open = self._tree.item(target,"open")
@@ -2092,16 +2225,17 @@ class PlistWindow(tk.Toplevel):
             if not len(path):
                 # User cancelled - no changes
                 return None
+        # Check if it should be binary
+        binary = self.plist_type_string.get().lower() == "binary"
         # Should have the save path
-        plist_data = self.nodes_to_values()
+        plist_data = self.nodes_to_values(binary=binary)
         # Create a temp folder and save there first
         temp = tempfile.mkdtemp()
         temp_file = os.path.join(temp, os.path.basename(path))
         try:
-            if self.plist_type_string.get().lower() == "binary":
+            if binary:
                 with open(temp_file,"wb") as f:
                     plist.dump(plist_data,f,sort_keys=self.controller.settings.get("sort_dict",False),fmt=plist.FMT_BINARY)
-            # elif not self.xcode_data:
             elif not self.controller.settings.get("xcode_data",True):
                 with open(temp_file,"wb") as f:
                     plist.dump(plist_data,f,sort_keys=self.controller.settings.get("sort_dict",False))
@@ -2155,7 +2289,7 @@ class PlistWindow(tk.Toplevel):
         # Opened it correctly - let's load it, and set our values
         self.plist_type_string.set(plist_type)
         self._tree.delete(*self._tree.get_children())
-        self.add_node(plist_data)
+        self.add_node(plist_data,check_binary=plist_type.lower() == "binary")
         self.current_plist = os.path.normpath(path) if path else path
         if path is None:
             self._ensure_edited(title=path or "Untitled.plist")
@@ -2174,7 +2308,8 @@ class PlistWindow(tk.Toplevel):
     def close_window(self, event = None, check_saving = True, check_close = True):
         # Check if we need to save first, then quit if we didn't cancel
         if check_saving and (self.saving or self.check_save() is None):
-            # User cancelled or we failed to save, bail
+            # User cancelled or we failed to save, lift the window and bail
+            self.controller.lift_window(self)
             return None
         # Destroy our current window - and initiate a check in the controller
         self.destroy()
@@ -2209,7 +2344,7 @@ class PlistWindow(tk.Toplevel):
             # Nothing to copy
             return
         try:
-            clipboard_string = plist.dumps(self.nodes_to_values(node,None),sort_keys=self.controller.settings.get("sort_dict",False))
+            clipboard_string = plist.dumps(self.nodes_to_values(node),sort_keys=self.controller.settings.get("sort_dict",False))
             if self.controller.settings.get("xcode_data",True):
                 clipboard_string = self._format_data_string(clipboard_string)
             # Get just the values
@@ -2223,7 +2358,7 @@ class PlistWindow(tk.Toplevel):
             # Nothing to copy
             return
         try:
-            plist_data = self.nodes_to_values(node,None)
+            plist_data = self.nodes_to_values(node)
             if isinstance(plist_data,dict) and len(plist_data):
                 # Set it to the first key's value
                 plist_data = plist_data[list(plist_data)[0]]
@@ -2237,7 +2372,7 @@ class PlistWindow(tk.Toplevel):
 
     def copy_all(self, event = None):
         try:
-            clipboard_string = plist.dumps(self.nodes_to_values(self.get_root_node(),None),sort_keys=self.controller.settings.get("sort_dict",False))
+            clipboard_string = plist.dumps(self.nodes_to_values(self.get_root_node()),sort_keys=self.controller.settings.get("sort_dict",False))
             if self.controller.settings.get("xcode_data",True):
                 clipboard_string = self._format_data_string(clipboard_string)
             # Get just the values
@@ -2281,10 +2416,9 @@ class PlistWindow(tk.Toplevel):
             # Nothing to paste
             return 'break'
         node = "" if not len(self._tree.selection()) else self._tree.selection()[0]
-        to_open = self._tree.item(node,"open")
         # Verify the type - or get the parent
         t = self.get_check_type(node).lower()
-        if not node == "" and not (t in ("dictionary","array") and self._tree.item(node,"open")):
+        if not node == "" and (not t in ("dictionary","array") or (self._tree.get_children(node) and not self._tree.item(node,"open"))):
             node = self._tree.parent(node)
         node = self.get_root_node() if node == "" else node # Force Root node if need be
         t = self.get_check_type(node).lower()
@@ -2319,7 +2453,7 @@ class PlistWindow(tk.Toplevel):
                     names.append(key)
                 last = self.add_node(val, node, key)
                 add_list.append({"type":"add","cell":last})
-                self._tree.item(last,open=to_open)
+                self._tree.item(last,open=True)
         first = self.get_root_node() if not len(add_list) else add_list[0].get("cell")
         self.add_undo(add_list)
         self._ensure_edited()
@@ -2330,7 +2464,7 @@ class PlistWindow(tk.Toplevel):
     # Converstion to/from Dict and Treeview Functions #
     ###                                             ###
 
-    def add_node(self, value, parentNode="", key=None):
+    def add_node(self, value, parentNode="", key=None, check_binary=False):
         if key is None:
             key = "Root" # Show the Root
         if isinstance(value,(list,tuple)):
@@ -2344,14 +2478,21 @@ class PlistWindow(tk.Toplevel):
         i = self._tree.insert(parentNode, "end", text=key, values=values)
 
         if isinstance(value, dict):
-            self._tree.item(i, open=True)
-            dict_list = list(value.items()) if not self.controller.settings.get("sort_dict",False) else sorted(list(value.items()))
-            for (key,val) in dict_list:
-                self.add_node(val, i, key)
+            if (not check_binary or (check_binary and self.plist_type_string.get().lower() != "binary")) \
+            and len(value) == 1 and "CF$UID" in value and isinstance(value["CF$UID"],(int,long)) \
+            and 0 <= value["CF$UID"] < 1 << 32:
+                # Got a UID - ensure it's within the unsigned 32-bit int bounds
+                value = value["CF$UID"]
+                self._tree.item(i, values=(self.get_type(value,override="UID"),value,"" if parentNode == "" else self.drag_code,))
+            else:
+                self._tree.item(i, open=True)
+                dict_list = list(value.items()) if not self.controller.settings.get("sort_dict",False) else sorted(list(value.items()))
+                for (key,val) in dict_list:
+                    self.add_node(val, i, key, check_binary=check_binary)
         elif isinstance(value, (list,tuple)):
             self._tree.item(i, open=True)
             for (key,val) in enumerate(value):
-                self.add_node(val, i, key)
+                self.add_node(val, i, key, check_binary=check_binary)
         elif self.is_data(value):
             self._tree.item(i, values=(self.get_type(value),self.get_data(value),"" if parentNode == "" else self.drag_code,))
         elif isinstance(value, datetime.datetime):
@@ -2364,11 +2505,13 @@ class PlistWindow(tk.Toplevel):
             self._tree.item(i, values=(value_type,value,"" if parentNode == "" else self.drag_code,))
         elif isinstance(value, bool):
             self._tree.item(i, values=(self.get_type(value),self.b_true() if value else self.b_false(),"" if parentNode == "" else self.drag_code,))
+        elif isinstance(value,plist.UID) or (hasattr(plistlib,"UID") and isinstance(value,plistlib.UID)):
+            self._tree.item(i, values=(self.get_type(value),value.data,"" if parentNode == "" else self.drag_code,))
         else:
             self._tree.item(i, values=(self.get_type(value),value,"" if parentNode == "" else self.drag_code,))
         return i
 
-    def get_value_from_node(self,node=""):
+    def get_value_from_node(self,node="",binary=False):
         values = self.get_padded_values(node, 3)
         value = values[1]
         check_type = self.get_check_type(node).lower()
@@ -2393,6 +2536,13 @@ class PlistWindow(tk.Toplevel):
                         value = float(value)
                     except:
                         value = 0 # default to 0 if we have to have something
+        elif check_type == "uid":
+            try:
+                value = int(value)
+            except:
+                value = 0 # Same principle as the integer
+            # UIDs behave differently depending on XML vs binary context
+            value = plist.UID(value) if binary else {"CF$UID":value}
         elif check_type == "data":
             if self.data_type_string.get().lower() == "hex":
                 # Convert the hex
@@ -2410,14 +2560,14 @@ class PlistWindow(tk.Toplevel):
             value = datetime.datetime.strptime(value,"%b %d, %Y %I:%M:%S %p")
         return value
 
-    def nodes_to_values(self,node="",parent=None):
+    def nodes_to_values(self,node="",parent=None,binary=False):
         if node in ("",None,self.get_root_node()):
             # Top level - set the parent to the type of our Root
             node = self.get_root_node()
             parent = self.get_root_type()
-            if parent is None: return self.get_value_from_node(node) # Return the raw value - we don't have a collection
+            if parent is None: return self.get_value_from_node(node,binary=binary) # Return the raw value - we don't have a collection
             for child in self._tree.get_children(node):
-                parent = self.nodes_to_values(child,parent)
+                parent = self.nodes_to_values(child,parent=parent,binary=binary)
             return parent
         # Not top - process
         if parent is None:
@@ -2430,10 +2580,10 @@ class PlistWindow(tk.Toplevel):
                 # Get the type based on our prefs
                 parent = [] if self.get_check_type(p).lower() == "array" else {} if self.controller.settings.get("sort_dict",False) else OrderedDict()
         name = self._tree.item(node,"text")
-        value = self.get_value_from_node(node)
+        value = self.get_value_from_node(node,binary=binary)
         # At this point, we should have the name and value
         for child in self._tree.get_children(node):
-            value = self.nodes_to_values(child,value)
+            value = self.nodes_to_values(child,parent=value,binary=binary)
         if isinstance(parent,list):
             parent.append(value)
         elif isinstance(parent,dict):
@@ -2443,8 +2593,10 @@ class PlistWindow(tk.Toplevel):
                 parent[str(name)] = value
         return parent
 
-    def get_type(self, value):
-        if isinstance(value, dict):
+    def get_type(self, value, override=None):
+        if override and isinstance(override,str):
+            return self.menu_code + " " + override
+        elif isinstance(value, dict):
             return self.menu_code + " Dictionary"
         elif isinstance(value, list):
             return self.menu_code + " Array"
@@ -2458,6 +2610,8 @@ class PlistWindow(tk.Toplevel):
             return self.menu_code + " Number"
         elif isinstance(value, (str,unicode)):
             return self.menu_code + " String"
+        elif isinstance(value,plist.UID) or (hasattr(plistlib,"UID") and isinstance(value,plistlib.UID)):
+            return self.menu_code + " UID"
         else:
             return self.menu_code + str(type(value))
 
@@ -2490,7 +2644,7 @@ class PlistWindow(tk.Toplevel):
         # create a unique name
         num = start # Initialize our counter
         while True:
-            temp_name = str(name+num) if isinstance(name,int) else name if num == start else name+str(sep)+str(num)
+            temp_name = str(name+num) if isinstance(name,(int,long)) else name if num == start else name+str(sep)+str(num)
             if not temp_name in names: break
             num += 1
         return temp_name
@@ -2608,7 +2762,7 @@ class PlistWindow(tk.Toplevel):
 
     def set_type_by_index(self, index = None, menu = None, zero_based = False):
         # Set our type based on index value
-        if not isinstance(index,int):
+        if not isinstance(index,(int,long)):
             # Try to get the keysym
             try: index = int(getattr(index,"keysym",None).replace("KP_",""))
             except: return # Borked value
@@ -2683,6 +2837,8 @@ class PlistWindow(tk.Toplevel):
             values[1] = datetime.datetime.now().strftime("%b %d, %Y %I:%M:%S %p")
         elif value.lower() == "data":
             values[1] = "<>" if self.data_type_string.get().lower() == "hex" else ""
+        elif value.lower() == "uid":
+            values[1] = "0"
         else:
             values[1] = ""
         # Set the values
@@ -2919,15 +3075,15 @@ class PlistWindow(tk.Toplevel):
         if cell in ("",self.get_root_node()):
             # Top level - get the Root
             if self.get_check_type(self.get_root_node()).lower() in ("array","dictionary"):
-                popup_menu.add_command(label="New top level entry{}".format(" (+)" if is_mac else ""), command=lambda:self.new_row(self.get_root_node()),accelerator=None if is_mac else "(+)")
+                popup_menu.add_command(label="New top level entry{}".format(" (Cmd +)" if is_mac else ""), command=lambda:self.new_row(self.get_root_node()),accelerator=None if is_mac else "(Ctrl +)")
         else:
             if self.get_check_type(cell).lower() in ("dictionary","array") and (self._tree.item(cell,"open") or not len(self._tree.get_children(cell))):
-                popup_menu.add_command(label="New child under '{}'{}".format(self._tree.item(cell,"text")," (+)" if is_mac else ""), command=lambda:self.new_row(cell),accelerator=None if is_mac else "(+)")
+                popup_menu.add_command(label="New child under '{}'{}".format(self._tree.item(cell,"text")," (Cmd +)" if is_mac else ""), command=lambda:self.new_row(cell),accelerator=None if is_mac else "(Ctrl +)")
                 popup_menu.add_command(label="New sibling of '{}'".format(self._tree.item(cell,"text")), command=lambda:self.new_row(cell,True))
-                popup_menu.add_command(label="Remove '{}' and any children{}".format(self._tree.item(cell,"text")," (-)" if is_mac else ""), command=lambda:self.remove_row(cell),accelerator=None if is_mac else "(-)")
+                popup_menu.add_command(label="Remove '{}' and any children{}".format(self._tree.item(cell,"text")," (Cmd -)" if is_mac else ""), command=lambda:self.remove_row(cell),accelerator=None if is_mac else "(Ctrl -)")
             else:
-                popup_menu.add_command(label="New sibling of '{}'{}".format(self._tree.item(cell,"text")," (+)" if is_mac else ""), command=lambda:self.new_row(cell),accelerator=None if is_mac else "(+)")
-                popup_menu.add_command(label="Remove '{}'{}".format(self._tree.item(cell,"text")," (-)" if is_mac else ""), command=lambda:self.remove_row(cell),accelerator=None if is_mac else "(-)")
+                popup_menu.add_command(label="New sibling of '{}'{}".format(self._tree.item(cell,"text")," (Cmd +)" if is_mac else ""), command=lambda:self.new_row(cell),accelerator=None if is_mac else "(Ctrl +)")
+                popup_menu.add_command(label="Remove '{}'{}".format(self._tree.item(cell,"text")," (Cmd -)" if is_mac else ""), command=lambda:self.remove_row(cell),accelerator=None if is_mac else "(Ctrl -)")
         # Let's get our sorting menus
         parent = cell if cell in ("",self.get_root_node()) else self._tree.parent(cell)
         if self.get_check_type(parent).lower() in ("dictionary","array"):

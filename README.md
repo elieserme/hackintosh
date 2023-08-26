@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.9.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 13.3.1 Ventura** like an **Mac Pro**.
+This is the guide for **OpenCore 0.9.4** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 13.5.1 Ventura** like an **Mac Pro**.
 
 ## Table of Contents
 
@@ -10,6 +10,7 @@ This is the guide for **OpenCore 0.9.1** Hackintosh build based on i7 9700KF | G
 	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
+	- [Windows 11](#windows-11)
 	- [MacOS 13 Ventura](#macos-13-ventura)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
@@ -31,16 +32,14 @@ This is the guide for **OpenCore 0.9.1** Hackintosh build based on i7 9700KF | G
 
 |       Type       | Item                                                                                                                                                                                             |
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|     **CPU**      | [Intel i7 9700KF ](https://www.intel.com.br/content/www/br/pt/products/sku/190885/intel-core-i79700kf-processor-12m-cache-up-to-4-90-ghz/specifications.html) 9th generation 8 cores 3,6GHz with Turbo Boost up to 4,9GHz          |
+|     **CPU**      | [Intel i7 9700KF ](https://www.intel.com.br/content/www/br/pt/products/sku/190885/intel-core-i79700kf-processor-12m-cache-up-to-4-90-ghz/specifications.html) 9th generation 8 core 3,6GHz with Turbo Boost up to 4,9GHz          |
 | **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
-|     **RAM**      | [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf) **2 x 16GB** DDR4 2666MHz _(native jedec speed)_                                                                   |
+|     **RAM**      | [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf) **2 x 16GB** DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
 |   **Wireless**   | [Apple BCM943602CDPAX_2](https://everymac.com/ultimate-mac-lookup/?search_keywords=A1419) Genuine Apple Wi-Fi and Bluetooth card pulled from Mac Model A1419 (Mac18,3). _Used an adapter to replace the Intel card that comes with the motherboard_|
-|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(Windows and Flight Simulator)_                                                   |
-|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(MacOS)_                                                                                                              |
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(for MacOS)_ <br />[WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(for Windows 11 and games)_                                                   |
 |     **HDD**      | [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) **2 x 2TB** HDD _(Archives and Time Machine - use the Disk Util RAID Assistant to make a drive array)_                                                 |
-|  **CPU Cooler**  | [Noctua NH-L9x65](https://noctua.at/en/nh-l9x65) Low profile CPU cooler                                                                                                       |
-| **Case Cooler**  | [Noctua NF-A12x25](https://noctua.at/en/nf-a12x25-pwm) 120mm case cooler _(System Fan 1)_                                                                                                    |
+|  **Coolers**  | [Noctua NH-L9x65](https://noctua.at/en/nh-l9x65) Low profile CPU cooler<br />[Noctua NF-A12x25](https://noctua.at/en/nf-a12x25-pwm) 120mm case cooler _(System Fan 1)_                                                                                                      |
 | **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit                                           |
 |     **Case**     | [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX                                                                                                               |
 
@@ -49,25 +48,30 @@ This is the guide for **OpenCore 0.9.1** Hackintosh build based on i7 9700KF | G
 Gigabyte z370N WIFI using BIOS version F14
 
 - **Load optimised defaults**
-- SmartFan &gt; Fan Control Mode &gt; **PWM**
+- SmartFan &gt; All Fans &gt; Fan Control Mode &gt; **PWM**
+- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **PCH**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
 - BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
-- Peripherals &gt; Re-Size BAR Support &gt; **DISABLED**
-- Peripherals &gt; Intel PTT &gt; **DISABLED**
+- Peripherals &gt; Re-Size BAR Support &gt; **AUTO**
+- Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **DISABLED**
-- Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
-- Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
+- Peripherals &gt; Trusted Computing &gt; **ENABLED**
+- Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **Intel RST Premium With Intel Optane Acceleration**
+- Peripherals &gt; SATA and RST Configuration &gt; Use RST Legacy OROM &gt; **DISABLED**
+- Peripherals &gt; SATA and RST Configuration &gt; RST Control PCIe Storage Devices &gt; **MANUAL**
+- Peripherals &gt; SATA and RST Configuration &gt; PCIe Storage Dev On Port 9 &gt; **RST Controlled**
+- Peripherals &gt; SATA and RST Configuration &gt; PCIe Storage Dev On Port 21 &gt; **Not RST Controlled**
+- Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hot Plug &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hardware Key Present &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **DISABLED**
+- Chipset &gt; VT-d &gt; **ENABLED**
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Power &gt; AC BACK &gt; **Always Off**
@@ -80,12 +84,19 @@ Gigabyte z370N WIFI using BIOS version F14
 > **Memory Note!**
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio**.
 
+> **Windows based settings**
+This build was made to full support **Windows 11** with **Intel RAID drivers** on this motherboard, but supporting **MacOS** via **Opencore kirks**.
+
+## Windows 11 
+
+To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1**
+
 ## MacOS 13 Ventura
 
 - Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/Ventura/) on a regular MacOS computer; 
 - Make a **USB** install disk _(the example below uses a USB device named USB and makes Ventura installation disk)_:
 ```bash
-sudo /Applications/Install\ macOS\ Ventura\ Installer.app/Contents/Resources/createinstallmedia –volume /Volumes/USB –nointeraction
+sudo /Applications/Install\ macOS\ Ventura.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
 ```
 - Use [git repo](https://github.com/elieserme/hackintosh/) to download the **EFI** folder 
 
