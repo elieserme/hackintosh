@@ -234,15 +234,6 @@
 				<key>IOName</key>
 				<string>#ethernet</string>
 			</dict>
-			<key>PciRoot(0x0)/Pci(0x17,0x0)</key>
-			<dict>
-				<key>class-code</key>
-				<data>/////w==</data>
-				<key>name</key>
-				<string>#storage</string>
-				<key>IOName</key>
-				<string>#storage</string>
-			</dict>
 		</dict>
 		<key>Delete</key>
 		<dict/>
