@@ -84,8 +84,8 @@ Gigabyte z370N WIFI using BIOS version F14
 > **Memory Note!**
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio**.
 
-> **Windows based settings**
-This build was made to full support **Windows 11** with **Intel RAID drivers** on this motherboard, but supporting **MacOS** via **Opencore kirks**. If you going to make HDD RAID on MacOS, change the following BIOS setting:<br /><br />Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
+> **Windows based settings!**
+This build was made to full support **Windows 11** with **Intel IRST drivers** for Windows RAID on this motherboard, but supporting **MacOS** via **Opencore kirks**. If you going to make HDD RAID on MacOS, change the following BIOS setting:<br /><br />Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 
 ## Windows 11 
 
