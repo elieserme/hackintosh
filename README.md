@@ -72,13 +72,13 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
-- Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
+- Chipset &gt; Wake On Lan &gt; **ENABLED** _(remind to enable it on adapters too)_
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Power &gt; AC BACK &gt; **Always Off**
-- Power &gt; ErP &gt; **ENABLED**
+- Power &gt; ErP &gt; **DISABLED**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
 - Power &gt; Power Loading &gt; **DISABLED**
-- Power &gt; CEC 2019 Ready &gt; **ENABLED**
+- Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Save and restarts
 
 > **Memory Note!**
