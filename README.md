@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.9.4** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 13.5.1 Ventura** like an **Mac Pro**.
+This is the guide for **OpenCore 0.9.5** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 13.5.2 Ventura** like an **Mac Pro** and ready for **MacOS 14 Sonoma!**
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ This is the guide for **OpenCore 0.9.4** Hackintosh build based on i7 9700KF | G
 |     **RAM**      | [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf) **2 x 16GB** DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
 |   **Wireless**   | [Intel AX210](https://www.intel.com.br/content/www/br/pt/products/sku/204836/intel-wifi-6e-ax210-gig/specifications.html) WiFi 6 and Bluetooth 5 PCIe card |
-|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(for Windows 11, with heatsink on the top of the motherboard)_ <br /> [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(for MacOS,  on the back of the motherboard)_                                                    |
+|     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(for Windows 11 and gamming, with heatsink on the top of the motherboard)_ <br /> [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(for MacOS,  on the back of the motherboard)_                                                    |
 |     **HDD RAID 5**      | **2 x** [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD 3.5" <br /> **1 x** [Western Digital WD20SPZX](https://www.westerndigital.com/pt-br/products/internal-drives/wd-blue-mobile-sata-hdd?sku=WD20SPZX#WD20SPZX) 2TB HDD 2.5"                                               |
 |  **Coolers**  | [Noctua NH-L9x65](https://noctua.at/en/nh-l9x65) Low profile CPU cooler<br />[Noctua NF-A12x25](https://noctua.at/en/nf-a12x25-pwm) 120mm case cooler _(System Fan 1)_                                                                                                      |
 | **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit                                           |
@@ -73,12 +73,12 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
 - Chipset &gt; Wake On Lan &gt; **ENABLED** _(remind to enable it on adapters too)_
-- Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Power &gt; AC BACK &gt; **Always Off**
 - Power &gt; ErP &gt; **DISABLED**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
 - Power &gt; Power Loading &gt; **DISABLED**
 - Power &gt; CEC 2019 Ready &gt; **DISABLED**
+- Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Save and restarts
 
 > **Memory Note!**
