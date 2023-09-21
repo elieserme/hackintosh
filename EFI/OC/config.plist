@@ -782,7 +782,7 @@
 				<key>SystemAudioVolume</key>
 				<data>GA==</data>
 				<key>boot-args</key>
-				<string>-noht40 agdpmod=ignore</string>
+				<string>-noht40 agdpmod=ignore revpatch=sbvmm</string>
 				<key>run-efi-updater</key>
 				<string>No</string>
 				<key>csr-active-config</key>

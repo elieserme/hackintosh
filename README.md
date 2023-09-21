@@ -65,7 +65,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; SATA and RST Configuration &gt; RST Control PCIe Storage Devices &gt; **MANUAL**
 - Peripherals &gt; SATA and RST Configuration &gt; PCIe Storage Dev On Port 9 &gt; **RST Controlled**
 - Peripherals &gt; SATA and RST Configuration &gt; PCIe Storage Dev On Port 21 &gt; **Not RST Controlled**
-- Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **ENABLED**
+- Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hot Plug &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hardware Key Present &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
