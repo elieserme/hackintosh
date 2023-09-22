@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.9.5** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 13.5.2 Ventura** like an **Mac Pro** and ready for **MacOS 14 Sonoma!**
+This is the guide for **OpenCore 0.9.5** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14 Sonoma!** like an **Mac Pro**!
 
 ## Table of Contents
 
@@ -11,7 +11,7 @@ This is the guide for **OpenCore 0.9.5** Hackintosh build based on i7 9700KF | G
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
 	- [Windows 11](#windows-11)
-	- [MacOS 13 Ventura](#macos-13-ventura)
+	- [MacOS 14 Sonoma](#macos-14-sonoma)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
 	- [Cleaning the EFI](#cleaning-the-efi)
@@ -95,12 +95,12 @@ To correct date and time, you need patch registry for **time sync** with MacOS, 
 reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
 ```
 
-## MacOS 13 Ventura
+## MacOS 14 Sonoma
 
-- Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/Ventura/) on a regular MacOS computer; 
-- Make a **USB** install disk _(the example below uses a USB device named USB and makes Ventura installation disk)_:
+- Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/Sonoma/) on a regular MacOS computer; 
+- Make a **USB** install disk _(the example below uses a USB device named USB and makes Sonoma installation disk)_:
 ```bash
-sudo /Applications/Install\ macOS\ Ventura.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
+sudo /Applications/Install\ macOS\ Sonoma.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
 ```
 - Use [git repo](https://github.com/elieserme/hackintosh/) to download the **EFI** folder 
 
