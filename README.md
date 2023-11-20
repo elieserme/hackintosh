@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.9.5** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14 Sonoma!** like an **Mac Pro**!
+This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14.1.1 Sonoma** like an **Mac Pro**!
 
 ## Table of Contents
 
@@ -235,6 +235,13 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 - If you **do not want** the **Boot Menu**, disable it in **`config.plist`** to boot like a real Mac:
 ```diff
 	<key>ShowPicker</key>
+-	<true/>
++	<false/>
+```
+
+- If you **do not like** the **Boot Chyme Sound**, disable it in **`config.plist`**:
+```diff
+	<key>PlayChime</key>
 -	<true/>
 +	<false/>
 ```

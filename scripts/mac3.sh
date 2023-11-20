@@ -16,6 +16,7 @@ brew install --cask google-chrome
 brew install --cask firefox
 brew install --cask tor-browser
 brew install --cask transmission
+brew install --cask cyberduck
 
 ### development
 brew install --cask visual-studio-code
@@ -36,13 +37,19 @@ brew install --cask microsoft-edge
 brew install gettext
 brew install neofetch
 brew install --cask teamviewer
-brew install asdf
 
-### asdf plugins 
+### asdf 
+brew install asdf
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf plugin-add java https://github.com/halcyon/asdf-java.git
 asdf plugin-add python
 asdf plugin add quarkus
+cat >> ~/.zshrc << EZS3
+. ~/.asdf/plugins/java/set-java-home.zsh
+EZS3
+cat >> ~/.asdfrc << EZS4
+java_macos_integration_enable = yes
+EZS4
 
 ### postgresql client
 brew install libpq
@@ -114,4 +121,11 @@ sudo tee /usr/local/bin/youtube-music-download > /dev/null << YZS1
 youtube-dl -x --audio-format mp3 \$1
 YZS1
 sudo chmod +x /usr/local/bin/youtube-music-download
+
+### SITE DOWNLOAD SCRIPT
+sudo tee /usr/local/bin/site-download > /dev/null << YZS1
+#!/bin/bash
+wget --mirror --convert-links --adjust-extension --page-requisites --no-parent \$1
+YZS1
+sudo chmod +x /usr/local/bin/site-download
 
