@@ -642,7 +642,7 @@
 			<key>AllowSetDefault</key>
 			<true/>
 			<key>ApECID</key>
-			<integer>6448302200476234567</integer>
+			<integer>0</integer>
 			<key>AuthRestart</key>
 			<true/>
 			<key>DmgLoading</key>
