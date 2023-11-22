@@ -239,7 +239,7 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 +	<false/>
 ```
 
-- If you **do not like** the **Boot Chyme Sound**, disable it in **`config.plist`**:
+- If you **do not like** the **Boot Chime Sound**, disable it in **`config.plist`**:
 ```diff
 	<key>PlayChime</key>
 -	<true/>
