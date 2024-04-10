@@ -9,8 +9,8 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 	- [Warning](#warning)
 	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
-	- [BIOS settings](#bios-settings)
-	- [Windows 11](#windows-11)
+	- [BIOS settings for Windows](#bios-settings-for-windows)
+	- [Windows 11 setup](#windows-11-setup)
 	- [MacOS 14 Sonoma](#macos-14-sonoma)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
@@ -43,16 +43,21 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 | **Power Supply** | [Super Flower LEADEX III GOLD 850W](https://www.super-flower.com.tw/ja/products/leadex-iii-gold-850w) 850W Unit                                           |
 |     **Case**     | [Fractal Pop Mini Silent](https://www.fractal-design.com/products/cases/pop/pop-mini-silent/black-tg-clear/) Micro ATX and Mini ITX support                                                                                                             |
 
-## BIOS settings
+> **Memory Note!**
+**Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
+
+## BIOS settings for Windows
 
 Gigabyte z370N WIFI using BIOS version F14
 
 - **Load optimised defaults**
-- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **PCH**
+- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM**
+- MIT &gt; Advanced Frequency Settings &gt; Enhanced Multi-Core Performance &gt; **ENABLED**
+- MIT &gt; Advanced Memory Settings &gt; Memory Enhancement Settings &gt; **Enhanced Performance**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
-- BIOS &gt; Secure Boot &gt; **DISABLED**
+- BIOS &gt; Secure Boot &gt; **ENABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
 - Peripherals &gt; Re-Size BAR Support &gt; **AUTO**
@@ -75,15 +80,13 @@ Gigabyte z370N WIFI using BIOS version F14
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
 - Power &gt; CEC 2019 Ready &gt; **ENABLED**
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
-- Save and restarts
-
-> **Memory Note!**
-**Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
+- Save & Exit &gt; Save Profile &gt; Windows _(get the first entry and name it)_
+- Save & Exit &gt; Save & Exit Setup
 
 > **Windows based settings!**
 This build was made to full support **Windows 11** with **Intel IRST drivers** for Windows RAID on this motherboard, but supporting **MacOS** via **Opencore kirks**.
 
-## Windows 11 
+## Windows 11 setup
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1** _(or run **Command Prompt as Administrator** and execute the following command):_
 
