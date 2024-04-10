@@ -17,8 +17,6 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 	- [Sleep](#sleep)
 	- [Cleaning the EFI](#cleaning-the-efi)
 	- [Final comments](#final-comments)
-	- [Build images](#build-images)
-
 
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
@@ -49,10 +47,11 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 
 ## BIOS settings for Windows
 
-Gigabyte z370N WIFI using BIOS version F14
+Gigabyte z370N WIFI using **BIOS version F14**
 
 - **Load optimised defaults**
 - SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM**
+- SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **VRM**
 - MIT &gt; Advanced Frequency Settings &gt; Enhanced Multi-Core Performance &gt; **ENABLED**
 - MIT &gt; Advanced Memory Settings &gt; Memory Enhancement Settings &gt; **Enhanced Performance**
 - BIOS &gt; FastBoot &gt; **DISABLED**
@@ -83,9 +82,6 @@ Gigabyte z370N WIFI using BIOS version F14
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Save & Exit &gt; Save Profile &gt; **Windows** _(get the first entry and name it)_
 - Save & Exit &gt; **Save & Exit Setup**
-
-> **Windows based settings!**
-This build was made to full support **Windows 11** with **Intel IRST drivers** for Windows RAID on this motherboard, but supporting **MacOS** via **Opencore kirks**.
 
 ## Windows 11 setup
 
@@ -251,23 +247,9 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 +	<false/>
 ```
 
-- If you **do not like** the **Boot Chime Sound**, disable it in **`config.plist`**:
-```diff
-	<key>PlayChime</key>
--	<true/>
-+	<false/>
-```
-
 ## Final comments
 
 After all you will can boot MacOS, Windows and Recovery **just like a real Mac** computer:
 - Update your Mac using the **Apple Software Updates**;
 - Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
 
-## Build images
-
-**Final Build**
-
-![Logi1](/images/final.png)
-
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=elieserme)](https://github.com/anuraghazra/github-readme-stats)
