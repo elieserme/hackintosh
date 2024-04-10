@@ -36,19 +36,18 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 | **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
 |     **RAM**      | [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf) **2 x 16GB** DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
-|   **Wireless**   | [Intel AX210](https://www.intel.com.br/content/www/br/pt/products/sku/204836/intel-wifi-6e-ax210-gig/specifications.html) WiFi 6 and Bluetooth 5 PCIe card |
+|   **Wireless**   | [Intel AC 8265NGW](https://www.intel.com.br/content/www/br/pt/products/sku/94150/intel-dual-band-wirelessac-8265/specifications.html) WiFi 6 and Bluetooth 5 PCIe card |
 |     **NVMe**     | [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 1TB PCIe NVMe _(for Windows 11 and gamming, with heatsink on the top of the motherboard)_ <br /> [WD Black SN750 ](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C) 500GB PCIe NVMe _(for MacOS,  on the back of the motherboard)_                                                    |
-|     **HDD RAID 5**      | **2 x** [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD 3.5" <br /> **1 x** [Western Digital WD20SPZX](https://www.westerndigital.com/pt-br/products/internal-drives/wd-blue-mobile-sata-hdd?sku=WD20SPZX#WD20SPZX) 2TB HDD 2.5"                                               |
-|  **Coolers**  | [Noctua NH-L9x65](https://noctua.at/en/nh-l9x65) Low profile CPU cooler<br />[Noctua NF-A12x25](https://noctua.at/en/nf-a12x25-pwm) 120mm case cooler _(System Fan 1)_                                                                                                      |
-| **Power Supply** | [Corsair CX550 Bronze ](https://www.corsair.com/br/pt/Categorias/Produtos/Unidades-de-fonte-de-alimentação/cx-series-config/p/CP-9020121-WW) 550W Unit                                           |
-|     **Case**     | [XIGMATEK Nebula C ](https://www.xigmatek.com/product_detail.php?item=63) Mini ITX                                                                                                               |
+|     **HDD RAID**      | **2 x** [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/) 2TB HDD 3.5"                                               |
+|  **Coolers**  | [Montech DT24](https://www.montechpc.com/en/products_detail.php?nid=299&s_ok2=) CPU cooler<br />[Fractal Aspect 12](https://www.fractal-design.com/products/fans/aspect/aspect-12/black/) **3 x** 120mm case cooler _(System Fan 1 and 2)_                                                                                                      |
+| **Power Supply** | [Super Flower LEADEX III GOLD 850W](https://www.super-flower.com.tw/ja/products/leadex-iii-gold-850w) 850W Unit                                           |
+|     **Case**     | [Fractal Pop Mini Silent](https://www.fractal-design.com/products/cases/pop/pop-mini-silent/black-tg-clear/) Micro ATX and Mini ITX support                                                                                                             |
 
 ## BIOS settings
 
 Gigabyte z370N WIFI using BIOS version F14
 
 - **Load optimised defaults**
-- SmartFan &gt; All Fans &gt; Fan Control Mode &gt; **PWM**
 - SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **PCH**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
@@ -58,7 +57,7 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
 - Peripherals &gt; Re-Size BAR Support &gt; **AUTO**
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
-- Peripherals &gt; SGX &gt; **DISABLED**
+- Peripherals &gt; SGX &gt; **ENABLED**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **Intel RST Premium With Intel Optane Acceleration**
 - Peripherals &gt; SATA and RST Configuration &gt; Use RST Legacy OROM &gt; **DISABLED**
@@ -66,26 +65,23 @@ Gigabyte z370N WIFI using BIOS version F14
 - Peripherals &gt; SATA and RST Configuration &gt; PCIe Storage Dev On Port 9 &gt; **RST Controlled**
 - Peripherals &gt; SATA and RST Configuration &gt; PCIe Storage Dev On Port 21 &gt; **Not RST Controlled**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
-- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hot Plug &gt; **ENABLED**
-- Peripherals &gt; SATA and RST Configuration &gt; Sata **N** _(all ports)_ &gt; Hardware Key Present &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
 - Chipset &gt; Wake On Lan &gt; **ENABLED** _(remind to enable it on adapters too)_
 - Power &gt; AC BACK &gt; **Always Off**
-- Power &gt; ErP &gt; **DISABLED**
+- Power &gt; ErP &gt; **ENABLED**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
-- Power &gt; Power Loading &gt; **DISABLED**
-- Power &gt; CEC 2019 Ready &gt; **DISABLED**
+- Power &gt; CEC 2019 Ready &gt; **ENABLED**
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Save and restarts
 
 > **Memory Note!**
-**Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio**.
+**Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
 
 > **Windows based settings!**
-This build was made to full support **Windows 11** with **Intel IRST drivers** for Windows RAID on this motherboard, but supporting **MacOS** via **Opencore kirks**. If you going to make HDD RAID on MacOS, change the following BIOS setting:<br /><br />Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
+This build was made to full support **Windows 11** with **Intel IRST drivers** for Windows RAID on this motherboard, but supporting **MacOS** via **Opencore kirks**.
 
 ## Windows 11 
 
