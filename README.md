@@ -80,8 +80,8 @@ Gigabyte z370N WIFI using BIOS version F14
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
 - Power &gt; CEC 2019 Ready &gt; **ENABLED**
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
-- Save & Exit &gt; Save Profile &gt; Windows _(get the first entry and name it)_
-- Save & Exit &gt; Save & Exit Setup
+- Save & Exit &gt; Save Profile &gt; **Windows** _(get the first entry and name it)_
+- Save & Exit &gt; **Save & Exit Setup**
 
 > **Windows based settings!**
 This build was made to full support **Windows 11** with **Intel IRST drivers** for Windows RAID on this motherboard, but supporting **MacOS** via **Opencore kirks**.
