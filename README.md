@@ -46,7 +46,7 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
 
 > **Network Note!**
-The **Intel AT211 Ethernet port** is disabled for this motherboard in MacOS, so you need to use the **Intel 219-V Ethernet port** when using MacOS. On Windows both ethernet ports are funcional.
+The **Intel AT211 Ethernet port** is disabled in MacOS, so you need to use the **Intel i219v Ethernet port** when using MacOS. On Windows both ethernet ports are functional.
 
 ## BIOS settings for Windows
 
@@ -87,6 +87,8 @@ Gigabyte z370N WIFI using **BIOS version F14**
 - Save & Exit &gt; **Save & Exit Setup**
 
 ## Windows 11 setup
+
+You can install **Windows 11** as usual. The **INF driver** is required soon after install. Other drivers, like **Intel WiFi and Bluetooth**, **Intel Ethernet networking** and **Intel IRST (for RAID)** are optional, but recommended for this motherboard.
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1** _(or run **Command Prompt as Administrator** and execute the following command):_
 
