@@ -11,7 +11,8 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 	- [Hardware](#hardware)
 	- [BIOS settings for Windows](#bios-settings-for-windows)
 	- [Windows 11 setup](#windows-11-setup)
-	- [MacOS 14 Sonoma](#macos-14-sonoma)
+	- [BIOS settings for MacOS](#bios-settings-for-macos)
+   	- [MacOS 14 Sonoma setup](#macos-14-sonoma-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
 	- [Cleaning the EFI](#cleaning-the-efi)
@@ -94,7 +95,19 @@ To correct date and time, you need patch registry for **time sync** with MacOS, 
 reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
 ```
 
-## MacOS 14 Sonoma
+## BIOS settings for MacOS
+
+- BIOS &gt; Secure Boot &gt; **DISABLED**
+- Peripherals &gt; Re-Size BAR Support &gt; **DISABLED**
+- Peripherals &gt; Intel PTT &gt; **DISABLED**
+- Peripherals &gt; SGX &gt; **DISABLED**
+- Peripherals &gt; Trusted Computing &gt; **DISABLED**
+- Chipset &gt; VT-d &gt; **DISABLED**
+- Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
+- Save & Exit &gt; Save Profile &gt; **MacOS** _(get the second entry and name it)_
+- Save & Exit &gt; **Save & Exit Setup**
+  
+## MacOS 14 Sonoma setup
 
 - Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/Sonoma/) on a regular MacOS computer; 
 - Make a **USB** install disk _(the example below uses a USB device named USB and makes Sonoma installation disk)_:
