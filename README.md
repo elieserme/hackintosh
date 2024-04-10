@@ -45,6 +45,9 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 > **Memory Note!**
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
 
+> **Network Note!**
+The **Intel AT211 Ethernet port** is disabled for this motherboard in MacOS, so you need to use the **Intel 219-V Ethernet port** when using MacOS. On Windows both ethernet ports work well.
+
 ## BIOS settings for Windows
 
 Gigabyte z370N WIFI using **BIOS version F14**
