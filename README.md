@@ -32,7 +32,7 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 |       Type       | Item                                                                                                                                                                                             |
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |     **CPU**      | [Intel i7 9700KF ](https://www.intel.com.br/content/www/br/pt/products/sku/190885/intel-core-i79700kf-processor-12m-cache-up-to-4-90-ghz/specifications.html) 9th generation 8 core 3,6GHz with Turbo Boost up to 4,9GHz          |
-| **Motherboard**  | [Gigabyte Z370N WiFi 1.0 ](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
+| **Motherboard**  | [Gigabyte Z370N WiFi 1.0](https://www.gigabyte.com/br/Motherboard/Z370N-WIFI-rev-10#kf) Mini ITX                                                                                                |
 |     **RAM**      | **2 x** [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf) **16GB** DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | [Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6) Dedicated Video Card                                                                         |
 |   **Wireless**   | [Intel AC 8265NGW](https://www.intel.com.br/content/www/br/pt/products/sku/94150/intel-dual-band-wirelessac-8265/specifications.html) WiFi and Bluetooth PCIe card onboard |
@@ -46,7 +46,7 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
 
 > **Network Note!**
-The **Intel AT211 Ethernet port** is disabled for this motherboard in MacOS, so you need to use the **Intel 219-V Ethernet port** when using MacOS. On Windows both ethernet ports work well.
+The **Intel AT211 Ethernet port** is disabled for this motherboard in MacOS, so you need to use the **Intel 219-V Ethernet port** when using MacOS. On Windows both ethernet ports are funcional.
 
 ## BIOS settings for Windows
 
