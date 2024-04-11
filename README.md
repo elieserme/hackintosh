@@ -189,7 +189,7 @@ Download **[ProperTree](https://github.com/corpnewt/ProperTree/zipball/master/)*
 	<false/>
 </dict>
 ```
-- Mount the **EFI partition** of the **USB** disk with [MountEFI](https://github.com/corpnewt/MountEFI/zipball/master/) utility and **copy your EFI folder** to **`/Volumes/EFI`**
+- Mount the **EFI partition** of the **USB** disk with **[MountEFI](https://github.com/corpnewt/MountEFI/zipball/master/)** utility and **copy your EFI folder** to **`/Volumes/EFI`**
 - **Boot** the target machine with **USB** disk you just made
 - Using **Modified GRUB Shell** we must disable **CFG Lock** first with command below:
 ```bash
