@@ -130,7 +130,7 @@ You will want to **Turn off Memory Integrity on Windows 11** to avoid problems o
   
 ## MacOS 14 Sonoma setup
 
-- Can be direct downloaded from Apple using [App Store](https://www.apple.com/br/macos/Sonoma/) on a regular MacOS computer; 
+- Can be direct downloaded from Apple using **[App Store](https://apps.apple.com/br/app/macos-sonoma/id6450717509?mt=12)** on a regular MacOS computer; 
 - Make a **USB** install disk _(the example below uses a USB device named USB and makes Sonoma installation disk)_:
 ```bash
 sudo /Applications/Install\ macOS\ Sonoma.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
