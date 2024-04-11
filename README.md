@@ -266,7 +266,10 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 ## Final Steps
 
-After Sonoma 14.4 you need to **disable SecureBootModel and Intel WiFi/Bluetooth kexts** to **install** and **update MacOS**. After successfully installing or updating your Hackintosh you can enable everything again as below (reverse the process before updating):
+The EFI folder configuration already comes with SecureBootModel and WiFi and Bluetooth Kexts disabled by default. After successfully installing MacOS you can enable these options as below.
+
+> **MacOS Update:**
+Using Sonoma 14.4 and later, every time you update MacOS, you need to first disable SecureBootModel (disabled) and also disable all WiFi and Bluetooth Kexts. After the update, you can enable it again.
 
 - Enable the **SecureBootModel** in **`config.plist`**:
 ```diff
