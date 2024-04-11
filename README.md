@@ -88,10 +88,22 @@ Gigabyte z370N WIFI using **BIOS version F14**
 
 ## Windows 11 setup
 
-You can install **Windows 11** as usual. The **INF driver** is required soon after install. Other drivers, like **Intel WiFi and Bluetooth**, **Intel Ethernet networking** and **Intel IRST (for RAID)** are optional, but recommended for this motherboard.
+You can install **Windows 11** as usual. **Drivers for this motherboard** are below:
 
-- Intel INF Driver - [Download](https://raw.github.com/elieserme/hackintosh/main/util/windows11/SetupChipset.exe)
-- Intel IRST Driver - [Download](/util/windows11/mb_driver_irst_17.11.0.1000.1.zip)
+- **Download [Intel INF Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/SetupChipset.exe)** _**(required)**_
+- **Download [Latest AMD Graphics Driver](https://www.amd.com/pt/support/graphics/amd-radeon-6000-series/amd-radeon-6600-series/amd-radeon-rx-6600-xt)** _**(required)**_
+- Download [Intel RAID Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/mb_driver_irst_17.11.0.1000.1.zip) _(optional)_
+- Download [Intel WiFi Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/mb_driver_630_wifi_dchsetup_22.200.0.6.zip) _(optional)_
+- Download [Intel Bluetooth Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/mb_driver_607_bt_win10_22.170.0.2.zip) _(optional)_
+- Download [Intel Ethernet Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/Wired_driver_29.0_x64.zip) _(optional)_
+- Download [Gigabyte APP Center](https://raw.github.com/elieserme/hackintosh/main/util/windows11/UpdPack_B24.0227.1.exe) _(optional)_
+- Download [Apple TimeCapsule Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/AirPortSetup.exe) _(optional)_
+
+> **Intel RAID APP**
+Download the **[Intel® Optane™ Memory and Storage Management APP](https://apps.microsoft.com/detail/9mzng5hzwz1t?hl=en-US&gl=US)** to control and monitor your RAID array 
+
+> **TimeCapsule on Windows**
+To use TimeCapsule driver, first enable the **SMB 1.0/CIFS** on Windows (use the _**Turn Windows features on or off**_ dialog for this)
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1** _(or run **Command Prompt as Administrator** and execute the following command):_
 
