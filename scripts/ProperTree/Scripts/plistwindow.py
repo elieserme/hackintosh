@@ -378,6 +378,13 @@ class PlistWindow(tk.Toplevel):
         self.set_font_size()
         self.set_font_family()
 
+        # If should_set_header_text() returns None, we're running in macOS
+        # with a window that does not support native dark mode.  The result
+        # of which is that some ttk widget backgrounds do not match the
+        # window background.  We'll try to work around that by using tk in
+        # those cases.
+        tk_or_ttk = tk if self.controller.should_set_header_text() is None else ttk
+
         # Create the treeview
         self._tree_frame = tk.Frame(self)
         # self._tree = ttk.Treeview(self._tree_frame, columns=("Type","Value","Drag"), selectmode="browse", style=self.style_name)
@@ -504,16 +511,16 @@ class PlistWindow(tk.Toplevel):
         in_label = tk.Label(self.display_frame,text="Display Ints as:")
         bl_label = tk.Label(self.display_frame,text="Display Bools as:")
         self.plist_type_string = tk.StringVar(self.display_frame)
-        self.plist_type_menu = tk.OptionMenu(self.display_frame, self.plist_type_string, *self.controller.allowed_types, command=self.change_plist_type)
+        self.plist_type_menu = tk_or_ttk.OptionMenu(self.display_frame, self.plist_type_string, *self.controller.get_option_menu_list(self.controller.allowed_types), command=self.change_plist_type)
         self.plist_type_string.set(self.controller.allowed_types[0])
         self.data_type_string = tk.StringVar(self.display_frame)
-        self.data_type_menu = tk.OptionMenu(self.display_frame, self.data_type_string, *self.controller.allowed_data, command=self.change_data_type)
+        self.data_type_menu = tk_or_ttk.OptionMenu(self.display_frame, self.data_type_string, *self.controller.get_option_menu_list(self.controller.allowed_data), command=self.change_data_type)
         self.data_type_string.set(self.controller.allowed_data[0])
         self.int_type_string = tk.StringVar(self.display_frame)
-        self.int_type_menu = tk.OptionMenu(self.display_frame, self.int_type_string, *self.controller.allowed_int, command=self.change_int_type)
+        self.int_type_menu = tk_or_ttk.OptionMenu(self.display_frame, self.int_type_string, *self.controller.get_option_menu_list(self.controller.allowed_int), command=self.change_int_type)
         self.int_type_string.set(self.controller.allowed_int[0])
         self.bool_type_string = tk.StringVar(self.display_frame)
-        self.bool_type_menu = tk.OptionMenu(self.display_frame, self.bool_type_string, *self.controller.allowed_bool, command=self.change_bool_type)
+        self.bool_type_menu = tk_or_ttk.OptionMenu(self.display_frame, self.bool_type_string, *self.controller.get_option_menu_list(self.controller.allowed_bool), command=self.change_bool_type)
         self.bool_type_string.set(self.controller.allowed_bool[0])
         pt_label.grid(row=1,column=1,pady=10,sticky="w")
         dt_label.grid(row=1,column=3,pady=10,sticky="w")
@@ -547,20 +554,20 @@ class PlistWindow(tk.Toplevel):
         self.r_text.grid(row=1,column=2,columnspan=1,sticky="we",padx=10,pady=10)
         self.f_title = tk.StringVar(self.find_frame)
         self.f_title.set(self.find_type)
-        f_option = tk.OptionMenu(self.find_frame, self.f_title, *self.f_options, command=self.change_find_type)
+        f_option = tk_or_ttk.OptionMenu(self.find_frame, self.f_title, *self.controller.get_option_menu_list(self.f_options), command=self.change_find_type)
         f_option['menu'].insert_separator(1)
         f_option.grid(row=0,column=1)
-        self.fp_button = tk.Button(self.find_frame,text="< Prev",width=8,command=self.find_prev)
+        self.fp_button = tk_or_ttk.Button(self.find_frame,text="< Prev",width=8,command=self.find_prev)
         self.fp_button.grid(row=0,column=3,sticky="e",padx=0,pady=10)
-        self.fn_button = tk.Button(self.find_frame,text="Next >",width=8,command=self.find_next)
+        self.fn_button = tk_or_ttk.Button(self.find_frame,text="Next >",width=8,command=self.find_next)
         self.fn_button.grid(row=0,column=4,sticky="w",padx=0,pady=10)
-        self.r_button = tk.Button(self.find_frame,text="Replace",command=self.replace)
+        self.r_button = tk_or_ttk.Button(self.find_frame,text="Replace",command=self.replace)
         self.r_button.grid(row=1,column=4,sticky="we",padx=10,pady=10)
         self.r_all_var = tk.IntVar()
-        self.r_all = tk.Checkbutton(self.find_frame,text="Replace All",variable=self.r_all_var)
+        self.r_all = tk_or_ttk.Checkbutton(self.find_frame,text="Replace All",variable=self.r_all_var)
         self.r_all.grid(row=1,column=5,sticky="w")
         self.f_case_var = tk.IntVar()
-        self.f_case = tk.Checkbutton(self.find_frame,text="Case-Sensitive",variable=self.f_case_var)
+        self.f_case = tk_or_ttk.Checkbutton(self.find_frame,text="Case-Sensitive",variable=self.f_case_var)
         self.f_case.grid(row=0,column=5,sticky="w")
 
         # Set find_frame bindings - also bind to child widgets to ensure keybinds are captured
@@ -589,6 +596,7 @@ class PlistWindow(tk.Toplevel):
             bit_mask -= 0x2 # Caps Lock
             # bit_mask -= 0x4 # Ctrl, don't whitelist - used for keybinds
             bit_mask -= 0x8 # Num Lock
+            bit_mask -= 0x20 # Scroll Lock
             # bit_mask -= 0x20000 # Alt, don't whitelist - used for File keybinds
         elif sys.platform == "darwin": # macOS
             bit_mask -= 0x1 # Shift
@@ -1237,7 +1245,14 @@ class PlistWindow(tk.Toplevel):
         return "" # Couldn't determine hash :(
 
     def oc_snapshot(self, event = None, clean = False):
-        target_dir = os.path.dirname(self.current_plist) if self.current_plist and os.path.exists(os.path.dirname(self.current_plist)) else None
+        # Get the target directory from our current file's directory - if any, and if it exists
+        target_dir = os.path.dirname(self.current_plist) if self.current_plist and os.path.isdir(os.path.dirname(self.current_plist)) else None
+        # If it doesn't exist, get the last_snapshot_path, if any
+        target_dir = target_dir or self.controller.settings.get("last_snapshot_path")
+        # Ensure it's a directory if we have something
+        if target_dir and not os.path.isdir(target_dir):
+            target_dir = None # Reset to nothing
+        # Prompt for the OC folder
         oc_folder = fd.askdirectory(title="Select OC Folder:",initialdir=target_dir)
         self.controller.lift_window(self) # Lift the window to continue catching events
         if not len(oc_folder):
@@ -1273,8 +1288,8 @@ class PlistWindow(tk.Toplevel):
                 mb.showerror("Incorrect OC Folder Structure", "{} exists, but is not a directory.\nPlease make sure you're selecting a valid OC folder.".format(x), parent=self)
                 return
 
-        # Folders are valid - lets work through each section
-
+        # Folders are valid - let's save a reference for next time and work through each section
+        self.controller.settings["last_snapshot_path"] = oc_folder
         # Let's get the hash of OpenCore.efi, compare to a known list, and then compare that version to our snapshot_version if found
         oc_hash = self.get_hash(oc_efi)
         # Let's get the version of the snapshot that matches our target, and that matches our hash if any
@@ -1364,6 +1379,28 @@ class PlistWindow(tk.Toplevel):
             new_add.append(aml)
             # Check path length
             long_paths.extend(self.check_path_length(aml))
+        # Make sure we don't have duplicates
+        acpi_enabled = []
+        acpi_duplicates = []
+        acpi_duplicates_disabled = []
+        for a in new_add:
+            if a.get("Enabled"):
+                if a.get("Path","") in acpi_enabled:
+                    # Got a dupe - shallow copy and disable
+                    new_a = {}
+                    for key in a: new_a[key] = a[key]
+                    new_a["Enabled"] = False
+                    acpi_duplicates_disabled.append(new_a)
+                    if not a.get("Path","") in acpi_duplicates:
+                        acpi_duplicates.append(a.get("Path",""))
+                else:
+                    # First hit - add the Path to acpi_enabled
+                    acpi_enabled.append(a.get("Path",""))
+                    acpi_duplicates_disabled.append(a)
+        if len(acpi_duplicates):
+            if mb.askyesno("Duplicate ACPI Paths","Disable the following ACPI entries with duplicate Paths?\n\n{}".format("\n".join(acpi_duplicates)),parent=self):
+                new_add = acpi_duplicates_disabled
+        # Save the results
         tree_dict["ACPI"]["Add"] = new_add
 
         # Now we need to walk the kexts
@@ -1438,7 +1475,7 @@ class PlistWindow(tk.Toplevel):
                 continue
             # Get our first match based on BundlePath which should be unique
             kext_match = next((k for k,i in kext_list if k["BundlePath"].lower() == kext["BundlePath"].lower()),None)
-            if kext_match is None:
+            if not kext_match:
                 # Not there, skip it
                 continue
             # Make sure the ExecutablePath and PlistPath are updated if different
@@ -1450,13 +1487,13 @@ class PlistWindow(tk.Toplevel):
         # We need to ensure that no 2 kexts consider each other as parents
         unordered_kexts = []
         for x in new_kexts:
-            x = next((y for y in kext_list if y[0].get("BundlePath","") == x.get("BundlePath","")),None)
-            if not x: continue
-            parents = [next(((z,y[1]) for z in new_kexts if z.get("BundlePath","") == y[0].get("BundlePath","")),[]) for y in kext_list if y[1].get("cfbi",None) in x[1].get("osbl",[])]
-            children = [next((z for z in new_kexts if z.get("BundlePath","") == y[0].get("BundlePath","")),[]) for y in kext_list if x[1].get("cfbi",None) in y[1].get("osbl",[])]
-            parents = [y for y in parents if not y[0] in children and not y[0].get("BundlePath","") == x[0].get("BundlePath","")]
+            info = next((y[1] for y in kext_list if y[0].get("BundlePath","") == x.get("BundlePath","")),None)
+            if not info: continue
+            parents = [(z,y[1]) for z in new_kexts for y in kext_list if z.get("BundlePath","") == y[0].get("BundlePath","") if y[1].get("cfbi",None) in info.get("osbl",[])]
+            children = [next((z for z in new_kexts if z.get("BundlePath","") == y[0].get("BundlePath","")),[]) for y in kext_list if info.get("cfbi",None) in y[1].get("osbl",[])]
+            parents = [y for y in parents if not y[0] in children and not y[0].get("BundlePath","") == x.get("BundlePath","")]
             unordered_kexts.append({
-                "kext":x[0],
+                "kext":x,
                 "parents":parents
             })
         ordered_kexts = []
@@ -1467,10 +1504,7 @@ class PlistWindow(tk.Toplevel):
                 # Gather a list of enabled/disabled parents - and ensure we properly populate
                 # our disabled_parents list
                 enabled_parents = [x[1].get("cfbi") for x in kext["parents"] if x[0].get("Enabled")]
-                disabled_add = [x for x in kext["parents"] if x[0].get("Enabled") == False and not x[1].get("cfbi") in enabled_parents and not any((x[1].get("cfbi")==y[1].get("cfbi") for y in disabled_parents))]
-                # Get any existing kext we're referencing
-                k = next((x for x in original_kexts if x.get("BundlePath")==kext["kext"].get("BundlePath")),None)
-                if not k or k.get("Enabled"):
+                if kext["kext"].get("Enabled"):
                     for p in kext["parents"]:
                         p_cf = p[1].get("cfbi")
                         if not p_cf: continue # Broken - can't check
@@ -1481,7 +1515,7 @@ class PlistWindow(tk.Toplevel):
                 if not all(x[0] in ordered_kexts for x in kext["parents"]):
                     unordered_kexts.append(kext)
                     continue
-            ordered_kexts.append(next(x for x in new_kexts if x.get("BundlePath","") == kext["kext"].get("BundlePath","")))
+            ordered_kexts.append(kext["kext"])
         # Let's compare against the original load order - to prevent mis-prompting
         missing_kexts = [x for x in ordered_kexts if not x in original_kexts]
         original_kexts.extend(missing_kexts)
@@ -1499,10 +1533,10 @@ class PlistWindow(tk.Toplevel):
                 ordered_kexts = original_kexts # We didn't want to update it
         if len(disabled_parents):
             if mb.askyesno("Disabled Parent Kexts","Enable the following disabled parent kexts?\n\n{}".format("\n".join([x[0].get("BundlePath","") for x in disabled_parents])),parent=self):
-                for x in ordered_kexts: # Walk our kexts and enable the parents
-                    if any((x.get("BundlePath","") == y[0].get("BundlePath","") for y in disabled_parents)): x["Enabled"] = True
+                for p in disabled_parents: p[0]["Enabled"] = True
         # Finally - we walk the kexts and ensure that we're not loading the same CFBundleIdentifier more than once
         enabled_kexts = []
+        bundles_enabled = []
         duplicate_bundles = []
         duplicates_disabled = []
         for kext in ordered_kexts:
@@ -1514,28 +1548,38 @@ class PlistWindow(tk.Toplevel):
             duplicates_disabled.append(temp_kext)
             # Ignore if alreday disabled
             if not temp_kext.get("Enabled",False): continue
-            # Get the original info
-            info = next((x for x in kext_list if x[0].get("BundlePath","") == temp_kext.get("BundlePath","")),None)
-            if not info or not info[1].get("cfbi",None): continue # Broken info
-            # Let's see if it's already in enabled_kexts - and compare the Min/Max/Match Kernel options
-            temp_min,temp_max = self.get_min_max_from_kext(temp_kext,"MatchKernel" in kext_add)
-            # Gather a list of like IDs
-            comp_kexts = [x for x in enabled_kexts if x[1]["cfbi"] == info[1]["cfbi"]]
-            # Walk the comp_kexts, and disable if we find an overlap
-            for comp_info in comp_kexts:
-                comp_kext = comp_info[0]
-                # Gather our min/max
-                comp_min,comp_max = self.get_min_max_from_kext(comp_kext,"MatchKernel" in kext_add)
-                # Let's see if we don't overlap
-                if temp_min > comp_max or temp_max < comp_min: # We're good, continue
-                    continue
-                # We overlapped - let's disable it
+            # Ensure we haven't already seen this BundlePath before
+            if temp_kext.get("BundlePath","") in bundles_enabled+duplicate_bundles:
                 temp_kext["Enabled"] = False
-                # Add it to the list - then break out of this loop
-                duplicate_bundles.append(temp_kext.get("BundlePath",""))
-                break
+                # Make sure we keep a reference to the bundle if needed
+                if not temp_kext.get("BundlePath","") in duplicate_bundles:
+                    duplicate_bundles.append(temp_kext.get("BundlePath",""))
+            else:
+                # Get the original info
+                info = next((x[1] for x in kext_list if x[0].get("BundlePath","") == temp_kext.get("BundlePath","")),None)
+                if not info or not info.get("cfbi",None): continue # Broken info
+                # Let's see if it's already in enabled_kexts - and compare the Min/Max/Match Kernel options
+                temp_min,temp_max = self.get_min_max_from_kext(temp_kext,"MatchKernel" in kext_add)
+                # Gather a list of like IDs
+                comp_kexts = [x for x in enabled_kexts if x[1]["cfbi"] == info["cfbi"]]
+                # Walk the comp_kexts, and disable if we find an overlap
+                for comp_info in comp_kexts:
+                    comp_kext = comp_info[0]
+                    # Gather our min/max
+                    comp_min,comp_max = self.get_min_max_from_kext(comp_kext,"MatchKernel" in kext_add)
+                    # Let's see if we don't overlap
+                    if temp_min > comp_max or temp_max < comp_min: # We're good, continue
+                        continue
+                    # We overlapped - let's disable it
+                    temp_kext["Enabled"] = False
+                    # Add it to the list - then break out of this 
+                    if not temp_kext.get("BundlePath","") in duplicate_bundles:
+                        duplicate_bundles.append(temp_kext.get("BundlePath",""))
+                    break
             # Check if we ended up disabling temp_kext, and if not - add it to the enabled_kexts list
-            if temp_kext.get("Enabled",False): enabled_kexts.append((temp_kext,info[1]))
+            if temp_kext.get("Enabled",False):
+                bundles_enabled.append(temp_kext.get("BundlePath",""))
+                enabled_kexts.append((temp_kext,info))
         # Check if we have duplicates - and offer to disable them
         if len(duplicate_bundles):
             if mb.askyesno("Duplicate CFBundleIdentifiers","Disable the following kexts with duplicate CFBundleIdentifiers?\n\n{}".format("\n".join(duplicate_bundles)),parent=self):
@@ -1563,7 +1607,13 @@ class PlistWindow(tk.Toplevel):
                             "Path":os.path.join(path,name)[len(oc_tools):].replace("\\", "/").lstrip("/") # Strip the /Volumes/EFI/
                         }
                         # Add our snapshot custom entries, if any
-                        for x in tool_add: new_tool_entry[x] = tool_add[x]
+                        for x in tool_add:
+                            if x == "Flavour" and new_tool_entry["Name"].lower().endswith("shell.efi"):
+                                # Adjust the Flavour to reflect what type of shell it is - we can use OpenShell:UEFIShell:Shell
+                                # to reflect this
+                                new_tool_entry[x] = "OpenShell:UEFIShell:Shell"
+                            else:
+                                new_tool_entry[x] = tool_add[x]
                         tools_list.append(OrderedDict(sorted(new_tool_entry.items(),key=lambda x:str(x[0]).lower())))
             tools = [] if clean else tree_dict["Misc"]["Tools"]
             for tool in sorted(tools_list, key=lambda x: x.get("Path","").lower()):
@@ -1583,6 +1633,28 @@ class PlistWindow(tk.Toplevel):
                 new_tools.append(tool)
                 # Check path length
                 long_paths.extend(self.check_path_length(tool))
+            # Make sure we don't have duplicates
+            tools_enabled = []
+            tools_duplicates = []
+            tools_duplicates_disabled = []
+            for t in new_tools:
+                if t.get("Enabled"):
+                    if t.get("Path","") in tools_enabled:
+                        # Got a dupe - shallow copy and disable
+                        new_t = {}
+                        for key in t: new_t[key] = t[key]
+                        new_t["Enabled"] = False
+                        tools_duplicates_disabled.append(new_t)
+                        if not t.get("Path","") in tools_duplicates:
+                            tools_duplicates.append(t.get("Path",""))
+                    else:
+                        # First hit - add the Path to tools_enabled
+                        tools_enabled.append(t.get("Path",""))
+                        tools_duplicates_disabled.append(t)
+            if len(tools_duplicates):
+                if mb.askyesno("Duplicate Tools","Disable the following Tools with duplicate Paths?\n\n{}".format("\n".join(tools_duplicates)),parent=self):
+                    new_tools = tools_duplicates_disabled
+            # Save the results
             tree_dict["Misc"]["Tools"] = new_tools
         else:
             # Make sure our Tools list is empty
@@ -1637,6 +1709,39 @@ class PlistWindow(tk.Toplevel):
                 new_drivers.append(driver)
                 # Check path length
                 long_paths.extend(self.check_path_length(driver))
+            # Make sure we don't have duplicates
+            drivers_enabled = []
+            drivers_duplicates = []
+            drivers_duplicates_disabled = []
+            for d in new_drivers:
+                if isinstance(d,dict):
+                    # The new way
+                    if d.get("Enabled"):
+                        if d.get("Path","") in drivers_enabled:
+                            # Got a dupe - shallow copy and disable
+                            new_d = {}
+                            for key in d: new_d[key] = d[key]
+                            new_d["Enabled"] = False
+                            drivers_duplicates_disabled.append(new_d)
+                            if not d.get("Path","") in drivers_duplicates:
+                                drivers_duplicates.append(d.get("Path",""))
+                        else:
+                            # First hit - add the Path to drivers_enabled
+                            drivers_enabled.append(d.get("Path",""))
+                            drivers_duplicates_disabled.append(d)
+                else:
+                    # The old way
+                    if d in drivers_enabled:
+                        # Got a dupe
+                        if not d in drivers_duplicates:
+                            drivers_duplicates.append(d)
+                    else:
+                        drivers_enabled.append(d)
+                        drivers_duplicates_disabled.append(d)
+            if len(drivers_duplicates):
+                if mb.askyesno("Duplicate Drivers","Disable the following Drivers with duplicate Paths?\n\n{}".format("\n".join(drivers_duplicates)),parent=self):
+                    new_drivers = drivers_duplicates_disabled
+            # Save the results
             tree_dict["UEFI"]["Drivers"] = new_drivers
         else:
             # Make sure our Drivers list is empty
@@ -1646,12 +1751,20 @@ class PlistWindow(tk.Toplevel):
         if self.controller.settings.get("force_snapshot_schema",False):
             ignored = ["Comment","Enabled","Path","BundlePath","ExecutablePath","PlistPath","Name"]
             for entries,values in ((tree_dict["ACPI"]["Add"],acpi_add),(tree_dict["Kernel"]["Add"],kext_add),(tree_dict["Misc"]["Tools"],tool_add),(tree_dict["UEFI"]["Drivers"],driver_add)):
+                values["Comment"] = ""
+                values["Enabled"] = True
                 if not values: continue # Skip if nothing to check
                 for entry in entries:
                     to_remove = [x for x in entry if not x in values and not x in ignored]
                     to_add =    [x for x in values if not x in entry]
-                    for add in to_add:    entry[add] = os.path.basename(entry.get("Path",values[add])) if add.lower() == "comment" else values[add]
-                    for rem in to_remove: entry.pop(rem,None)
+                    for add in to_add:
+                        if add.lower() == "comment":
+                            val = os.path.basename(entry.get("Path",entry.get("BundlePath",values[add])))
+                        else:
+                            val = values[add]
+                        entry[add] = val
+                    for rem in to_remove:
+                        entry.pop(rem,None)
         
         # Now we remove the original tree - then replace it
         undo_list = []
@@ -1712,11 +1825,10 @@ class PlistWindow(tk.Toplevel):
     def clicked(self, event = None):
         # Reset every click
         self.clicked_drag = False
-        if not event:
+        if not event or not self.controller.enable_drag_and_drop.get():
             return
         rowid = self._tree.identify_row(event.y)
         if rowid and self._tree.bbox(rowid):
-            # Mouse down in a valid node
             self.clicked_drag = True
     
     def _change_display(self,new_display,target_funct):
@@ -2418,7 +2530,9 @@ class PlistWindow(tk.Toplevel):
         node = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         # Verify the type - or get the parent
         t = self.get_check_type(node).lower()
+        index = 0
         if not node == "" and (not t in ("dictionary","array") or (self._tree.get_children(node) and not self._tree.item(node,"open"))):
+            index = self._tree.index(node)+1
             node = self._tree.parent(node)
         node = self.get_root_node() if node == "" else node # Force Root node if need be
         t = self.get_check_type(node).lower()
@@ -2446,12 +2560,14 @@ class PlistWindow(tk.Toplevel):
         if isinstance(plist_data,dict):
             dict_list = list(plist_data.items()) if not self.controller.settings.get("sort_dict",False) else sorted(list(plist_data.items()))
             names = [self._tree.item(x,"text") for x in self._tree.get_children(node)] if t == "dictionary" else []
-            for (key,val) in dict_list:
+            for (key,val) in dict_list[::-1]:
                 if t == "dictionary":
                     # create a unique name
                     key = self.get_unique_name(str(key),names)
                     names.append(key)
                 last = self.add_node(val, node, key)
+                # Move it into place
+                self._tree.move(last,node,index)
                 add_list.append({"type":"add","cell":last})
                 self._tree.item(last,open=True)
         first = self.get_root_node() if not len(add_list) else add_list[0].get("cell")
@@ -2655,7 +2771,9 @@ class PlistWindow(tk.Toplevel):
         if target == self.get_root_node() and not self.get_check_type(self.get_root_node()).lower() in ("array","dictionary"):
             return # Can't add to a non-collection!
         new_cell = None
+        index = 0
         if not self.get_check_type(target).lower() in ("dictionary","array") or force_sibling or (not self._tree.item(target,"open") and len(self._tree.get_children(target))):
+            index = self._tree.index(target)+1
             target = self._tree.parent(target)
         target = self.get_root_node() if target == "" else target # Force the Root node if need be
         # create a unique name
@@ -2663,7 +2781,7 @@ class PlistWindow(tk.Toplevel):
         if self.get_check_type(target).lower() == "dictionary":
             names = [self._tree.item(x,"text")for x in self._tree.get_children(target)]
             name = self.get_unique_name("New String",names)
-        new_cell = self._tree.insert(target, "end", text=name, values=(self.menu_code + " String","",self.drag_code,))
+        new_cell = self._tree.insert(target, index, text=name, values=(self.menu_code + " String","",self.drag_code,))
         # Verify that array names are updated to show the proper indexes
         if self.get_check_type(target).lower() == "array":
             self.update_array_counts(target)
@@ -2898,7 +3016,7 @@ class PlistWindow(tk.Toplevel):
             cell = self._tree.parent(current_cell)
             if not self.get_check_type(cell).lower() == "array":
                 # Our name isn't just a number add the key
-                path.append(self._tree.item(current_cell,"text").replace("/","\/"))
+                path.append(self._tree.item(current_cell,"text").replace("/","\\/"))
             else:
                 path.append("*")
             current_cell = cell            
@@ -3111,7 +3229,7 @@ class PlistWindow(tk.Toplevel):
         # Add rbits option
         cell_search = [x for x in self.split(cell_path) if not x=="*"]
         if cell_search and cell_search[0] == "Root": cell_search = cell_search[1:]
-        if cell_search and self.get_configuration_path():
+        if cell_search and os.path.isfile(self.controller.get_best_tex_path()):
             popup_menu.add_separator()
             popup_menu.add_command(label="Show info for \"{}\"{}".format(
                 " -> ".join(cell_search), " (Cmd+I)" if is_mac else ""), command=self.show_config_info, accelerator=None if is_mac else "(Ctrl+I)")
@@ -3364,26 +3482,6 @@ class PlistWindow(tk.Toplevel):
                 tags.append("odd" if x % 2 else "even")
             self._tree.item(item, tags=tags)
 
-    def get_configuration_path(self):
-        # will need path to a Configuration.tex based for the version of OpenCore being used
-        # for this to provide the correct info
-        # for now this is a cheap hack to a Configuration.tex in the same location as ProperTree
-        pt_path = os.path.normpath(sys.path[0])
-        # Add a check for next to the script
-        config_tex_paths = [os.path.join(pt_path,"Configuration.tex")]
-        pt_path_parts = pt_path.split(os.sep)
-        if len(pt_path_parts) >= 3 and pt_path_parts[-2:] == ["Contents","MacOS"] \
-            and pt_path_parts[-3].lower().endswith(".app"):
-            for x in range(3):
-                # Remove the last 3 path components as we're in a .app bundle
-                pt_path = os.path.dirname(pt_path)
-                # Add a check for next to the .app bundle
-                config_tex_paths.append(os.path.join(pt_path,"Configuration.tex"))
-        # Iterate any paths we need to check and return the first match
-        for path in config_tex_paths:
-            if os.path.isfile(path):
-                return path
-
     def show_config_info(self, event = None):
         # find the path of selected cell
         cell = "" if not len(self._tree.selection()) else self._tree.selection()[0]
@@ -3401,8 +3499,8 @@ class PlistWindow(tk.Toplevel):
         check_title = '"{}" Info'.format(" -> ".join([x for x in search_list if not x=="*"]))
         window = next((x for x in self.controller.stackorder(self.controller.tk,include_defaults=True) if x.title() == check_title),None)
         if not window:
-            config_tex_path = self.get_configuration_path()
-            if config_tex_path:
+            config_tex_path = self.controller.get_best_tex_path()
+            if config_tex_path and os.path.isfile(config_tex_path):
                 # pass mouse pointer location as location to open info window
                 mx = self.root.winfo_pointerx()
                 my = self.root.winfo_pointery()
@@ -3423,6 +3521,7 @@ class PlistWindow(tk.Toplevel):
                 window.protocol("WM_DELETE_WINDOW", lambda x=window:self.controller.close_window(window=x))
                 window.bind("<{}-w>".format("Command" if sys.platform == "darwin" else "Control"), self.controller.close_window)
                 self.controller.set_window_opacity(window=window)
+                self.controller.set_win_titlebar(windows=window)
             else:
                 window = self # Ensure we're lifted again
         # Ensure window is lifted

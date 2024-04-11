@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14.1.1 Sonoma** like an **Mac Pro**!
+This is the guide for **OpenCore 0.9.9** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14.4.1 Sonoma** like an **Mac Pro**!
 
 ## Table of Contents
 
@@ -15,6 +15,7 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 	- [MacOS 14 Sonoma setup](#macos-14-sonoma-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
+	- [Final Steps](#final-steps)
 	- [Cleaning the EFI](#cleaning-the-efi)
 	- [Final comments](#final-comments)
 
@@ -263,6 +264,97 @@ pmset -g live
 
 The commands above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
 
+## Final Steps
+
+After Sonoma 14.4 you need to **disable SecureBootModel and Intel WiFi/Bluetooth kexts** to **install** and **update MacOS**. After successfully installing or updating your Hackintosh you can enable everything again as below (reverse the process before updating):
+
+- Enable the **SecureBootModel** in **`config.plist`**:
+```diff
+	<key>SecureBootModel</key>
+-	<string>Disabled</string>
++	<string>Default</string>
+```
+
+- Enable the **Intel WiFi and Bluetooth Kexts** in **`config.plist`**:
+```diff
+	<dict>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>AirportItlwm.kext</string>
+		<key>Comment</key>
+		<string>AirportItlwm.kext</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/AirportItlwm</string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>MinKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+	</dict>
+	<dict>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>IntelBluetoothFirmware.kext</string>
+		<key>Comment</key>
+		<string>IntelBluetoothFirmware.kext</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/IntelBluetoothFirmware</string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>MinKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+	</dict>
+	<dict>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>IntelBTPatcher.kext</string>
+		<key>Comment</key>
+		<string>IntelBTPatcher.kext</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/IntelBTPatcher</string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>MinKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+	</dict>
+	<dict>
+		<key>Arch</key>
+		<string>Any</string>
+		<key>BundlePath</key>
+		<string>BlueToolFixup.kext</string>
+		<key>Comment</key>
+		<string>BlueToolFixup.kext</string>
+		<key>Enabled</key>
+-		<false/>
++		<true/>
+		<key>ExecutablePath</key>
+		<string>Contents/MacOS/BlueToolFixup</string>
+		<key>MaxKernel</key>
+		<string></string>
+		<key>MinKernel</key>
+		<string></string>
+		<key>PlistPath</key>
+		<string>Contents/Info.plist</string>
+	</dict>
+```
+
 ## Cleaning the EFI
 
 - If you **do not want** the **Boot Menu**, disable it in **`config.plist`** to boot like a real Mac:
@@ -274,7 +366,8 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 ## Final comments
 
-After all you will can boot MacOS, Windows and Recovery **just like a real Mac** computer:
-- Update your Mac using the **Apple Software Updates**;
-- Remind [update OpenCore](https://dortania.github.io/OpenCore-Post-Install/universal/update.html) **before** update MacOS.
+To switch between Windows and MacOS you must **enter the BIOS** and **change the Boot order** to the Windows or MacOS disk according to your choice and also **load the BIOS settings** profile depending on the operating system you are going to start:
+
+- Save & Exit &gt; Load Profile &gt; **Windows** _or_ **MacOS**
+- Save & Exit &gt; **Save & Exit Setup**
 
