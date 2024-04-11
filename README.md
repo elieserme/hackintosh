@@ -88,7 +88,7 @@ Gigabyte z370N WIFI using **BIOS version F14**
 
 ## Windows 11 setup
 
-You can install **Windows 11** as usual. **Drivers for this motherboard** are below:
+You can install **Windows 11** as usual. **Drivers** for this motherboard are below:
 
 - **Download [Intel INF Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/SetupChipset.exe)** _**(required)**_
 - **Download [Latest AMD Graphics Driver](https://www.amd.com/pt/support/graphics/amd-radeon-6000-series/amd-radeon-6600-series/amd-radeon-rx-6600-xt)** _**(required)**_
@@ -99,10 +99,10 @@ You can install **Windows 11** as usual. **Drivers for this motherboard** are be
 - Download [Gigabyte APP Center](https://raw.github.com/elieserme/hackintosh/main/util/windows11/UpdPack_B24.0227.1.exe) _(optional)_
 - Download [Apple TimeCapsule Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/AirPortSetup.exe) _(optional)_
 
-> **Intel RAID APP**
+> **Intel RAID APP:**
 Download the **[Intel® Optane™ Memory and Storage Management APP](https://apps.microsoft.com/detail/9mzng5hzwz1t?hl=en-US&gl=US)** to control and monitor your RAID array 
 
-> **TimeCapsule on Windows**
+> **TimeCapsule on Windows:**
 To use TimeCapsule driver, first enable the **SMB 1.0/CIFS** on Windows (use the _**Turn Windows features on or off**_ dialog for this)
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1** _(or run **Command Prompt as Administrator** and execute the following command):_
@@ -111,7 +111,7 @@ To correct date and time, you need patch registry for **time sync** with MacOS, 
 reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
 ```
 
-You will need to **Turn off Memory Integrity on Windows 11** to avoid problems on Opencore boot (and increase gamming performance):
+You will want to **Turn off Memory Integrity on Windows 11** to avoid problems on Opencore boot _(and increase gamming performance)_:
 
 - Select **Start**, enter ‘**Core Isolation**’ in the taskbar, and select **Core Isolation** from the list of results to open the Windows security app;
 - On the **Core isolation** page, _**turn off** the toggle_ for **Memory Integrity**. You might need to restart the computer. 
