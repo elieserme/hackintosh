@@ -12,7 +12,7 @@ This is the guide for **OpenCore 0.9.6** Hackintosh build based on i7 9700KF | G
 	- [BIOS settings for Windows](#bios-settings-for-windows)
 	- [Windows 11 setup](#windows-11-setup)
 	- [BIOS settings for MacOS](#bios-settings-for-macos)
-   	- [MacOS 14 Sonoma setup](#macos-14-sonoma-setup)
+	- [MacOS 14 Sonoma setup](#macos-14-sonoma-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
 	- [Cleaning the EFI](#cleaning-the-efi)
@@ -52,7 +52,7 @@ The **Intel AT211 Ethernet port** is disabled in MacOS, so you need to use the *
 
 Gigabyte z370N WIFI using **BIOS version F14**
 
-- **Load optimised defaults**
+- Save & Exit &gt; **Load optimised defaults**
 - SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM**
 - SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **VRM**
 - MIT &gt; Advanced Frequency Settings &gt; Enhanced Multi-Core Performance &gt; **ENABLED**
@@ -89,6 +89,9 @@ Gigabyte z370N WIFI using **BIOS version F14**
 ## Windows 11 setup
 
 You can install **Windows 11** as usual. The **INF driver** is required soon after install. Other drivers, like **Intel WiFi and Bluetooth**, **Intel Ethernet networking** and **Intel IRST (for RAID)** are optional, but recommended for this motherboard.
+
+- Intel INF Driver - [Download](/util/windows11/SetupChipset.exe)
+- Intel IRST Driver - [Download](/util/windows11/mb_driver_irst_17.11.0.1000.1.zip)
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1** _(or run **Command Prompt as Administrator** and execute the following command):_
 
