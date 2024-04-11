@@ -135,7 +135,7 @@ You will want to **Turn off Memory Integrity on Windows 11** to avoid problems o
 ```bash
 sudo /Applications/Install\ macOS\ Sonoma.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
 ```
-- Download the **[git repo sources](http://github.com/elieserme/hackintosh/zipball/main/)** and use the **EFI** folder 
+- **Download** the **[git repo sources](http://github.com/elieserme/hackintosh/zipball/main/)** and use the **EFI** folder **or clone it** with following command:
 
 ```bash
 git clone git@github.com:elieserme/hackintosh.git
