@@ -90,7 +90,7 @@ Gigabyte z370N WIFI using **BIOS version F14**
 
 You can install **Windows 11** as usual. The **INF driver** is required soon after install. Other drivers, like **Intel WiFi and Bluetooth**, **Intel Ethernet networking** and **Intel IRST (for RAID)** are optional, but recommended for this motherboard.
 
-- Intel INF Driver - [Download](/util/windows11/SetupChipset.exe)
+- Intel INF Driver - [Download](https://github.com/elieserme/hackintosh/blob/main/util/windows11/SetupChipset.exe)
 - Intel IRST Driver - [Download](/util/windows11/mb_driver_irst_17.11.0.1000.1.zip)
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1** _(or run **Command Prompt as Administrator** and execute the following command):_
