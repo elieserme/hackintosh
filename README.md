@@ -17,7 +17,7 @@ This is the guide for **OpenCore 0.9.9** Hackintosh build based on i7 9700KF | G
 	- [Sleep](#sleep)
 	- [Final Steps](#final-steps)
 	- [Cleaning the EFI](#cleaning-the-efi)
-	- [Final comments](#final-comments)
+	- [Dual Boot](#dual-boot)
 
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
@@ -47,15 +47,15 @@ This is the guide for **OpenCore 0.9.9** Hackintosh build based on i7 9700KF | G
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
 
 > **Network Note!**
-The **Intel AT211 Ethernet port** is disabled in MacOS, so you need to use the **Intel i219v Ethernet port** when using MacOS. On Windows both ethernet ports are functional.
+The **Intel AT211 Ethernet is disabled** in MacOS, so you need to use the **Intel i219v Ethernet port** when using MacOS. On Windows both ethernet ports are functional.
 
 ## BIOS settings for Windows
 
 Gigabyte z370N WIFI using **BIOS version F14**
 
 - Save & Exit &gt; **Load optimised defaults**
-- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM**
-- SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **VRM**
+- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM MOS**
+- SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **VRM MOS**
 - MIT &gt; Advanced Frequency Settings &gt; Enhanced Multi-Core Performance &gt; **ENABLED**
 - MIT &gt; Advanced Memory Settings &gt; Memory Enhancement Settings &gt; **Enhanced Performance**
 - BIOS &gt; FastBoot &gt; **DISABLED**
@@ -367,7 +367,7 @@ Using Sonoma 14.4 and later, every time you update MacOS, you need to first disa
 +	<false/>
 ```
 
-## Final comments
+## Dual Boot
 
 To switch between Windows and MacOS you must **enter the BIOS** and **change the Boot order** to the Windows or MacOS disk according to your choice and also **load the BIOS settings** profile depending on the operating system you are going to start:
 
