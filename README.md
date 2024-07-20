@@ -50,7 +50,7 @@ The **Intel AT211 Ethernet is disabled** in MacOS, so you need to use the **Inte
 
 ## BIOS settings for Windows
 
-Gigabyte z370N WIFI using **BIOS version F14**
+Gigabyte z370N WIFI using **BIOS version F12**
 
 - Save & Exit &gt; **Load optimised defaults**
 - SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM MOS**
@@ -189,7 +189,7 @@ Download **[ProperTree](https://github.com/corpnewt/ProperTree/zipball/master/)*
 ```bash
 setup_var_3 0x5A4 0x00
 ```
-**Please note that hardcoded value is for F14 BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Some other motherboards can disable CFG Lock on BIOS settings without this hack)_. 
+**Please note that hardcoded value is for F12 BIOS version of the Gigabyte z370N WIFI 1.0 motherboard, if you use another BIOS version or another motherboard model you need to [recalculate this value](https://dortania.github.io/OpenCore-Post-Install/misc/msr-lock.html)** _(this command must run every time that BIOS is reflashed or CMOS clear. Some other motherboards can disable CFG Lock on BIOS settings without this hack)_. 
 
 - Use **Clear NVRAM** and reboot to make a clean install
 - Use **Disk Utility** to erase a **APFS GUI** volume and **install MacOS**
