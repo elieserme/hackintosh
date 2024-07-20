@@ -1,13 +1,13 @@
 # Hackintosh
 
-This is the guide for **OpenCore 0.9.9** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14.4.1 Sonoma** like an **Mac Pro**!
+This is the guide for **OpenCore 1.0.0** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14.5 Sonoma** like an **iMac Pro**!
 
 ## Table of Contents
 
 - [Hackintosh](#hackintosh)
 	- [Table of Contents](#table-of-contents)
 	- [Warning](#warning)
-	- [Why use Mac Pro model](#why-use-mac-pro-model)
+	- [Why use iMac Pro model](#why-use-imac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings for Windows](#bios-settings-for-windows)
 	- [Windows 11 setup](#windows-11-setup)
@@ -22,8 +22,7 @@ This is the guide for **OpenCore 0.9.9** Hackintosh build based on i7 9700KF | G
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
-## Why use Mac Pro model
-- The **Last Intel Mac** supported by Apple;
+## Why use iMac Pro model
 - **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **No DRM issues** _(you can use Apple TV+ and Safari for Netflix and PrimeVideo)_.
@@ -56,8 +55,6 @@ Gigabyte z370N WIFI using **BIOS version F14**
 - Save & Exit &gt; **Load optimised defaults**
 - SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM MOS**
 - SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **VRM MOS**
-- MIT &gt; Advanced Frequency Settings &gt; Enhanced Multi-Core Performance &gt; **ENABLED**
-- MIT &gt; Advanced Memory Settings &gt; Memory Enhancement Settings &gt; **Enhanced Performance**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
@@ -93,11 +90,7 @@ You can install **Windows 11** as usual. **Drivers** for this motherboard are be
 
 - **Download [Intel INF Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/SetupChipset.exe)** _**(required)**_
 - **Download [Latest AMD Graphics Driver](https://www.amd.com/pt/support/graphics/amd-radeon-6000-series/amd-radeon-6600-series/amd-radeon-rx-6600-xt)** _**(required)**_
-- **Download [Intel RAID Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/mb_driver_irst_17.11.0.1000.1.zip)** _**(required)**_
-- Download [Intel WiFi Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/mb_driver_630_wifi_dchsetup_22.200.0.6.zip) _(optional)_
-- Download [Intel Bluetooth Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/mb_driver_607_bt_win10_22.170.0.2.zip) _(optional)_
-- Download [Intel Ethernet Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/Wired_driver_29.0_x64.zip) _(optional)_
-- Download [Gigabyte APP Center](https://raw.github.com/elieserme/hackintosh/main/util/windows11/UpdPack_B24.0227.1.exe) _(optional)_
+- **Download [Intel RAID Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/mb_driver_irst_17.11.0.1000.1.zip)** _**(required if will use RAID)**_
 - Download [Apple TimeCapsule Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/AirPortSetup.exe) _(optional)_
 
 > **Intel RAID APP:**
@@ -172,7 +165,7 @@ Download **[ProperTree](https://github.com/corpnewt/ProperTree/zipball/master/)*
 		<key>SpoofVendor</key>
 		<true/>
 		<key>SystemProductName</key>
-		<string>MacPro7,1</string>
+		<string>iMacPro1,1</string>
 		<key>SystemSerialNumber</key>
 		<string>AAAAAAAAAAAA</string>
 		<key>SystemUUID</key>

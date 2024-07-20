@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys, os, plistlib, base64, binascii, datetime, tempfile, shutil, re, subprocess, math, hashlib, time
 
-from collections import OrderedDict
+from collections import OrderedDict, deque
 from Scripts import config_tex_info
 
 try:
@@ -179,8 +179,9 @@ class EntryPopup(EntryPlus):
         if self.column == "#0":
             check_type = self.master.get_check_type(self.cell).lower()
             # We are currently in the key column
-            if check_type in ("dictionary","array"):
-                # Can't edit the other field with these - bail
+            if check_type in ("dictionary","array","boolean"):
+                # Can't edit the other field with these, or they require
+                # a popup menu which is handled via other keybinds - bail
                 return 'break'
             edit_col = "#2"
         elif self.column == "#2":
@@ -289,11 +290,16 @@ class PlistWindow(tk.Toplevel):
         # Create the window
         self.root = root
         self.controller = controller
-        self.undo_stack = []
-        self.redo_stack = []
+        self.undo_stack = deque()
+        self.redo_stack = deque()
         self.drag_undo = None
         self.clicked_drag = False
         self.saving = False
+        self.adding_rows = False
+        self.removing_rows = False
+        self.pasting_nodes = False
+        self.alternating_colors = False
+        self.reundoing = False
         self.last_data = None
         self.last_int  = None
         self.last_bool = None
@@ -427,7 +433,7 @@ class PlistWindow(tk.Toplevel):
         self._tree.bind("<Double-1>", self.on_double_click)
         self._tree.bind('<<TreeviewSelect>>', self.tree_click_event)
         self._tree.bind('<<TreeviewOpen>>', self.pre_alternate)
-        self._tree.bind('<<TreeviewClose>>', self.alternate_colors)
+        self._tree.bind('<<TreeviewClose>>', self.pre_collapse)
         self._tree.bind("<B1-Motion>", self.move_selection)
         self._tree.bind("<ButtonRelease-1>",self.confirm_drag)
         self._tree.bind("<Button-1>",self.clicked)
@@ -558,11 +564,11 @@ class PlistWindow(tk.Toplevel):
         f_option['menu'].insert_separator(1)
         f_option.grid(row=0,column=1)
         self.fp_button = tk_or_ttk.Button(self.find_frame,text="< Prev",width=8,command=self.find_prev)
-        self.fp_button.grid(row=0,column=3,sticky="e",padx=0,pady=10)
+        self.fp_button.grid(row=0,column=3,sticky="e",padx=(10,0),pady=10)
         self.fn_button = tk_or_ttk.Button(self.find_frame,text="Next >",width=8,command=self.find_next)
-        self.fn_button.grid(row=0,column=4,sticky="w",padx=0,pady=10)
+        self.fn_button.grid(row=0,column=4,sticky="w",padx=(0,10),pady=10)
         self.r_button = tk_or_ttk.Button(self.find_frame,text="Replace",command=self.replace)
-        self.r_button.grid(row=1,column=4,sticky="we",padx=10,pady=10)
+        self.r_button.grid(row=1,column=3,columnspan=2,sticky="we",padx=10,pady=10)
         self.r_all_var = tk.IntVar()
         self.r_all = tk_or_ttk.Checkbutton(self.find_frame,text="Replace All",variable=self.r_all_var)
         self.r_all.grid(row=1,column=5,sticky="w")
@@ -637,7 +643,7 @@ class PlistWindow(tk.Toplevel):
                     return node
             return None # Found nothing
         # Get all the visible nodes
-        nodes  = self.iter_nodes()
+        nodes = self.iter_nodes()
         # Gather our event info
         if event_time - self.last_key >= self.last_key_threhsold:
             # We're beyond our time - reset the search
@@ -896,20 +902,39 @@ class PlistWindow(tk.Toplevel):
         self.show_type ^= True
         self.draw_frames(event,"showtype")
 
+    def get_index(self, iterable, item):
+        # Returns the index of the passed item in the iterable
+        # if found
+        for i,x in enumerate(iterable):
+            if x == item:
+                return i
+        raise ValueError("{} is not in iterable".format(item))
+
     def do_replace(self, node, find, new_text):
         # We can assume that we have a legit match for whatever is passed
         # Let's get some info first
         case_sensitive = self.f_case_var.get()
         node_type      = self.get_check_type(node)
-        parent_type    = self.get_check_type(self._tree.parent(node))
+        parent         = self._tree.parent(node)
+        parent_type    = self.get_check_type(parent)
         find_type      = self.find_type.lower()
 
         if find_type == "key":
             # We're only replacing the text
             name = self._tree.item(node,"text")
             new_name = re.sub(("" if case_sensitive else "(?i)")+re.escape(find), lambda m: new_text, name)
+            # Make sure we don't replace it if it already exists
+            for child in self._tree.get_children(parent):
+                if child == node:
+                    # Skip ourselves
+                    continue
+                # Check if our text is equal to any other keys
+                if new_name == self._tree.item(child,"text"):
+                    # Have a match, beep and bail
+                    self.bell()
+                    return False
             self._tree.item(node,text=new_name)
-            return
+            return True
         # Check the values
         values = self.get_padded_values(node,3)
         if find_type == "string":
@@ -935,6 +960,7 @@ class PlistWindow(tk.Toplevel):
             # Do a straight up replace
             values[1] = new_text
             self._tree.item(node,values=values)
+        return True
 
     def replace(self, event=None):
         find = self.f_text.get()
@@ -988,23 +1014,27 @@ class PlistWindow(tk.Toplevel):
             return
         # At this point, we should have something to replace
         replacements = []
-        for x in matches:
+        for i,x in enumerate(matches):
             name = self._tree.item(x[1],"text")
             values = self._tree.item(x[1],"values")
-            self.do_replace(x[1],find,repl)
-            replacements.append({
-                "type":"edit",
-                "cell":x[1],
-                "text":name,
-                "values":values
-                })
+            if self.do_replace(x[1],find,repl):
+                replacements.append({
+                    "type":"edit",
+                    "cell":x[1],
+                    "text":name,
+                    "values":values
+                    })
+            elif not replace_all:
+                break
         # Select the last matched cell
-        self.select(matches[-1][1])
-        self.add_undo(replacements)
-        # Ensure we're edited
-        self._ensure_edited()
-        # Let's try to find the next
-        if not replace_all: self.find_next(replacing=True)
+        self.select(matches[i][1])
+        if replacements:
+            self.add_undo(replacements)
+            # Ensure we're edited
+            self._ensure_edited()
+            # Let's try to find the next
+            if not replace_all:
+                self.find_next(replacing=True)
 
     def is_match(self, node, text):
         case_sensitive = self.f_case_var.get()
@@ -1055,7 +1085,11 @@ class PlistWindow(tk.Toplevel):
         for node in nodes:
             match = self.is_match(node, text)
             if not match == False:
-                found.append((nodes.index(node),node))
+                if hasattr(nodes,"index"):
+                    index = nodes.index(node)
+                else:
+                    index = self.get_index(nodes,node)
+                found.append((index,node))
         return found
 
     def find_prev(self, event=None):
@@ -1078,7 +1112,12 @@ class PlistWindow(tk.Toplevel):
         # Let's get the index of our selected item
         node  = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         nodes = self.iter_nodes(False)
-        index = len(nodes) if node == "" else nodes.index(node)
+        if node == "":
+            index = len(nodes)
+        elif hasattr(nodes,"index"):
+            index = nodes.index(node)
+        else:
+            index = self.get_index(nodes,node)
         # Find the item at a lower index than our current selection
         for match in matches[::-1]:
             if match[0] < index:
@@ -1110,7 +1149,12 @@ class PlistWindow(tk.Toplevel):
         # Let's get the index of our selected item
         node  = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         nodes = self.iter_nodes(False)
-        index = len(nodes) if node == "" else nodes.index(node)
+        if node == "":
+            index = len(nodes)
+        elif hasattr(nodes,"index"):
+            index = nodes.index(node)
+        else:
+            index = self.get_index(nodes,node)
         # Find the item at a higher index than our current selection
         for match in matches:
             if match[0] > index:
@@ -1179,7 +1223,7 @@ class PlistWindow(tk.Toplevel):
             mb.showerror("An Error Occurred While Opening {}".format(os.path.basename(self.current_plist)), repr(e),parent=self)
             return
         # We should have the plist data now
-        self.open_plist(self.current_plist,plist_data,self.plist_type_string.get())
+        self.open_plist(self.current_plist,plist_data,plist_type=self.plist_type_string.get(),alternate=True)
 
     def get_min_max_from_match(self, match_text):
         # Helper method to take MatchKernel output and break it into the MinKernel and MaxKernel
@@ -1245,6 +1289,23 @@ class PlistWindow(tk.Toplevel):
         return "" # Couldn't determine hash :(
 
     def oc_snapshot(self, event = None, clean = False):
+        # Make sure we have snapshot data from the controller
+        if not self.controller.snapshot_data:
+            self.bell()
+            mb.showerror(
+                "OC{} Snapshot Aborted".format(
+                    " Clean" if clean else ""
+                ),
+                (
+                    "{} is missing or malformed.\n\n"
+                    "Please correct or replace the file.\n\n"
+                    "If running from a network drive or cloud backup, try running locally."
+                ).format(
+                    os.path.join(os.path.abspath(os.path.dirname(os.path.realpath(__file__))),"snapshot.plist")
+                ),
+                parent=self
+            )
+            return
         # Get the target directory from our current file's directory - if any, and if it exists
         target_dir = os.path.dirname(self.current_plist) if self.current_plist and os.path.isdir(os.path.dirname(self.current_plist)) else None
         # If it doesn't exist, get the last_snapshot_path, if any
@@ -1272,21 +1333,44 @@ class PlistWindow(tk.Toplevel):
         #  | +- SomeFolder
         #  | | +- SomeOtherTool.efi
         
-        oc_acpi    = os.path.normpath(os.path.join(oc_folder,"ACPI"))
-        oc_drivers = os.path.normpath(os.path.join(oc_folder,"Drivers"))
-        oc_kexts   = os.path.normpath(os.path.join(oc_folder,"Kexts"))
-        oc_tools   = os.path.normpath(os.path.join(oc_folder,"Tools"))
-        oc_efi     = os.path.normpath(os.path.join(oc_folder,"OpenCore.efi"))
+        def check_folders(path):
+            return_dict = {
+                "oc_acpi":   os.path.normpath(os.path.join(path,"ACPI")),
+                "oc_drivers":os.path.normpath(os.path.join(path,"Drivers")),
+                "oc_kexts":  os.path.normpath(os.path.join(path,"Kexts")),
+                "oc_tools":  os.path.normpath(os.path.join(path,"Tools")),
+                "oc_efi":    os.path.normpath(os.path.join(path,"OpenCore.efi"))
+            }
+            return_dict["missing"] = [return_dict[x] for x in ("oc_acpi","oc_drivers","oc_kexts") if not os.path.isdir(return_dict[x])]
+            return return_dict
 
-        for x in (oc_acpi,oc_drivers,oc_kexts):
-            if not os.path.exists(x):
+        oc_path_check = check_folders(oc_folder)
+        if oc_path_check["missing"]:
+            # User might have selected their EFI folder - try to resolve
+            # an OC folder within
+            efi_oc_folder = os.path.join(oc_folder,"OC")
+            efi_path_check = check_folders(efi_oc_folder)
+            if efi_path_check["missing"]:
+                # No dice - show the missing dialog box
                 self.bell()
-                mb.showerror("Incorrect OC Folder Structure", "{} does not exist.\nPlease make sure you're selecting a valid OC folder.".format(x), parent=self)
+                mb.showerror(
+                    "Incorrect OC Folder Structure",
+                    "The following required folders do not exist:\n\n{}\n\nPlease make sure you're selecting a valid OC folder.".format(
+                        ", ".join([os.path.basename(x) for x in oc_path_check["missing"]])
+                    ),
+                    parent=self
+                )
                 return
-            if x != oc_efi and not os.path.isdir(x):
-                self.bell()
-                mb.showerror("Incorrect OC Folder Structure", "{} exists, but is not a directory.\nPlease make sure you're selecting a valid OC folder.".format(x), parent=self)
-                return
+            # We got it - update path related vars
+            oc_folder = efi_oc_folder
+            oc_path_check = efi_path_check
+        
+        # Extract our vars
+        oc_acpi    = oc_path_check["oc_acpi"]
+        oc_drivers = oc_path_check["oc_drivers"]
+        oc_kexts   = oc_path_check["oc_kexts"]
+        oc_tools   = oc_path_check["oc_tools"]
+        oc_efi     = oc_path_check["oc_efi"]
 
         # Folders are valid - let's save a reference for next time and work through each section
         self.controller.settings["last_snapshot_path"] = oc_folder
@@ -1335,19 +1419,85 @@ class PlistWindow(tk.Toplevel):
 
         long_paths = [] # We'll add any paths that exceed the OC_STORAGE_SAFE_PATH_MAX of 128 chars
 
+        tree_dict = self.nodes_to_values(binary=False)
+        # We have our plist contents - let's check all our paths and types - and ensure
+        # that things line up as needed.  If not - we'll warn the user, and ask if they
+        # want to continue.
+        path_walk = (
+            (("ACPI","Add"),list),
+            (("Kernel","Add"),list),
+            (("Misc","Tools"),list),
+            (("UEFI","Drivers"),list)
+        )
+        missing_paths = []
+        incorrect_types = []
+        dict_type = dict if self.controller.settings.get("sort_dict",False) else OrderedDict
+        for path_list,path_type in path_walk:
+            # Start with a top-level perspective, and walk paths as needed
+            target_path = tree_dict
+            path_missing = False
+            for i,path in enumerate(path_list,start=1):
+                use_type = path_type if i >= len(path_list) else dict_type
+                if not path in target_path:
+                    # The path is missing - let's create it in the tree_dict
+                    # in case the user wants to continue
+                    target_path[path] = use_type()
+                    if not path_missing:
+                        # Let's also toggle our boolean to prevent referencing
+                        # multiple steps in the same path, and save the highest
+                        # level missing path to report
+                        path_missing = True
+                        missing_paths.append(" -> ".join(path_list[:i]))
+                else:
+                    # Check types
+                    if not isinstance(target_path[path],path_type if i >= len(path_list) else dict):
+                        # Incorrect type.  Save that for later, and update
+                        # the tree_dict
+                        exp_type = self.get_type(use_type(),menu_code=False)
+                        got_type = self.get_type(target_path[path],menu_code=False)
+                        incorrect_types.append("{}: Expected {}, got {}".format(
+                            " -> ".join(path_list[:i]),
+                            exp_type,
+                            got_type
+                        ))
+                        target_path[path] = use_type()
+                # Update our scope for the next loop
+                target_path = target_path[path]
+        # Check if we have any missing paths or incorrect types - and show a dialog as
+        # needed
+        if missing_paths or incorrect_types:
+            # Let's build our error
+            error_list = []
+            verb = []
+            title = []
+            if missing_paths:
+                title.append("Incomplete")
+                verb.append("add missing paths")
+                error_list.extend(
+                    ["The following entries are missing:\n"] + missing_paths + [""]
+                )
+            if incorrect_types:
+                title.append("Incorrect")
+                verb.append("fix incorrect types")
+                error_list.extend(
+                    ["The following types are incorrect:\n"] + incorrect_types + [""]
+                )
+            # Flesh out the rest of the error - offering to correct the above
+            error_list.extend([
+                "This may mean that your plist is incomplete, or you are performing an OC{} Snapshot on the wrong file.\n".format(
+                    " Clean" if clean else ""
+                ),
+                "Would you like to {} and continue?".format(", ".join(verb))
+            ])
+            if not mb.askyesno("{} Plist Structure".format("/".join(title)),"\n".join(error_list),parent=self):
+                # User said "no", let's bail
+                return
+
         # ACPI is first, we'll iterate the .aml files we have and add what is missing
         # while also removing what exists in the plist and not in the folder.
         # If something exists in the table already, we won't touch it.  This leaves the
         # enabled and comment properties untouched.
         #
-        # Let's make sure we have the ACPI -> Add sections in our config
-
-        tree_dict = self.nodes_to_values(binary=False)
-        # We're going to replace the whole list
-        if not "ACPI" in tree_dict or not isinstance(tree_dict["ACPI"],dict):
-            tree_dict["ACPI"] = {"Add":[]}
-        if not "Add" in tree_dict["ACPI"] or not isinstance(tree_dict["ACPI"]["Add"],list):
-            tree_dict["ACPI"]["Add"] = []
         # Now we walk the existing add values
         new_acpi = []
         for path, subdirs, files in os.walk(oc_acpi):
@@ -1387,7 +1537,7 @@ class PlistWindow(tk.Toplevel):
             if a.get("Enabled"):
                 if a.get("Path","") in acpi_enabled:
                     # Got a dupe - shallow copy and disable
-                    new_a = {}
+                    new_a = OrderedDict() if isinstance(a,OrderedDict) else {}
                     for key in a: new_a[key] = a[key]
                     new_a["Enabled"] = False
                     acpi_duplicates_disabled.append(new_a)
@@ -1404,11 +1554,6 @@ class PlistWindow(tk.Toplevel):
         tree_dict["ACPI"]["Add"] = new_add
 
         # Now we need to walk the kexts
-        if not "Kernel" in tree_dict or not isinstance(tree_dict["Kernel"],dict):
-            tree_dict["Kernel"] = {"Add":[]}
-        if not "Add" in tree_dict["Kernel"] or not isinstance(tree_dict["Kernel"]["Add"],list):
-            tree_dict["Kernel"]["Add"] = []
-
         kext_list = []
         # We need to gather a list of all the files inside that and with .efi
         for path, subdirs, files in os.walk(oc_kexts):
@@ -1587,10 +1732,6 @@ class PlistWindow(tk.Toplevel):
         tree_dict["Kernel"]["Add"] = ordered_kexts
 
         # Let's walk the Tools folder if it exists
-        if not "Misc" in tree_dict or not isinstance(tree_dict["Misc"],dict):
-            tree_dict["Misc"] = {"Tools":[]}
-        if not "Tools" in tree_dict["Misc"] or not isinstance(tree_dict["Misc"]["Tools"],list):
-            tree_dict["Misc"]["Tools"] = []
         if os.path.exists(oc_tools) and os.path.isdir(oc_tools):
             tools_list = []
             # We need to gather a list of all the files inside that and with .efi
@@ -1641,7 +1782,7 @@ class PlistWindow(tk.Toplevel):
                 if t.get("Enabled"):
                     if t.get("Path","") in tools_enabled:
                         # Got a dupe - shallow copy and disable
-                        new_t = {}
+                        new_t = OrderedDict() if isinstance(t,OrderedDict) else {}
                         for key in t: new_t[key] = t[key]
                         new_t["Enabled"] = False
                         tools_duplicates_disabled.append(new_t)
@@ -1661,91 +1802,83 @@ class PlistWindow(tk.Toplevel):
             tree_dict["Misc"]["Tools"] = []
 
         # Last we need to walk the .efi drivers
-        if not "UEFI" in tree_dict or not isinstance(tree_dict["UEFI"],dict):
-            tree_dict["UEFI"] = {"Drivers":[]}
-        if not "Drivers" in tree_dict["UEFI"] or not isinstance(tree_dict["UEFI"]["Drivers"],list):
-            tree_dict["UEFI"]["Drivers"] = []
-        if os.path.exists(oc_drivers) and os.path.isdir(oc_drivers):
-            drivers_list = []
-            # We need to gather a list of all the files inside that and with .efi
-            for path, subdirs, files in os.walk(oc_drivers):
-                for name in files:
-                    if not name.startswith(".") and name.lower().endswith(".efi"):
-                        # Check if we're using the new approach - or just listing the paths
-                        if not driver_add:
-                            drivers_list.append(os.path.join(path,name)[len(oc_drivers):].replace("\\", "/").lstrip("/")) # Strip the /Volumes/EFI/
-                        else:
-                            new_driver_entry = {
-                                # "Arguments": "",
-                                "Enabled":True,
-                                "Path":os.path.join(path,name)[len(oc_drivers):].replace("\\", "/").lstrip("/") # Strip the /Volumes/EFI/
-                            }
-                            # Add our snapshot custom entries, if any - include the name of the .efi driver if the Comment
-                            for x in driver_add: new_driver_entry[x] = name if x.lower() == "comment" else driver_add[x]
-                            drivers_list.append(OrderedDict(sorted(new_driver_entry.items(),key=lambda x:str(x[0]).lower())))
-            drivers = [] if clean else tree_dict["UEFI"]["Drivers"]
-            for driver in sorted(drivers_list, key=lambda x: x.get("Path","").lower() if driver_add else x):
-                if not driver_add: # Old way
-                    if not isinstance(driver,(str,unicode)) or driver.lower() in [x.lower() for x in drivers if isinstance(x,(str,unicode))]:
-                        continue
-                else:
-                    if driver["Path"].lower() in [x.get("Path","").lower() for x in drivers if isinstance(x,dict)]:
-                        # Already have it, skip
-                        continue
-                # We need it, it seems
-                drivers.append(driver)
-            new_drivers = []
-            for driver in drivers:
-                if not driver_add: # Old way
-                    if not isinstance(driver,(str,unicode)) or not driver.lower() in [x.lower() for x in drivers_list if isinstance(x,(str,unicode))]:
-                        continue
-                else:
-                    if not isinstance(driver,dict):
-                        # Not a dict - skip it
-                        continue
-                    if not driver.get("Path","").lower() in [x["Path"].lower() for x in drivers_list]:
-                        # Not there, skip it
-                        continue
-                new_drivers.append(driver)
-                # Check path length
-                long_paths.extend(self.check_path_length(driver))
-            # Make sure we don't have duplicates
-            drivers_enabled = []
-            drivers_duplicates = []
-            drivers_duplicates_disabled = []
-            for d in new_drivers:
-                if isinstance(d,dict):
-                    # The new way
-                    if d.get("Enabled"):
-                        if d.get("Path","") in drivers_enabled:
-                            # Got a dupe - shallow copy and disable
-                            new_d = {}
-                            for key in d: new_d[key] = d[key]
-                            new_d["Enabled"] = False
-                            drivers_duplicates_disabled.append(new_d)
-                            if not d.get("Path","") in drivers_duplicates:
-                                drivers_duplicates.append(d.get("Path",""))
-                        else:
-                            # First hit - add the Path to drivers_enabled
-                            drivers_enabled.append(d.get("Path",""))
-                            drivers_duplicates_disabled.append(d)
-                else:
-                    # The old way
-                    if d in drivers_enabled:
-                        # Got a dupe
-                        if not d in drivers_duplicates:
-                            drivers_duplicates.append(d)
+        drivers_list = []
+        # We need to gather a list of all the files inside that and with .efi
+        for path, subdirs, files in os.walk(oc_drivers):
+            for name in files:
+                if not name.startswith(".") and name.lower().endswith(".efi"):
+                    # Check if we're using the new approach - or just listing the paths
+                    if not driver_add:
+                        drivers_list.append(os.path.join(path,name)[len(oc_drivers):].replace("\\", "/").lstrip("/")) # Strip the /Volumes/EFI/
                     else:
-                        drivers_enabled.append(d)
+                        new_driver_entry = {
+                            # "Arguments": "",
+                            "Enabled":True,
+                            "Path":os.path.join(path,name)[len(oc_drivers):].replace("\\", "/").lstrip("/") # Strip the /Volumes/EFI/
+                        }
+                        # Add our snapshot custom entries, if any - include the name of the .efi driver if the Comment
+                        for x in driver_add: new_driver_entry[x] = name if x.lower() == "comment" else driver_add[x]
+                        drivers_list.append(OrderedDict(sorted(new_driver_entry.items(),key=lambda x:str(x[0]).lower())))
+        drivers = [] if clean else tree_dict["UEFI"]["Drivers"]
+        for driver in sorted(drivers_list, key=lambda x: x.get("Path","").lower() if driver_add else x):
+            if not driver_add: # Old way
+                if not isinstance(driver,(str,unicode)) or driver.lower() in [x.lower() for x in drivers if isinstance(x,(str,unicode))]:
+                    continue
+            else:
+                if driver["Path"].lower() in [x.get("Path","").lower() for x in drivers if isinstance(x,dict)]:
+                    # Already have it, skip
+                    continue
+            # We need it, it seems
+            drivers.append(driver)
+        new_drivers = []
+        for driver in drivers:
+            if not driver_add: # Old way
+                if not isinstance(driver,(str,unicode)) or not driver.lower() in [x.lower() for x in drivers_list if isinstance(x,(str,unicode))]:
+                    continue
+            else:
+                if not isinstance(driver,dict):
+                    # Not a dict - skip it
+                    continue
+                if not driver.get("Path","").lower() in [x["Path"].lower() for x in drivers_list]:
+                    # Not there, skip it
+                    continue
+            new_drivers.append(driver)
+            # Check path length
+            long_paths.extend(self.check_path_length(driver))
+        # Make sure we don't have duplicates
+        drivers_enabled = []
+        drivers_duplicates = []
+        drivers_duplicates_disabled = []
+        for d in new_drivers:
+            if isinstance(d,dict):
+                # The new way
+                if d.get("Enabled"):
+                    if d.get("Path","") in drivers_enabled:
+                        # Got a dupe - shallow copy and disable
+                        new_d = OrderedDict() if isinstance(d,OrderedDict) else {}
+                        for key in d: new_d[key] = d[key]
+                        new_d["Enabled"] = False
+                        drivers_duplicates_disabled.append(new_d)
+                        if not d.get("Path","") in drivers_duplicates:
+                            drivers_duplicates.append(d.get("Path",""))
+                    else:
+                        # First hit - add the Path to drivers_enabled
+                        drivers_enabled.append(d.get("Path",""))
                         drivers_duplicates_disabled.append(d)
-            if len(drivers_duplicates):
-                if mb.askyesno("Duplicate Drivers","Disable the following Drivers with duplicate Paths?\n\n{}".format("\n".join(drivers_duplicates)),parent=self):
-                    new_drivers = drivers_duplicates_disabled
-            # Save the results
-            tree_dict["UEFI"]["Drivers"] = new_drivers
-        else:
-            # Make sure our Drivers list is empty
-            tree_dict["UEFI"]["Drivers"] = []
+            else:
+                # The old way
+                if d in drivers_enabled:
+                    # Got a dupe
+                    if not d in drivers_duplicates:
+                        drivers_duplicates.append(d)
+                else:
+                    drivers_enabled.append(d)
+                    drivers_duplicates_disabled.append(d)
+        if len(drivers_duplicates):
+            if mb.askyesno("Duplicate Drivers","Disable the following Drivers with duplicate Paths?\n\n{}".format("\n".join(drivers_duplicates)),parent=self):
+                new_drivers = drivers_duplicates_disabled
+        # Save the results
+        tree_dict["UEFI"]["Drivers"] = new_drivers
 
         # Check if we're forcing schema - and ensure values line up
         if self.controller.settings.get("force_snapshot_schema",False):
@@ -1865,7 +1998,7 @@ class PlistWindow(tk.Toplevel):
         self._change_display(new_display,self._change_int_display)
 
     def _change_int_display(self,node_list,new_display="Decimal"):
-        if not isinstance(node_list,(list,tuple)): node_list = [node_list]
+        if not isinstance(node_list,(list,tuple,deque)): node_list = [node_list]
         for node in node_list:
             node,task,values = self._qualify_node(node,"number")
             if task == False or values is None: continue # Didn't qualify
@@ -1892,7 +2025,7 @@ class PlistWindow(tk.Toplevel):
         self._change_display(new_display,self._change_bool_display)
 
     def _change_bool_display(self,node_list,new_display="True/False"):
-        if not isinstance(node_list,(list,tuple)): node_list = [node_list]
+        if not isinstance(node_list,(list,tuple,deque)): node_list = [node_list]
         on,off = new_display.split("/")
         on_list = [x.split("/")[0] for x in self.controller.allowed_bool]
         for node in node_list:
@@ -1912,7 +2045,7 @@ class PlistWindow(tk.Toplevel):
         self._change_display(new_display,self._change_data_display)
 
     def _change_data_display(self,node_list,new_display="Hex"):
-        if not isinstance(node_list,(list,tuple)): node_list = [node_list]
+        if not isinstance(node_list,(list,tuple,deque)): node_list = [node_list]
         for node in node_list:
             node,task,values = self._qualify_node(node,"data")
             if values is None: continue # Didn't qualify
@@ -1951,10 +2084,14 @@ class PlistWindow(tk.Toplevel):
         if max_undo > 0:
             # Pop the first item until we're at/under max
             while len(self.undo_stack) > max_undo:
-                self.undo_stack.pop(0)
+                self.undo_stack.popleft()
         self.redo_stack = [] # clear the redo stack
 
     def reundo(self, event=None, undo = True, single_undo = None):
+        # We can't start a new reundo until the last has finished
+        if self.reundoing: return
+        # Lock the reundo task to this instance
+        self.reundoing = True
         # Let's come up with a more centralized way to do this
         # We'll break down the potential actions into a few types:
         #
@@ -1982,13 +2119,14 @@ class PlistWindow(tk.Toplevel):
         if not len(u):
             self.bell()
             # Nothing to undo/redo
+            self.reundoing = False
             return
         # Check if we have any open EntryPopups and cancel them
         if self.entry_popup:
             self.entry_popup.cancel()
         # Retain the original selection
         selected,nodes = self.preselect()
-        task_list = u.pop(-1)
+        task_list = u.pop()
         r_task_list = []
         # Iterate in reverse to undo the last thing first
         for task in task_list[::-1]:
@@ -2042,6 +2180,7 @@ class PlistWindow(tk.Toplevel):
         # Change selection if needed
         self.update_all_children()
         self.reselect((selected,nodes))
+        self.reundoing = False
 
     def preselect(self):
         # Returns a tuple of the selected item and current visible nodes
@@ -2190,7 +2329,6 @@ class PlistWindow(tk.Toplevel):
         # Post the undo, and clear the global
         self.add_undo(undo_tasks)
         self.drag_undo = None
-        self.alternate_colors()
 
     def strip_comments(self, event=None):
         # Strips out any values attached to keys beginning with the prefix
@@ -2397,25 +2535,25 @@ class PlistWindow(tk.Toplevel):
         self._ensure_edited(edited=False)
         return True
 
-    def open_plist(self, path, plist_data, plist_type = "XML", auto_expand = True):
+    def open_plist(self, path, plist_data, plist_type = "XML", auto_expand = True, alternate = True, title = None):
         # Opened it correctly - let's load it, and set our values
         self.plist_type_string.set(plist_type)
         self._tree.delete(*self._tree.get_children())
         self.add_node(plist_data,check_binary=plist_type.lower() == "binary")
         self.current_plist = os.path.normpath(path) if path else path
         if path is None:
-            self._ensure_edited(title=path or "Untitled.plist")
+            self._ensure_edited(title=title or "Untitled.plist")
         else:
             self._ensure_edited(edited=False,title=path)
-        self.undo_stack = []
-        self.redo_stack = []
+        self.undo_stack.clear()
+        self.redo_stack.clear()
         # Close if need be
         if not auto_expand:
             self.collapse_all()
         # Ensure the root is expanded at least
         root = self.get_root_node()
         self._tree.item(root,open=True)
-        self.select(root)
+        self.select(root,alternate=alternate)
 
     def close_window(self, event = None, check_saving = True, check_close = True):
         # Check if we need to save first, then quit if we didn't cancel
@@ -2444,10 +2582,17 @@ class PlistWindow(tk.Toplevel):
         # Gather our args for the potential clipboard commands Windows -> macOS -> Linux
         for args in (["clip"],) if os.name=="nt" else (["pbcopy"],) if sys.platform=="darwin" else (["xclip","-sel","c"],["xsel","-ib"],):
             # Try to start a subprocess to mirror the tkinter clipboard contents
-            try: clipboard = subprocess.Popen(args,stdin=subprocess.PIPE)
-            except: continue
+            try:
+                clipboard = subprocess.Popen(
+                    args,
+                    stdin=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    stdout=subprocess.PIPE
+                )
+            except:
+                continue
             # Dirty py2 check to see if we need to encode the data or not
-            clipboard.stdin.write(clipboard_string if 2/3==0 else clipboard_string.encode("utf-8"))
+            clipboard.stdin.write(clipboard_string if 2/3==0 else clipboard_string.encode())
             break # Break out of the loop as needed
 
     def copy_selection(self, event = None):
@@ -2493,6 +2638,10 @@ class PlistWindow(tk.Toplevel):
             pass
 
     def paste_selection(self, event = None):
+        # We can't paste if another paste operation is in progress
+        if self.pasting_nodes: return
+        # Lock the paste operation to this instance
+        self.pasting_nodes = True
         # Try to format the clipboard contents as a plist
         try:
             clip = self.clipboard_get()
@@ -2519,6 +2668,7 @@ class PlistWindow(tk.Toplevel):
                 # Let's throw an error
                 self.bell()
                 mb.showerror("An Error Occurred While Pasting", repr(e),parent=self)
+                self.pasting_nodes = False
                 return 'break'
         if plist_data is None:
             if len(clip):
@@ -2526,6 +2676,7 @@ class PlistWindow(tk.Toplevel):
                 self.bell()
                 mb.showerror("An Error Occurred While Pasting", "The pasted value is not a valid plist string.",parent=self)
             # Nothing to paste
+            self.pasting_nodes = False
             return 'break'
         node = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         # Verify the type - or get the parent
@@ -2575,12 +2726,34 @@ class PlistWindow(tk.Toplevel):
         self._ensure_edited()
         self.update_all_children()
         self.select(first)
+        self.pasting_nodes = False
 
     ###                                             ###
     # Converstion to/from Dict and Treeview Functions #
     ###                                             ###
 
     def add_node(self, value, parentNode="", key=None, check_binary=False):
+        node_stack = deque()
+        node_stack.append((value,parentNode,key,check_binary))
+        top_node = None
+        while node_stack:
+            node = node_stack.popleft()
+            last_check,remaining = self._add_node(*node)
+            if top_node is None and last_check is not None:
+                # Retain the top_node as needed
+                top_node = last_check
+            if remaining is None:
+                # We don't have to add any more
+                continue
+            elif isinstance(remaining,list):
+                # Got entries to add
+                node_stack.extend(remaining)
+        # We exited the loop - return the top_node if any
+        return top_node
+
+    def _add_node(self, value, parentNode, key, check_binary):
+        if value is None:
+            return (None,None)
         if key is None:
             key = "Root" # Show the Root
         if isinstance(value,(list,tuple)):
@@ -2592,7 +2765,7 @@ class PlistWindow(tk.Toplevel):
         else:
             values = (self.get_type(value),value,"" if parentNode == "" else self.drag_code)
         i = self._tree.insert(parentNode, "end", text=key, values=values)
-
+        remaining = None
         if isinstance(value, dict):
             if (not check_binary or (check_binary and self.plist_type_string.get().lower() != "binary")) \
             and len(value) == 1 and "CF$UID" in value and isinstance(value["CF$UID"],(int,long)) \
@@ -2603,12 +2776,12 @@ class PlistWindow(tk.Toplevel):
             else:
                 self._tree.item(i, open=True)
                 dict_list = list(value.items()) if not self.controller.settings.get("sort_dict",False) else sorted(list(value.items()))
-                for (key,val) in dict_list:
-                    self.add_node(val, i, key, check_binary=check_binary)
+                # Iterate our dict_list and create the pending nodes to add
+                remaining = [(val,i,key,check_binary) for (key,val) in dict_list]
         elif isinstance(value, (list,tuple)):
             self._tree.item(i, open=True)
-            for (key,val) in enumerate(value):
-                self.add_node(val, i, key, check_binary=check_binary)
+            # Iterate our values and create the pending nodes to add
+            remaining = [(val,i,key,check_binary) for (key,val) in enumerate(value)]
         elif self.is_data(value):
             self._tree.item(i, values=(self.get_type(value),self.get_data(value),"" if parentNode == "" else self.drag_code,))
         elif isinstance(value, datetime.datetime):
@@ -2625,7 +2798,7 @@ class PlistWindow(tk.Toplevel):
             self._tree.item(i, values=(self.get_type(value),value.data,"" if parentNode == "" else self.drag_code,))
         else:
             self._tree.item(i, values=(self.get_type(value),value,"" if parentNode == "" else self.drag_code,))
-        return i
+        return (i,remaining)
 
     def get_value_from_node(self,node="",binary=False):
         values = self.get_padded_values(node, 3)
@@ -2677,59 +2850,68 @@ class PlistWindow(tk.Toplevel):
         return value
 
     def nodes_to_values(self,node="",parent=None,binary=False):
+        node_stack = deque()
         if node in ("",None,self.get_root_node()):
             # Top level - set the parent to the type of our Root
             node = self.get_root_node()
             parent = self.get_root_type()
-            if parent is None: return self.get_value_from_node(node,binary=binary) # Return the raw value - we don't have a collection
-            for child in self._tree.get_children(node):
-                parent = self.nodes_to_values(child,parent=parent,binary=binary)
-            return parent
-        # Not top - process
-        if parent is None:
-            # We need to setup the parent
-            p = self._tree.parent(node)
-            if p in ("",self.get_root_node()):
-                # The parent is the Root node
-                parent = self.get_root_type()
-            else:
-                # Get the type based on our prefs
-                parent = [] if self.get_check_type(p).lower() == "array" else {} if self.controller.settings.get("sort_dict",False) else OrderedDict()
-        name = self._tree.item(node,"text")
-        value = self.get_value_from_node(node,binary=binary)
-        # At this point, we should have the name and value
-        for child in self._tree.get_children(node):
-            value = self.nodes_to_values(child,parent=value,binary=binary)
-        if isinstance(parent,list):
-            parent.append(value)
-        elif isinstance(parent,dict):
-            if isinstance(name,unicode):
-                parent[name] = value
-            else:
-                parent[str(name)] = value
+            if parent is None:
+                # Return the raw value - we don't have a collection
+                return self.get_value_from_node(node,binary=binary)
+            # Add any children to our stack
+            node_stack.extend([(c,parent) for c in self._tree.get_children(node)[::-1]])
+        else:
+            if parent is None:
+                # We need to setup the parent
+                p = self._tree.parent(node)
+                if p in ("",self.get_root_node()):
+                    # The parent is the Root node
+                    parent = self.get_root_type()
+                else:
+                    # Get the type based on our prefs
+                    parent = [] if self.get_check_type(p).lower() == "array" else \
+                            {} if self.controller.settings.get("sort_dict",False) else OrderedDict()
+            node_stack.append((node,parent))
+        # Start walking our stack
+        while node_stack:
+            n,p = node_stack.pop()
+            if parent is None and p is not None:
+                parent = p
+            name = self._tree.item(n,"text")
+            value = self.get_value_from_node(n,binary=binary)
+            if isinstance(p,list):
+                p.append(value)
+            elif isinstance(p,dict):
+                if isinstance(name,unicode):
+                    p[name] = value
+                else:
+                    p[str(name)] = value
+            for c in self._tree.get_children(n)[::-1]:
+                node_stack.append((c,value))
         return parent
 
-    def get_type(self, value, override=None):
+    def get_type(self, value, override=None, menu_code=True):
+        prefix = self.menu_code + " " if menu_code else ""
         if override and isinstance(override,str):
-            return self.menu_code + " " + override
+            return prefix + override
         elif isinstance(value, dict):
-            return self.menu_code + " Dictionary"
+            return prefix + "Dictionary"
         elif isinstance(value, list):
-            return self.menu_code + " Array"
+            return prefix + "Array"
         elif isinstance(value, datetime.datetime):
-            return self.menu_code + " Date"
+            return prefix + "Date"
         elif self.is_data(value):
-            return self.menu_code + " Data"
+            return prefix + "Data"
         elif isinstance(value, bool):
-            return self.menu_code + " Boolean"
+            return prefix + "Boolean"
         elif isinstance(value, (int,float,long)):
-            return self.menu_code + " Number"
+            return prefix + "Number"
         elif isinstance(value, (str,unicode)):
-            return self.menu_code + " String"
+            return prefix + "String"
         elif isinstance(value,plist.UID) or (hasattr(plistlib,"UID") and isinstance(value,plistlib.UID)):
-            return self.menu_code + " UID"
+            return prefix + "UID"
         else:
-            return self.menu_code + str(type(value))
+            return prefix + str(type(value))
 
     def is_data(self, value):
         return (sys.version_info >= (3, 0) and isinstance(value, bytes)) or (sys.version_info < (3,0) and isinstance(value, plistlib.Data))
@@ -2766,9 +2948,14 @@ class PlistWindow(tk.Toplevel):
         return temp_name
 
     def new_row(self,target=None,force_sibling=False):
+        # We can't create new rows if another operation is in progress
+        if self.adding_rows: return
+        # Lock the new row operation to this instance
+        self.adding_rows = True
         if target is None or isinstance(target, tk.Event):
             target = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         if target == self.get_root_node() and not self.get_check_type(self.get_root_node()).lower() in ("array","dictionary"):
+            self.adding_rows = False
             return # Can't add to a non-collection!
         new_cell = None
         index = 0
@@ -2791,16 +2978,22 @@ class PlistWindow(tk.Toplevel):
         self.add_undo({"type":"add","cell":new_cell})
         if target == "":
             # Top level, nothing to do here but edit the new row
-            self.alternate_colors()
+            self.alternate_colors(start_with=new_cell)
+            self.adding_rows = False
             return
         # Update the child counts
         self.update_children(target)
         # Ensure the target is opened
         self._tree.item(target,open=True)
         # Flush our alternating lines
-        self.alternate_colors()
+        self.alternate_colors(start_with=new_cell)
+        self.adding_rows = False
 
     def remove_row(self,target=None):
+        # We can't remove rows if another operation is in progress
+        if self.removing_rows: return
+        # Lock the new row operation to this instance
+        self.removing_rows = True
         if target is None or isinstance(target, tk.Event):
             target = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         if target in ("",self.get_root_node()):
@@ -2824,11 +3017,13 @@ class PlistWindow(tk.Toplevel):
         self._ensure_edited()
         # Check if the parent was an array/dict, and update counts
         if parent == "":
+            self.removing_rows = False
             return
         if self.get_check_type(parent).lower() == "array":
             self.update_array_counts(parent)
         self.update_children(parent)
-        self.alternate_colors()
+        self.alternate_colors(start_with=new_target)
+        self.removing_rows = False
 
     ###                          ###
     # Treeview Data Helper Methods #
@@ -2860,9 +3055,15 @@ class PlistWindow(tk.Toplevel):
             children = "1 key/value pair" if len(child_count) == 1 else "{} key/value pairs".format(len(child_count))
         elif self.get_check_type(target).lower() == "array":
             children = "1 child" if len(child_count) == 1 else "{} children".format(len(child_count))
-        # Set the resulting values
-        values[1] = children
-        self._tree.item(target,values=values)
+        else:
+            children = None
+        # Set the resulting values as needed
+        if children:
+            try:
+                values[1] = children
+                self._tree.item(target,values=values)
+            except:
+                pass
 
     def update_array_counts(self, target):
         for x,child in enumerate(self._tree.get_children(target)):
@@ -3141,28 +3342,45 @@ class PlistWindow(tk.Toplevel):
         self.update_all_children()
         self.alternate_colors()
 
+    def sorted_nicely(self, l, reverse = False):
+        convert = lambda text: int(text) if text.isdigit() else text
+        alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key.lower())]
+        return sorted(l,key=lambda x:alphanum_key(self._tree.item(x,"text")),reverse=reverse)
+
     def do_sort(self, cell, recursive = False, reverse = False):
-        undo_tasks = []
-        children = self._tree.get_children(cell)
-        if not len(children): return undo_tasks # bail early, nothing to check
-        sorted_children = [x for x in children]
-        if self.get_check_type(cell).lower() == "dictionary":
-            sorted_children = sorted(sorted_children,key=lambda x:self._tree.item(x,"text").lower(), reverse=reverse)
-        skip_sort = all((children[x]==sorted_children[x] for x in range(len(children))))
-        for index,child in enumerate(sorted_children):
-            if self.get_check_type(child).lower() in ("dictionary","array") and recursive:
-                undo_tasks.extend(self.do_sort(child,recursive=recursive,reverse=reverse))
-            if skip_sort: continue # No change - skip sorting
-            # Add the move command
-            undo_tasks.append({
-                "type":"move",
-                "cell":child,
-                "from":cell,
-                "to":cell,
-                "index":self._tree.index(child)
-            })
-            self._tree.move(child, cell, index)
-        return undo_tasks
+        node_stack = deque()
+        node_stack.append(cell)
+        undo_tasks = deque()
+        while node_stack:
+            node = node_stack.pop()
+            children = self._tree.get_children(node)
+            # Make sure we have something to sort
+            if not children:
+                continue
+            # Make sure we have a dictionary
+            if not self.get_check_type(node).lower() == "dictionary":
+                continue
+            sorted_children = self.sorted_nicely(children,reverse=reverse)
+            # Make sure we're actually making changes
+            skip_sort = all(sorted_children[i] == child for i,child in enumerate(children))
+            if skip_sort and not recursive:
+                continue
+            for index,child in enumerate(sorted_children):
+                # Check if we have a collection - and if we're recursively sorting
+                if recursive and self.get_check_type(child).lower() in ("dictionary","array"):
+                    node_stack.append(child)
+                # Let's ensure at least one item moved, and then add to the undo task
+                if not skip_sort:
+                    undo_tasks.append({
+                        "type":"move",
+                        "cell":child,
+                        "from":node,
+                        "to":node,
+                        "index":self._tree.index(child)
+                    })
+                    # Actually move the node
+                    self._tree.move(child,node,index)
+        return list(undo_tasks)
 
     def sort_keys(self, cell, recursive = False, reverse = False):
         # Let's build a sorted list of keys, then generate move edits for each
@@ -3227,7 +3445,7 @@ class PlistWindow(tk.Toplevel):
         popup_menu.add_command(label="Paste{}".format(" (Cmd+V)" if is_mac else ""),command=self.paste_selection,state=p_state,accelerator=None if is_mac else "(Ctrl+V)")
         cell_path = self.get_cell_path(cell)
         # Add rbits option
-        cell_search = [x for x in self.split(cell_path) if not x=="*"]
+        cell_search = [x for x in self.split(cell_path) if x and x!="*"]
         if cell_search and cell_search[0] == "Root": cell_search = cell_search[1:]
         if cell_search and os.path.isfile(self.controller.get_best_tex_path()):
             popup_menu.add_separator()
@@ -3276,12 +3494,13 @@ class PlistWindow(tk.Toplevel):
         # Get selected node
         cell = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         self._tree.item(cell,open=True)
-        self.alternate_colors()
+        self.alternate_colors(start_with=cell)
 
     def collapse_node(self):
         # Get selected node
         cell = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         self._tree.item(cell,open=False)
+        self.alternate_colors(start_with=cell)
 
     def expand_all(self):
         # Get all nodes
@@ -3304,17 +3523,16 @@ class PlistWindow(tk.Toplevel):
         nodes.append(cell)
         for node in nodes:
             self._tree.item(node,open=True)
-        self.alternate_colors()
+        self.alternate_colors(start_with=cell)
         return "break" # Prevent keybinds from propagating further
 
     def collapse_children(self):
         # Get all children of the selected node
         cell = "" if not len(self._tree.selection()) else self._tree.selection()[0]
         nodes = self.iter_nodes(False, cell)
-        # nodes.append(cell)
         for node in nodes:
             self._tree.item(node,open=False)
-        self.alternate_colors()
+        self.alternate_colors(start_with=cell)
         return "break" # Prevent keybinds from propagating further
 
     def tree_click_event(self, event):
@@ -3335,6 +3553,15 @@ class PlistWindow(tk.Toplevel):
         parent = self._tree.parent(rowid)
         # get the actual item name we're editing
         tv_item = self._tree.identify('item', event.x, event.y)
+        # If our event.x/y_root are both 0, try to set them to the
+        # center of the tv_item's bbox
+        if event.x_root == event.y_root == 0:
+            try:
+                x,y,width,height = self._tree.bbox(tv_item,column)
+                event.x_root = self.winfo_rootx()+x+round(width/2)
+                event.y_root = self.winfo_rooty()+y+round(height/2)
+            except:
+                pass
         # Get the actual text
         index = int(column.replace("#",""))
         try:
@@ -3406,14 +3633,21 @@ class PlistWindow(tk.Toplevel):
             pass
         self.entry_popup = None
 
-    def iter_nodes(self, visible = True, current_item = None):
-        items = []
+    def iter_nodes(self, visible=True, current_item=None):
+        # Implement an iterative depth-first search to prevent
+        # max recursion in rare cases
         if current_item is None or isinstance(current_item, tk.Event):
             current_item = ""
-        for child in self._tree.get_children(current_item):
-            items.append(child)
-            if not visible or self._tree.item(child,"open"):
-                items.extend(self.iter_nodes(visible, child))
+        node_stack = deque()
+        node_stack.append(current_item)
+        items = deque()
+        while node_stack:
+            node = node_stack.pop()
+            if node and node != current_item:
+                items.append(node)
+            if not visible or self._tree.item(node,"open") or node == "":
+                for child in self._tree.get_children(node)[::-1]:
+                    node_stack.append(child)
         return items
 
     def get_root_node(self):
@@ -3444,9 +3678,18 @@ class PlistWindow(tk.Toplevel):
         if not self._tree.item(cell,"open"):
             self._tree.item(cell,open=True)
         # Call the actual alternate_colors function
-        self.alternate_colors(event)
+        self.alternate_colors(start_with=cell)
 
-    def set_colors(self, event = None):
+    def pre_collapse(self, event):
+        # Called before items close - we should ensure we alternate colors starting
+        # at the selected cell and on
+        cell = "" if not len(self._tree.selection()) else self._tree.selection()[0]
+        if self._tree.item(cell,"open"):
+            self._tree.item(cell,open=False)
+        # Call the alternate_colors function
+        self.alternate_colors(start_with=cell)
+
+    def set_colors(self, event = None, alternate = False):
         # Setup the colors and styles
         self.r1 = self.controller.r1_canvas["background"]
         self.r2 = self.controller.r2_canvas["background"]
@@ -3466,21 +3709,28 @@ class PlistWindow(tk.Toplevel):
         self._tree.tag_configure('even', foreground=self.r1t, background=self.r1)
         self._tree.tag_configure('odd', foreground=self.r2t, background=self.r2)
         self._tree.tag_configure("selected", foreground="black", background=self.hl)
-        self.alternate_colors()
+        if alternate: self.alternate_colors()
 
-    def alternate_colors(self, event = None):
+    def alternate_colors(self, event = None, start_with = None):
+        if self.alternating_colors: return
+        self.alternating_colors = True
+        focus = self._tree.focus()
         # Let's walk the children of our treeview
-        visible = self.iter_nodes(True,event)
+        visible = self.iter_nodes(visible=True)
+        # Set up our tag tuples
+        sel,odd,even = ("selected",),("odd",),("even",)
+        found_start = False
         for x,item in enumerate(visible):
-            tags = self._tree.item(item,"tags")
-            if not isinstance(tags,list): tags = []
-            # Strip out odd/even/selected
-            tags = [x for x in tags if not x in ("odd","even","selected")]
-            if item == self._tree.focus():
-                tags.append("selected")
-            else:
-                tags.append("odd" if x % 2 else "even")
-            self._tree.item(item, tags=tags)
+            if start_with is not None and start_with == item:
+                # We found the cell we were looking for
+                found_start = True
+            if start_with is None or found_start:
+                # We either aren't looking for a specific cell,
+                # or we already found it
+                tag = sel if item==focus else odd if x % 2 else even
+                if self._tree.item(item,"tags") != tag:
+                    self._tree.item(item,tags=tag)
+        self.alternating_colors = False
 
     def show_config_info(self, event = None):
         # find the path of selected cell
@@ -3501,17 +3751,15 @@ class PlistWindow(tk.Toplevel):
         if not window:
             config_tex_path = self.controller.get_best_tex_path()
             if config_tex_path and os.path.isfile(config_tex_path):
-                # pass mouse pointer location as location to open info window
-                mx = self.root.winfo_pointerx()
-                my = self.root.winfo_pointery()
+                # Ensure the selected cell is visible
+                self._tree.see(cell)
                 window = config_tex_info.display_info_window(
                     config_tex_path,
                     search_list,
                     120,
                     False,
                     False,
-                    mx,
-                    my,
+                    self, # Pass our window as the caller
                     font=self.font,
                     fg=self.r1t,
                     bg=self.r1

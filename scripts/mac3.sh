@@ -36,6 +36,9 @@ brew install gettext
 brew install neofetch
 brew install --cask teamviewer
 brew install --cask dropbox
+brew install parallel
+brew install webp
+brew install graphviz
 
 ### asdf 
 brew install asdf
@@ -103,6 +106,10 @@ rm AWSCLIV2.pkg
 ### veracrypt
 brew install --cask macfuse
 brew install --cask veracrypt
+
+### NTFS support
+brew install gromgit/fuse/ntfs-3g-mac
+brew install --cask mounty
 
 ### YOUTUBE DOWNLOAD SCRIPT
 sudo tee /usr/local/bin/youtube-download > /dev/null << YZS1
