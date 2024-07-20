@@ -16,7 +16,7 @@ sed -i'.zshrc_backup1' 's/plugins=(git)/plugins=(git zsh-autosuggestions)/g' ~/.
 sed -i'.zshrc_backup2' 's/robbyrussell/agnoster/g' ~/.zshrc
 cat >> ~/.zshrc << EZS3
 export DEFAULT_USER=\$USER
-export PATH=/Library/PostgreSQL/14/bin:\${PATH}
+export PATH=/Library/PostgreSQL/16/bin:\${PATH}
 export ANDROID_SDK=/Users/$USER/Library/Android/sdk
 export PATH=/Users/$USER/Library/Android/sdk/platform-tools:/Users/$USER/Library/Android/sdk/emulator:/Users/$USER/Library/Android/sdk/tools:\$PATH
 EZS3
