@@ -61,7 +61,6 @@ Gigabyte z370N WIFI using **BIOS version F12**
 - BIOS &gt; Secure Boot &gt; **ENABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
-- Peripherals &gt; Re-Size BAR Support &gt; **AUTO**
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **ENABLED**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
@@ -113,7 +112,6 @@ You will want to **Turn off Memory Integrity on Windows 11** to avoid problems o
 ## BIOS settings for MacOS
 
 - BIOS &gt; Secure Boot &gt; **DISABLED**
-- Peripherals &gt; Re-Size BAR Support &gt; **DISABLED**
 - Peripherals &gt; Intel PTT &gt; **DISABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **DISABLED**
