@@ -260,7 +260,7 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 The EFI folder configuration already comes with SecureBootModel and WiFi and Bluetooth Kexts disabled by default. After successfully installing MacOS you can enable these options as below.
 
 > **MacOS Update:**
-Using Sonoma 14.4 and later, every time you update MacOS, you need to first disable SecureBootModel (Disabled) and also disable all Intel WiFi and Bluetooth Kexts. After the update, you can enable it again.
+Using Sonoma 14.4 and later, every time you update MacOS, you need to first disable SecureBootModel (Disabled) and also disable all Intel WiFi and Bluetooth Kexts. After the update, you can enable it again. Please remind to **Clear NVRAM** each time you enable or disable this settings.
 
 - Enable the **SecureBootModel** in **`config.plist`**:
 ```diff
