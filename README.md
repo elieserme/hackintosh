@@ -96,7 +96,7 @@ You can install **Windows 11** as usual. **Drivers** for this motherboard are be
 Download the **[Intel® Optane™ Memory and Storage Management APP](https://apps.microsoft.com/detail/9mzng5hzwz1t?hl=en-US&gl=US)** to control and monitor your RAID array 
 
 > **TimeCapsule on Windows:**
-To use TimeCapsule driver, first enable the **SMB 1.0/CIFS** on Windows (use the _**Turn Windows features on or off**_ dialog for this)
+To use TimeCapsule driver, first enable the **SMB 1.0/CIFS** on Windows (use the _**Turn Windows features on or off**_ dialog for this). The same apply if you have a Windows file server that will be accessed by a MacOS machine.
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1** _(or run **Command Prompt as Administrator** and execute the following command):_
 
