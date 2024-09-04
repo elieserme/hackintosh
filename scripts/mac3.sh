@@ -41,6 +41,7 @@ brew install parallel
 brew install webp
 brew install graphviz
 brew install --cask dotnet-sdk
+brew install --cask docker
 
 ### asdf 
 brew install asdf

@@ -61,7 +61,6 @@ Gigabyte z370N WIFI using **BIOS version F12**
 - BIOS &gt; Secure Boot &gt; **ENABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
-- Peripherals &gt; Re-Size BAR Support &gt; **AUTO** _(for BIOS F14b and F14 only)_
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
