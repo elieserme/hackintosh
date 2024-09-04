@@ -8,11 +8,11 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Incompatible AWAC Fix</string>
+				<string>Fake SMBUS Device for MacOS</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
-				<string>SSDT-AWAC.aml</string>
+				<string>SSDT-SBUS-MCHC.aml</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
@@ -24,6 +24,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Incompatible AWAC Fix</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-AWAC.aml</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>HPET _CRS (Needs _CRS to XCRS Rename)</string>
 				<key>Enabled</key>
 				<true/>
@@ -32,15 +40,38 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Fake SMBUS Device for MacOS</string>
+				<string>Enable Ethernet with VT-d</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
-				<string>SSDT-SBUS-MCHC.aml</string>
+				<string>SSDT-DMAR.aml</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Powered USB Ports</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-USBX.aml</string>
 			</dict>
 		</array>
 		<key>Delete</key>
-		<array/>
+		<array>
+			<dict>
+				<key>All</key>
+				<true/>
+				<key>Comment</key>
+				<string>Disable OEM DMAR Table</string>
+				<key>Enabled</key>
+				<true/>
+				<key>OemTableId</key>
+				<data></data>
+				<key>TableLength</key>
+				<integer>0</integer>
+				<key>TableSignature</key>
+				<data>RE1BUg==</data>
+			</dict>
+		</array>
 		<key>Patch</key>
 		<array>
 			<dict>
@@ -193,7 +224,7 @@
 			<key>AvoidRuntimeDefrag</key>
 			<true/>
 			<key>DevirtualiseMmio</key>
-			<true/>
+			<false/>
 			<key>DisableSingleUser</key>
 			<false/>
 			<key>DisableVariableWrite</key>
@@ -203,8 +234,6 @@
 			<key>EnableSafeModeSlide</key>
 			<true/>
 			<key>EnableWriteUnprotector</key>
-			<false/>
-			<key>FixupAppleEfiImages</key>
 			<false/>
 			<key>ForceBooterSignature</key>
 			<false/>
@@ -223,7 +252,7 @@
 			<key>RebuildAppleMemoryMap</key>
 			<true/>
 			<key>ResizeAppleGpuBars</key>
-			<integer>-1</integer>
+			<integer>0</integer>
 			<key>SetupVirtualMap</key>
 			<true/>
 			<key>SignalAppleOS</key>
@@ -236,23 +265,19 @@
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>PciRoot(0x0)/Pci(0x1F,0x3)</key>
-			<dict>
-				<key>layout-id</key>
-				<integer>5</integer>
-				<key>alc-delay</key>
-				<integer>1000</integer>
-				<key>alctcsel</key>
-				<data>AQAAAA==</data>
-			</dict>
 			<key>PciRoot(0x0)/Pci(0x1C,0x5)/Pci(0x0,0x0)</key>
 			<dict>
+				<key>IOName</key>
+				<string>#ethernet</string>
 				<key>class-code</key>
 				<data>/////w==</data>
 				<key>name</key>
 				<string>#ethernet</string>
-				<key>IOName</key>
-				<string>#ethernet</string>
+			</dict>
+			<key>PciRoot(0x0)/Pci(0x1F,0x3)</key>
+			<dict>
+				<key>layout-id</key>
+				<integer>5</integer>
 			</dict>
 		</dict>
 		<key>Delete</key>
@@ -268,7 +293,7 @@
 				<key>BundlePath</key>
 				<string>Lilu.kext</string>
 				<key>Comment</key>
-				<string>Lilu.kext</string>
+				<string>V1.6.8 | Lilu.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -286,7 +311,7 @@
 				<key>BundlePath</key>
 				<string>NVMeFix.kext</string>
 				<key>Comment</key>
-				<string>NVMeFix.kext</string>
+				<string>V1.1.1 | NVMeFix.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -322,7 +347,7 @@
 				<key>BundlePath</key>
 				<string>RestrictEvents.kext</string>
 				<key>Comment</key>
-				<string>RestrictEvents.kext</string>
+				<string>V1.1.4 | RestrictEvents.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -340,7 +365,7 @@
 				<key>BundlePath</key>
 				<string>USBMap.kext</string>
 				<key>Comment</key>
-				<string>USBMap.kext</string>
+				<string>V1.0 | USBMap.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -358,7 +383,7 @@
 				<key>BundlePath</key>
 				<string>VirtualSMC.kext</string>
 				<key>Comment</key>
-				<string>VirtualSMC.kext</string>
+				<string>V1.3.3</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -376,7 +401,7 @@
 				<key>BundlePath</key>
 				<string>WhateverGreen.kext</string>
 				<key>Comment</key>
-				<string>WhateverGreen.kext</string>
+				<string>V1.6.7 | WhateverGreen.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -394,7 +419,7 @@
 				<key>BundlePath</key>
 				<string>AppleALC.kext</string>
 				<key>Comment</key>
-				<string>AppleALC.kext</string>
+				<string>V1.9.1 | AppleALC.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -412,7 +437,7 @@
 				<key>BundlePath</key>
 				<string>SMCProcessor.kext</string>
 				<key>Comment</key>
-				<string>SMCProcessor.kext</string>
+				<string>V1.3.3 | SMCProcessor.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -430,7 +455,7 @@
 				<key>BundlePath</key>
 				<string>SMCSuperIO.kext</string>
 				<key>Comment</key>
-				<string>SMCSuperIO.kext</string>
+				<string>V1.3.3 | SMCSuperIO.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -466,7 +491,7 @@
 				<key>BundlePath</key>
 				<string>IntelMausi.kext</string>
 				<key>Comment</key>
-				<string>IntelMausi.kext</string>
+				<string>V1.0.7 | IntelMausi.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -555,12 +580,12 @@
 		<array/>
 		<key>Emulate</key>
 		<dict>
-			<key>DummyPowerManagement</key>
-			<false/>
 			<key>Cpuid1Data</key>
 			<data></data>
 			<key>Cpuid1Mask</key>
 			<data></data>
+			<key>DummyPowerManagement</key>
+			<false/>
 			<key>MaxKernel</key>
 			<string></string>
 			<key>MinKernel</key>
@@ -572,8 +597,6 @@
 		<array/>
 		<key>Quirks</key>
 		<dict>
-			<key>SetApfsTrimTimeout</key>
-			<integer>-1</integer>
 			<key>AppleCpuPmCfgLock</key>
 			<false/>
 			<key>AppleXcpmCfgLock</key>
@@ -587,8 +610,6 @@
 			<key>CustomSMBIOSGuid</key>
 			<false/>
 			<key>DisableIoMapper</key>
-			<false/>
-			<key>DisableIoMapperMapping</key>
 			<false/>
 			<key>DisableLinkeditJettison</key>
 			<true/>
@@ -614,6 +635,8 @@
 			<true/>
 			<key>ProvideCurrentCpuInfo</key>
 			<false/>
+			<key>SetApfsTrimTimeout</key>
+			<integer>0</integer>
 			<key>ThirdPartyDrives</key>
 			<false/>
 			<key>XhciPortLimit</key>
@@ -637,8 +660,6 @@
 		<array/>
 		<key>Boot</key>
 		<dict>
-			<key>LauncherPath</key>
-			<string>Default</string>
 			<key>ConsoleAttributes</key>
 			<integer>0</integer>
 			<key>HibernateMode</key>
@@ -647,10 +668,10 @@
 			<false/>
 			<key>HideAuxiliary</key>
 			<true/>
-			<key>InstanceIdentifier</key>
-			<string></string>
 			<key>LauncherOption</key>
 			<string>Full</string>
+			<key>LauncherPath</key>
+			<string>Default</string>
 			<key>PickerAttributes</key>
 			<integer>144</integer>
 			<key>PickerAudioAssist</key>
@@ -691,13 +712,13 @@
 		<array/>
 		<key>Security</key>
 		<dict>
-			<key>BlacklistAppleUpdate</key>
-			<true/>
 			<key>AllowSetDefault</key>
 			<true/>
 			<key>ApECID</key>
 			<integer>0</integer>
 			<key>AuthRestart</key>
+			<true/>
+			<key>BlacklistAppleUpdate</key>
 			<true/>
 			<key>DmgLoading</key>
 			<string>Signed</string>
@@ -720,6 +741,33 @@
 		</dict>
 		<key>Serial</key>
 		<dict>
+			<key>Custom</key>
+			<dict>
+				<key>BaudRate</key>
+				<integer>115200</integer>
+				<key>ClockRate</key>
+				<integer>1843200</integer>
+				<key>DetectCable</key>
+				<false/>
+				<key>ExtendedTxFifoSize</key>
+				<integer>64</integer>
+				<key>FifoControl</key>
+				<integer>7</integer>
+				<key>LineControl</key>
+				<integer>3</integer>
+				<key>PciDeviceInfo</key>
+				<data>/w==</data>
+				<key>RegisterAccessWidth</key>
+				<integer>8</integer>
+				<key>RegisterBase</key>
+				<integer>1016</integer>
+				<key>RegisterStride</key>
+				<integer>1</integer>
+				<key>UseHardwareFlowControl</key>
+				<false/>
+				<key>UseMmio</key>
+				<false/>
+			</dict>
 			<key>Init</key>
 			<false/>
 			<key>Override</key>
@@ -728,21 +776,21 @@
 		<key>Tools</key>
 		<array>
 			<dict>
-				<key>Comment</key>
-				<string>OpenShell.efi</string>
+				<key>Arguments</key>
+				<string></string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Comment</key>
+				<string>OpenShell.efi</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Flavour</key>
 				<string>OpenShell:UEFIShell:Shell</string>
 				<key>FullNvramAccess</key>
 				<false/>
-				<key>Arguments</key>
-				<string></string>
-				<key>Path</key>
-				<string>OpenShell.efi</string>
 				<key>Name</key>
+				<string>OpenShell.efi</string>
+				<key>Path</key>
 				<string>OpenShell.efi</string>
 				<key>RealPath</key>
 				<false/>
@@ -750,21 +798,21 @@
 				<false/>
 			</dict>
 			<dict>
-				<key>Comment</key>
-				<string>modGRUBShell.efi</string>
+				<key>Arguments</key>
+				<string></string>
 				<key>Auxiliary</key>
 				<true/>
+				<key>Comment</key>
+				<string>modGRUBShell.efi</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Flavour</key>
 				<string>Auto</string>
 				<key>FullNvramAccess</key>
 				<false/>
-				<key>Arguments</key>
-				<string></string>
-				<key>Path</key>
-				<string>modGRUBShell.efi</string>
 				<key>Name</key>
+				<string>modGRUBShell.efi</string>
+				<key>Path</key>
 				<string>modGRUBShell.efi</string>
 				<key>RealPath</key>
 				<false/>
@@ -841,12 +889,12 @@
 				<data>GA==</data>
 				<key>boot-args</key>
 				<string>agdpmod=pikera</string>
-				<key>run-efi-updater</key>
-				<string>No</string>
 				<key>csr-active-config</key>
 				<data>AAAAAA==</data>
 				<key>prev-lang:kbd</key>
 				<string>pt-BR:72</string>
+				<key>run-efi-updater</key>
+				<string>No</string>
 			</dict>
 		</dict>
 		<key>Delete</key>
@@ -964,6 +1012,8 @@
 			<string>Builtin</string>
 			<key>CustomDelays</key>
 			<false/>
+			<key>GraphicsInputMirroring</key>
+			<true/>
 			<key>KeyInitialDelay</key>
 			<integer>50</integer>
 			<key>KeySubsequentDelay</key>
@@ -980,8 +1030,6 @@
 			<integer>80</integer>
 			<key>PointerPollMin</key>
 			<integer>10</integer>
-			<key>GraphicsInputMirroring</key>
-			<true/>
 			<key>PointerSpeedDiv</key>
 			<integer>1</integer>
 			<key>PointerSpeedMul</key>
@@ -995,6 +1043,8 @@
 			<string>PciRoot(0x0)/Pci(0x1F,0x3)</string>
 			<key>AudioOutMask</key>
 			<integer>1</integer>
+			<key>AudioSupport</key>
+			<false/>
 			<key>DisconnectHda</key>
 			<false/>
 			<key>MaximumGain</key>
@@ -1003,8 +1053,6 @@
 			<integer>-30</integer>
 			<key>MinimumAudibleGain</key>
 			<integer>-55</integer>
-			<key>AudioSupport</key>
-			<false/>
 			<key>PlayChime</key>
 			<string>Disabled</string>
 			<key>ResetTrafficClass</key>
@@ -1076,22 +1124,16 @@
 		<dict>
 			<key>ClearScreenOnModeSwitch</key>
 			<false/>
-			<key>ConsoleFont</key>
-			<string></string>
 			<key>ConsoleMode</key>
 			<string></string>
 			<key>DirectGopRendering</key>
 			<false/>
 			<key>ForceResolution</key>
 			<false/>
-			<key>GopBurstMode</key>
-			<false/>
 			<key>GopPassThrough</key>
 			<string>Disabled</string>
 			<key>IgnoreTextInGraphics</key>
 			<false/>
-			<key>InitialMode</key>
-			<string>Auto</string>
 			<key>ProvideConsoleGop</key>
 			<true/>
 			<key>ReconnectGraphicsOnConnect</key>
@@ -1147,8 +1189,6 @@
 			<false/>
 			<key>OSInfo</key>
 			<false/>
-			<key>PciIo</key>
-			<false/>
 			<key>UnicodeCollation</key>
 			<false/>
 		</dict>
@@ -1164,9 +1204,9 @@
 			<false/>
 			<key>ExitBootServicesDelay</key>
 			<integer>0</integer>
-			<key>ForgeUefiSupport</key>
-			<false/>
 			<key>ForceOcWriteFlash</key>
+			<false/>
+			<key>ForgeUefiSupport</key>
 			<false/>
 			<key>IgnoreInvalidFlexRatio</key>
 			<false/>
@@ -1178,10 +1218,6 @@
 			<true/>
 			<key>ResizeGpuBars</key>
 			<integer>-1</integer>
-			<key>ResizeUsePciRbIo</key>
-			<false/>
-			<key>ShimRetainProtocol</key>
-			<false/>
 			<key>TscSyncTimeout</key>
 			<integer>0</integer>
 			<key>UnblockFsConnect</key>

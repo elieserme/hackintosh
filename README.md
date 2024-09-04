@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 1.0.0** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14.5 Sonoma** like an **iMac Pro**!
+This is the guide for **OpenCore 1.0.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14.6.1 Sonoma** like an **iMac Pro**!
 
 ## Table of Contents
 
@@ -61,8 +61,9 @@ Gigabyte z370N WIFI using **BIOS version F12**
 - BIOS &gt; Secure Boot &gt; **ENABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
+- Peripherals &gt; Re-Size BAR Support &gt; **AUTO** _(for BIOS F14b and F14 only)_
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
-- Peripherals &gt; SGX &gt; **ENABLED**
+- Peripherals &gt; SGX &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **Intel RST Premium With Intel Optane Acceleration**
 - Peripherals &gt; SATA and RST Configuration &gt; Use RST Legacy OROM &gt; **DISABLED**
@@ -76,9 +77,9 @@ Gigabyte z370N WIFI using **BIOS version F12**
 - Chipset &gt; VT-d &gt; **ENABLED**
 - Chipset &gt; Wake On Lan &gt; **ENABLED** _(remind to enable it on adapters too)_
 - Power &gt; AC BACK &gt; **Always Off**
-- Power &gt; ErP &gt; **ENABLED**
+- Power &gt; ErP &gt; **DISABLED**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
-- Power &gt; CEC 2019 Ready &gt; **ENABLED**
+- Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
 - Save & Exit &gt; Save Profile &gt; **Windows** _(get the first entry and name it)_
 - Save & Exit &gt; **Save & Exit Setup**
@@ -113,9 +114,7 @@ You will want to **Turn off Memory Integrity on Windows 11** to avoid problems o
 
 - BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Intel PTT &gt; **DISABLED**
-- Peripherals &gt; SGX &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **DISABLED**
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Save & Exit &gt; Save Profile &gt; **MacOS** _(get the second entry and name it)_
 - Save & Exit &gt; **Save & Exit Setup**

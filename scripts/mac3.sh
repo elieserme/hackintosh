@@ -18,6 +18,7 @@ brew install --cask tor-browser
 brew install --cask transmission
 brew install --cask cyberduck
 brew install --cask balenaetcher
+brew install --cask libreoffice
 
 ### development
 brew install --cask visual-studio-code
@@ -39,6 +40,7 @@ brew install --cask dropbox
 brew install parallel
 brew install webp
 brew install graphviz
+brew install --cask dotnet-sdk
 
 ### asdf 
 brew install asdf
@@ -83,6 +85,7 @@ brew install --cask appcleaner
 brew install --cask monitorcontrol
 brew install --cask fliqlo
 brew install --cask gimp
+brew install --cask inkscape
 brew install --cask keka
 brew install --cask iina
 brew install yt-dlp
