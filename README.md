@@ -36,7 +36,7 @@ This is the guide for **OpenCore 1.0.1** Hackintosh build based on i7 9700KF | G
 |     **RAM**      | **2 x [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf)** 16GB DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | **[Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6)** Dedicated Video Card                                                                         |
 |   **Wireless**   | **[Intel AC 8265NGW](https://www.intel.com.br/content/www/br/pt/products/sku/94150/intel-dual-band-wirelessac-8265/specifications.html)** WiFi and Bluetooth PCIe card onboard |
-|     **NVMe**     | **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 1TB PCIe NVMe _(for Windows 11 and gamming, with heatsink on the top of the motherboard)_ <br /> **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 500GB PCIe NVMe _(for MacOS,  on the back of the motherboard)_                                                    |
+|     **NVMe**     | **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 500GB PCIe NVMe _(for MacOS,  on the top of the motherboard)_  <br /> **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 1TB PCIe NVMe _(for Windows 11 and gamming, on the back of the motherboard)_                                                    |
 |     **HDD RAID**      | **2 x [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/)** 2TB HDD 3.5"                                               |
 |  **Coolers**  | **[Montech DT24](https://www.montechpc.com/en/products_detail.php?nid=299&s_ok2=)** CPU cooler<br />**3 x [Fractal Aspect 12](https://www.fractal-design.com/products/fans/aspect/aspect-12/black/)** 120mm case cooler _(System Fan 1 and 2)_                                                                                                      |
 | **Power Supply** | **[Super Flower LEADEX III GOLD 850W](https://www.super-flower.com.tw/ja/products/leadex-iii-gold-850w)**  _(use **[this link](https://outervision.com/power-supply-calculator)** to calculate your power supply need)_                                           |
@@ -64,17 +64,13 @@ Gigabyte z370N WIFI using **BIOS version F12**
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
-- Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **Intel RST Premium With Intel Optane Acceleration**
-- Peripherals &gt; SATA and RST Configuration &gt; Use RST Legacy OROM &gt; **DISABLED**
-- Peripherals &gt; SATA and RST Configuration &gt; RST Control PCIe Storage Devices &gt; **MANUAL**
-- Peripherals &gt; SATA and RST Configuration &gt; PCIe Storage Dev On Port 9 &gt; **RST Controlled**
-- Peripherals &gt; SATA and RST Configuration &gt; PCIe Storage Dev On Port 21 &gt; **Not RST Controlled**
+- Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
 - Chipset &gt; VT-d &gt; **ENABLED**
-- Chipset &gt; Wake On Lan &gt; **ENABLED** _(remind to enable it on adapters too)_
+- Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; AC BACK &gt; **Always Off**
 - Power &gt; ErP &gt; **DISABLED**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
@@ -89,11 +85,7 @@ You can install **Windows 11** as usual. **Drivers** for this motherboard are be
 
 - **Download [Intel INF Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/SetupChipset.exe)** _**(required)**_
 - **Download [Latest AMD Graphics Driver](https://www.amd.com/pt/support/graphics/amd-radeon-6000-series/amd-radeon-6600-series/amd-radeon-rx-6600-xt)** _**(required)**_
-- **Download [Intel RAID Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/mb_driver_irst_17.11.0.1000.1.zip)** _**(required if will use RAID)**_
 - Download [Apple TimeCapsule Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/AirPortSetup.exe) _(optional)_
-
-> **Intel RAID APP:**
-Download the **[Intel® Optane™ Memory and Storage Management APP](https://apps.microsoft.com/detail/9mzng5hzwz1t?hl=en-US&gl=US)** to control and monitor your RAID array 
 
 > **TimeCapsule on Windows:**
 To use TimeCapsule driver, first enable the **SMB 1.0/CIFS** on Windows (use the _**Turn Windows features on or off**_ dialog for this). The same apply if you have a Windows file server that will be accessed by a MacOS machine.
@@ -114,7 +106,6 @@ You will want to **Turn off Memory Integrity on Windows 11** to avoid problems o
 - BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Intel PTT &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **DISABLED**
-- Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Save & Exit &gt; Save Profile &gt; **MacOS** _(get the second entry and name it)_
 - Save & Exit &gt; **Save & Exit Setup**
   
