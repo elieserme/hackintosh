@@ -37,7 +37,7 @@ This is the guide for **OpenCore 1.0.1** Hackintosh build based on i7 9700KF | G
 |     **GPU**      | **[Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6)** Dedicated Video Card                                                                         |
 |   **Wireless**   | **[Intel AC 8265NGW](https://www.intel.com.br/content/www/br/pt/products/sku/94150/intel-dual-band-wirelessac-8265/specifications.html)** WiFi and Bluetooth PCIe card onboard |
 |     **NVMe**     | **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 500GB PCIe NVMe _(for MacOS,  on the top of the motherboard)_  <br /> **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 1TB PCIe NVMe _(for Windows 11 and gamming, on the back of the motherboard)_                                                    |
-|     **HDD RAID**      | **2 x [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/)** 2TB HDD 3.5"                                               |
+|     **HDD**      | **2 x [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/)** 2TB HDD 3.5"                                               |
 |  **Coolers**  | **[Montech DT24](https://www.montechpc.com/en/products_detail.php?nid=299&s_ok2=)** CPU cooler<br />**3 x [Fractal Aspect 12](https://www.fractal-design.com/products/fans/aspect/aspect-12/black/)** 120mm case cooler _(System Fan 1 and 2)_                                                                                                      |
 | **Power Supply** | **[Super Flower LEADEX III GOLD 850W](https://www.super-flower.com.tw/ja/products/leadex-iii-gold-850w)**  _(use **[this link](https://outervision.com/power-supply-calculator)** to calculate your power supply need)_                                           |
 |     **Case**     | **[Fractal Pop Mini Silent](https://www.fractal-design.com/products/cases/pop/pop-mini-silent/black-tg-clear/)** Micro ATX and Mini ITX support                                                                                                             |
@@ -88,7 +88,7 @@ You can install **Windows 11** as usual. **Drivers** for this motherboard are be
 - Download [Apple TimeCapsule Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/AirPortSetup.exe) _(optional)_
 
 > **TimeCapsule on Windows:**
-To use TimeCapsule driver, first enable the **SMB 1.0/CIFS** on Windows (use the _**Turn Windows features on or off**_ dialog for this). The same apply if you have a Windows file server that will be accessed by a MacOS machine.
+To use TimeCapsule driver, first enable the **SMB 1.0/CIFS** on Windows (use the _**Turn Windows features on or off**_ dialog for this). The same apply if you have a Windows file server that will be accessed by a MacOS machine or vice-versa.
 
 To correct date and time, you need patch registry for **time sync** with MacOS, run **regedit as Administrator** and go to `HKEY_LOCAL_MACHINE` &gt; `SYSTEM` &gt; `CURRENTCONTROLSET` &gt; `CONTROL` &gt; `TIMEZONEINFORMATION` and add the property **RealTimeIsUniversal** with value **DWORD=1** _(or run **Command Prompt as Administrator** and execute the following command):_
 
