@@ -53,8 +53,8 @@ The **Intel AT211 Ethernet is disabled** in MacOS, so you need to use the **Inte
 Gigabyte z370N WIFI using **BIOS version F12**
 
 - Save & Exit &gt; **Load optimised defaults**
-- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM MOS**
-- SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **VRM MOS**
+- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **PCH**
+- SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **PCH**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
