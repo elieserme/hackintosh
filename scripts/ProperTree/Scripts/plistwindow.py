@@ -2,7 +2,8 @@
 import sys, os, plistlib, base64, binascii, datetime, tempfile, shutil, re, subprocess, math, hashlib, time
 
 from collections import OrderedDict, deque
-from Scripts import config_tex_info
+from io import BytesIO
+from Scripts import config_tex_info, plist
 
 try:
     # Python 2
@@ -12,6 +13,7 @@ try:
     import tkMessageBox as mb
     from tkFont import Font
     from itertools import izip_longest as izip
+    from StringIO import StringIO
 except ImportError:
     # Python 3
     import tkinter as tk
@@ -20,26 +22,27 @@ except ImportError:
     from tkinter import messagebox as mb
     from tkinter.font import Font
     from itertools import zip_longest as izip
-from . import plist
-
-try:
-    long
-    unicode
-except NameError:  # Python 3
     long = int
     unicode = str
+    basestring = str
+    from io import StringIO
 
 class EntryPlus(tk.Entry):
-    def __init__(self,parent,master,**kw):
+    def __init__(self,parent,master,controller,**kw):
         tk.Entry.__init__(self, parent, **kw)
 
         self.parent = parent
         self.master = master
+        self.controller = controller
 
         key = "Command" if str(sys.platform) == "darwin" else "Control"
         self.bind("<{}-a>".format(key), self.select_all)
         self.bind("<{}-c>".format(key), self.copy)
         self.bind("<{}-v>".format(key), self.paste)
+        self.bind("<Left>", self.goto_left)
+        self.bind("<Right>", self.goto_right)
+        self.bind("<Shift-Left>", self.select_left)
+        self.bind("<Shift-Right>", self.select_right)
         self.bind("<Shift-Up>", self.select_prior)
         self.bind("<Shift-Down>", self.select_after)
         self.bind("<Up>", self.goto_start)
@@ -51,18 +54,67 @@ class EntryPlus(tk.Entry):
         return 'break'
 
     def select_prior(self, *ignore):
-        self.selection_range(0,self.index(tk.INSERT))
+        try:
+            if self.index(tk.INSERT) == self.index(tk.SEL_LAST):
+                # Just set the cursor position
+                return self.goto_left_right()
+            else:
+                self.selection_range(0,tk.SEL_LAST)
+        except:
+            self.selection_range(0,self.index(tk.INSERT))
         self.icursor(0)
         return 'break'
 
     def select_after(self, *ignore):
-        self.selection_range(self.index(tk.INSERT),"end")
-        self.icursor("end")
+        try:
+            if self.index(tk.INSERT) == self.index(tk.SEL_FIRST):
+                # Just set the cursor position
+                return self.goto_left_right(left=False)
+            else:
+                self.selection_range(tk.SEL_FIRST,tk.END)
+        except:
+            self.selection_range(self.index(tk.INSERT),tk.END)
+        self.icursor(tk.END)
         return 'break'
 
+    def select_left_right(self, left=True):
+        # Check if we're at the left already, and if so
+        # just return
+        if (left and self.index(tk.INSERT) == 0) or \
+        (not left and self.index(tk.INSERT) == self.index(tk.END)):
+            return 'break'
+        # Get the baseline values
+        index = self.index(tk.INSERT)
+        try:
+            start = self.index(tk.SEL_FIRST)
+            end   = self.index(tk.SEL_LAST)
+        except:
+            # Default to the index
+            start = end = index
+        # Clamp the index
+        new_index = min(max(0,index - 1 if left else index + 1),self.index(tk.END))
+        # Figure out which we're updating
+        if index == start:
+            start = new_index
+        else:
+            end = new_index
+        # Set our selection
+        self.icursor(new_index)
+        self.selection_range(
+            min(start,end),
+            max(start,end)
+        )
+        return 'break'
+
+    def select_left(self, *ignore):
+        return self.select_left_right()
+
+    def select_right(self, *ignore):
+        return self.select_left_right(left=False)
+
     def select_all(self, *ignore):
-        self.selection_range(0,"end")
-        self.icursor("end")
+        self.selection_range(0,tk.END)
+        self.icursor(tk.END)
         # returns 'break' to interrupt default key-bindings
         return 'break'
 
@@ -73,8 +125,34 @@ class EntryPlus(tk.Entry):
 
     def goto_end(self, event=None):
         self.selection_range(0, 0)
-        self.icursor("end")
+        self.icursor(tk.END)
         return 'break'
+
+    def goto_left_right(self, left=True):
+        try:
+            target = self.index(
+                tk.SEL_FIRST if left else tk.SEL_LAST
+            )
+            # We have some text selected, clear it
+            # and set the cursor at the left or right
+            # as needed
+            self.selection_range(0, 0)
+            self.icursor(target)
+        except:
+            # No selection - just move the cursor
+            # to the left or right if possible
+            if left:
+                cursor = max(0,self.index(tk.INSERT)-1)
+            else:
+                cursor = min(len(self.get()),self.index(tk.INSERT)+1)
+            self.icursor(cursor)
+        return 'break'
+
+    def goto_left(self, event=None):
+        return self.goto_left_right()
+
+    def goto_right(self, event=None):
+        return self.goto_left_right(left=False)
     
     def copy(self, event=None):
         try:
@@ -83,7 +161,14 @@ class EntryPlus(tk.Entry):
             get = ""
         if not len(get):
             return 'break'
-        self.master._clipboard_append(get)
+        # Use the _clipboard_append method of the controller
+        # if passed, otherwise fall back to the master's
+        # clipboard_append which may not roll over to the
+        # system clipboard
+        if hasattr(self.controller,"_clipboard_append"):
+            self.controller._clipboard_append(get)
+        else:
+            self.master.clipboard_append(get)
         self.update()
         return 'break'
 
@@ -108,9 +193,8 @@ class EntryPlus(tk.Entry):
         return 'break'
 
 class EntryPopup(EntryPlus):
-    def __init__(self, parent, master, text, cell, column, **kw):
-        # tk.Entry.__init__(self, parent, **kw)
-        EntryPlus.__init__(self, parent, master, **kw)
+    def __init__(self, parent, master, controller, text, cell, column, **kw):
+        EntryPlus.__init__(self, parent, master, controller, **kw)
 
         self.original_text = text
         self.insert(0, text)
@@ -334,6 +418,8 @@ class PlistWindow(tk.Toplevel):
 
         # Set up the options
         self.current_plist = None # None = new
+        self.last_saved = None
+        self.last_hash = None
         self.edited = False
         self.dragging = False
         self.drag_start = None
@@ -546,13 +632,13 @@ class PlistWindow(tk.Toplevel):
         r_label.grid(row=1,column=0,sticky="e")
         self.f_options = ["Key", "Boolean", "Data", "Date", "Number", "UID", "String"]
         self.find_type = self.f_options[0]
-        self.f_text = EntryPlus(self.find_frame,self)
+        self.f_text = EntryPlus(self.find_frame,self,self.controller)
         self.f_text.bind("<Return>", self.find_next)
         self.f_text.bind("<KP_Enter>", self.find_next)
         self.f_text.delete(0,tk.END)
         self.f_text.insert(0,"")
         self.f_text.grid(row=0,column=2,sticky="we",padx=10,pady=10)
-        self.r_text = EntryPlus(self.find_frame,self)
+        self.r_text = EntryPlus(self.find_frame,self,self.controller)
         self.r_text.bind("<Return>", self.replace)
         self.r_text.bind("<KP_Enter>", self.replace)
         self.r_text.delete(0,tk.END)
@@ -1223,7 +1309,13 @@ class PlistWindow(tk.Toplevel):
             mb.showerror("An Error Occurred While Opening {}".format(os.path.basename(self.current_plist)), repr(e),parent=self)
             return
         # We should have the plist data now
-        self.open_plist(self.current_plist,plist_data,plist_type=self.plist_type_string.get(),alternate=True)
+        self.open_plist(
+            self.current_plist,
+            plist_data,
+            auto_expand=self.controller.settings.get("expand_all_items_on_open",True),
+            plist_type=self.plist_type_string.get(),
+            alternate=True
+        )
 
     def get_min_max_from_match(self, match_text):
         # Helper method to take MatchKernel output and break it into the MinKernel and MaxKernel
@@ -1262,9 +1354,9 @@ class PlistWindow(tk.Toplevel):
             name = os.path.basename(item.get("Path",item.get("BundlePath","Unknown Name")))
             # Check the keys containing "path"
             for key in item:
-                if "path" in key.lower() and isinstance(item[key],(str,unicode)) and len(item[key])>self.safe_path_length:
+                if "path" in key.lower() and isinstance(item[key],basestring) and len(item[key])>self.safe_path_length:
                     paths_too_long.append(key) # Too long - keep a reference of the key
-        elif isinstance(item,(str,unicode)):
+        elif isinstance(item,basestring):
             name = os.path.basename(item) # Retain the last path component as the name
             # Checking the item itself
             if len(item)>self.safe_path_length:
@@ -1274,18 +1366,36 @@ class PlistWindow(tk.Toplevel):
         return [(item,name,paths_too_long)] # Return a list containing a tuple of the original item, and which paths are too long
 
     def get_hash(self,path,block_size=65536):
-        if not os.path.exists(path):
-            return ""
+        # If it's a string, we try to open it, assuming it's a file path
+        if isinstance(path,basestring):
+            if not os.path.exists(path):
+                return ""
+            f = open(path,"rb")
+        else:
+            # If it's not, assume it's a buffer or file handle
+            f = path
+            f.seek(0)
+        # Helper method to close file handles, or seek to 0
+        # as needed
+        def finish(f,path):
+            if isinstance(path,basestring):
+                f.close()
+            else:
+                f.seek(0)
+        # Set up our hasher and hash in chunks
         hasher = hashlib.md5()
         try:
-            with open(path,"rb") as f:
-                while True:
-                    buffer = f.read(block_size)
-                    if not buffer: break
-                    hasher.update(buffer)
+            while True:
+                buffer = f.read(block_size)
+                if not buffer:
+                    break
+                hasher.update(buffer)
+            finish(f,path)
             return hasher.hexdigest()
         except:
             pass
+        # Make sure we close our file handle, or seek to 0
+        finish(f,path)
         return "" # Couldn't determine hash :(
 
     def oc_snapshot(self, event = None, clean = False):
@@ -1587,13 +1697,13 @@ class PlistWindow(tk.Toplevel):
                 try:
                     with open(plist_full_path,"rb") as f:
                         info_plist = plist.load(f)
-                    if not "CFBundleIdentifier" in info_plist or not isinstance(info_plist["CFBundleIdentifier"],(str,unicode)):
+                    if not "CFBundleIdentifier" in info_plist or not isinstance(info_plist["CFBundleIdentifier"],basestring):
                         continue # Requires a valid CFBundleIdentifier string
                     kinfo = {
                         "CFBundleIdentifier": info_plist["CFBundleIdentifier"],
                         "OSBundleLibraries": info_plist.get("OSBundleLibraries",[]),
                         "cfbi": info_plist["CFBundleIdentifier"].lower(), # Case insensitive
-                        "osbl": [x.lower() for x in info_plist.get("OSBundleLibraries",[]) if isinstance(x,(str,unicode))] # Case insensitive
+                        "osbl": [x.lower() for x in info_plist.get("OSBundleLibraries",[]) if isinstance(x,basestring)] # Case insensitive
                     }
                     if info_plist.get("CFBundleExecutable",None):
                         if not os.path.exists(os.path.join(path,name,"Contents","MacOS",info_plist["CFBundleExecutable"])):
@@ -1822,7 +1932,7 @@ class PlistWindow(tk.Toplevel):
         drivers = [] if clean else tree_dict["UEFI"]["Drivers"]
         for driver in sorted(drivers_list, key=lambda x: x.get("Path","").lower() if driver_add else x):
             if not driver_add: # Old way
-                if not isinstance(driver,(str,unicode)) or driver.lower() in [x.lower() for x in drivers if isinstance(x,(str,unicode))]:
+                if not isinstance(driver,basestring) or driver.lower() in [x.lower() for x in drivers if isinstance(x,basestring)]:
                     continue
             else:
                 if driver["Path"].lower() in [x.get("Path","").lower() for x in drivers if isinstance(x,dict)]:
@@ -1833,7 +1943,7 @@ class PlistWindow(tk.Toplevel):
         new_drivers = []
         for driver in drivers:
             if not driver_add: # Old way
-                if not isinstance(driver,(str,unicode)) or not driver.lower() in [x.lower() for x in drivers_list if isinstance(x,(str,unicode))]:
+                if not isinstance(driver,basestring) or not driver.lower() in [x.lower() for x in drivers_list if isinstance(x,basestring)]:
                     continue
             else:
                 if not isinstance(driver,dict):
@@ -1929,7 +2039,7 @@ class PlistWindow(tk.Toplevel):
             formatted = []
             for entry in long_paths:
                 item,name,keys = entry
-                if isinstance(item,(str,unicode)): # It's an older string path
+                if isinstance(item,basestring): # It's an older string path
                     formatted.append(name)
                 elif isinstance(item,dict):
                     formatted.append("{} -> {}".format(name,", ".join(keys)))
@@ -2159,7 +2269,7 @@ class PlistWindow(tk.Toplevel):
                     "cell":cell,
                 })
                 # Now we actually add it
-                self._tree.move(cell,task["from"],task.get("index","end"))
+                self._tree.move(cell,task["from"],task.get("index",tk.END))
                 selected = cell
             elif ttype == "move":
                 # We moved a cell - let's save the old info
@@ -2171,7 +2281,7 @@ class PlistWindow(tk.Toplevel):
                     "index":self._tree.index(cell)
                 })
                 # Let's actually move it now
-                self._tree.move(cell,task["from"],task.get("index","end"))
+                self._tree.move(cell,task["from"],task.get("index",tk.END))
         # Let's check if we have an r_task_list - and add it if it wasn't a one-off
         if len(r_task_list) and single_undo is None:
             r.append(r_task_list)
@@ -2203,6 +2313,29 @@ class PlistWindow(tk.Toplevel):
         # only when the window specifically gained focus
         if event and event.widget == self:
             self.lift()
+            if self.controller.settings.get("warn_if_modified",True) \
+            and self.current_plist and os.path.isfile(self.current_plist) \
+            and self.last_saved and self.last_hash:
+                # We have a valid file and a save time - see if the file
+                # has been modified since then
+                try:
+                    last_modified = os.path.getmtime(self.current_plist)
+                    modified_hash = self.get_hash(self.current_plist)
+                except Exception:
+                    self.last_saved = self.last_hash = None
+                    return
+                if self.last_saved != last_modified and self.last_hash != modified_hash:
+                    # Update to avoid continually warning
+                    self.last_saved = last_modified
+                    self.last_hash  = modified_hash
+                    self.bell()
+                    if mb.askyesno(
+                        "File Was Modified",
+                        "{} was modified by another application, do you want to reload it from disk?".format(
+                            os.path.basename(self.current_plist)
+                        ),
+                        parent=self):
+                        self.reload_from_disk()
 
     def move_selection(self, event):
         # Check if we have a entry_popup - and relocate it
@@ -2482,22 +2615,30 @@ class PlistWindow(tk.Toplevel):
         # Create a temp folder and save there first
         temp = tempfile.mkdtemp()
         temp_file = os.path.join(temp, os.path.basename(path))
+        # Set up an in-memory target for the plist - use StringIO on python 2, and
+        # BytesIO after
+        m = StringIO() if sys.version_info < (3,0) else BytesIO()
         try:
             if binary:
-                with open(temp_file,"wb") as f:
-                    plist.dump(plist_data,f,sort_keys=self.controller.settings.get("sort_dict",False),fmt=plist.FMT_BINARY)
+                plist.dump(plist_data,m,sort_keys=self.controller.settings.get("sort_dict",False),fmt=plist.FMT_BINARY)
             elif not self.controller.settings.get("xcode_data",True):
-                with open(temp_file,"wb") as f:
-                    plist.dump(plist_data,f,sort_keys=self.controller.settings.get("sort_dict",False))
+                plist.dump(plist_data,m,sort_keys=self.controller.settings.get("sort_dict",False))
             else:
                 # Dump to a string first
                 plist_text = self._format_data_string(plist.dumps(plist_data,sort_keys=self.controller.settings.get("sort_dict",False)))
                 # At this point, we have a list of lines - with all <data> tags on the same line
-                # let's write to file
-                with open(temp_file,"wb") as f:
-                    if sys.version_info >= (3,0):
-                        plist_text = plist_text.encode("utf-8")
-                    f.write(plist_text)
+                # let's write to buffer
+                if sys.version_info >= (3,0):
+                    plist_text = plist_text.encode("utf-8")
+                m.write(plist_text)
+            # Get the hash value of m, and then save it to a file
+            mem_hash = self.get_hash(m)
+            with open(temp_file,"wb") as f:
+                shutil.copyfileobj(m,f)
+            temp_hash = self.get_hash(temp_file)
+            # Make sure the temp file was serialized properly
+            if mem_hash != temp_hash:
+                raise Exception("The in-memory and temp file hashes do not match.  Serializing to the temp directory failed.")
             if os.path.isfile(path):
                 # We are overwriting an existing file - try to clone the perms and ownership
                 try: shutil.copystat(path,temp_file)
@@ -2510,18 +2651,22 @@ class PlistWindow(tk.Toplevel):
             shutil.copy(temp_file,path)
             # Let's ensure the md5 of the temp file and saved file are the same
             # There have been some reports of file issues when saving directly to an ESP
-            temp_hash = self.get_hash(temp_file)
             save_hash = self.get_hash(path)
-            if not temp_hash == save_hash: # Some issue occurred - let's throw an exception
-                self.bell()
-                mb.showerror("Saved MD5 Hash Mismatch","The saved and temp file hashes do not match - which suggests that copying from the temp directory to the destination was unsuccessful.\n\nIf the destination volume is an ESP, try first saving to your Desktop, then copying the file over manually.",parent=self)
+            if temp_hash != save_hash: # Some issue occurred - let's throw an exception
+                raise Exception((
+                    "The saved and temp file hashes do not match - copying from the temp directory to the destination was unsuccessful.\n\n"
+                    "If the destination volume is an ESP, try first saving to your Desktop, then copying the file over manually."
+                ))
         except Exception as e:
             # Had an issue, throw up a display box
             self.bell()
-            mb.showerror("An Error Occurred While Saving", repr(e), parent=self)
+            mb.showerror("An Error Occurred While Saving", str(e), parent=self)
             return None
         finally:
+            # Close our StringIO/BytesIO buffer
+            m.close()
             try:
+                # Remove the temp dir if possible
                 shutil.rmtree(temp,ignore_errors=True)
             except:
                 pass
@@ -2529,6 +2674,11 @@ class PlistWindow(tk.Toplevel):
         path = os.path.normpath(path) if path else path
         # Retain the new path if the save worked correctly
         self.current_plist = path
+        try:
+            self.last_saved = os.path.getmtime(path)
+            self.last_hash  = save_hash
+        except Exception:
+            self.last_saved = self.last_hash = None # Reset them
         # Set the window title to the path
         self.title(path)
         # No changes - so we'll reset that
@@ -2541,6 +2691,11 @@ class PlistWindow(tk.Toplevel):
         self._tree.delete(*self._tree.get_children())
         self.add_node(plist_data,check_binary=plist_type.lower() == "binary")
         self.current_plist = os.path.normpath(path) if path else path
+        try:
+            self.last_saved = os.path.getmtime(path)
+            self.last_hash  = self.get_hash(path)
+        except Exception:
+            self.last_saved = self.last_hash = None
         if path is None:
             self._ensure_edited(title=title or "Untitled.plist")
         else:
@@ -2567,33 +2722,7 @@ class PlistWindow(tk.Toplevel):
         return True
 
     def _clipboard_append(self, clipboard_string = None):
-        # Tkinter has issues copying to the system clipboard as evident in this bug report:
-        # https://bugs.python.org/issue40452
-        #
-        # There are some workarounds that require compiling a new tk binary - but we can
-        # ensure the system clipboard is updated by calling either clip or pbcopy depending
-        # on the current OS.
-        #
-        # First we clear the tkinter clipboard
-        self.clipboard_clear()
-        # Only write to the tkinter clipboard if we have a value
-        if clipboard_string: self.clipboard_append(clipboard_string)
-        else: clipboard_string = "" # Ensure we have at least an empty string
-        # Gather our args for the potential clipboard commands Windows -> macOS -> Linux
-        for args in (["clip"],) if os.name=="nt" else (["pbcopy"],) if sys.platform=="darwin" else (["xclip","-sel","c"],["xsel","-ib"],):
-            # Try to start a subprocess to mirror the tkinter clipboard contents
-            try:
-                clipboard = subprocess.Popen(
-                    args,
-                    stdin=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    stdout=subprocess.PIPE
-                )
-            except:
-                continue
-            # Dirty py2 check to see if we need to encode the data or not
-            clipboard.stdin.write(clipboard_string if 2/3==0 else clipboard_string.encode())
-            break # Break out of the loop as needed
+        self.controller._clipboard_append(clipboard_string=clipboard_string)
 
     def copy_selection(self, event = None):
         node = self._tree.focus()
@@ -2764,7 +2893,7 @@ class PlistWindow(tk.Toplevel):
             values = (self.get_type(value),children,"" if parentNode == "" else self.drag_code)
         else:
             values = (self.get_type(value),value,"" if parentNode == "" else self.drag_code)
-        i = self._tree.insert(parentNode, "end", text=key, values=values)
+        i = self._tree.insert(parentNode, tk.END, text=key, values=values)
         remaining = None
         if isinstance(value, dict):
             if (not check_binary or (check_binary and self.plist_type_string.get().lower() != "binary")) \
@@ -2882,7 +3011,7 @@ class PlistWindow(tk.Toplevel):
             if isinstance(p,list):
                 p.append(value)
             elif isinstance(p,dict):
-                if isinstance(name,unicode):
+                if isinstance(name,basestring):
                     p[name] = value
                 else:
                     p[str(name)] = value
@@ -2892,7 +3021,7 @@ class PlistWindow(tk.Toplevel):
 
     def get_type(self, value, override=None, menu_code=True):
         prefix = self.menu_code + " " if menu_code else ""
-        if override and isinstance(override,str):
+        if override and isinstance(override,basestring):
             return prefix + override
         elif isinstance(value, dict):
             return prefix + "Dictionary"
@@ -2906,7 +3035,7 @@ class PlistWindow(tk.Toplevel):
             return prefix + "Boolean"
         elif isinstance(value, (int,float,long)):
             return prefix + "Number"
-        elif isinstance(value, (str,unicode)):
+        elif isinstance(value, basestring):
             return prefix + "String"
         elif isinstance(value,plist.UID) or (hasattr(plistlib,"UID") and isinstance(value,plistlib.UID)):
             return prefix + "UID"
@@ -3289,7 +3418,7 @@ class PlistWindow(tk.Toplevel):
                     break
             if not found:
                 # Need to add it
-                current_cell = self._tree.insert(current_cell,"end",text=p,values=(self.menu_code+" "+needed_type,"",self.drag_code,),open=True)
+                current_cell = self._tree.insert(current_cell,tk.END,text=p,values=(self.menu_code+" "+needed_type,"",self.drag_code,),open=True)
                 undo_list.append({
                     "type":"add",
                     "cell":current_cell
@@ -3611,7 +3740,7 @@ class PlistWindow(tk.Toplevel):
             # Special formatting of hex values
             text = text.replace("<","").replace(">","")
         # place Entry popup properly
-        self.entry_popup = EntryPopup(self._tree, self, text, tv_item, column)
+        self.entry_popup = EntryPopup(self._tree, self, self.controller, text, tv_item, column)
         self.entry_popup.relocate()
         return 'break'
 

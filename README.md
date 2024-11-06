@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 1.0.1** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 14.6.1 Sonoma** like an **iMac Pro**!
+This is the guide for **OpenCore 1.0.2** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.1 Sequoia** like an **iMac Pro**!
 
 ## Table of Contents
 
@@ -105,7 +105,6 @@ You will want to **Turn off Memory Integrity on Windows 11** to avoid problems o
 
 - BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Intel PTT &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **DISABLED**
 - Save & Exit &gt; Save Profile &gt; **MacOS** _(get the second entry and name it)_
 - Save & Exit &gt; **Save & Exit Setup**
   
@@ -249,93 +248,13 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 The EFI folder configuration already comes with SecureBootModel and WiFi and Bluetooth Kexts disabled by default. After successfully installing MacOS you can enable these options as below.
 
 > **MacOS Update:**
-Using Sonoma 14.4 and later, every time you update MacOS, you need to first disable SecureBootModel (Disabled) and also disable all Intel WiFi and Bluetooth Kexts. After the update, you can enable it again. Please remind to **Clear NVRAM** each time you enable or disable this settings.
+Using Sonoma 14.4 and later, every time you update MacOS, you need to first disable SecureBootModel (Disabled). After the update, you can enable it again (Default). Please remind to **Clear NVRAM** each time you enable or disable this settings.
 
 - Enable the **SecureBootModel** in **`config.plist`**:
 ```diff
 	<key>SecureBootModel</key>
 -	<string>Disabled</string>
 +	<string>Default</string>
-```
-
-- Enable the **Intel WiFi and Bluetooth Kexts** in **`config.plist`**:
-```diff
-	<dict>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>AirportItlwm.kext</string>
-		<key>Comment</key>
-		<string>AirportItlwm.kext</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/AirportItlwm</string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>MinKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-	</dict>
-	<dict>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>IntelBluetoothFirmware.kext</string>
-		<key>Comment</key>
-		<string>IntelBluetoothFirmware.kext</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/IntelBluetoothFirmware</string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>MinKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-	</dict>
-	<dict>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>IntelBTPatcher.kext</string>
-		<key>Comment</key>
-		<string>IntelBTPatcher.kext</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/IntelBTPatcher</string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>MinKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-	</dict>
-	<dict>
-		<key>Arch</key>
-		<string>Any</string>
-		<key>BundlePath</key>
-		<string>BlueToolFixup.kext</string>
-		<key>Comment</key>
-		<string>BlueToolFixup.kext</string>
-		<key>Enabled</key>
--		<false/>
-+		<true/>
-		<key>ExecutablePath</key>
-		<string>Contents/MacOS/BlueToolFixup</string>
-		<key>MaxKernel</key>
-		<string></string>
-		<key>MinKernel</key>
-		<string></string>
-		<key>PlistPath</key>
-		<string>Contents/Info.plist</string>
-	</dict>
 ```
 
 ## Cleaning the EFI

@@ -146,7 +146,7 @@ class ProperTree:
         self.check_string_check.grid(row=5,column=0,columnspan=3,sticky="w",padx=10)
         comment_prefix_label = tk.Label(self.settings_window,text="Comment Prefix (default is #):")
         comment_prefix_label.grid(row=6,column=0,sticky="w",padx=10)
-        self.comment_prefix_text = tk.Entry(self.settings_window)
+        self.comment_prefix_text = plistwindow.EntryPlus(self.settings_window,self.tk,self)
         self.comment_prefix_text.grid(row=6,column=1,columnspan=2,sticky="we",padx=10)
         self.plist_type_string = tk.StringVar(self.settings_window)
         self.plist_type_menu = tk_or_ttk.OptionMenu(self.settings_window, self.plist_type_string, *self.get_option_menu_list(self.allowed_types), command=self.change_plist_type)
@@ -175,25 +175,28 @@ class ProperTree:
         self.snapshot_menu.grid(row=11,column=1,columnspan=2,sticky="we",padx=10)
         self.schema_check = tk_or_ttk.Checkbutton(self.settings_window,text="Force Update Snapshot Schema",variable=self.force_schema,command=self.schema_command)
         self.schema_check.grid(row=12,column=0,columnspan=3,sticky="w",padx=10)
+        self.mod_check = tk.IntVar()
+        self.enable_mod_check = tk_or_ttk.Checkbutton(self.settings_window,text="Warn If Files Are Externally Modified",variable=self.mod_check,command=self.mod_check_command)
+        self.enable_mod_check.grid(row=13,column=0,columnspan=3,stick="w",padx=10)
         self.enable_drag_and_drop = tk.BooleanVar()
         self.toggle_drag_drop = tk_or_ttk.Checkbutton(self.settings_window,text="Enable Row Drag & Drop", variable=self.enable_drag_and_drop,command=self.drag_drop_command)
-        self.toggle_drag_drop.grid(row=13,column=0,columnspan=3,sticky="w",padx=10)
+        self.toggle_drag_drop.grid(row=14,column=0,columnspan=3,sticky="w",padx=10)
         self.drag_label = tk.Label(self.settings_window,text="Drag Dead Zone (1-100 pixels):")
-        self.drag_label.grid(row=14,column=0,sticky="w",padx=10)
+        self.drag_label.grid(row=15,column=0,sticky="w",padx=10)
         self.drag_pixels = tk.Label(self.settings_window,text="20")
-        self.drag_pixels.grid(row=14,column=1,sticky="w",padx=(10,0))
+        self.drag_pixels.grid(row=15,column=1,sticky="w",padx=(10,0))
         self.drag_scale = tk_or_ttk.Scale(self.settings_window,from_=1,to=100,orient=tk.HORIZONTAL,command=self.scale_command)
         # Try to hide the value if using tk - will throw an exception in ttk
         try: self.drag_scale.configure(showvalue=False)
         except tk.TclError: pass
-        self.drag_scale.grid(row=14,column=2,sticky="we",padx=(0,10))
+        self.drag_scale.grid(row=15,column=2,sticky="we",padx=(0,10))
         self.drag_disabled = tk.Label(self.settings_window,text="[ Drag & Drop Disabled ]")
         self.drag_disabled.configure(state="disabled")
-        self.drag_disabled.grid(row=14,column=1,columnspan=2,sticky="we",padx=10)
+        self.drag_disabled.grid(row=15,column=1,columnspan=2,sticky="we",padx=10)
         undo_max_label = tk.Label(self.settings_window,text="Max Undo (0=unlim, {}=default):".format(self.max_undo))
-        undo_max_label.grid(row=15,column=0,sticky="w",padx=10)
-        self.undo_max_text = tk.Entry(self.settings_window)
-        self.undo_max_text.grid(row=15,column=1,columnspan=2,sticky="we",padx=10)
+        undo_max_label.grid(row=16,column=0,sticky="w",padx=10)
+        self.undo_max_text = plistwindow.EntryPlus(self.settings_window,self.tk,self)
+        self.undo_max_text.grid(row=16,column=1,columnspan=2,sticky="we",padx=10)
         
         # Left/right separator:
         sep = ttk.Separator(self.settings_window,orient="vertical")
@@ -251,7 +254,10 @@ class ProperTree:
         self.font_check = tk_or_ttk.Checkbutton(self.settings_window,text="Use Custom Font Size",variable=self.custom_font,command=self.font_command)
         self.font_string = tk.StringVar()
         self.font_spinbox = tk.Spinbox(self.settings_window,from_=1,to=128,textvariable=self.font_string)
-        self.font_string.trace("w",self.update_font)
+        try:
+            self.font_string.trace_add("write",self.update_font)
+        except AttributeError:
+            self.font_string.trace("w",self.update_font)
         self.font_check.grid(row=10,column=4,sticky="w",padx=10)
         self.font_spinbox.grid(row=10,column=5,columnspan=2,sticky="we",padx=10)
 
@@ -261,7 +267,10 @@ class ProperTree:
         self.font_custom_check = tk_or_ttk.Checkbutton(self.settings_window,text="Use Custom Font",variable=self.font_var,command=self.font_select)
         self.font_custom = ttk.Combobox(self.settings_window,state="readonly",textvariable=self.font_family,values=sorted(families()))
         self.font_custom.bind('<<ComboboxSelected>>',self.font_pick)
-        self.font_family.trace("w",self.update_font_family)
+        try:
+            self.font_family.trace_add("write",self.update_font_family)
+        except AttributeError:
+            self.font_family.trace("w",self.update_font_family)
         self.font_custom_check.grid(row=11,column=4,stick="w",padx=10)
         self.font_custom.grid(row=11,column=5,columnspan=2,sticky="we",padx=10)
 
@@ -280,21 +289,21 @@ class ProperTree:
         default_dark.grid(row=14,column=5,columnspan=2,sticky="we",padx=10)
 
         sep_theme = ttk.Separator(self.settings_window,orient="horizontal")
-        sep_theme.grid(row=16,column=0,columnspan=7,sticky="we",padx=10,pady=(10,0))
+        sep_theme.grid(row=17,column=0,columnspan=7,sticky="we",padx=10,pady=(10,0))
 
         # Add the check for updates checkbox and button
         self.update_int = tk.IntVar()
         self.update_check = tk_or_ttk.Checkbutton(self.settings_window,text="Check For Updates At Start",variable=self.update_int,command=self.update_command)
-        self.update_check.grid(row=17,column=0,sticky="w",padx=10,pady=(5,0))
+        self.update_check.grid(row=18,column=0,sticky="w",padx=10,pady=(5,0))
         self.notify_once_int = tk.IntVar()
         self.notify_once_check = tk_or_ttk.Checkbutton(self.settings_window,text="Only Notify Once Per Version",variable=self.notify_once_int,command=self.notify_once)
-        self.notify_once_check.grid(row=18,column=0,sticky="w",padx=10,pady=(0,10))
+        self.notify_once_check.grid(row=19,column=0,sticky="w",padx=10,pady=(0,10))
         self.update_button = tk_or_ttk.Button(self.settings_window,text="Check Now",command=lambda:self.check_for_updates(user_initiated=True))
-        self.update_button.grid(row=18,column=1,columnspan=2,sticky="w",padx=10,pady=(0,10))
+        self.update_button.grid(row=19,column=1,columnspan=2,sticky="w",padx=10,pady=(0,10))
         self.tex_button = tk_or_ttk.Button(self.settings_window,text="Get Configuration.tex",command=self.get_latest_tex)
-        self.tex_button.grid(row=18,column=4,sticky="we",padx=10,pady=(0,10))
+        self.tex_button.grid(row=19,column=4,sticky="we",padx=10,pady=(0,10))
         reset_settings = tk_or_ttk.Button(self.settings_window,text="Restore All Defaults",command=self.reset_settings)
-        reset_settings.grid(row=18,column=5,columnspan=2,sticky="we",padx=10,pady=(0,10))
+        reset_settings.grid(row=19,column=5,columnspan=2,sticky="we",padx=10,pady=(0,10))
 
         # Setup the color picker click methods
         self.r1_canvas.bind("<ButtonRelease-1>",lambda x:self.pick_color("alternating_color_1",self.r1_canvas))
@@ -337,12 +346,12 @@ class ProperTree:
         f_option.grid(row=0,column=1,sticky="we")
         t_option.grid(row=1,column=1,sticky="we")
 
-        self.f_text = tk.Entry(self.tk)
+        self.f_text = plistwindow.EntryPlus(self.tk,self.tk,self)
         self.f_text.delete(0,tk.END)
         self.f_text.insert(0,"")
         self.f_text.grid(row=0,column=2,columnspan=3,sticky="we",padx=10,pady=10)
 
-        self.t_text = tk.Entry(self.tk)
+        self.t_text = plistwindow.EntryPlus(self.tk,self.tk,self)
         self.t_text.configure(state='normal')
         self.t_text.delete(0,tk.END)
         self.t_text.insert(0,"")
@@ -473,6 +482,7 @@ class ProperTree:
         # invert_row1_text_color:       bool
         # invert_row2_text_color:       bool
         # invert_hl_text_color:         bool
+        # warn_if_modified:             bool
         # enable_drag_and_drop:         bool
         # drag_dead_zone:               pixel distance before drag starts (default is 20)
         # open_recent:                  list, paths recently opened
@@ -522,6 +532,25 @@ class ProperTree:
         self.tex_url = "https://raw.githubusercontent.com/acidanthera/OpenCorePkg/master/Docs/Configuration.tex"
         self.repo_url = "https://github.com/corpnewt/ProperTree"
 
+        # Windows running python 2 seems to have issues with multiprocessing
+        # if the case of the main script's name is incorrect:
+        # e.g. Downloader.py vs downloader.py
+        #
+        # To work around this, we try to scrape for the correct case if
+        # possible.
+        try:
+            path = os.path.abspath(sys.modules["__main__"].__file__)
+            if os.path.isfile(path):
+                name = os.path.basename(path).lower()
+                fldr = os.path.dirname(path)
+                for f in os.listdir(fldr):
+                    if f.lower() == name:
+                        sys.modules["__main__"].__file__ = os.path.join(fldr,f)
+                        break
+        except AttributeError as e:
+            # This likely means we're running from the interpreter directly
+            pass
+
         # Implement a simple boolean lock, and check for updates if needed
         self.is_checking_for_updates = False
         if self.settings.get("check_for_updates_at_startup",True):
@@ -551,6 +580,37 @@ class ProperTree:
 
         # Start our run loop
         tk.mainloop()
+
+    def _clipboard_append(self, clipboard_string = None):
+        # Tkinter has issues copying to the system clipboard as evident in this bug report:
+        # https://bugs.python.org/issue40452
+        #
+        # There are some workarounds that require compiling a new tk binary - but we can
+        # ensure the system clipboard is updated by calling either clip or pbcopy depending
+        # on the current OS.
+        #
+        # First we clear the tkinter clipboard
+        self.tk.clipboard_clear()
+        # Only write to the tkinter clipboard if we have a value
+        if clipboard_string: self.tk.clipboard_append(clipboard_string)
+        else: clipboard_string = "" # Ensure we have at least an empty string
+        # Gather our args for the potential clipboard commands Windows -> macOS -> Linux
+        for args in (["clip"],) if os.name=="nt" else (["pbcopy"],) if sys.platform=="darwin" else (["xclip","-sel","c"],["xsel","-ib"],):
+            # Try to start a subprocess to mirror the tkinter clipboard contents
+            try:
+                clipboard = subprocess.Popen(
+                    args,
+                    stdin=subprocess.PIPE,
+                    stderr=getattr(subprocess,"DEVNULL",open(os.devnull,"w")),
+                    stdout=getattr(subprocess,"DEVNULL",open(os.devnull,"w"))
+                )
+            except:
+                continue
+            # Dirty py2 check to see if we need to encode the data or not
+            clipboard.stdin.write(clipboard_string if 2/3==0 else clipboard_string.encode())
+            clipboard.stdin.flush() # Flush the buffer
+            clipboard.stdin.close() # Close the pipe
+            break # Break out of the loop as needed
 
     def sigint_check(self):
         # Helper to keep the event loop moving in order to ensure we can catch
@@ -768,6 +828,8 @@ class ProperTree:
         if p.is_alive():
             self.tk.after(100,self.check_update_process,p)
             return
+        # Join the process to ensure resources are returned
+        p.join()
         # We've returned - reset our bool lock
         self.is_checking_for_updates = False
         # Check if we got anything from the queue
@@ -896,6 +958,8 @@ class ProperTree:
         if p.is_alive():
             self.tk.after(100,self.check_tex_process,p)
             return
+        # Join the process to ensure resources are returned
+        p.join()
         # Check if we got anything from the queue
         if self.tex_queue.empty(): # Nothing in the queue, bail
             return self.reset_tex_button()
@@ -946,8 +1010,17 @@ class ProperTree:
         if opacity is None:
             try: opacity = min(100,max(int(self.settings.get("opacity",100)),25))
             except: opacity = 100 # failsafe
-        windows = (window,) if window else self.stackorder(self.tk,include_defaults=True)
-        for window in self.stackorder(self.tk,include_defaults=True):
+        if window:
+            # Only use the passed window(s)
+            if isinstance(window,(list,tuple)):
+                windows = window
+            else: # Wrap it up in a tuple
+                windows = (window,)
+        else:
+            # Make sure we set opacity on the default windows whether they're
+            # visible or not
+            windows = self.stackorder(self.tk,include_defaults=False) + [self.tk, self.settings_window]
+        for window in windows:
             window.attributes("-alpha",float(opacity)/float(100))
 
     def update_opacity(self, event = None):
@@ -1010,6 +1083,9 @@ class ProperTree:
 
     def schema_command(self, event = None):
         self.settings["force_snapshot_schema"] = True if self.force_schema.get() else False
+
+    def mod_check_command(self, event = None):
+        self.settings["warn_if_modified"] = True if self.mod_check.get() else False
 
     def update_command(self, event = None):
         self.settings["check_for_updates_at_startup"] = True if self.update_int.get() else False
@@ -1162,6 +1238,7 @@ class ProperTree:
         snapshot_name = next((x for x in snapshot_choices if x.split(" ")[0] == snapshot_vers),None)
         self.snapshot_string.set(snapshot_name if snapshot_name in snapshot_choices else "Auto-detect")
         self.force_schema.set(self.settings.get("force_snapshot_schema",False))
+        self.mod_check.set(self.settings.get("warn_if_modified",True))
         self.comment_ignore_case.set(self.settings.get("comment_strip_ignore_case",False))
         self.comment_check_string.set(self.settings.get("comment_strip_check_string",True))
         self.update_int.set(self.settings.get("check_for_updates_at_startup",True))

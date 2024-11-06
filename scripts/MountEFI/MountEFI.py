@@ -14,7 +14,7 @@ class MountEFI:
             self.u.head("MountEFI")
             print("\nWaiting for disks...")
             print("\nIf you see this message for a long while, you may have a disk that is")
-            print("slow or malfunctioning - causing \"diskutil list\" or \"diskdump\" to stall.")
+            print("slow or malfunctioning - causing \"diskdump\" to stall.")
             print("")
             print("Note: APFS volumes created on newer OS versions (10.14+) can cause stalls")
             print("when accessed on older macOS versions (10.13 and prior).  They will appear")
@@ -225,8 +225,17 @@ class MountEFI:
             elif menu == "c" and self.boot_manager:
                 disk = self.boot_manager
             elif menu == "l":
-                self.d.update() # Force an update to get the most recent info
-                dl_message = "\n"+(self.d.diskutil_list or "diskutil list output was not found!").strip()+"\n"
+                self.u.head("MountEFI")
+                print("\nWaiting for disks...")
+                print("\nIf you see this message for a long while, you may have a disk that is")
+                print("slow or malfunctioning - causing \"diskutil\" to stall.")
+                print("")
+                print("Note: APFS volumes created on newer OS versions (10.14+) can cause stalls")
+                print("when accessed on older macOS versions (10.13 and prior).  They will appear")
+                print("eventually, but may take several minutes.")
+                try: diskutil_list = self.r.run({"args":["diskutil","list"]})[0]
+                except: diskutil_list = ""
+                dl_message = "\n"+(diskutil_list or "diskutil list output was not found!").strip()+"\n"
                 if self.settings.get("resize_window",True):
                     self.u.resize(80,max(len(dl_message.split("\n"))+pad,24))
                 self.u.head("Diskutil List Output")
@@ -255,7 +264,7 @@ class MountEFI:
                 self.u.grab("Returning in 5 seconds...", timeout=5)
                 continue
             # Valid disk!
-            efi = self.d.get_efi(iden)
+            efi = self.d.get_efis(iden)
             if not efi:
                 self.u.head("No EFI Partition")
                 print("")
@@ -273,13 +282,20 @@ class MountEFI:
                 continue
             # Resize and then mount the EFI partition
             if self.settings.get("resize_window",True): self.u.resize(80, 24)
-            self.u.head("Mounting {}".format(efi))
+            self.u.head("Mounting EFI Partition{}".format("" if len(efi) == 1 else "s"))
             print(" ")
-            out = self.d.mount_partition(efi)
-            if out[2] == 0:
-                print(out[0])
-            else:
-                print(out[1])
+            failed = False
+            for e in efi:
+                print("Mounting {}...".format(e))
+                out = self.d.mount_partition(e)
+                if out[2] == 0:
+                    print(out[0].strip())
+                else:
+                    print(out[1].strip() or "Something went wrong")
+                    failed = True
+            if failed:
+                print("")
+                self.u.grab("Press [enter] to return...")
             # Check our settings
             am = self.settings.get("after_mount", None)
             if not am:

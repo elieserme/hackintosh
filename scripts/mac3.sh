@@ -42,6 +42,7 @@ brew install webp
 brew install graphviz
 brew install --cask dotnet-sdk
 brew install --cask docker
+brew install --cask navicat-premium-lite
 
 ### asdf 
 brew install asdf
@@ -97,6 +98,10 @@ brew install --cask zoom
 brew install --cask istat-menus
 brew install docker
 brew install docker-compose
+
+### openvpn
+brew install openvpn
+brew install --cask openvpn-connect
 
 ### hackintosh
 brew install --cask hackintool

@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, shutil, re
 sys.path.append(os.path.abspath(os.path.dirname(os.path.realpath(__file__))))
 import run, plist
 
@@ -246,8 +246,8 @@ GPT_GUIDS = {
 class Disk:
     def __init__(self):
         self.r = run.Run()
-        self.diskdump = self.check_diskdump()
-        self.diskutil_list = ""
+        self.version_re = re.compile(r"diskdump ([a-zA-z\d]+\.[a-zA-Z\d]+\.[a-zA-Z\d]+)")
+        self.diskdump,self.diskdump_version = self.check_diskdump()
         self.full_os_version = self.r.run({"args":["sw_vers", "-productVersion"]})[0]
         if len(self.full_os_version.split(".")) < 3:
             # Ensure the format is XX.YY.ZZ
@@ -303,13 +303,64 @@ class Disk:
         b = b.rstrip("0") if strip_zeroes else b.ljust(round_to,"0") if round_to > 0 else ""
         return "{:,}{} {}".format(int(a),"" if not b else "."+b,biggest)
 
+    def get_diskdump_version(self, diskdump_path):
+        # Helper to attempt to extract the version from
+        # "diskdump version" given a path.
+        version = "0.0.0"
+        if os.path.exists(diskdump_path):
+            if "com.apple.quarantine" in self.r.run({"args":["xattr",diskdump_path]})[0]:
+                self.r.run({"args":["xattr","-d","com.apple.quarantine",diskdump_path]})
+            if not os.access(diskdump_path, os.X_OK):
+                self.r.run({"args":["chmod","+x",diskdump_path]})
+            try:
+                # Attempt to extract "diskdump A.B.C" from the "diskdump version"
+                # results - and pull the "A.B.C" group from the regex match
+                version = self.version_re.match(
+                    self.r.run({"args":[diskdump_path,"version"]})[0].split("\n")[0].strip()
+                ).group(1)
+            except:
+                pass
+        return version
+
     def check_diskdump(self):
         ddpath = os.path.join(os.path.dirname(os.path.realpath(__file__)),"diskdump")
         if not os.path.exists(ddpath):
             raise FileNotFoundError("Could not locate diskdump")
-        if "com.apple.quarantine" in self.r.run({"args":["xattr",ddpath]})[0]:
-            self.r.run({"args":["xattr","-d","com.apple.quarantine",ddpath]})
-        return ddpath
+        # Get the local version, falling back to 0.0.0 if there's no match
+        local_version = self.get_diskdump_version(ddpath)
+        # Check if we're running as root, or if we're not in a folder nested within
+        # ~/Desktop or ~/Downloads - as we don't have to worry about retaining
+        # local copies of diskdump in those situations
+        desktop   = os.path.realpath(os.path.expanduser(os.path.join("~","Desktop")))+os.sep
+        downloads = os.path.realpath(os.path.expanduser(os.path.join("~","Downloads")))+os.sep
+        if os.getuid() == 0 or not ddpath.startswith((desktop,downloads)):
+            return (ddpath,local_version)
+        # If diskdump is run from a folder nested under Desktop or Downloads, it will
+        # need sudo even for basic (non-ESP) mounts and unmounts.  To work around this
+        # we'll ensure we place it in the Application Support folder.  We'll check the
+        # version there, and see if it matches our local copy - and if not, we'll
+        # replace it to ensure we're using the one we expect to use/packaged with disk.py
+        ddfolder = os.path.expanduser(os.path.join("~","Library","Application Support","CorpNewt","DiskDump"))
+        if not os.path.exists(ddfolder):
+            # Attempt to create it
+            try:
+                os.makedirs(ddfolder)
+            except Exception as e:
+                raise FileNotFoundError("Failed to create ~/Library/Application Support/CorpNewt/DiskDump: {}".format(e))
+        # Got the folder - let's check if there's a diskdump bin already there, then
+        # try to get the version, and compare with our own
+        ddtarget = os.path.join(ddfolder,"diskdump")
+        installed_version = self.get_diskdump_version(ddtarget)
+        if self.compare_version(local_version,installed_version):
+            # We need to replace the installed bin to match our local copy
+            try:
+                shutil.copy(ddpath,ddtarget)
+            except Exception as e:
+                raise FileNotFoundError("Failed to copy diskdump to ~/Library/Application Support/CorpNewt/DiskDump: {}".format(e))
+            # Update the installed_version to reflect the local_version we just
+            # copied in
+            installed_version = local_version
+        return (ddtarget,installed_version)
 
     def update(self):
         # Refresh our disk list
@@ -318,49 +369,11 @@ class Disk:
 
     def get_disks(self):
         # Check for our binary - and ensure it's setup to run
-        ddpath = os.path.join(os.path.dirname(os.path.realpath(__file__)),"diskdump")
-        if not os.path.exists(ddpath): return {}
-        # Get our "diskutil list" and diskdump info.  Run diskutil list first
-        # as it takes longer - but will stall while waiting for disks to appear,
-        # meaning our diskdump output will be better reflected.
-        self.diskutil_list = self.r.run({"args":["diskutil","list"]})[0]
-        diskstring = self.r.run({"args":[ddpath]})[0]
+        if not os.path.exists(self.diskdump): return {}
+        # Get our diskdump info.
+        diskstring = self.r.run({"args":[self.diskdump]})[0]
         if not diskstring: return {}
         diskdump = plist.loads(diskstring)
-        last_disk = None
-        for line in self.diskutil_list.split("\n"):
-            if line.startswith("/dev/disk"):
-                last_disk = line.split()[0].split("/")[-1]
-            elif not last_disk:
-                continue
-            elif line.strip().startswith("Logical Volume on"):
-                # Core Storage
-                ps = line.split("Logical Volume on")[1].strip().split(", ")
-                disk = self.get_disk(last_disk,disk_dict=diskdump)
-                if disk: # Update parent disk
-                    disk["container"] = True
-                    disk["core_storage"] = True
-                    disk["physical_stores"] = ps
-                    # Save a reference to the physical stores
-                    for s in ps:
-                        store = self.get_disk(s,disk_dict=diskdump)
-                        if store:
-                            store["container_for"] = last_disk
-                            store["core_storage_container_for"] = last_disk
-            elif line.strip().startswith("Physical Store"):
-                # APFS
-                ps = line.split("Physical Store")[1].strip().split(", ")
-                disk = self.get_disk(last_disk,disk_dict=diskdump)
-                if disk: # Update parent disk
-                    disk["container"] = True
-                    disk["apfs"] = True
-                    disk["physical_stores"] = ps
-                    # Save a reference to the physical stores
-                    for s in ps:
-                        store = self.get_disk(s,disk_dict=diskdump)
-                        if store:
-                            store["container_for"] = last_disk
-                            store["apfs_container_for"] = last_disk
         return diskdump
 
     def get_identifier(self, disk = None, disk_dict = None):
@@ -473,7 +486,7 @@ class Disk:
         return guid
 
     def get_volume_type(self, disk = None, disk_dict = None):
-        # Returns teh DAVolumeType or DAVolumeKind of the passed disk if any
+        # Returns the DAVolumeType or DAVolumeKind of the passed disk if any
         disk = self.get_disk(disk,disk_dict=disk_dict)
         if not disk: return
         if "DAVolumeType" in disk: return disk["DAVolumeType"]
@@ -689,14 +702,14 @@ class Disk:
         disk = self.get_identifier(disk,disk_dict=disk_dict)
         if not disk: return
         sudo = self.needs_sudo(disk,disk_dict=disk_dict)
-        out = self.r.run({"args":["diskutil","mount",disk],"sudo":sudo})
+        out = self.r.run({"args":[self.diskdump,"mount",disk],"sudo":sudo})
         self.update()
         return out
 
-    def unmount_partition(self, disk, disk_dict = None):
+    def unmount_partition(self, disk, disk_dict = None, force = False):
         disk = self.get_identifier(disk,disk_dict=disk_dict)
         if not disk: return
-        out = self.r.run({"args":["diskutil","unmount",disk]})
+        out = self.r.run({"args":[self.diskdump,"forceunmount" if force else "unmount",disk]})
         self.update()
         return out
 
@@ -732,21 +745,29 @@ if __name__ == '__main__':
     mount_list = []
     needs_sudo = d.needs_sudo()
     for x in args:
-        name = d.get_volume_name(x)
-        if not name: name = "Untitled"
+        name = d.get_volume_name(x) or "Untitled"
         name = name.replace('"','\\"') # Escape double quotes in names
-        efi = d.get_efi(x)
-        if efi: mount_list.append((efi,name,d.is_mounted(efi),"diskutil mount {}".format(efi)))
-        else: errors.append("'{}' has no ESP.".format(name))
+        diskdump = d.diskdump.replace('"','\\\\\\"') # Escape double quotes in names
+        efi = d.get_efis(x)
+        if efi: 
+            for i,e in enumerate(efi):
+                mount_list.append((
+                    e,
+                    name if i == 0 else "", # Omit the name after the first ESP
+                    d.is_mounted(e),
+                    "\\\"{}\\\" mount {}".format(diskdump,e)
+                ))
+        else:
+            errors.append("'{}' has no ESP.".format(name))
     if mount_list:
         # We have something to mount
         efis =  [x[-1] for x in mount_list if not x[2]] # Only mount those that aren't mounted
-        names = [x[1]  for x in mount_list if not x[2]]
+        names = [x[1]  for x in mount_list if x[1] and not x[2]]
         if efis: # We have something to mount here
             command = "do shell script \"{}\" with prompt \"MountEFI would like to mount the ESP{} on {}\"{}".format(
                 "; ".join(efis),
-                "s" if len(names) > 1 else "",
-                ", ".join(names),
+                "s" if len(efis) > 1 else "",
+                names[0] if len(names) == 1 else " and ".join([", ".join(names[:-1]),names[-1]]),
                 " with administrator privileges" if needs_sudo else "")
             o,e,r = d.r.run({"args":["osascript","-e",command]})
             if r > 0 and len(e.strip()) and e.strip().lower().endswith("(-128)"): exit() # User canceled, bail
