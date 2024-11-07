@@ -12,7 +12,7 @@ This is the guide for **OpenCore 1.0.2** Hackintosh build based on i7 9700KF | G
 	- [BIOS settings for Windows](#bios-settings-for-windows)
 	- [Windows 11 setup](#windows-11-setup)
 	- [BIOS settings for MacOS](#bios-settings-for-macos)
-	- [MacOS 14 Sonoma setup](#macos-14-sonoma-setup)
+	- [MacOS 15 Sequoia setup](#macos-15-sequoia-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
 	- [Final Steps](#final-steps)
@@ -108,12 +108,12 @@ You will want to **Turn off Memory Integrity on Windows 11** to avoid problems o
 - Save & Exit &gt; Save Profile &gt; **MacOS** _(get the second entry and name it)_
 - Save & Exit &gt; **Save & Exit Setup**
   
-## MacOS 14 Sonoma setup
+## MacOS 15 Sequoia setup
 
-- Can be direct downloaded from Apple using **[App Store](https://apps.apple.com/br/app/macos-sonoma/id6450717509?mt=12)** on a regular MacOS computer; 
-- Make a **USB** install disk _(the example below uses a USB device named USB and makes Sonoma installation disk)_:
+- Can be direct downloaded from Apple using **[App Store](https://www.apple.com/br/macos/macos-sequoia/)** on a regular MacOS computer; 
+- Make a **USB** install disk _(the example below uses a USB device named USB and makes Sequoia installation disk)_:
 ```bash
-sudo /Applications/Install\ macOS\ Sonoma.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
+sudo /Applications/Install\ macOS\ Sequoia.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
 ```
 - **Download** the **[git repo sources](http://github.com/elieserme/hackintosh/zipball/main/)** and use the **EFI** folder **or clone it** with following command:
 
