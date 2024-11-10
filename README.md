@@ -50,7 +50,7 @@ The **Intel AT211 Ethernet is disabled** in MacOS, so you need to use the **Inte
 
 ## BIOS settings for Windows
 
-Gigabyte z370N WIFI using **BIOS version F12**
+Gigabyte z370N WIFI using **BIOS version F14**
 
 - Save & Exit &gt; **Load optimised defaults**
 - SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **PCH**
@@ -61,6 +61,7 @@ Gigabyte z370N WIFI using **BIOS version F12**
 - BIOS &gt; Secure Boot &gt; **ENABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
+- Peripherals &gt; Re-Size BAR Support &gt; **AUTO** 
 - Peripherals &gt; Intel PTT &gt; **ENABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
 - Peripherals &gt; Trusted Computing &gt; **ENABLED**
