@@ -22,6 +22,12 @@ This is the guide for **OpenCore 1.0.2** Hackintosh build based on i7 9700KF | G
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
 
+> **Warning!**
+Custom configuration for this _specific motherboard, graphics card and NVMe listed below_. If your computer's components are different, **DO NOT USE THIS CONFIGURATION AND MAKE YOUR OWN ONE ACCORDING TO YOUR HARDWARE**.
+
+> **Memory Note!**
+**Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
+
 ## Why use iMac Pro model
 - **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
