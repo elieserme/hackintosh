@@ -46,7 +46,7 @@ This is the guide for **OpenCore 1.0.2** Hackintosh build based on i7 9700KF | G
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
 
 > **Config Note!**
-**RC6 Render Standby** is missing on this motherboard BIOS when installed a _Intel CPU with F suffix (no iGPU)_. This option need to be **DISABLED** for system stability and avoid kernel panics. The **forceRenderStandby=0** boot arg does this if it does not appear on BIOS setup.
+**RC6 Render Standby** is missing on this motherboard BIOS when installed a _Intel CPU with F suffix (no iGPU)_. This option need to be **DISABLED** for system stability and avoid kernel panics (like NVMe errors). The opencore **forceRenderStandby=0** boot argument does the trick if missing this option on BIOS.
 
 > **Network Note!**
 The **Intel AT211 Ethernet is disabled** in MacOS, so you need to use the **Intel i219v Ethernet port** when using MacOS. On Windows both ethernet ports are functional.
