@@ -119,6 +119,8 @@ You will want to **Turn off Memory Integrity on Windows 11** to avoid problems o
 ```bash
 sudo /Applications/Install\ macOS\ Sequoia.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
 ```
+- **Download** the **[Python installer](https://www.python.org/downloads/)** and setup it first!
+
 - **Download** the **[git repo sources](http://github.com/elieserme/hackintosh/zipball/main/)** and use the **EFI** folder **or clone it** with following command:
 
 ```bash
