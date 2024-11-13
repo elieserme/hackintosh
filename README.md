@@ -106,7 +106,15 @@ reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation
 You will want to **Turn off Memory Integrity on Windows 11** to avoid problems on Opencore boot _(and increase gamming performance)_:
 
 - Select **Start**, enter ‘**Core Isolation**’ in the taskbar, and select **Core Isolation** from the list of results to open the Windows security app;
-- On the **Core isolation** page, _**turn off** the toggle_ for **Memory Integrity**. You might need to restart the computer. 
+- On the **Core isolation** page, _**turn off** the toggle_ for **Memory Integrity**. You might need to restart the computer.
+
+If you want a **cleaner installation of Windows 11**, you can run a script to do the cleanup _(be careful, for testing only)_ using [LeDragoX's scripts](https://github.com/LeDragoX/Win-Debloat-Tools). After running the script, you may want to get the **new desktop context menu back**. Use the command below to return it to normal:
+
+```bash
+reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f
+```
+
+To **keep your Windows drivers up to date**, Intel has a tool that can help _(it only works with Intel's basic motherboard drivers)_. You can download and install it from [Intel's website](https://www.intel.com/content/www/us/en/support/detect.html).
 
 ## BIOS settings for MacOS
 
