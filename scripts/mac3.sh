@@ -31,6 +31,7 @@ brew install --cask sketch
 brew install --cask brave-browser
 brew install --cask intellij-idea-ce
 brew install --cask pycharm-ce
+brew install --cask webstorm
 brew install --cask microsoft-teams
 brew install --cask microsoft-edge
 brew install gettext
@@ -95,9 +96,11 @@ brew install ffmpeg
 brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
-brew install --cask istat-menus
+brew install --cask stats
 brew install docker
 brew install docker-compose
+brew install --cask sublime-text
+brew install --cask spotify
 
 ### openvpn
 brew install openvpn
