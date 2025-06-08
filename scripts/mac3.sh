@@ -13,65 +13,64 @@ brew install graphicsmagick
 
 ### web navigation
 brew install --cask google-chrome
-brew install --cask firefox
-brew install --cask tor-browser
+# brew install --cask firefox
+# brew install --cask tor-browser
 brew install --cask transmission
 brew install --cask cyberduck
 brew install --cask balenaetcher
-brew install --cask libreoffice
+# brew install --cask libreoffice
 
 ### development
 brew install --cask visual-studio-code
 brew install --cask imageoptim
 brew install --cask insomnia
 brew install --cask discord
-brew install --cask dbeaver-community
-brew install --cask figma
-brew install --cask sketch
-brew install --cask brave-browser
-brew install --cask intellij-idea-ce
-brew install --cask pycharm-ce
-brew install --cask webstorm
+# brew install --cask dbeaver-community
+# brew install --cask figma
+# brew install --cask sketch
+# brew install --cask brave-browser
+# brew install --cask intellij-idea-ce
+# brew install --cask pycharm-ce
 brew install --cask microsoft-teams
 brew install --cask microsoft-edge
 brew install gettext
 brew install neofetch
-brew install --cask teamviewer
-brew install --cask dropbox
-brew install parallel
-brew install webp
-brew install graphviz
-brew install --cask dotnet-sdk
+# brew install --cask teamviewer
+# brew install --cask dropbox
+# brew install parallel
+# brew install webp
+# brew install graphviz
+# brew install --cask dotnet-sdk
 brew install --cask docker
-brew install --cask navicat-premium-lite
+# brew install --cask navicat-premium-lite
 
 ### asdf 
-brew install asdf
-echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf plugin-add java https://github.com/halcyon/asdf-java.git
-asdf plugin-add python
-asdf plugin add quarkus
-cat >> ~/.asdfrc << EZS4
-java_macos_integration_enable = yes
-EZS4
+# brew install asdf
+# echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+# asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+# asdf plugin-add java https://github.com/halcyon/asdf-java.git
+# asdf plugin-add python
+# asdf plugin add quarkus
+# cat >> ~/.asdfrc << EZS4
+# java_macos_integration_enable = yes
+# EZS4
 
 ### postgresql client
 # brew install libpq
 # brew link --force libpq
 
 ### oracle client
-brew tap InstantClientTap/instantclient
-brew install instantclient-sqlplus
-brew install sqlcl
+# brew tap InstantClientTap/instantclient
+# brew install instantclient-sqlplus
+# brew install sqlcl
 
 ### mobile dev
 brew install --cask android-studio
-brew install --cask flutter
-sudo gem install cocoapods
-sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-sudo xcodebuild -runFirstLaunch
-sudo xcodebuild -license accept
+# brew install --cask flutter
+# sudo gem install cocoapods
+# sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+# sudo xcodebuild -runFirstLaunch
+# sudo xcodebuild -license accept
 
 ### git instead of apple git
 brew install git
@@ -79,14 +78,14 @@ git config --global user.name "Me"
 git config --global user.email "me@me.com"
 git config --global init.defaultBranch main
 git config --global pull.rebase false
-brew install git-crypt
+# brew install git-crypt
 brew install --cask github
 brew install gh
 
 ### apps
 brew install --cask appcleaner
 brew install --cask monitorcontrol
-brew install --cask fliqlo
+# brew install --cask fliqlo
 brew install --cask gimp
 brew install --cask inkscape
 brew install --cask keka
@@ -96,19 +95,17 @@ brew install ffmpeg
 brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
-brew install --cask stats
+# brew install --cask istat-menus
 brew install docker
 brew install docker-compose
-brew install --cask sublime-text
-brew install --cask spotify
 
 ### openvpn
-brew install openvpn
-brew install --cask openvpn-connect
+# brew install openvpn
+# brew install --cask openvpn-connect
 
 ### hackintosh
 brew install --cask hackintool
-brew install --cask maciasl
+# brew install --cask maciasl
 
 ### awscli
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
@@ -116,12 +113,12 @@ sudo installer -pkg AWSCLIV2.pkg -target /
 rm AWSCLIV2.pkg
 
 ### veracrypt
-brew install --cask macfuse
-brew install --cask veracrypt
+# brew install --cask macfuse
+# brew install --cask veracrypt
 
 ### NTFS support
-brew install gromgit/fuse/ntfs-3g-mac
-brew install --cask mounty
+# brew install gromgit/fuse/ntfs-3g-mac
+# brew install --cask mounty
 
 ### YOUTUBE DOWNLOAD SCRIPT
 sudo tee /usr/local/bin/youtube-download > /dev/null << YZS1

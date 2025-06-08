@@ -2,7 +2,6 @@
 
 ### INSTALL FIRST
 ### XCODE WITH COMMAND LINE TOOLS
-### PYTHON 3.9.7, MAMP 5.7 AND PGSQL 14.4
 ### CHANGE TO ZSH (on older OSX): chsh -s /bin/zsh
 
 ### oh-my-zsh

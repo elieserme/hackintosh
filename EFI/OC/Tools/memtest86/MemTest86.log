@@ -4542,3 +4542,2198 @@
 2024-08-06 17:18:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88170800 (Vendor ID: GenuineIntel 6 9E D)
 2024-08-06 17:18:42 - MapTempIntel - MSR(0x1A2) =           640E00
 2024-08-06 17:18:42 - Current CPU temperature: 77C
+2024-11-21 14:14:20 - Attempting to retrieve the root directory of the data partition.
+2024-11-21 14:14:20 - Found 2 handles that supported SimpleFileSystem
+2024-11-21 14:14:20 - Checking handle 0 (BAFF1098)
+2024-11-21 14:14:20 - Handle is own partition
+2024-11-21 14:14:20 - Checking handle 1 (BAFD8D98)
+2024-11-21 14:14:20 - HD node found: MBR type(2), Signature type(2), Part #(2), Start LBA(409640), Num Sectors(34566232)
+2024-11-21 14:14:20 - Self node: MBR type(2), Signature type(2), Part #(1), Start LBA(40), Num Sectors(409600)
+2024-11-21 14:14:21 - [FS0]
+2024-11-21 14:14:21 - PciRoot(0x0)/Pci(0x1A,0x0)/USB(0x1,0x0)/USB(0x3,0x0)/HD(1,GPT,71FF2929-B7E7-4145-98E2-5D596F19BAC5,0x28,0x64000)
+2024-11-21 14:14:21 - Label: "EFI", Mode: RW, Free space: 151 MB / 196 MB (0%)
+2024-11-21 14:14:21 - [FS1]
+2024-11-21 14:14:21 - PciRoot(0x0)/Pci(0x1A,0x0)/USB(0x1,0x0)/USB(0x3,0x0)/HD(2,GPT,9D3506FF-007D-478B-A3EB-A133EABD3D90,0x64028,0x20F7058)
+2024-11-21 14:14:21 - Label: "Install macOS Sequoia", Mode: RO, Free space: 711 MB / 16878 MB (0%)
+2024-11-21 14:14:21 - Disabling watchdog timer (Result: Success)
+2024-11-21 14:14:21 - Could not find Simple Network protocol.
+2024-11-21 14:14:21 - =============================================
+2024-11-21 14:14:21 - MemTest86 V9.4 Free Build: 1000 (64-bit)
+2024-11-21 14:14:21 - =============================================
+2024-11-21 14:14:21 - SMBIOS BIOS INFO Vendor: "Acidanthera", Version: "2069.0.0.0.0", Release Date: "08/07/2024"
+2024-11-21 14:14:21 - SMBIOS SYSTEM INFO Manufacturer: "Acidanthera", Product: "iMacPro1,1", Version: "1.0", S/N: "C02WMHZSHX87", SKU: "", Family: ""
+2024-11-21 14:14:21 - SMBIOS: Found SMBIOS BaseboardInformation (pbLinAddr=0xBD46208C, FormattedLen=15, iTotalLen=78)
+2024-11-21 14:14:21 - SMBIOS BASEBOARD INFO Manufacturer: "Acidanthera", Product: "Mac-7BA5B2D9E42DDD94", Version: "iMacPro1,1", S/N: "C028171004NJG361M", AssetTag: "", LocationInChassis: ""
+2024-11-21 14:14:21 - EFI Specifications: 2.31
+2024-11-21 14:14:21 - Found blacklist file
+2024-11-21 14:14:21 - [BLACKLIST] Adding "Mac-F42C88C8" (BIOS: "", FLAGS: 1) to blacklist
+2024-11-21 14:14:21 - [BLACKLIST] Adding "Mac-F4238CC8" (BIOS: "", FLAGS: 8) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Mac-F4208DC8" (BIOS: "", FLAGS: 8) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Mac-27ADBB7B4CEE8E61" (BIOS: "", FLAGS: 20) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Mac-7BA5B2DFE22DDD8C" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Mac-AF89B6D9451A490B" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Mac-CFF7D910A743CAAF" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Mac-AA95B1DDAB278B95" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Mac-27AD2F918AE68F61" (BIOS: "", FLAGS: 40) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "80AF" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Z97MX-Gaming 5" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Z170MX-Gaming 5" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Z170X-Gaming 3" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Z170X-Gaming 7" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Z170X-Gaming GT" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Z170X-UD3-CF" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Z170-HD3P" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "990FXA-UD3" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "970A-DS3P" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X99-Ultra Gaming-CF" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "M5A97 R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "M5A97 EVO R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "M5A99FX PRO R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "M5A99X EVO R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X99-A" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X99-A/USB 3.1" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X99-A II" (BIOS: "1701", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X99-A" (BIOS: "1701", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Sabertooth X99" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "SABERTOOTH 990FX R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "SABERTOOTH 990FX R3.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "SABERTOOTH 990FX/GEN3 R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "STRIX X99 GAMING" (BIOS: "1701", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X99-DELUXE" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X99-DELUXE II" (BIOS: "1701", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "RAMPAGE V EXTREME" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "RAMPAGE V EDITION 10" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "MAXIMUS VIII RANGER" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "Z10PE-D8 WS" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X9DRW" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X9DRW-3LN4F+/X9DRW-3TF+" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X9DRi-LN4+/X9DR3-LN4+" (BIOS: "", FLAGS: 40) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X9DR3-F" (BIOS: "", FLAGS: 40) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X9SRL-F" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X9DRD-iF" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "X9SRA/X9SRA-3" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "151-BE-E097" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "131-HE-E095" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "131-HE-E095-KR" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:22 - [BLACKLIST] Adding "151-HE-E999-KR" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "PRIME B350-PLUS" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "PRIME X370-PRO" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "CROSSHAIR VI HERO" (BIOS: "1602", FLAGS: 4) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "CROSSHAIR V FORMULA-Z" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "ROG STRIX X370-F GAMING" (BIOS: "4012", FLAGS: 4) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "OEMSH Product" (BIOS: "", FLAGS: 8) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "OEMAL Product" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "OEMCT Product" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "OEMWY Product" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "LNVNB161216" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "GA-990FX-GAMING" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "X399 SLI PLUS (MS-7B09)" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "X570 I AORUS PRO WIFI" (BIOS: "F32", FLAGS: 2) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "MS-17EK" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "0F685W" (BIOS: "", FLAGS: 80) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "ProLiant DL325 Gen10" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "ProLiant DL385 Gen10" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "ProLiant DL385 Gen10 Plus" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "06CDVY" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "Surface Book" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "Surface Book 2" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "Surface Pro" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "Surface Pro 7" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "Surface Pro" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "MACH-WX9-PCB" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "MACH-WX9" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "8873" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] Adding "0P4NHH" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:14:23 - [BLACKLIST] 78 boards added to blacklist
+2024-11-21 14:14:23 - Console Control protocol workaround enabled
+2024-11-21 14:14:23 - Number of console modes: 1
+2024-11-21 14:14:23 - Mode 0: 240 x 67
+2024-11-21 14:14:23 - Console attribute: 7
+2024-11-21 14:14:23 - Initializing localization strings
+2024-11-21 14:14:23 - Language en-US is supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x00C0 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language fr-FR is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x00C0 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language it-IT is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x00C9 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language es-AR is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x00C0 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language pt-BR is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x00C0 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language ca-ES is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x00C4 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language de-DE is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x010C (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language cs-CZ is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x0104 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language pl-PL is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x0410 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language ru-RU is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x3041 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language ja-JP is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0x4E0F (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language zh-CN is not supported
+2024-11-21 14:14:23 - GetGlyph failed for character 0xF944 (Warning Unknown Glyph)
+2024-11-21 14:14:23 - Language zh-HK is not supported
+2024-11-21 14:14:23 - Font does not support all languages. Installing unicode font...
+2024-11-21 14:14:23 - InitFont - Font header version: 1.1
+2024-11-21 14:14:23 - InitFont - Number of narrow glyphs: 7110
+2024-11-21 14:14:23 - InitFont - Number of wide glyphs: 49976
+2024-11-21 14:14:23 - Language en-US is supported
+2024-11-21 14:14:23 - Language fr-FR is supported
+2024-11-21 14:14:23 - Language it-IT is supported
+2024-11-21 14:14:23 - Language es-AR is supported
+2024-11-21 14:14:23 - Language pt-BR is supported
+2024-11-21 14:14:23 - Language ca-ES is supported
+2024-11-21 14:14:23 - Language de-DE is supported
+2024-11-21 14:14:23 - Language cs-CZ is supported
+2024-11-21 14:14:23 - Language pl-PL is supported
+2024-11-21 14:14:23 - Language ru-RU is supported
+2024-11-21 14:14:23 - Language ja-JP is supported
+2024-11-21 14:14:23 - Language zh-CN is supported
+2024-11-21 14:14:23 - Language zh-HK is supported
+2024-11-21 14:14:23 - iMS support is NOT available
+2024-11-21 14:14:23 - Initializing screen for graphics
+2024-11-21 14:14:23 - Number of graphics modes: 5
+2024-11-21 14:14:23 - Mode 0: 1920 x 1080 [Current]
+2024-11-21 14:14:23 - Mode 1: 640 x 480
+2024-11-21 14:14:24 - Mode 2: 800 x 600
+2024-11-21 14:14:24 - Mode 3: 1024 x 768
+2024-11-21 14:14:24 - Mode 4: 1280 x 1024
+2024-11-21 14:14:24 - Getting CPUID
+2024-11-21 14:14:24 - Getting cache size
+2024-11-21 14:14:24 - get_cache_size - Vendor ID: GenuineIntel Brand ID: Intel(R) Core(TM) i3-4160 CPU @ 3.60GHz
+2024-11-21 14:14:24 - L1 data cache: 32, 2, 8 [0x1C004121]
+2024-11-21 14:14:24 - L1d t2 linesize 64 linepart 1 ways 8 sets 64, size 32KB
+2024-11-21 14:14:24 - L1i t2 linesize 64 linepart 1 ways 8 sets 64, size 32KB
+2024-11-21 14:14:24 - L2u t2 linesize 64 linepart 1 ways 8 sets 512, size 256KB
+2024-11-21 14:14:24 - L3u t16 linesize 64 linepart 1 ways 12 sets 4096, size 3072KB
+2024-11-21 14:14:24 - L0 cache: 0 KB (1)
+2024-11-21 14:14:24 - L0u t1 linesize 1 linepart 1 ways 1 sets 1, size 0KB
+2024-11-21 14:14:24 - L1 instruction cache size: 4 x 32KB
+2024-11-21 14:14:24 - L1 data cache size: 4 x 32KB
+2024-11-21 14:14:24 - L2 cache size: 4 x 256KB
+2024-11-21 14:14:24 - L3 cache size: 3072KB
+2024-11-21 14:14:24 - Measuring CPU/cache/mem speed
+2024-11-21 14:14:24 - hpet_init - Found RSDP. Version: 2 
+2024-11-21 14:14:24 - hpet_init - Found XSDT. Entry Count: 20
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: FACP  Version: 5
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: APIC  Version: 3
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: FPDT  Version: 1
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: FIDT  Version: 1
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: ASF!  Version: 32
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: SSDT  Version: 1
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: SLIC  Version: 1
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: SSDT  Version: 1
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: SSDT  Version: 1
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: MCFG  Version: 1
+2024-11-21 14:14:24 - hpet_init - Found ACPI table: HPET  Version: 1
+2024-11-21 14:14:24 - hpet_init - HPET base address: 0xFED00000
+2024-11-21 14:14:24 - hpet_init - HPET gen cap: 0x429B17F8086A701 (Period: 69841279fs)
+2024-11-21 14:14:24 - hpet_init - HPET gen cfg: 0x1
+2024-11-21 14:14:24 - hpet_init - main counter value (1): 152422263
+2024-11-21 14:14:24 - hpet_init - main counter value (2): 152496266
+2024-11-21 14:14:24 - cpuspeed_hpet - rdtsc instruction supported: 1
+2024-11-21 14:14:24 - cpuspeed_hpet - HPET counter start: 152589807, HPET counter end: 153305715
+2024-11-21 14:14:24 - cpuspeed_hpet - start TSC: 39858647520, end TSC: 40038237080 (difference: 179589560)
+2024-11-21 14:14:24 - cpu_cache_speed - (Attempt 1) clock cycle (ms): 3591791
+2024-11-21 14:14:24 - cpuspeed_hpet - rdtsc instruction supported: 1
+2024-11-21 14:14:24 - cpuspeed_hpet - HPET counter start: 153542028, HPET counter end: 154257936
+2024-11-21 14:14:24 - cpuspeed_hpet - start TSC: 40097510336, end TSC: 40277098520 (difference: 179588184)
+2024-11-21 14:14:24 - cpu_cache_speed - (Attempt 2) clock cycle (ms): 3591763
+2024-11-21 14:14:24 - cpuspeed_hpet - rdtsc instruction supported: 1
+2024-11-21 14:14:24 - cpuspeed_hpet - HPET counter start: 154466956, HPET counter end: 155182864
+2024-11-21 14:14:24 - cpuspeed_hpet - start TSC: 40329526452, end TSC: 40509115208 (difference: 179588756)
+2024-11-21 14:14:24 - cpu_cache_speed - (Attempt 3) clock cycle (ms): 3591775
+2024-11-21 14:14:24 - cpu_cache_speed - Using average of last 3 samples (3591775, 3591763, 3591791)
+2024-11-21 14:14:24 - cpu_cache_speed - CPU speed: 3591.7MHz
+2024-11-21 14:14:24 - cpu_cache_speed - measuring L1 cache speed at 0xBA2C7000 (32 KB)
+2024-11-21 14:14:24 - cpu_cache_speed - L1 cache speed: 185531 MB/s
+2024-11-21 14:14:24 - cpu_cache_speed - measuring L2 cache speed at 0xBA28F000 (256 KB)
+2024-11-21 14:14:24 - cpu_cache_speed - L2 cache speed: 56899 MB/s
+2024-11-21 14:14:24 - cpu_cache_speed - measuring L3 cache speed at 0xB9FCF000 (3072 KB)
+2024-11-21 14:14:24 - cpu_cache_speed - L3 cache speed: 42388 MB/s
+2024-11-21 14:14:24 - get_mem_speed - measuring mem speed at 0xB78F2000 (27136 KB)
+2024-11-21 14:14:24 - get_mem_speed - mem speed: 18932 MB/s
+2024-11-21 14:14:25 - cpu_cache_speed - Memory latency: 24.747 ns
+2024-11-21 14:14:25 - Retrieving CPU MSR data
+2024-11-21 14:14:25 - GetIntelArchitectureSpecificMSRInfo - CPU Intel(R) Core(TM) i3-4160 CPU @ 3.60GHz: 6.60
+2024-11-21 14:14:25 - GetIntelArchitectureSpecificMSRInfo - Nehalem et al detected
+2024-11-21 14:14:25 - GetHaswellFamilyMSRInfo_Static - MSR[0xCE] = 00080838F3012400
+2024-11-21 14:14:25 - GetHaswellFamilyMSRInfo_Static - ExternalClock = 99771
+2024-11-21 14:14:25 - GetHaswellFamilyMSRInfo_Static - MSR[0x1A2] = 0000000000641400
+2024-11-21 14:14:25 - IsIntelTurboSupported - CPUID[0x6][EAX] = 00000075
+2024-11-21 14:14:25 - IsDisableIntelTurboSupported - not supported
+2024-11-21 14:14:25 - IsIntelTurboSupported - CPUID[0x6][EAX] = 00000075
+2024-11-21 14:14:25 - IsDisableIntelTurboSupported - not supported
+2024-11-21 14:14:25 - GetIntelArchitectureSpecificMSRInfo - Turbo disabled
+2024-11-21 14:14:25 - IsIntel_PerfMon_Supported - CPUID[0xA][EDX] = 00000603
+2024-11-21 14:14:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - CPUID[0xA][EDX] = 00000603
+2024-11-21 14:14:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x38F] = 000000000000000F
+2024-11-21 14:14:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x38D] = 0000000000000000
+2024-11-21 14:14:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x199] = 0000000000002400
+2024-11-21 14:14:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x198] = 0000241100002400
+2024-11-21 14:14:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - high perf counter freq = 3591776000
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - time in ns = 401542328
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - FreqCore in KHz = 3591775, FreqRef in KHz = 3591775, Ratio = 100
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - CPUID[0xA][EDX] = 00000603
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x38F] = 000000000000000F
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x38D] = 0000000000000000
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x199] = 0000000000002400
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x198] = 0000241100002400
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - high perf counter freq = 3591776000
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - time in ns = 399290979
+2024-11-21 14:14:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - FreqCore in KHz = 3591776, FreqRef in KHz = 3591776, Ratio = 100
+2024-11-21 14:14:26 - GetIntelArchitectureSpecificMSRInfo - MaxRatio = 100
+2024-11-21 14:14:26 - GetIntelArchitectureSpecificMSRInfo - Mult = 3600
+2024-11-21 14:14:26 - GetIntelArchitectureSpecificMSRInfo - raw_freq_cpu = 3591756
+2024-11-21 14:14:26 - GetIntelArchitectureSpecificMSRInfo - Freq: 3591756KHz (Ratio: 3600, ExtClk: 99771KHz), Turbo: 0KHz, (Ratio: 0, ExtClk: 0KHz) (Theoretical max: 0KHz)
+2024-11-21 14:14:26 - Getting memory size
+2024-11-21 14:14:26 - 0x000000000000 - 0x000000057FFF (352KB) {Free Memory}
+2024-11-21 14:14:26 - 0x000000058000 - 0x000000058FFF (4KB) {Reserved Memory}
+2024-11-21 14:14:26 - 0x000000059000 - 0x00000009DFFF (276KB) {Free Memory}
+2024-11-21 14:14:26 - 0x00000009E000 - 0x00000009FFFF (8KB) {Reserved Memory}
+2024-11-21 14:14:26 - 0x000000100000 - 0x0000A9B43FFF (2714MB) {Free Memory}
+2024-11-21 14:14:26 - 0x0000A9B44000 - 0x0000A9C43FFF (1024KB) {Loader Data}
+2024-11-21 14:14:26 - 0x0000A9C44000 - 0x0000ACD81FFF (49MB) {Free Memory}
+2024-11-21 14:14:26 - 0x0000ACD82000 - 0x0000ACF62FFF (1924KB) {Loader Code}
+2024-11-21 14:14:26 - 0x0000ACF63000 - 0x0000ACF69FFF (28KB) {ACPI Non-volatile}
+2024-11-21 14:14:26 - 0x0000ACF6A000 - 0x0000AD0C3FFF (1384KB) {Boot Services Data}
+2024-11-21 14:14:26 - 0x0000AD0C4000 - 0x0000AD863FFF (7MB) {Boot Services Code}
+2024-11-21 14:14:26 - 0x0000AD864000 - 0x0000AD868FFF (20KB) {Boot Services Data}
+2024-11-21 14:14:26 - 0x0000AD869000 - 0x0000AD86CFFF (16KB) {Boot Services Code}
+2024-11-21 14:14:26 - 0x0000AD86D000 - 0x0000AD881FFF (84KB) {Boot Services Data}
+2024-11-21 14:14:26 - 0x0000AD882000 - 0x0000AD893FFF (72KB) {Boot Services Code}
+2024-11-21 14:14:26 - 0x0000AD894000 - 0x0000AD89DFFF (40KB) {Boot Services Data}
+2024-11-21 14:14:26 - 0x0000AD89E000 - 0x0000ADB24FFF (2MB) {Runtime Services Data}
+2024-11-21 14:14:26 - 0x0000ADB25000 - 0x0000ADB33FFF (60KB) {Boot Services Data}
+2024-11-21 14:14:26 - 0x0000ADB34000 - 0x0000ADB3CFFF (36KB) {Free Memory}
+2024-11-21 14:14:26 - 0x0000ADB3D000 - 0x0000ADB42FFF (24KB) {Loader Code}
+2024-11-21 14:14:26 - 0x0000ADB43000 - 0x0000B9371FFF (184MB) {Free Memory}
+2024-11-21 14:14:26 - 0x0000B9372000 - 0x0000B9C89FFF (9MB) {Boot Services Data}
+2024-11-21 14:14:26 - 0x0000B9C8A000 - 0x0000BA2CCFFF (6MB) {Free Memory}
+2024-11-21 14:14:26 - 0x0000BA2CD000 - 0x0000BCE3BFFF (43MB) {Boot Services Data}
+2024-11-21 14:14:26 - 0x0000BCE3C000 - 0x0000BD175FFF (3MB) {Free Memory}
+2024-11-21 14:14:26 - 0x0000BD176000 - 0x0000BD43BFFF (2MB) {Boot Services Code}
+2024-11-21 14:14:26 - 0x0000BD43C000 - 0x0000BD460FFF (148KB) {Reserved Memory}
+2024-11-21 14:14:26 - 0x0000BD461000 - 0x0000BD4A4FFF (272KB) {Reserved Memory}
+2024-11-21 14:14:26 - 0x0000BD4A5000 - 0x0000BD5EAFFF (1304KB) {Free Memory}
+2024-11-21 14:14:26 - 0x0000BD5EB000 - 0x0000BDB0CFFF (5MB) {ACPI Non-volatile}
+2024-11-21 14:14:26 - 0x0000BDB0D000 - 0x0000BDB18FFF (48KB) {ACPI Non-volatile}
+2024-11-21 14:14:26 - 0x0000BDB19000 - 0x0000BDB24FFF (48KB) {ACPI Non-volatile}
+2024-11-21 14:14:26 - 0x0000BDB25000 - 0x0000BDC02FFF (888KB) {Runtime Services Data}
+2024-11-21 14:14:27 - 0x0000BDC03000 - 0x0000BDF7BFFF (3MB) {Runtime Services Data}
+2024-11-21 14:14:27 - 0x0000BDF7C000 - 0x0000BDF91FFF (88KB) {Runtime Services Code}
+2024-11-21 14:14:27 - 0x0000BDF92000 - 0x0000BDFFEFFF (436KB) {Runtime Services Code}
+2024-11-21 14:14:27 - 0x0000BDFFF000 - 0x0000BDFFFFFF (4KB) {Boot Services Data}
+2024-11-21 14:14:27 - 0x000100000000 - 0x00041FDFFFFF (12798MB) {Free Memory}
+2024-11-21 14:14:27 - 0x0000BF000000 - 0x0000DF1FFFFF (514MB) {Reserved Memory}
+2024-11-21 14:14:27 - 0x0000F8000000 - 0x0000FBFFFFFF (64MB) {OS Memory-mapped IO}
+2024-11-21 14:14:27 - 0x0000FEC00000 - 0x0000FEC00FFF (4KB) {OS Memory-mapped IO}
+2024-11-21 14:14:27 - 0x0000FED00000 - 0x0000FED03FFF (16KB) {OS Memory-mapped IO}
+2024-11-21 14:14:27 - 0x0000FED1C000 - 0x0000FED1FFFF (16KB) {OS Memory-mapped IO}
+2024-11-21 14:14:27 - 0x0000FEE00000 - 0x0000FEE00FFF (4KB) {OS Memory-mapped IO}
+2024-11-21 14:14:27 - 0x0000FF000000 - 0x0000FFFFFFFF (16MB) {OS Memory-mapped IO}
+2024-11-21 14:14:27 - 
+2024-11-21 14:14:27 - Available Memory: 0x3D8D1A000 (15GB)
+2024-11-21 14:14:27 - Reserved Memory: 0x2A290000 (674MB)
+2024-11-21 14:14:27 - mem_size - Number of entries: 45
+2024-11-21 14:14:27 - mem_size - Max address: 0x41FE00000
+2024-11-21 14:14:27 - mem_size - Total memory size (16601001984 bytes)
+2024-11-21 14:14:27 - Getting memory SPD info
+2024-11-21 14:14:27 - Attempting to enable any disabled SMBus controllers...
+2024-11-21 14:14:27 - Attempting to enable SMBUS:
+2024-11-21 14:14:27 - RCBA Register: FED1C001
+2024-11-21 14:14:27 - Function Disable Register MMIO Addr: FED1F418
+2024-11-21 14:14:27 - Function Disable Register Value: 02F60001
+2024-11-21 14:14:27 - Searching PCI for SMBus Controller
+2024-11-21 14:14:27 - {00:1F:03} SMBus Configuration Registers:
+2024-11-21 14:14:27 - 00: 8C228086 02800003 0C050005 00000000
+2024-11-21 14:14:27 - 10: F7D19004 00000000 00000000 00000000
+2024-11-21 14:14:27 - 20: 0000F041 00000000 00000000 01641B0A
+2024-11-21 14:14:27 - 30: 00000000 00000000 00000000 000003FF
+2024-11-21 14:14:27 - 40: 00000011 00000000 00000000 00000000
+2024-11-21 14:14:27 - 50: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - 60: 00040403 08080000 00000000 00000000
+2024-11-21 14:14:27 - 70: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - 80: 00000004 00000000 00000000 00000000
+2024-11-21 14:14:27 - 90: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - A0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - B0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - C0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - D0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - E0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - F0: 00000000 00000000 08060FB1 00000000
+2024-11-21 14:14:27 -  Found SMBus device:  VID:8086 DID:8C22 Bus:00 Dev:1F Fun:03 IO Add:F040 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel 8 Series/C220 Series (Lynx Point) (PCH)]
+2024-11-21 14:14:27 - Finished searching PCI for SMBus Controller
+2024-11-21 14:14:27 - [Intel 8 Series/C220 Series (Lynx Point) (PCH) Bus:00 Dev:1F Fun:03 Add:F040] Looking for SPD
+2024-11-21 14:14:27 - Expanding SPD info array (0 => 16)
+2024-11-21 14:14:27 - MemoryInfo(0xBA2BF018, 63424 bytes) RawSPD(0xBA2BA018, 16384 bytes)
+2024-11-21 14:14:27 - Raw SPD bytes for DIMM#0 (Channel -1, Slot -1):
+2024-11-21 14:14:27 - 92 13 0B 02 04 21 00 09 03 52 01 08 0A 00 FC 00 
+2024-11-21 14:14:27 - 69 78 69 30 69 11 18 81 20 08 3C 3C 00 F0 83 01 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 88 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 0F 11 01 01 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 07 9E 02 15 37 C1 33 60 04 0B 02 
+2024-11-21 14:14:27 - 54 4D 54 34 31 47 55 36 42 46 52 38 43 2D 50 42 
+2024-11-21 14:14:27 - 48 4A 4E 30 07 92 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - Module Manufacturer's Specific Data raw bytes:
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - DIMM#0 (Channel -1, Slot -1) serial number: C1336004
+2024-11-21 14:14:27 - Raw SPD bytes for DIMM#1 (Channel -1, Slot -1):
+2024-11-21 14:14:27 - 92 13 0B 02 04 21 00 09 03 52 01 08 0A 00 FC 00 
+2024-11-21 14:14:27 - 69 78 69 30 69 11 18 81 20 08 3C 3C 00 F0 83 01 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 88 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 0F 11 01 01 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 07 9E 02 15 23 00 73 65 29 0B 02 
+2024-11-21 14:14:27 - 54 4D 54 34 31 47 55 36 42 46 52 38 43 2D 50 42 
+2024-11-21 14:14:27 - 48 4A 4E 30 07 92 00 30 30 31 33 33 30 30 33 30 
+2024-11-21 14:14:27 - 30 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - Module Manufacturer's Specific Data raw bytes:
+2024-11-21 14:14:27 - 00 30 30 31 33 33 30 30 33 30 30 31 00 00 00 00 
+2024-11-21 14:14:27 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:14:27 - DIMM#1 (Channel -1, Slot -1) serial number: 00736529
+2024-11-21 14:14:27 - Enumerating PCI bus...
+2024-11-21 14:14:27 - Scanning PCI for devices:
+2024-11-21 14:14:27 -  VID:8086 DID:0C00 Bus:00 Dev:00 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:06 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:0C01 Bus:00 Dev:01 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:06 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:041E Bus:00 Dev:02 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:06 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:0C0C Bus:00 Dev:03 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:06 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:8C31 Bus:00 Dev:14 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:8C3A Bus:00 Dev:16 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:04 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:8C2D Bus:00 Dev:1A Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:8C20 Bus:00 Dev:1B Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:8C10 Bus:00 Dev:1C Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:D5 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:8C16 Bus:00 Dev:1C Fun:03 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:D5 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:8C26 Bus:00 Dev:1D Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:8C5C Bus:00 Dev:1F Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:8086 DID:8C02 Bus:00 Dev:1F Fun:02 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:14:27 - {00:1F:03} SMBus Configuration Registers:
+2024-11-21 14:14:27 - 00: 8C228086 02800003 0C050005 00000000
+2024-11-21 14:14:27 - 10: F7D19004 00000000 00000000 00000000
+2024-11-21 14:14:27 - 20: 0000F041 00000000 00000000 01641B0A
+2024-11-21 14:14:27 - 30: 00000000 00000000 00000000 000003FF
+2024-11-21 14:14:27 - 40: 00000011 00000000 00000000 00000000
+2024-11-21 14:14:27 - 50: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - 60: 00040403 08080000 00000000 00000000
+2024-11-21 14:14:27 - 70: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - 80: 00000004 00000000 00000000 00000000
+2024-11-21 14:14:27 - 90: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - A0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - B0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - C0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - D0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - E0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - F0: 00000000 00000000 08060FB1 00000000
+2024-11-21 14:14:27 -  VID:8086 DID:8C22 Bus:00 Dev:1F Fun:03 IO Add:F040 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel 8 Series/C220 Series (Lynx Point) (PCH)]
+2024-11-21 14:14:27 -  VID:8086 DID:8C24 Bus:00 Dev:1F Fun:06 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:14:27 -  VID:1283 DID:8892 Bus:02 Dev:00 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:72 [Unknown Unknown]
+2024-11-21 14:14:27 -  VID:10EC DID:8168 Bus:04 Dev:00 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:0C [Unknown Unknown]
+2024-11-21 14:14:27 - Finished searching PCI for SMBus Controller
+2024-11-21 14:14:27 - Getting SMBIOS Memory Device info...
+2024-11-21 14:14:27 - Found 2 Memory Devices
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct 0
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct Get strings (FormattedLen=92, iTotalLen=9F)
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct: String area len=67
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct: parsing v2.3+ strings
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct: parsing v3.2+ strings
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct end
+2024-11-21 14:14:27 - [Slot 0] TotalWidth: 64, DataWidth: 64, Size: 8192, FormFactor: 9, DeviceSet: 0, MemoryType: 24, Speed: 1600, Attributes: 2, ExtendedSize: 0, ConfiguredMemoryClockSpeed: 1600, MinimumVoltage: 1500, MaximumVoltage: 1500, ConfiguredVoltage: 1500
+2024-11-21 14:14:27 - [Slot 0] DeviceLocator: ChannelA-DIMM0, BankLocator: BANK 0, Manufacturer: 0715, S/N: C1336004, AssetTag: 9876543210, PartNumber: TMT41GU6BFR8C-PBHJ
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct 1
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct Get strings (FormattedLen=92, iTotalLen=9F)
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct: String area len=67
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct: parsing v2.3+ strings
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct: parsing v3.2+ strings
+2024-11-21 14:14:27 - DEBUG: Get SMB mem device Struct end
+2024-11-21 14:14:27 - [Slot 1] TotalWidth: 64, DataWidth: 64, Size: 8192, FormFactor: 9, DeviceSet: 0, MemoryType: 24, Speed: 1600, Attributes: 2, ExtendedSize: 0, ConfiguredMemoryClockSpeed: 1600, MinimumVoltage: 1500, MaximumVoltage: 1500, ConfiguredVoltage: 1500
+2024-11-21 14:14:27 - [Slot 1] DeviceLocator: ChannelB-DIMM0, BankLocator: BANK 2, Manufacturer: 0715, S/N: 00736529, AssetTag: 9876543210, PartNumber: TMT41GU6BFR8C-PBHJ
+2024-11-21 14:14:27 - Number of non-empty SMBIOS memory devices found: 2
+2024-11-21 14:14:27 - Attempting to enable any disabled TSOD controllers...
+2024-11-21 14:14:27 - Attempting to enable SMBUS:
+2024-11-21 14:14:27 - RCBA Register: FED1C001
+2024-11-21 14:14:27 - Function Disable Register MMIO Addr: FED1F418
+2024-11-21 14:14:27 - Function Disable Register Value: 02F60001
+2024-11-21 14:14:27 - Searching PCI for TSOD Controller
+2024-11-21 14:14:27 - {00:1F:03} SMBus Configuration Registers:
+2024-11-21 14:14:27 - 00: 8C228086 02800003 0C050005 00000000
+2024-11-21 14:14:27 - 10: F7D19004 00000000 00000000 00000000
+2024-11-21 14:14:27 - 20: 0000F041 00000000 00000000 01641B0A
+2024-11-21 14:14:27 - 30: 00000000 00000000 00000000 000003FF
+2024-11-21 14:14:27 - 40: 00000011 00000000 00000000 00000000
+2024-11-21 14:14:27 - 50: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - 60: 00040403 08080000 00000000 00000000
+2024-11-21 14:14:27 - 70: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - 80: 00000004 00000000 00000000 00000000
+2024-11-21 14:14:27 - 90: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - A0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - B0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - C0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - D0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - E0: 00000000 00000000 00000000 00000000
+2024-11-21 14:14:27 - F0: 00000000 00000000 08060FB1 00000000
+2024-11-21 14:14:27 - Finished searching PCI for SMBus Controller
+2024-11-21 14:14:27 - Could not find TSOD controller.
+2024-11-21 14:14:27 - Getting memory controller info
+2024-11-21 14:14:27 - find_mem_controller - found Intel E3-1200v3 (8086:0C00) at 0-0-0
+2024-11-21 14:14:27 - Intel E3 Haswell-E chipset init
+2024-11-21 14:14:27 - MCHBAR_LO=FED10001
+2024-11-21 14:14:27 - MCHBAR_HI=00000000
+2024-11-21 14:14:27 - MCHBAR=FED10000
+2024-11-21 14:14:27 - CAPID0_A=6284C361
+2024-11-21 14:14:27 - find_mem_controller - Intel E3-1200v3 (8086:0C00) at 0-0-0
+2024-11-21 14:14:27 - find_mem_controller - Intel E3-1200v3 ECC mode: detect: no, correct: no, scrub: no, chipkill: no
+2024-11-21 14:14:27 - ECC polling disabled
+2024-11-21 14:14:27 - Parsing command line: ""
+2024-11-21 14:14:27 - Successfully located the PI MpService protocol.
+2024-11-21 14:14:28 - BSP is Proc 0
+2024-11-21 14:14:28 - This platform has 4 logical processors of which 4 are enabled.
+2024-11-21 14:14:28 -  ProcID   Enabled   Type   Status   Pkg   Core  Thread  Hyperthread?
+2024-11-21 14:14:28 - --------  --------  ----  -------- -----  ----  ------  ------------
+2024-11-21 14:14:28 - 00000000      Y      BSP  00000007     0     0      0      N
+2024-11-21 14:14:28 - 00000001      Y       AP  00000006     0     0      1      Y
+2024-11-21 14:14:28 - 00000002      Y       AP  00000006     0     1      0      N
+2024-11-21 14:14:28 - 00000003      Y       AP  00000006     0     1      1      Y
+2024-11-21 14:14:28 - This platform has 4 logical processors of which 4 are enabled.
+2024-11-21 14:14:28 - Number of hyperthreads detected: 2 
+2024-11-21 14:14:28 - Disabling all hyperthreads
+2024-11-21 14:14:28 - Disabling hyperthread processor 1
+2024-11-21 14:14:28 - Disabling hyperthread processor 3
+2024-11-21 14:14:28 - Testing MP support
+2024-11-21 14:14:28 - MPSupportTestMPServices - AP dispatch test
+2024-11-21 14:14:28 - MPSupportTestMPServices - Starting AP#2
+2024-11-21 14:14:28 - MPSupportTestMPServices - Waiting for AP's to complete execution
+2024-11-21 14:14:29 - MPSupportTestMPServices - CPU #2 finished execution
+2024-11-21 14:14:29 - MPSupportTestMPServices - AP dispatch test complete
+2024-11-21 14:14:29 - MP test passed. Setting default CPU mode to PARALLEL
+2024-11-21 14:14:29 - Applying configurations
+2024-11-21 14:14:29 - [CONFIG] This platform has 4 logical processors of which 2 are enabled.
+2024-11-21 14:14:29 - [CONFIG] MAXCPUS is not valid
+2024-11-21 14:14:29 - Applying configurations complete
+2024-11-21 14:14:29 - Console size = 240 x 67
+2024-11-21 14:14:29 - Checking for graphics mode support
+2024-11-21 14:14:29 - Graphics mode available
+2024-11-21 14:14:29 - Enabling graphics mode
+2024-11-21 14:14:29 - Get screen size
+2024-11-21 14:14:29 - Current screen size: 1920 x 1080
+2024-11-21 14:14:29 - Screen size = 1920 x 1080
+2024-11-21 14:14:29 - Char width=8 height=19
+2024-11-21 14:14:29 - Loading images
+2024-11-21 14:14:29 - Show splash screen
+2024-11-21 14:14:29 - Splash screen start time: 58071498824 (clk=3591776, ConIn=ACFB9C20, WaitForKey=BA4F4118)
+2024-11-21 14:14:32 - Splash screen mouse event detected: 10 (x=956, y=538)
+2024-11-21 14:14:35 - Exit splash screen
+2024-11-21 14:14:35 - Enabling graphics mode
+2024-11-21 14:14:36 - Get screen size
+2024-11-21 14:14:36 - Current screen size: 1920 x 1080
+2024-11-21 14:14:36 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:14:36 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:16:20 - Attempting to retrieve the root directory of the data partition.
+2024-11-21 14:16:20 - Found 2 handles that supported SimpleFileSystem
+2024-11-21 14:16:20 - Checking handle 0 (BAFF1218)
+2024-11-21 14:16:20 - Handle is own partition
+2024-11-21 14:16:20 - Checking handle 1 (BAFD8F18)
+2024-11-21 14:16:20 - HD node found: MBR type(2), Signature type(2), Part #(2), Start LBA(409640), Num Sectors(34566232)
+2024-11-21 14:16:20 - Self node: MBR type(2), Signature type(2), Part #(1), Start LBA(40), Num Sectors(409600)
+2024-11-21 14:16:20 - [FS0]
+2024-11-21 14:16:20 - PciRoot(0x0)/Pci(0x1A,0x0)/USB(0x1,0x0)/USB(0x3,0x0)/HD(1,GPT,71FF2929-B7E7-4145-98E2-5D596F19BAC5,0x28,0x64000)
+2024-11-21 14:16:20 - Label: "EFI", Mode: RW, Free space: 151 MB / 196 MB (0%)
+2024-11-21 14:16:20 - [FS1]
+2024-11-21 14:16:20 - PciRoot(0x0)/Pci(0x1A,0x0)/USB(0x1,0x0)/USB(0x3,0x0)/HD(2,GPT,9D3506FF-007D-478B-A3EB-A133EABD3D90,0x64028,0x20F7058)
+2024-11-21 14:16:20 - Label: "Install macOS Sequoia", Mode: RO, Free space: 711 MB / 16878 MB (0%)
+2024-11-21 14:16:20 - Disabling watchdog timer (Result: Success)
+2024-11-21 14:16:20 - Could not find Simple Network protocol.
+2024-11-21 14:16:20 - =============================================
+2024-11-21 14:16:20 - MemTest86 V9.4 Free Build: 1000 (64-bit)
+2024-11-21 14:16:20 - =============================================
+2024-11-21 14:16:20 - SMBIOS BIOS INFO Vendor: "Acidanthera", Version: "2069.0.0.0.0", Release Date: "08/07/2024"
+2024-11-21 14:16:20 - SMBIOS SYSTEM INFO Manufacturer: "Acidanthera", Product: "iMacPro1,1", Version: "1.0", S/N: "C02WMHZSHX87", SKU: "", Family: ""
+2024-11-21 14:16:20 - SMBIOS: Found SMBIOS BaseboardInformation (pbLinAddr=0xBD46208C, FormattedLen=15, iTotalLen=78)
+2024-11-21 14:16:20 - SMBIOS BASEBOARD INFO Manufacturer: "Acidanthera", Product: "Mac-7BA5B2D9E42DDD94", Version: "iMacPro1,1", S/N: "C028171004NJG361M", AssetTag: "", LocationInChassis: ""
+2024-11-21 14:16:20 - EFI Specifications: 2.31
+2024-11-21 14:16:20 - Found blacklist file
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Mac-F42C88C8" (BIOS: "", FLAGS: 1) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Mac-F4238CC8" (BIOS: "", FLAGS: 8) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Mac-F4208DC8" (BIOS: "", FLAGS: 8) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Mac-27ADBB7B4CEE8E61" (BIOS: "", FLAGS: 20) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Mac-7BA5B2DFE22DDD8C" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Mac-AF89B6D9451A490B" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Mac-CFF7D910A743CAAF" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Mac-AA95B1DDAB278B95" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Mac-27AD2F918AE68F61" (BIOS: "", FLAGS: 40) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "80AF" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Z97MX-Gaming 5" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Z170MX-Gaming 5" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Z170X-Gaming 3" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Z170X-Gaming 7" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Z170X-Gaming GT" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Z170X-UD3-CF" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Z170-HD3P" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "990FXA-UD3" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "970A-DS3P" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "X99-Ultra Gaming-CF" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "M5A97 R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "M5A97 EVO R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "M5A99FX PRO R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "M5A99X EVO R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "X99-A" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "X99-A/USB 3.1" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "X99-A II" (BIOS: "1701", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "X99-A" (BIOS: "1701", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "Sabertooth X99" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "SABERTOOTH 990FX R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "SABERTOOTH 990FX R3.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "SABERTOOTH 990FX/GEN3 R2.0" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "STRIX X99 GAMING" (BIOS: "1701", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "X99-DELUXE" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "X99-DELUXE II" (BIOS: "1701", FLAGS: 2) to blacklist
+2024-11-21 14:16:21 - [BLACKLIST] Adding "RAMPAGE V EXTREME" (BIOS: "3701", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "RAMPAGE V EDITION 10" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "MAXIMUS VIII RANGER" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "Z10PE-D8 WS" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "X9DRW" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "X9DRW-3LN4F+/X9DRW-3TF+" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "X9DRi-LN4+/X9DR3-LN4+" (BIOS: "", FLAGS: 40) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "X9DR3-F" (BIOS: "", FLAGS: 40) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "X9SRL-F" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "X9DRD-iF" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "X9SRA/X9SRA-3" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "151-BE-E097" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "131-HE-E095" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "131-HE-E095-KR" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "151-HE-E999-KR" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "PRIME B350-PLUS" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "PRIME X370-PRO" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "CROSSHAIR VI HERO" (BIOS: "1602", FLAGS: 4) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "CROSSHAIR V FORMULA-Z" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "ROG STRIX X370-F GAMING" (BIOS: "4012", FLAGS: 4) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "OEMSH Product" (BIOS: "", FLAGS: 8) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "OEMAL Product" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "OEMCT Product" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "OEMWY Product" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "LNVNB161216" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "GA-990FX-GAMING" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "X399 SLI PLUS (MS-7B09)" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "X570 I AORUS PRO WIFI" (BIOS: "F32", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "MS-17EK" (BIOS: "", FLAGS: 2) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "0F685W" (BIOS: "", FLAGS: 80) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "ProLiant DL325 Gen10" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "ProLiant DL385 Gen10" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "ProLiant DL385 Gen10 Plus" (BIOS: "", FLAGS: 4) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "06CDVY" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "Surface Book" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "Surface Book 2" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "Surface Pro" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "Surface Pro 7" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "Surface Pro" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "MACH-WX9-PCB" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "MACH-WX9" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "8873" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] Adding "0P4NHH" (BIOS: "", FLAGS: 10) to blacklist
+2024-11-21 14:16:22 - [BLACKLIST] 78 boards added to blacklist
+2024-11-21 14:16:22 - Console Control protocol workaround enabled
+2024-11-21 14:16:22 - Number of console modes: 1
+2024-11-21 14:16:22 - Mode 0: 240 x 67
+2024-11-21 14:16:22 - Console attribute: 7
+2024-11-21 14:16:22 - Initializing localization strings
+2024-11-21 14:16:22 - Language en-US is supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x00C0 (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language fr-FR is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x00C0 (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language it-IT is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x00C9 (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language es-AR is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x00C0 (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language pt-BR is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x00C0 (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language ca-ES is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x00C4 (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language de-DE is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x010C (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language cs-CZ is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x0104 (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language pl-PL is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x0410 (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language ru-RU is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x3041 (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language ja-JP is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0x4E0F (Warning Unknown Glyph)
+2024-11-21 14:16:22 - Language zh-CN is not supported
+2024-11-21 14:16:22 - GetGlyph failed for character 0xF944 (Warning Unknown Glyph)
+2024-11-21 14:16:23 - Language zh-HK is not supported
+2024-11-21 14:16:23 - Font does not support all languages. Installing unicode font...
+2024-11-21 14:16:23 - InitFont - Font header version: 1.1
+2024-11-21 14:16:23 - InitFont - Number of narrow glyphs: 7110
+2024-11-21 14:16:23 - InitFont - Number of wide glyphs: 49976
+2024-11-21 14:16:23 - Language en-US is supported
+2024-11-21 14:16:23 - Language fr-FR is supported
+2024-11-21 14:16:23 - Language it-IT is supported
+2024-11-21 14:16:23 - Language es-AR is supported
+2024-11-21 14:16:23 - Language pt-BR is supported
+2024-11-21 14:16:23 - Language ca-ES is supported
+2024-11-21 14:16:23 - Language de-DE is supported
+2024-11-21 14:16:23 - Language cs-CZ is supported
+2024-11-21 14:16:23 - Language pl-PL is supported
+2024-11-21 14:16:23 - Language ru-RU is supported
+2024-11-21 14:16:23 - Language ja-JP is supported
+2024-11-21 14:16:23 - Language zh-CN is supported
+2024-11-21 14:16:23 - Language zh-HK is supported
+2024-11-21 14:16:23 - iMS support is NOT available
+2024-11-21 14:16:23 - Initializing screen for graphics
+2024-11-21 14:16:23 - Number of graphics modes: 5
+2024-11-21 14:16:23 - Mode 0: 1920 x 1080 [Current]
+2024-11-21 14:16:23 - Mode 1: 640 x 480
+2024-11-21 14:16:23 - Mode 2: 800 x 600
+2024-11-21 14:16:23 - Mode 3: 1024 x 768
+2024-11-21 14:16:23 - Mode 4: 1280 x 1024
+2024-11-21 14:16:23 - Getting CPUID
+2024-11-21 14:16:23 - Getting cache size
+2024-11-21 14:16:23 - get_cache_size - Vendor ID: GenuineIntel Brand ID: Intel(R) Core(TM) i3-4160 CPU @ 3.60GHz
+2024-11-21 14:16:23 - L1 data cache: 32, 2, 8 [0x1C004121]
+2024-11-21 14:16:23 - L1d t2 linesize 64 linepart 1 ways 8 sets 64, size 32KB
+2024-11-21 14:16:23 - L1i t2 linesize 64 linepart 1 ways 8 sets 64, size 32KB
+2024-11-21 14:16:23 - L2u t2 linesize 64 linepart 1 ways 8 sets 512, size 256KB
+2024-11-21 14:16:23 - L3u t16 linesize 64 linepart 1 ways 12 sets 4096, size 3072KB
+2024-11-21 14:16:23 - L0 cache: 0 KB (1)
+2024-11-21 14:16:23 - L0u t1 linesize 1 linepart 1 ways 1 sets 1, size 0KB
+2024-11-21 14:16:23 - L1 instruction cache size: 4 x 32KB
+2024-11-21 14:16:23 - L1 data cache size: 4 x 32KB
+2024-11-21 14:16:23 - L2 cache size: 4 x 256KB
+2024-11-21 14:16:23 - L3 cache size: 3072KB
+2024-11-21 14:16:23 - Measuring CPU/cache/mem speed
+2024-11-21 14:16:23 - hpet_init - Found RSDP. Version: 2 
+2024-11-21 14:16:23 - hpet_init - Found XSDT. Entry Count: 20
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: FACP  Version: 5
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: APIC  Version: 3
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: FPDT  Version: 1
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: FIDT  Version: 1
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: ASF!  Version: 32
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: SSDT  Version: 1
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: SLIC  Version: 1
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: SSDT  Version: 1
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: SSDT  Version: 1
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: MCFG  Version: 1
+2024-11-21 14:16:23 - hpet_init - Found ACPI table: HPET  Version: 1
+2024-11-21 14:16:23 - hpet_init - HPET base address: 0xFED00000
+2024-11-21 14:16:23 - hpet_init - HPET gen cap: 0x429B17F8086A701 (Period: 69841279fs)
+2024-11-21 14:16:23 - hpet_init - HPET gen cfg: 0x1
+2024-11-21 14:16:23 - hpet_init - main counter value (1): 160651683
+2024-11-21 14:16:23 - hpet_init - main counter value (2): 160696393
+2024-11-21 14:16:23 - cpuspeed_hpet - rdtsc instruction supported: 1
+2024-11-21 14:16:23 - cpuspeed_hpet - HPET counter start: 160788537, HPET counter end: 161504445
+2024-11-21 14:16:23 - cpuspeed_hpet - start TSC: 41915496964, end TSC: 42095085560 (difference: 179588596)
+2024-11-21 14:16:23 - cpu_cache_speed - (Attempt 1) clock cycle (ms): 3591771
+2024-11-21 14:16:23 - cpuspeed_hpet - rdtsc instruction supported: 1
+2024-11-21 14:16:23 - cpuspeed_hpet - HPET counter start: 161759172, HPET counter end: 162475080
+2024-11-21 14:16:23 - cpuspeed_hpet - start TSC: 42158978880, end TSC: 42338567384 (difference: 179588504)
+2024-11-21 14:16:23 - cpu_cache_speed - (Attempt 2) clock cycle (ms): 3591770
+2024-11-21 14:16:23 - cpuspeed_hpet - rdtsc instruction supported: 1
+2024-11-21 14:16:23 - cpuspeed_hpet - HPET counter start: 162705662, HPET counter end: 163421570
+2024-11-21 14:16:23 - cpuspeed_hpet - start TSC: 42396403788, end TSC: 42575991416 (difference: 179587628)
+2024-11-21 14:16:23 - cpu_cache_speed - (Attempt 3) clock cycle (ms): 3591752
+2024-11-21 14:16:23 - cpu_cache_speed - Using average of last 3 samples (3591752, 3591770, 3591771)
+2024-11-21 14:16:23 - cpu_cache_speed - CPU speed: 3591.7MHz
+2024-11-21 14:16:23 - cpu_cache_speed - measuring L1 cache speed at 0xBA360000 (32 KB)
+2024-11-21 14:16:23 - cpu_cache_speed - L1 cache speed: 184303 MB/s
+2024-11-21 14:16:23 - cpu_cache_speed - measuring L2 cache speed at 0xBA328000 (256 KB)
+2024-11-21 14:16:23 - cpu_cache_speed - L2 cache speed: 56899 MB/s
+2024-11-21 14:16:23 - cpu_cache_speed - measuring L3 cache speed at 0xBA068000 (3072 KB)
+2024-11-21 14:16:23 - cpu_cache_speed - L3 cache speed: 40369 MB/s
+2024-11-21 14:16:23 - get_mem_speed - measuring mem speed at 0xB798A000 (27136 KB)
+2024-11-21 14:16:23 - get_mem_speed - mem speed: 18796 MB/s
+2024-11-21 14:16:24 - cpu_cache_speed - Memory latency: 25.272 ns
+2024-11-21 14:16:24 - Retrieving CPU MSR data
+2024-11-21 14:16:24 - GetIntelArchitectureSpecificMSRInfo - CPU Intel(R) Core(TM) i3-4160 CPU @ 3.60GHz: 6.60
+2024-11-21 14:16:24 - GetIntelArchitectureSpecificMSRInfo - Nehalem et al detected
+2024-11-21 14:16:24 - GetHaswellFamilyMSRInfo_Static - MSR[0xCE] = 00080838F3012400
+2024-11-21 14:16:24 - GetHaswellFamilyMSRInfo_Static - ExternalClock = 99771
+2024-11-21 14:16:24 - GetHaswellFamilyMSRInfo_Static - MSR[0x1A2] = 0000000000641400
+2024-11-21 14:16:24 - IsIntelTurboSupported - CPUID[0x6][EAX] = 00000075
+2024-11-21 14:16:24 - IsDisableIntelTurboSupported - not supported
+2024-11-21 14:16:24 - IsIntelTurboSupported - CPUID[0x6][EAX] = 00000075
+2024-11-21 14:16:24 - IsDisableIntelTurboSupported - not supported
+2024-11-21 14:16:24 - GetIntelArchitectureSpecificMSRInfo - Turbo disabled
+2024-11-21 14:16:24 - IsIntel_PerfMon_Supported - CPUID[0xA][EDX] = 00000603
+2024-11-21 14:16:24 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - CPUID[0xA][EDX] = 00000603
+2024-11-21 14:16:24 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x38F] = 000000000000000F
+2024-11-21 14:16:24 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x38D] = 0000000000000000
+2024-11-21 14:16:24 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x199] = 0000000000002400
+2024-11-21 14:16:24 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x198] = 0000241100002400
+2024-11-21 14:16:24 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - high perf counter freq = 3591764000
+2024-11-21 14:16:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - time in ns = 409523532
+2024-11-21 14:16:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - FreqCore in KHz = 3591763, FreqRef in KHz = 3591763, Ratio = 100
+2024-11-21 14:16:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - CPUID[0xA][EDX] = 00000603
+2024-11-21 14:16:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x38F] = 000000000000000F
+2024-11-21 14:16:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x38D] = 0000000000000000
+2024-11-21 14:16:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x199] = 0000000000002400
+2024-11-21 14:16:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - MSR[0x198] = 0000241100002400
+2024-11-21 14:16:25 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - high perf counter freq = 3591764000
+2024-11-21 14:16:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - time in ns = 403694954
+2024-11-21 14:16:26 - GetIntelCPUMaxSpeed_CPU_CLK_UNHALTED - FreqCore in KHz = 3591764, FreqRef in KHz = 3591764, Ratio = 100
+2024-11-21 14:16:26 - GetIntelArchitectureSpecificMSRInfo - MaxRatio = 100
+2024-11-21 14:16:26 - GetIntelArchitectureSpecificMSRInfo - Mult = 3600
+2024-11-21 14:16:26 - GetIntelArchitectureSpecificMSRInfo - raw_freq_cpu = 3591756
+2024-11-21 14:16:26 - GetIntelArchitectureSpecificMSRInfo - Freq: 3591756KHz (Ratio: 3600, ExtClk: 99771KHz), Turbo: 0KHz, (Ratio: 0, ExtClk: 0KHz) (Theoretical max: 0KHz)
+2024-11-21 14:16:26 - Getting memory size
+2024-11-21 14:16:26 - 0x000000000000 - 0x000000057FFF (352KB) {Free Memory}
+2024-11-21 14:16:26 - 0x000000058000 - 0x000000058FFF (4KB) {Reserved Memory}
+2024-11-21 14:16:26 - 0x000000059000 - 0x00000009DFFF (276KB) {Free Memory}
+2024-11-21 14:16:26 - 0x00000009E000 - 0x00000009FFFF (8KB) {Reserved Memory}
+2024-11-21 14:16:26 - 0x000000100000 - 0x0000A9B43FFF (2714MB) {Free Memory}
+2024-11-21 14:16:26 - 0x0000A9B44000 - 0x0000A9C43FFF (1024KB) {Loader Data}
+2024-11-21 14:16:26 - 0x0000A9C44000 - 0x0000ACD81FFF (49MB) {Free Memory}
+2024-11-21 14:16:26 - 0x0000ACD82000 - 0x0000ACF62FFF (1924KB) {Loader Code}
+2024-11-21 14:16:26 - 0x0000ACF63000 - 0x0000ACF69FFF (28KB) {ACPI Non-volatile}
+2024-11-21 14:16:26 - 0x0000ACF6A000 - 0x0000AD0C3FFF (1384KB) {Boot Services Data}
+2024-11-21 14:16:26 - 0x0000AD0C4000 - 0x0000AD863FFF (7MB) {Boot Services Code}
+2024-11-21 14:16:26 - 0x0000AD864000 - 0x0000AD868FFF (20KB) {Boot Services Data}
+2024-11-21 14:16:26 - 0x0000AD869000 - 0x0000AD86CFFF (16KB) {Boot Services Code}
+2024-11-21 14:16:26 - 0x0000AD86D000 - 0x0000AD881FFF (84KB) {Boot Services Data}
+2024-11-21 14:16:26 - 0x0000AD882000 - 0x0000AD893FFF (72KB) {Boot Services Code}
+2024-11-21 14:16:26 - 0x0000AD894000 - 0x0000AD89DFFF (40KB) {Boot Services Data}
+2024-11-21 14:16:26 - 0x0000AD89E000 - 0x0000ADB24FFF (2MB) {Runtime Services Data}
+2024-11-21 14:16:26 - 0x0000ADB25000 - 0x0000ADB33FFF (60KB) {Boot Services Data}
+2024-11-21 14:16:26 - 0x0000ADB34000 - 0x0000B9409FFF (184MB) {Free Memory}
+2024-11-21 14:16:26 - 0x0000B940A000 - 0x0000B9D22FFF (9MB) {Boot Services Data}
+2024-11-21 14:16:26 - 0x0000B9D23000 - 0x0000BA365FFF (6MB) {Free Memory}
+2024-11-21 14:16:26 - 0x0000BA366000 - 0x0000BCE3BFFF (42MB) {Boot Services Data}
+2024-11-21 14:16:26 - 0x0000BCE3C000 - 0x0000BD175FFF (3MB) {Free Memory}
+2024-11-21 14:16:26 - 0x0000BD176000 - 0x0000BD43BFFF (2MB) {Boot Services Code}
+2024-11-21 14:16:26 - 0x0000BD43C000 - 0x0000BD460FFF (148KB) {Reserved Memory}
+2024-11-21 14:16:26 - 0x0000BD461000 - 0x0000BD4A4FFF (272KB) {Reserved Memory}
+2024-11-21 14:16:26 - 0x0000BD4A5000 - 0x0000BD5EAFFF (1304KB) {Free Memory}
+2024-11-21 14:16:26 - 0x0000BD5EB000 - 0x0000BDB0CFFF (5MB) {ACPI Non-volatile}
+2024-11-21 14:16:26 - 0x0000BDB0D000 - 0x0000BDB18FFF (48KB) {ACPI Non-volatile}
+2024-11-21 14:16:26 - 0x0000BDB19000 - 0x0000BDB24FFF (48KB) {ACPI Non-volatile}
+2024-11-21 14:16:26 - 0x0000BDB25000 - 0x0000BDC02FFF (888KB) {Runtime Services Data}
+2024-11-21 14:16:26 - 0x0000BDC03000 - 0x0000BDF7BFFF (3MB) {Runtime Services Data}
+2024-11-21 14:16:26 - 0x0000BDF7C000 - 0x0000BDF91FFF (88KB) {Runtime Services Code}
+2024-11-21 14:16:26 - 0x0000BDF92000 - 0x0000BDFFEFFF (436KB) {Runtime Services Code}
+2024-11-21 14:16:26 - 0x0000BDFFF000 - 0x0000BDFFFFFF (4KB) {Boot Services Data}
+2024-11-21 14:16:26 - 0x000100000000 - 0x00041FDFFFFF (12798MB) {Free Memory}
+2024-11-21 14:16:26 - 0x0000BF000000 - 0x0000DF1FFFFF (514MB) {Reserved Memory}
+2024-11-21 14:16:26 - 0x0000F8000000 - 0x0000FBFFFFFF (64MB) {OS Memory-mapped IO}
+2024-11-21 14:16:26 - 0x0000FEC00000 - 0x0000FEC00FFF (4KB) {OS Memory-mapped IO}
+2024-11-21 14:16:26 - 0x0000FED00000 - 0x0000FED03FFF (16KB) {OS Memory-mapped IO}
+2024-11-21 14:16:26 - 0x0000FED1C000 - 0x0000FED1FFFF (16KB) {OS Memory-mapped IO}
+2024-11-21 14:16:26 - 0x0000FEE00000 - 0x0000FEE00FFF (4KB) {OS Memory-mapped IO}
+2024-11-21 14:16:26 - 0x0000FF000000 - 0x0000FFFFFFFF (16MB) {OS Memory-mapped IO}
+2024-11-21 14:16:26 - 
+2024-11-21 14:16:26 - Available Memory: 0x3D8DB8000 (15GB)
+2024-11-21 14:16:26 - Reserved Memory: 0x2A1F2000 (673MB)
+2024-11-21 14:16:26 - mem_size - Number of entries: 43
+2024-11-21 14:16:26 - mem_size - Max address: 0x41FE00000
+2024-11-21 14:16:26 - mem_size - Total memory size (16601001984 bytes)
+2024-11-21 14:16:26 - Getting memory SPD info
+2024-11-21 14:16:26 - Attempting to enable any disabled SMBus controllers...
+2024-11-21 14:16:26 - Attempting to enable SMBUS:
+2024-11-21 14:16:26 - RCBA Register: FED1C001
+2024-11-21 14:16:26 - Function Disable Register MMIO Addr: FED1F418
+2024-11-21 14:16:26 - Function Disable Register Value: 02F60001
+2024-11-21 14:16:26 - Searching PCI for SMBus Controller
+2024-11-21 14:16:26 - {00:1F:03} SMBus Configuration Registers:
+2024-11-21 14:16:26 - 00: 8C228086 02800003 0C050005 00000000
+2024-11-21 14:16:26 - 10: F7D19004 00000000 00000000 00000000
+2024-11-21 14:16:26 - 20: 0000F041 00000000 00000000 01641B0A
+2024-11-21 14:16:26 - 30: 00000000 00000000 00000000 000003FF
+2024-11-21 14:16:26 - 40: 00000011 00000000 00000000 00000000
+2024-11-21 14:16:26 - 50: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - 60: 00040403 08080000 00000000 00000000
+2024-11-21 14:16:26 - 70: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - 80: 00000004 00000000 00000000 00000000
+2024-11-21 14:16:26 - 90: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - A0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - B0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - C0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - D0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - E0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - F0: 00000000 00000000 08060FB1 00000000
+2024-11-21 14:16:26 -  Found SMBus device:  VID:8086 DID:8C22 Bus:00 Dev:1F Fun:03 IO Add:F040 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel 8 Series/C220 Series (Lynx Point) (PCH)]
+2024-11-21 14:16:26 - Finished searching PCI for SMBus Controller
+2024-11-21 14:16:26 - [Intel 8 Series/C220 Series (Lynx Point) (PCH) Bus:00 Dev:1F Fun:03 Add:F040] Looking for SPD
+2024-11-21 14:16:26 - Expanding SPD info array (0 => 16)
+2024-11-21 14:16:26 - MemoryInfo(0xBA358018, 63424 bytes) RawSPD(0xBA353018, 16384 bytes)
+2024-11-21 14:16:26 - Raw SPD bytes for DIMM#0 (Channel -1, Slot -1):
+2024-11-21 14:16:26 - 92 13 0B 02 04 21 00 09 03 52 01 08 0A 00 FC 00 
+2024-11-21 14:16:26 - 69 78 69 30 69 11 18 81 20 08 3C 3C 00 F0 83 01 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 88 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 0F 11 01 01 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 07 9E 02 15 37 C1 33 60 04 0B 02 
+2024-11-21 14:16:26 - 54 4D 54 34 31 47 55 36 42 46 52 38 43 2D 50 42 
+2024-11-21 14:16:26 - 48 4A 4E 30 07 92 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - Module Manufacturer's Specific Data raw bytes:
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - DIMM#0 (Channel -1, Slot -1) serial number: C1336004
+2024-11-21 14:16:26 - Raw SPD bytes for DIMM#1 (Channel -1, Slot -1):
+2024-11-21 14:16:26 - 92 13 0B 02 04 21 00 09 03 52 01 08 0A 00 FC 00 
+2024-11-21 14:16:26 - 69 78 69 30 69 11 18 81 20 08 3C 3C 00 F0 83 01 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 88 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 0F 11 01 01 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 07 9E 02 15 23 00 73 65 29 0B 02 
+2024-11-21 14:16:26 - 54 4D 54 34 31 47 55 36 42 46 52 38 43 2D 50 42 
+2024-11-21 14:16:26 - 48 4A 4E 30 07 92 00 30 30 31 33 33 30 30 33 30 
+2024-11-21 14:16:26 - 30 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - Module Manufacturer's Specific Data raw bytes:
+2024-11-21 14:16:26 - 00 30 30 31 33 33 30 30 33 30 30 31 00 00 00 00 
+2024-11-21 14:16:26 - 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+2024-11-21 14:16:26 - DIMM#1 (Channel -1, Slot -1) serial number: 00736529
+2024-11-21 14:16:26 - Enumerating PCI bus...
+2024-11-21 14:16:26 - Scanning PCI for devices:
+2024-11-21 14:16:26 -  VID:8086 DID:0C00 Bus:00 Dev:00 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:06 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:0C01 Bus:00 Dev:01 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:06 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:041E Bus:00 Dev:02 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:06 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:0C0C Bus:00 Dev:03 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:06 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:8C31 Bus:00 Dev:14 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:8C3A Bus:00 Dev:16 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:04 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:8C2D Bus:00 Dev:1A Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:8C20 Bus:00 Dev:1B Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:8C10 Bus:00 Dev:1C Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:D5 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:8C16 Bus:00 Dev:1C Fun:03 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:D5 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:8C26 Bus:00 Dev:1D Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:8C5C Bus:00 Dev:1F Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:8086 DID:8C02 Bus:00 Dev:1F Fun:02 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:16:26 - {00:1F:03} SMBus Configuration Registers:
+2024-11-21 14:16:26 - 00: 8C228086 02800003 0C050005 00000000
+2024-11-21 14:16:26 - 10: F7D19004 00000000 00000000 00000000
+2024-11-21 14:16:26 - 20: 0000F041 00000000 00000000 01641B0A
+2024-11-21 14:16:26 - 30: 00000000 00000000 00000000 000003FF
+2024-11-21 14:16:26 - 40: 00000011 00000000 00000000 00000000
+2024-11-21 14:16:26 - 50: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - 60: 00040403 08080000 00000000 00000000
+2024-11-21 14:16:26 - 70: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - 80: 00000004 00000000 00000000 00000000
+2024-11-21 14:16:26 - 90: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - A0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - B0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - C0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - D0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - E0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:26 - F0: 00000000 00000000 08060FB1 00000000
+2024-11-21 14:16:26 -  VID:8086 DID:8C22 Bus:00 Dev:1F Fun:03 IO Add:F040 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel 8 Series/C220 Series (Lynx Point) (PCH)]
+2024-11-21 14:16:26 -  VID:8086 DID:8C24 Bus:00 Dev:1F Fun:06 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:05 [Intel Unknown]
+2024-11-21 14:16:26 -  VID:1283 DID:8892 Bus:02 Dev:00 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:72 [Unknown Unknown]
+2024-11-21 14:16:26 -  VID:10EC DID:8168 Bus:04 Dev:00 Fun:00 IO Add:0000 IO (2) Add:0000 MMIO Add:0 PCI Add:{00:00:00:0000} Rev:0C [Unknown Unknown]
+2024-11-21 14:16:27 - Finished searching PCI for SMBus Controller
+2024-11-21 14:16:27 - Getting SMBIOS Memory Device info...
+2024-11-21 14:16:27 - Found 2 Memory Devices
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct 0
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct Get strings (FormattedLen=92, iTotalLen=9F)
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct: String area len=67
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct: parsing v2.3+ strings
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct: parsing v3.2+ strings
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct end
+2024-11-21 14:16:27 - [Slot 0] TotalWidth: 64, DataWidth: 64, Size: 8192, FormFactor: 9, DeviceSet: 0, MemoryType: 24, Speed: 1600, Attributes: 2, ExtendedSize: 0, ConfiguredMemoryClockSpeed: 1600, MinimumVoltage: 1500, MaximumVoltage: 1500, ConfiguredVoltage: 1500
+2024-11-21 14:16:27 - [Slot 0] DeviceLocator: ChannelA-DIMM0, BankLocator: BANK 0, Manufacturer: 0715, S/N: C1336004, AssetTag: 9876543210, PartNumber: TMT41GU6BFR8C-PBHJ
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct 1
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct Get strings (FormattedLen=92, iTotalLen=9F)
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct: String area len=67
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct: parsing v2.3+ strings
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct: parsing v3.2+ strings
+2024-11-21 14:16:27 - DEBUG: Get SMB mem device Struct end
+2024-11-21 14:16:27 - [Slot 1] TotalWidth: 64, DataWidth: 64, Size: 8192, FormFactor: 9, DeviceSet: 0, MemoryType: 24, Speed: 1600, Attributes: 2, ExtendedSize: 0, ConfiguredMemoryClockSpeed: 1600, MinimumVoltage: 1500, MaximumVoltage: 1500, ConfiguredVoltage: 1500
+2024-11-21 14:16:27 - [Slot 1] DeviceLocator: ChannelB-DIMM0, BankLocator: BANK 2, Manufacturer: 0715, S/N: 00736529, AssetTag: 9876543210, PartNumber: TMT41GU6BFR8C-PBHJ
+2024-11-21 14:16:27 - Number of non-empty SMBIOS memory devices found: 2
+2024-11-21 14:16:27 - Attempting to enable any disabled TSOD controllers...
+2024-11-21 14:16:27 - Attempting to enable SMBUS:
+2024-11-21 14:16:27 - RCBA Register: FED1C001
+2024-11-21 14:16:27 - Function Disable Register MMIO Addr: FED1F418
+2024-11-21 14:16:27 - Function Disable Register Value: 02F60001
+2024-11-21 14:16:27 - Searching PCI for TSOD Controller
+2024-11-21 14:16:27 - {00:1F:03} SMBus Configuration Registers:
+2024-11-21 14:16:27 - 00: 8C228086 02800003 0C050005 00000000
+2024-11-21 14:16:27 - 10: F7D19004 00000000 00000000 00000000
+2024-11-21 14:16:27 - 20: 0000F041 00000000 00000000 01641B0A
+2024-11-21 14:16:27 - 30: 00000000 00000000 00000000 000003FF
+2024-11-21 14:16:27 - 40: 00000011 00000000 00000000 00000000
+2024-11-21 14:16:27 - 50: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:27 - 60: 00040403 08080000 00000000 00000000
+2024-11-21 14:16:27 - 70: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:27 - 80: 00000004 00000000 00000000 00000000
+2024-11-21 14:16:27 - 90: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:27 - A0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:27 - B0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:27 - C0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:27 - D0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:27 - E0: 00000000 00000000 00000000 00000000
+2024-11-21 14:16:27 - F0: 00000000 00000000 08060FB1 00000000
+2024-11-21 14:16:27 - Finished searching PCI for SMBus Controller
+2024-11-21 14:16:27 - Could not find TSOD controller.
+2024-11-21 14:16:27 - Getting memory controller info
+2024-11-21 14:16:27 - find_mem_controller - found Intel E3-1200v3 (8086:0C00) at 0-0-0
+2024-11-21 14:16:27 - Intel E3 Haswell-E chipset init
+2024-11-21 14:16:27 - MCHBAR_LO=FED10001
+2024-11-21 14:16:27 - MCHBAR_HI=00000000
+2024-11-21 14:16:27 - MCHBAR=FED10000
+2024-11-21 14:16:27 - CAPID0_A=6284C361
+2024-11-21 14:16:27 - find_mem_controller - Intel E3-1200v3 (8086:0C00) at 0-0-0
+2024-11-21 14:16:27 - find_mem_controller - Intel E3-1200v3 ECC mode: detect: no, correct: no, scrub: no, chipkill: no
+2024-11-21 14:16:27 - ECC polling disabled
+2024-11-21 14:16:27 - Parsing command line: ""
+2024-11-21 14:16:27 - Successfully located the PI MpService protocol.
+2024-11-21 14:16:27 - BSP is Proc 0
+2024-11-21 14:16:27 - This platform has 4 logical processors of which 4 are enabled.
+2024-11-21 14:16:27 -  ProcID   Enabled   Type   Status   Pkg   Core  Thread  Hyperthread?
+2024-11-21 14:16:27 - --------  --------  ----  -------- -----  ----  ------  ------------
+2024-11-21 14:16:27 - 00000000      Y      BSP  00000007     0     0      0      N
+2024-11-21 14:16:27 - 00000001      Y       AP  00000006     0     0      1      Y
+2024-11-21 14:16:27 - 00000002      Y       AP  00000006     0     1      0      N
+2024-11-21 14:16:27 - 00000003      Y       AP  00000006     0     1      1      Y
+2024-11-21 14:16:27 - This platform has 4 logical processors of which 4 are enabled.
+2024-11-21 14:16:27 - Number of hyperthreads detected: 2 
+2024-11-21 14:16:27 - Disabling all hyperthreads
+2024-11-21 14:16:27 - Disabling hyperthread processor 1
+2024-11-21 14:16:27 - Disabling hyperthread processor 3
+2024-11-21 14:16:27 - Testing MP support
+2024-11-21 14:16:27 - MPSupportTestMPServices - AP dispatch test
+2024-11-21 14:16:27 - MPSupportTestMPServices - Starting AP#2
+2024-11-21 14:16:27 - MPSupportTestMPServices - Waiting for AP's to complete execution
+2024-11-21 14:16:28 - MPSupportTestMPServices - CPU #2 finished execution
+2024-11-21 14:16:28 - MPSupportTestMPServices - AP dispatch test complete
+2024-11-21 14:16:28 - MP test passed. Setting default CPU mode to PARALLEL
+2024-11-21 14:16:28 - Applying configurations
+2024-11-21 14:16:28 - [CONFIG] This platform has 4 logical processors of which 2 are enabled.
+2024-11-21 14:16:28 - [CONFIG] MAXCPUS is not valid
+2024-11-21 14:16:28 - Applying configurations complete
+2024-11-21 14:16:28 - Console size = 240 x 67
+2024-11-21 14:16:28 - Checking for graphics mode support
+2024-11-21 14:16:28 - Graphics mode available
+2024-11-21 14:16:28 - Enabling graphics mode
+2024-11-21 14:16:28 - Get screen size
+2024-11-21 14:16:28 - Current screen size: 1920 x 1080
+2024-11-21 14:16:28 - Screen size = 1920 x 1080
+2024-11-21 14:16:28 - Char width=8 height=19
+2024-11-21 14:16:28 - Loading images
+2024-11-21 14:16:28 - Show splash screen
+2024-11-21 14:16:28 - Splash screen start time: 60223815172 (clk=3591764, ConIn=ACFB9C20, WaitForKey=BA4F5118)
+2024-11-21 14:16:32 - Splash screen mouse event detected: 10 (x=960, y=540)
+2024-11-21 14:16:34 - Exit splash screen
+2024-11-21 14:16:34 - Enabling graphics mode
+2024-11-21 14:16:34 - Get screen size
+2024-11-21 14:16:34 - Current screen size: 1920 x 1080
+2024-11-21 14:16:34 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882B0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:16:34 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:16:40 - *** TEST SESSION - 2024-11-21 14:16:40 ***
+2024-11-21 14:16:40 - CPU selection mode = 1
+2024-11-21 14:16:40 - ReadMemoryRanges - Available Pages = 4033827
+2024-11-21 14:16:40 - Locking all memory ranges first...
+2024-11-21 14:16:40 - Skipping memory range 0x0 - 0x58000 (352KB). Range too small.
+2024-11-21 14:16:40 - Skipping memory range 0x59000 - 0x9E000 (276KB). Range too small.
+2024-11-21 14:16:40 - Memory range locked: 0x100000 - 0xA9B44000 (13355900KB of available memory left)
+2024-11-21 14:16:40 - Memory range locked: 0xA9C44000 - 0xACD82000 (13305476KB of available memory left)
+2024-11-21 14:16:40 - Memory range locked: 0xADB34000 - 0xB940A000 (13116204KB of available memory left)
+2024-11-21 14:16:40 - Skipping memory range 0xB9D23000 - 0xBA2B5000 (5704KB). Range too small.
+2024-11-21 14:16:40 - Skipping memory range 0xBA2C6000 - 0xBA2D3000 (52KB). Range too small.
+2024-11-21 14:16:40 - Skipping memory range 0xBA2DD000 - 0xBA2E7000 (40KB). Range too small.
+2024-11-21 14:16:40 - Skipping memory range 0xBA2FF000 - 0xBA304000 (20KB). Range too small.
+2024-11-21 14:16:40 - Skipping memory range 0xBCE3C000 - 0xBD176000 (3304KB). Range too small.
+2024-11-21 14:16:40 - Skipping memory range 0xBD4A5000 - 0xBD5EB000 (1304KB). Range too small.
+2024-11-21 14:16:40 - Remaining memory is less than 16MB. Reducing memory range from 0x100000000 - 0x41FE00000 (13105152KB) => 0x100000000 - 0x41F8CB000 (13099820KB) 
+2024-11-21 14:16:40 - Memory range locked: 0x100000000 - 0x41F8CB000 (16384KB of available memory left)
+2024-11-21 14:16:40 - All memory ranges successfully locked
+2024-11-21 14:16:40 - Starting pass #1 (of 4)
+2024-11-21 14:16:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88290000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:16:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:16:40 - Current CPU temperature: 59C
+2024-11-21 14:16:40 - Running test #0 (Test 0 [Address test, walking ones, 1 CPU])
+2024-11-21 14:16:40 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:16:40 - MtSupportRunAllTests - Start time: 115 ms
+2024-11-21 14:16:40 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:16:40 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:16:40 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:16:40 - MtSupportRunAllTests - Test execution time: 0.413s (Test 0 cumulative error count: 0)
+2024-11-21 14:16:40 - Running test #1 (Test 1 [Address test, own address, 1 CPU])
+2024-11-21 14:16:40 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:16:40 - MtSupportRunAllTests - Start time: 555 ms
+2024-11-21 14:16:40 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:16:40 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:16:41 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:16:43 - MtSupportRunAllTests - Test execution time: 2.835s (Test 1 cumulative error count: 0)
+2024-11-21 14:16:43 - Running test #2 (Test 2 [Address test, own address])
+2024-11-21 14:16:43 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:16:43 - MtSupportRunAllTests - Start time: 3413 ms
+2024-11-21 14:16:43 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:16:43 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:16:43 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:16:46 - MtSupportRunAllTests - Test execution time: 2.477s (Test 2 cumulative error count: 0)
+2024-11-21 14:16:46 - Running test #3 (Test 3 [Moving inversions, ones & zeroes])
+2024-11-21 14:16:46 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:16:46 - MtSupportRunAllTests - Start time: 5913 ms
+2024-11-21 14:16:46 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:16:46 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:16:46 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:17:02 - MtSupportRunAllTests - Test execution time: 16.007s (Test 3 cumulative error count: 0)
+2024-11-21 14:17:02 - Running test #4 (Test 4 [Moving inversions, 8-bit pattern])
+2024-11-21 14:17:02 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:17:02 - MtSupportRunAllTests - Start time: 21941 ms
+2024-11-21 14:17:02 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:17:02 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:17:02 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:17:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88250000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:17:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:17:40 - Current CPU temperature: 63C
+2024-11-21 14:18:18 - MtSupportRunAllTests - Test execution time: 76.250s (Test 4 cumulative error count: 0)
+2024-11-21 14:18:19 - Running test #5 (Test 5 [Moving inversions, random pattern])
+2024-11-21 14:18:19 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:18:19 - MtSupportRunAllTests - Start time: 98579 ms
+2024-11-21 14:18:19 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:18:19 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:18:19 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:18:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:18:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:18:40 - Current CPU temperature: 65C
+2024-11-21 14:19:38 - MtSupportRunAllTests - Test execution time: 79.926s (Test 5 cumulative error count: 0)
+2024-11-21 14:19:38 - Running test #6 (Test 6 [Block move, 64-byte blocks])
+2024-11-21 14:19:38 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:19:38 - MtSupportRunAllTests - Start time: 178526 ms
+2024-11-21 14:19:38 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:19:38 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:19:38 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:19:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88250000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:19:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:19:40 - Current CPU temperature: 63C
+2024-11-21 14:20:27 - MtSupportRunAllTests - Test execution time: 48.203s (Test 6 cumulative error count: 0)
+2024-11-21 14:20:27 - Running test #7 (Test 7 [Moving inversions, 32-bit pattern])
+2024-11-21 14:20:27 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:20:27 - MtSupportRunAllTests - Start time: 226750 ms
+2024-11-21 14:20:27 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:20:27 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:20:27 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:20:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:20:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:20:40 - Current CPU temperature: 70C
+2024-11-21 14:21:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:21:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:21:40 - Current CPU temperature: 70C
+2024-11-21 14:22:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:22:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:22:40 - Current CPU temperature: 70C
+2024-11-21 14:23:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:23:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:23:40 - Current CPU temperature: 69C
+2024-11-21 14:24:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:24:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:24:40 - Current CPU temperature: 70C
+2024-11-21 14:25:38 - MtSupportRunAllTests - Test execution time: 311.050s (Test 7 cumulative error count: 0)
+2024-11-21 14:25:38 - Running test #8 (Test 8 [Random number sequence])
+2024-11-21 14:25:38 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:25:38 - MtSupportRunAllTests - Start time: 537818 ms
+2024-11-21 14:25:38 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:25:38 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:25:38 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:25:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:25:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:25:40 - Current CPU temperature: 68C
+2024-11-21 14:26:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:26:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:26:40 - Current CPU temperature: 67C
+2024-11-21 14:27:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:27:40 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:27:40 - Current CPU temperature: 66C
+2024-11-21 14:27:44 - MtSupportRunAllTests - Test execution time: 126.073s (Test 8 cumulative error count: 0)
+2024-11-21 14:27:44 - Running test #9 (Test 9 [Modulo 20, ones & zeros])
+2024-11-21 14:27:44 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:27:44 - MtSupportRunAllTests - Start time: 663915 ms
+2024-11-21 14:27:44 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:27:44 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:27:44 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:28:40 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88260000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:28:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:28:41 - Current CPU temperature: 62C
+2024-11-21 14:29:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88250000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:29:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:29:41 - Current CPU temperature: 63C
+2024-11-21 14:30:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88240000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:30:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:30:41 - Current CPU temperature: 64C
+2024-11-21 14:31:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:31:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:31:41 - Current CPU temperature: 68C
+2024-11-21 14:32:00 - MtSupportRunAllTests - Test execution time: 255.924s (Test 9 cumulative error count: 0)
+2024-11-21 14:32:00 - Running test #10 (Test 10 [Bit fade test, 2 patterns, 1 CPU])
+2024-11-21 14:32:00 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:32:00 - MtSupportRunAllTests - Start time: 919861 ms
+2024-11-21 14:32:00 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:32:00 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:32:00 - Start bit fade test (0x0 - 0x41FE00000)
+2024-11-21 14:32:00 - Starting Stage 0, Pattern=00000000
+2024-11-21 14:32:01 - Finished Stage 0, Pattern=00000000
+2024-11-21 14:32:01 - Sleep start time: 921514
+2024-11-21 14:32:01 - Sleep time: 300000
+2024-11-21 14:32:01 - Test 10 - Sleeping (299 seconds remaining)
+2024-11-21 14:32:32 - Slept for 30 seconds
+2024-11-21 14:32:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882B0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:32:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:32:41 - Current CPU temperature: 57C
+2024-11-21 14:33:02 - Slept for 60 seconds
+2024-11-21 14:33:32 - Slept for 90 seconds
+2024-11-21 14:33:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:33:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:33:41 - Current CPU temperature: 55C
+2024-11-21 14:34:02 - Slept for 120 seconds
+2024-11-21 14:34:32 - Slept for 150 seconds
+2024-11-21 14:34:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:34:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:34:41 - Current CPU temperature: 53C
+2024-11-21 14:35:02 - Slept for 180 seconds
+2024-11-21 14:35:32 - Slept for 210 seconds
+2024-11-21 14:35:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:35:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:35:41 - Current CPU temperature: 54C
+2024-11-21 14:36:02 - Slept for 240 seconds
+2024-11-21 14:36:32 - Slept for 270 seconds
+2024-11-21 14:36:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:36:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:36:41 - Current CPU temperature: 53C
+2024-11-21 14:37:01 - Starting Stage 1, Pattern=00000000
+2024-11-21 14:37:04 - Finished Stage 1, Pattern=00000000
+2024-11-21 14:37:04 - Starting Stage 0, Pattern=FFFFFFFF
+2024-11-21 14:37:06 - Finished Stage 0, Pattern=FFFFFFFF
+2024-11-21 14:37:06 - Sleep start time: 1225615
+2024-11-21 14:37:06 - Sleep time: 300000
+2024-11-21 14:37:06 - Test 10 - Sleeping (299 seconds remaining)
+2024-11-21 14:37:36 - Slept for 30 seconds
+2024-11-21 14:37:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88300000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:37:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:37:41 - Current CPU temperature: 52C
+2024-11-21 14:38:06 - Slept for 60 seconds
+2024-11-21 14:38:36 - Slept for 90 seconds
+2024-11-21 14:38:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:38:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:38:41 - Current CPU temperature: 53C
+2024-11-21 14:39:06 - Slept for 120 seconds
+2024-11-21 14:39:36 - Slept for 150 seconds
+2024-11-21 14:39:41 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:39:41 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:39:41 - Current CPU temperature: 54C
+2024-11-21 14:40:06 - Slept for 180 seconds
+2024-11-21 14:40:36 - Slept for 210 seconds
+2024-11-21 14:40:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:40:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:40:42 - Current CPU temperature: 53C
+2024-11-21 14:41:06 - Slept for 240 seconds
+2024-11-21 14:41:36 - Slept for 270 seconds
+2024-11-21 14:41:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:41:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:41:42 - Current CPU temperature: 53C
+2024-11-21 14:42:06 - Starting Stage 1, Pattern=FFFFFFFF
+2024-11-21 14:42:08 - Finished Stage 1, Pattern=FFFFFFFF
+2024-11-21 14:42:08 - MtSupportRunAllTests - Test execution time: 608.199s (Test 10 cumulative error count: 0)
+2024-11-21 14:42:08 - Running test #13 (Test 13 [Hammer test])
+2024-11-21 14:42:08 - MtSupportRunAllTests - Setting random seed to 0x50415353
+2024-11-21 14:42:08 - MtSupportRunAllTests - Start time: 1528080 ms
+2024-11-21 14:42:08 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:42:08 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:42:08 - Start double-sided hammer test (0x0 - 0x41FE00000, Step size: 0x1000000)
+2024-11-21 14:42:08 - Using fixed pattern 0x00000000
+2024-11-21 14:42:10 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x100000 - 0x20100000]
+2024-11-21 14:42:14 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x20100000 - 0x40100000]
+2024-11-21 14:42:18 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x40100000 - 0x60100000]
+2024-11-21 14:42:22 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x60100000 - 0x80100000]
+2024-11-21 14:42:25 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x80100000 - 0xA0100000]
+2024-11-21 14:42:41 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x100000000 - 0x120000000]
+2024-11-21 14:42:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88270000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:42:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:42:42 - Current CPU temperature: 61C
+2024-11-21 14:42:44 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x120000000 - 0x140000000]
+2024-11-21 14:42:48 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x140000000 - 0x160000000]
+2024-11-21 14:42:52 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x160000000 - 0x180000000]
+2024-11-21 14:42:56 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x180000000 - 0x1A0000000]
+2024-11-21 14:43:00 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1A0000000 - 0x1C0000000]
+2024-11-21 14:43:04 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1C0000000 - 0x1E0000000]
+2024-11-21 14:43:08 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1E0000000 - 0x200000000]
+2024-11-21 14:43:12 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x200000000 - 0x220000000]
+2024-11-21 14:43:16 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x220000000 - 0x240000000]
+2024-11-21 14:43:20 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x240000000 - 0x260000000]
+2024-11-21 14:43:23 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x260000000 - 0x280000000]
+2024-11-21 14:43:27 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x280000000 - 0x2A0000000]
+2024-11-21 14:43:31 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2A0000000 - 0x2C0000000]
+2024-11-21 14:43:35 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2C0000000 - 0x2E0000000]
+2024-11-21 14:43:39 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2E0000000 - 0x300000000]
+2024-11-21 14:43:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88280000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:43:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:43:42 - Current CPU temperature: 60C
+2024-11-21 14:43:43 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x300000000 - 0x320000000]
+2024-11-21 14:43:47 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x320000000 - 0x340000000]
+2024-11-21 14:43:51 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x340000000 - 0x360000000]
+2024-11-21 14:43:55 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x360000000 - 0x380000000]
+2024-11-21 14:43:59 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x380000000 - 0x3A0000000]
+2024-11-21 14:44:03 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3A0000000 - 0x3C0000000]
+2024-11-21 14:44:06 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3C0000000 - 0x3E0000000]
+2024-11-21 14:44:10 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3E0000000 - 0x400000000]
+2024-11-21 14:44:14 - RunHammerTest - Running hammer test on 2 CPUs (252MB each) [0x400000000 - 0x41F8CB000]
+2024-11-21 14:44:16 - MtSupportRunAllTests - Test execution time: 128.288s (Test 13 cumulative error count: 0)
+2024-11-21 14:44:16 - Finished pass #1 (of 4) (Cumulative error count: 0)
+2024-11-21 14:44:16 - Starting pass #2 (of 4)
+2024-11-21 14:44:16 - Running test #0 (Test 0 [Address test, walking ones, 1 CPU])
+2024-11-21 14:44:16 - MtSupportRunAllTests - Setting random seed to 0x3FD67650
+2024-11-21 14:44:16 - MtSupportRunAllTests - Start time: 1656445 ms
+2024-11-21 14:44:16 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:44:16 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:44:16 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:44:17 - MtSupportRunAllTests - Test execution time: 0.403s (Test 0 cumulative error count: 0)
+2024-11-21 14:44:17 - Running test #1 (Test 1 [Address test, own address, 1 CPU])
+2024-11-21 14:44:17 - MtSupportRunAllTests - Setting random seed to 0x9B4086AC
+2024-11-21 14:44:17 - MtSupportRunAllTests - Start time: 1656872 ms
+2024-11-21 14:44:17 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:44:17 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:44:17 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:44:20 - MtSupportRunAllTests - Test execution time: 2.833s (Test 1 cumulative error count: 0)
+2024-11-21 14:44:20 - Running test #2 (Test 2 [Address test, own address])
+2024-11-21 14:44:20 - MtSupportRunAllTests - Setting random seed to 0xFEBFCF0C
+2024-11-21 14:44:20 - MtSupportRunAllTests - Start time: 1659728 ms
+2024-11-21 14:44:20 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:44:20 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:44:20 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:44:22 - MtSupportRunAllTests - Test execution time: 2.480s (Test 2 cumulative error count: 0)
+2024-11-21 14:44:22 - Running test #3 (Test 3 [Moving inversions, ones & zeroes])
+2024-11-21 14:44:22 - MtSupportRunAllTests - Setting random seed to 0x1699A350
+2024-11-21 14:44:22 - MtSupportRunAllTests - Start time: 1662231 ms
+2024-11-21 14:44:22 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:44:22 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:44:22 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:44:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:44:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:44:42 - Current CPU temperature: 65C
+2024-11-21 14:45:04 - MtSupportRunAllTests - Test execution time: 41.817s (Test 3 cumulative error count: 0)
+2024-11-21 14:45:04 - Running test #4 (Test 4 [Moving inversions, 8-bit pattern])
+2024-11-21 14:45:04 - MtSupportRunAllTests - Setting random seed to 0x13F8E7A4
+2024-11-21 14:45:04 - MtSupportRunAllTests - Start time: 1704071 ms
+2024-11-21 14:45:04 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:45:04 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:45:04 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:45:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:45:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:45:42 - Current CPU temperature: 66C
+2024-11-21 14:46:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88250000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:46:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:46:42 - Current CPU temperature: 63C
+2024-11-21 14:47:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:47:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:47:42 - Current CPU temperature: 66C
+2024-11-21 14:48:01 - MtSupportRunAllTests - Test execution time: 177.392s (Test 4 cumulative error count: 0)
+2024-11-21 14:48:01 - Running test #5 (Test 5 [Moving inversions, random pattern])
+2024-11-21 14:48:01 - MtSupportRunAllTests - Setting random seed to 0x71835578
+2024-11-21 14:48:01 - MtSupportRunAllTests - Start time: 1881483 ms
+2024-11-21 14:48:01 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:48:01 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:48:01 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:48:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:48:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:48:42 - Current CPU temperature: 65C
+2024-11-21 14:49:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:49:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:49:42 - Current CPU temperature: 65C
+2024-11-21 14:50:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88240000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:50:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:50:42 - Current CPU temperature: 64C
+2024-11-21 14:51:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:51:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:51:42 - Current CPU temperature: 65C
+2024-11-21 14:51:59 - MtSupportRunAllTests - Test execution time: 237.366s (Test 5 cumulative error count: 0)
+2024-11-21 14:51:59 - Running test #6 (Test 6 [Block move, 64-byte blocks])
+2024-11-21 14:51:59 - MtSupportRunAllTests - Setting random seed to 0xF69E213C
+2024-11-21 14:51:59 - MtSupportRunAllTests - Start time: 2118870 ms
+2024-11-21 14:51:59 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:51:59 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:51:59 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:52:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88250000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:52:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:52:42 - Current CPU temperature: 63C
+2024-11-21 14:53:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88250000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:53:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:53:42 - Current CPU temperature: 63C
+2024-11-21 14:54:18 - MtSupportRunAllTests - Test execution time: 139.483s (Test 6 cumulative error count: 0)
+2024-11-21 14:54:18 - Running test #7 (Test 7 [Moving inversions, 32-bit pattern])
+2024-11-21 14:54:18 - MtSupportRunAllTests - Setting random seed to 0xA044531C
+2024-11-21 14:54:18 - MtSupportRunAllTests - Start time: 2258373 ms
+2024-11-21 14:54:18 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 14:54:18 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 14:54:18 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 14:54:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:54:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:54:42 - Current CPU temperature: 71C
+2024-11-21 14:55:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:55:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:55:42 - Current CPU temperature: 71C
+2024-11-21 14:56:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:56:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:56:42 - Current CPU temperature: 71C
+2024-11-21 14:57:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:57:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:57:42 - Current CPU temperature: 71C
+2024-11-21 14:58:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:58:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:58:42 - Current CPU temperature: 69C
+2024-11-21 14:59:42 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 14:59:42 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 14:59:43 - Current CPU temperature: 70C
+2024-11-21 15:00:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:00:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:00:43 - Current CPU temperature: 71C
+2024-11-21 15:01:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:01:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:01:43 - Current CPU temperature: 71C
+2024-11-21 15:02:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:02:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:02:43 - Current CPU temperature: 71C
+2024-11-21 15:03:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:03:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:03:43 - Current CPU temperature: 70C
+2024-11-21 15:04:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:04:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:04:43 - Current CPU temperature: 69C
+2024-11-21 15:05:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:05:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:05:43 - Current CPU temperature: 71C
+2024-11-21 15:06:35 - MtSupportRunAllTests - Test execution time: 737.202s (Test 7 cumulative error count: 0)
+2024-11-21 15:06:35 - Running test #8 (Test 8 [Random number sequence])
+2024-11-21 15:06:35 - MtSupportRunAllTests - Setting random seed to 0x253A3EA8
+2024-11-21 15:06:36 - MtSupportRunAllTests - Start time: 2995597 ms
+2024-11-21 15:06:36 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:06:36 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:06:36 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:06:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:06:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:06:43 - Current CPU temperature: 69C
+2024-11-21 15:07:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:07:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:07:43 - Current CPU temperature: 67C
+2024-11-21 15:08:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:08:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:08:43 - Current CPU temperature: 67C
+2024-11-21 15:09:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:09:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:09:43 - Current CPU temperature: 66C
+2024-11-21 15:10:43 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:10:43 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:10:43 - Current CPU temperature: 66C
+2024-11-21 15:11:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:11:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:11:44 - Current CPU temperature: 66C
+2024-11-21 15:12:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:12:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:12:44 - Current CPU temperature: 65C
+2024-11-21 15:12:53 - MtSupportRunAllTests - Test execution time: 377.441s (Test 8 cumulative error count: 0)
+2024-11-21 15:12:53 - Running test #9 (Test 9 [Modulo 20, ones & zeros])
+2024-11-21 15:12:53 - MtSupportRunAllTests - Setting random seed to 0xCE3869EC
+2024-11-21 15:12:53 - MtSupportRunAllTests - Start time: 3373057 ms
+2024-11-21 15:12:53 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:12:53 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:12:53 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:13:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88250000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:13:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:13:44 - Current CPU temperature: 63C
+2024-11-21 15:14:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:14:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:14:44 - Current CPU temperature: 67C
+2024-11-21 15:15:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:15:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:15:44 - Current CPU temperature: 65C
+2024-11-21 15:16:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:16:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:16:44 - Current CPU temperature: 66C
+2024-11-21 15:17:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:17:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:17:44 - Current CPU temperature: 68C
+2024-11-21 15:18:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:18:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:18:44 - Current CPU temperature: 67C
+2024-11-21 15:19:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:19:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:19:44 - Current CPU temperature: 68C
+2024-11-21 15:20:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:20:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:20:44 - Current CPU temperature: 69C
+2024-11-21 15:21:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:21:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:21:44 - Current CPU temperature: 65C
+2024-11-21 15:22:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:22:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:22:44 - Current CPU temperature: 66C
+2024-11-21 15:23:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:23:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:23:44 - Current CPU temperature: 66C
+2024-11-21 15:24:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:24:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:24:44 - Current CPU temperature: 69C
+2024-11-21 15:25:34 - MtSupportRunAllTests - Test execution time: 760.849s (Test 9 cumulative error count: 0)
+2024-11-21 15:25:34 - Running test #10 (Test 10 [Bit fade test, 2 patterns, 1 CPU])
+2024-11-21 15:25:34 - MtSupportRunAllTests - Setting random seed to 0x1A13B190
+2024-11-21 15:25:34 - MtSupportRunAllTests - Start time: 4133929 ms
+2024-11-21 15:25:34 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:25:34 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:25:34 - Start bit fade test (0x0 - 0x41FE00000)
+2024-11-21 15:25:34 - Starting Stage 0, Pattern=00000000
+2024-11-21 15:25:35 - Finished Stage 0, Pattern=00000000
+2024-11-21 15:25:36 - Sleep start time: 4135612
+2024-11-21 15:25:36 - Sleep time: 300000
+2024-11-21 15:25:36 - Test 10 - Sleeping (299 seconds remaining)
+2024-11-21 15:25:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88290000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:25:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:25:44 - Current CPU temperature: 59C
+2024-11-21 15:26:06 - Slept for 30 seconds
+2024-11-21 15:26:36 - Slept for 60 seconds
+2024-11-21 15:26:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882C0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:26:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:26:44 - Current CPU temperature: 56C
+2024-11-21 15:27:06 - Slept for 90 seconds
+2024-11-21 15:27:36 - Slept for 120 seconds
+2024-11-21 15:27:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:27:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:27:44 - Current CPU temperature: 54C
+2024-11-21 15:28:06 - Slept for 150 seconds
+2024-11-21 15:28:36 - Slept for 180 seconds
+2024-11-21 15:28:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:28:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:28:44 - Current CPU temperature: 54C
+2024-11-21 15:29:06 - Slept for 210 seconds
+2024-11-21 15:29:36 - Slept for 240 seconds
+2024-11-21 15:29:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:29:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:29:44 - Current CPU temperature: 54C
+2024-11-21 15:30:06 - Slept for 270 seconds
+2024-11-21 15:30:36 - Starting Stage 1, Pattern=00000000
+2024-11-21 15:30:38 - Finished Stage 1, Pattern=00000000
+2024-11-21 15:30:38 - Starting Stage 0, Pattern=FFFFFFFF
+2024-11-21 15:30:40 - Finished Stage 0, Pattern=FFFFFFFF
+2024-11-21 15:30:40 - Sleep start time: 4439728
+2024-11-21 15:30:40 - Sleep time: 300000
+2024-11-21 15:30:40 - Test 10 - Sleeping (299 seconds remaining)
+2024-11-21 15:30:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:30:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:30:44 - Current CPU temperature: 53C
+2024-11-21 15:31:10 - Slept for 30 seconds
+2024-11-21 15:31:40 - Slept for 60 seconds
+2024-11-21 15:31:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:31:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:31:44 - Current CPU temperature: 54C
+2024-11-21 15:32:10 - Slept for 90 seconds
+2024-11-21 15:32:40 - Slept for 120 seconds
+2024-11-21 15:32:44 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:32:44 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:32:44 - Current CPU temperature: 54C
+2024-11-21 15:33:10 - Slept for 150 seconds
+2024-11-21 15:33:40 - Slept for 180 seconds
+2024-11-21 15:33:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88300000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:33:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:33:45 - Current CPU temperature: 52C
+2024-11-21 15:34:10 - Slept for 210 seconds
+2024-11-21 15:34:40 - Slept for 240 seconds
+2024-11-21 15:34:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:34:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:34:45 - Current CPU temperature: 53C
+2024-11-21 15:35:10 - Slept for 270 seconds
+2024-11-21 15:35:40 - Starting Stage 1, Pattern=FFFFFFFF
+2024-11-21 15:35:42 - Finished Stage 1, Pattern=FFFFFFFF
+2024-11-21 15:35:42 - MtSupportRunAllTests - Test execution time: 608.246s (Test 10 cumulative error count: 0)
+2024-11-21 15:35:42 - Running test #13 (Test 13 [Hammer test])
+2024-11-21 15:35:42 - MtSupportRunAllTests - Setting random seed to 0xC6CB6C3C
+2024-11-21 15:35:42 - MtSupportRunAllTests - Start time: 4742193 ms
+2024-11-21 15:35:42 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:35:42 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:35:42 - Start double-sided hammer test (0x0 - 0x41FE00000, Step size: 0x1000000)
+2024-11-21 15:35:42 - Using fixed pattern 0x00000000
+2024-11-21 15:35:44 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x100000 - 0x20100000]
+2024-11-21 15:35:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882C0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:35:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:35:45 - Current CPU temperature: 56C
+2024-11-21 15:35:49 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x20100000 - 0x40100000]
+2024-11-21 15:35:54 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x40100000 - 0x60100000]
+2024-11-21 15:35:59 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x60100000 - 0x80100000]
+2024-11-21 15:36:04 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x80100000 - 0xA0100000]
+2024-11-21 15:36:22 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x100000000 - 0x120000000]
+2024-11-21 15:36:27 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x120000000 - 0x140000000]
+2024-11-21 15:36:32 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x140000000 - 0x160000000]
+2024-11-21 15:36:37 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x160000000 - 0x180000000]
+2024-11-21 15:36:43 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x180000000 - 0x1A0000000]
+2024-11-21 15:36:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88280000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:36:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:36:45 - Current CPU temperature: 60C
+2024-11-21 15:36:48 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1A0000000 - 0x1C0000000]
+2024-11-21 15:36:53 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1C0000000 - 0x1E0000000]
+2024-11-21 15:36:58 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1E0000000 - 0x200000000]
+2024-11-21 15:37:03 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x200000000 - 0x220000000]
+2024-11-21 15:37:08 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x220000000 - 0x240000000]
+2024-11-21 15:37:13 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x240000000 - 0x260000000]
+2024-11-21 15:37:18 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x260000000 - 0x280000000]
+2024-11-21 15:37:23 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x280000000 - 0x2A0000000]
+2024-11-21 15:37:29 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2A0000000 - 0x2C0000000]
+2024-11-21 15:37:34 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2C0000000 - 0x2E0000000]
+2024-11-21 15:37:39 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2E0000000 - 0x300000000]
+2024-11-21 15:37:44 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x300000000 - 0x320000000]
+2024-11-21 15:37:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882C0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:37:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:37:45 - Current CPU temperature: 56C
+2024-11-21 15:37:49 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x320000000 - 0x340000000]
+2024-11-21 15:37:54 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x340000000 - 0x360000000]
+2024-11-21 15:37:59 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x360000000 - 0x380000000]
+2024-11-21 15:38:04 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x380000000 - 0x3A0000000]
+2024-11-21 15:38:09 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3A0000000 - 0x3C0000000]
+2024-11-21 15:38:14 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3C0000000 - 0x3E0000000]
+2024-11-21 15:38:20 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3E0000000 - 0x400000000]
+2024-11-21 15:38:25 - RunHammerTest - Running hammer test on 2 CPUs (252MB each) [0x400000000 - 0x41F8CB000]
+2024-11-21 15:38:28 - MtSupportRunAllTests - Test execution time: 165.590s (Test 13 cumulative error count: 0)
+2024-11-21 15:38:28 - Finished pass #2 (of 4) (Cumulative error count: 0)
+2024-11-21 15:38:28 - Starting pass #3 (of 4)
+2024-11-21 15:38:28 - Running test #0 (Test 0 [Address test, walking ones, 1 CPU])
+2024-11-21 15:38:28 - MtSupportRunAllTests - Setting random seed to 0x48338DAC
+2024-11-21 15:38:28 - MtSupportRunAllTests - Start time: 4907816 ms
+2024-11-21 15:38:28 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:38:28 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:38:28 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:38:28 - MtSupportRunAllTests - Test execution time: 0.410s (Test 0 cumulative error count: 0)
+2024-11-21 15:38:28 - Running test #1 (Test 1 [Address test, own address, 1 CPU])
+2024-11-21 15:38:28 - MtSupportRunAllTests - Setting random seed to 0xA5094C8C
+2024-11-21 15:38:28 - MtSupportRunAllTests - Start time: 4908249 ms
+2024-11-21 15:38:28 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:38:28 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:38:28 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:38:31 - MtSupportRunAllTests - Test execution time: 2.834s (Test 1 cumulative error count: 0)
+2024-11-21 15:38:31 - Running test #2 (Test 2 [Address test, own address])
+2024-11-21 15:38:31 - MtSupportRunAllTests - Setting random seed to 0x086CEBB4
+2024-11-21 15:38:31 - MtSupportRunAllTests - Start time: 4911105 ms
+2024-11-21 15:38:31 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:38:31 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:38:31 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:38:33 - MtSupportRunAllTests - Test execution time: 2.496s (Test 2 cumulative error count: 0)
+2024-11-21 15:38:33 - Running test #3 (Test 3 [Moving inversions, ones & zeroes])
+2024-11-21 15:38:34 - MtSupportRunAllTests - Setting random seed to 0x23AA3FE0
+2024-11-21 15:38:34 - MtSupportRunAllTests - Start time: 4913624 ms
+2024-11-21 15:38:34 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:38:34 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:38:34 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:38:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88240000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:38:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:38:45 - Current CPU temperature: 64C
+2024-11-21 15:39:15 - MtSupportRunAllTests - Test execution time: 41.820s (Test 3 cumulative error count: 0)
+2024-11-21 15:39:15 - Running test #4 (Test 4 [Moving inversions, 8-bit pattern])
+2024-11-21 15:39:15 - MtSupportRunAllTests - Setting random seed to 0x2197E150
+2024-11-21 15:39:15 - MtSupportRunAllTests - Start time: 4955467 ms
+2024-11-21 15:39:15 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:39:15 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:39:15 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:39:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:39:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:39:45 - Current CPU temperature: 68C
+2024-11-21 15:40:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:40:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:40:45 - Current CPU temperature: 68C
+2024-11-21 15:41:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:41:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:41:45 - Current CPU temperature: 67C
+2024-11-21 15:42:13 - MtSupportRunAllTests - Test execution time: 177.469s (Test 4 cumulative error count: 0)
+2024-11-21 15:42:13 - Running test #5 (Test 5 [Moving inversions, random pattern])
+2024-11-21 15:42:13 - MtSupportRunAllTests - Setting random seed to 0x8F6CB558
+2024-11-21 15:42:13 - MtSupportRunAllTests - Start time: 5132955 ms
+2024-11-21 15:42:13 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:42:13 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:42:13 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:42:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:42:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:42:45 - Current CPU temperature: 68C
+2024-11-21 15:43:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:43:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:43:45 - Current CPU temperature: 66C
+2024-11-21 15:44:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:44:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:44:45 - Current CPU temperature: 66C
+2024-11-21 15:45:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:45:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:45:45 - Current CPU temperature: 66C
+2024-11-21 15:46:10 - MtSupportRunAllTests - Test execution time: 237.367s (Test 5 cumulative error count: 0)
+2024-11-21 15:46:10 - Running test #6 (Test 6 [Block move, 64-byte blocks])
+2024-11-21 15:46:10 - MtSupportRunAllTests - Setting random seed to 0x14F8CE08
+2024-11-21 15:46:10 - MtSupportRunAllTests - Start time: 5370343 ms
+2024-11-21 15:46:10 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:46:10 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:46:10 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:46:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:46:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:46:45 - Current CPU temperature: 65C
+2024-11-21 15:47:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88240000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:47:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:47:45 - Current CPU temperature: 64C
+2024-11-21 15:48:30 - MtSupportRunAllTests - Test execution time: 139.566s (Test 6 cumulative error count: 0)
+2024-11-21 15:48:30 - Running test #7 (Test 7 [Moving inversions, 32-bit pattern])
+2024-11-21 15:48:30 - MtSupportRunAllTests - Setting random seed to 0xD02D4840
+2024-11-21 15:48:30 - MtSupportRunAllTests - Start time: 5509929 ms
+2024-11-21 15:48:30 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 15:48:30 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 15:48:30 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 15:48:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:48:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:48:45 - Current CPU temperature: 70C
+2024-11-21 15:49:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:49:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:49:45 - Current CPU temperature: 70C
+2024-11-21 15:50:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:50:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:50:45 - Current CPU temperature: 71C
+2024-11-21 15:51:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:51:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:51:45 - Current CPU temperature: 70C
+2024-11-21 15:52:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:52:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:52:45 - Current CPU temperature: 70C
+2024-11-21 15:53:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:53:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:53:45 - Current CPU temperature: 70C
+2024-11-21 15:54:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:54:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:54:45 - Current CPU temperature: 71C
+2024-11-21 15:55:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:55:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:55:45 - Current CPU temperature: 71C
+2024-11-21 15:56:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881C0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:56:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:56:45 - Current CPU temperature: 72C
+2024-11-21 15:57:45 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:57:45 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:57:45 - Current CPU temperature: 70C
+2024-11-21 15:58:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:58:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:58:46 - Current CPU temperature: 71C
+2024-11-21 15:59:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 15:59:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 15:59:46 - Current CPU temperature: 71C
+2024-11-21 16:00:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:00:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:00:46 - Current CPU temperature: 71C
+2024-11-21 16:00:47 - MtSupportRunAllTests - Test execution time: 736.885s (Test 7 cumulative error count: 0)
+2024-11-21 16:00:47 - Running test #8 (Test 8 [Random number sequence])
+2024-11-21 16:00:47 - MtSupportRunAllTests - Setting random seed to 0x11014A1C
+2024-11-21 16:00:47 - MtSupportRunAllTests - Start time: 6246834 ms
+2024-11-21 16:00:47 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:00:47 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:00:47 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:01:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:01:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:01:46 - Current CPU temperature: 66C
+2024-11-21 16:02:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:02:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:02:46 - Current CPU temperature: 66C
+2024-11-21 16:03:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:03:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:03:46 - Current CPU temperature: 66C
+2024-11-21 16:04:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:04:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:04:46 - Current CPU temperature: 66C
+2024-11-21 16:05:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:05:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:05:46 - Current CPU temperature: 66C
+2024-11-21 16:06:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:06:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:06:46 - Current CPU temperature: 66C
+2024-11-21 16:07:04 - MtSupportRunAllTests - Test execution time: 377.438s (Test 8 cumulative error count: 0)
+2024-11-21 16:07:04 - Running test #9 (Test 9 [Modulo 20, ones & zeros])
+2024-11-21 16:07:04 - MtSupportRunAllTests - Setting random seed to 0xB9D74860
+2024-11-21 16:07:04 - MtSupportRunAllTests - Start time: 6624293 ms
+2024-11-21 16:07:04 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:07:04 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:07:04 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:07:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:07:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:07:46 - Current CPU temperature: 65C
+2024-11-21 16:08:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:08:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:08:46 - Current CPU temperature: 66C
+2024-11-21 16:09:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:09:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:09:46 - Current CPU temperature: 65C
+2024-11-21 16:10:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:10:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:10:46 - Current CPU temperature: 67C
+2024-11-21 16:11:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:11:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:11:46 - Current CPU temperature: 67C
+2024-11-21 16:12:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:12:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:12:46 - Current CPU temperature: 69C
+2024-11-21 16:13:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:13:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:13:46 - Current CPU temperature: 66C
+2024-11-21 16:14:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:14:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:14:46 - Current CPU temperature: 66C
+2024-11-21 16:15:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:15:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:15:46 - Current CPU temperature: 66C
+2024-11-21 16:16:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88240000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:16:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:16:46 - Current CPU temperature: 64C
+2024-11-21 16:17:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:17:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:17:46 - Current CPU temperature: 68C
+2024-11-21 16:18:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:18:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:18:46 - Current CPU temperature: 68C
+2024-11-21 16:19:45 - MtSupportRunAllTests - Test execution time: 760.857s (Test 9 cumulative error count: 0)
+2024-11-21 16:19:45 - Running test #10 (Test 10 [Bit fade test, 2 patterns, 1 CPU])
+2024-11-21 16:19:45 - MtSupportRunAllTests - Setting random seed to 0x068E4E6C
+2024-11-21 16:19:45 - MtSupportRunAllTests - Start time: 7385169 ms
+2024-11-21 16:19:45 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:19:45 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:19:45 - Start bit fade test (0x0 - 0x41FE00000)
+2024-11-21 16:19:45 - Starting Stage 0, Pattern=00000000
+2024-11-21 16:19:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:19:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:19:46 - Current CPU temperature: 65C
+2024-11-21 16:19:47 - Finished Stage 0, Pattern=00000000
+2024-11-21 16:19:47 - Sleep start time: 7386836
+2024-11-21 16:19:47 - Sleep time: 300000
+2024-11-21 16:19:47 - Test 10 - Sleeping (299 seconds remaining)
+2024-11-21 16:20:17 - Slept for 30 seconds
+2024-11-21 16:20:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:20:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:20:46 - Current CPU temperature: 54C
+2024-11-21 16:20:47 - Slept for 60 seconds
+2024-11-21 16:21:17 - Slept for 90 seconds
+2024-11-21 16:21:46 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:21:46 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:21:46 - Current CPU temperature: 55C
+2024-11-21 16:21:47 - Slept for 120 seconds
+2024-11-21 16:22:17 - Slept for 150 seconds
+2024-11-21 16:22:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:22:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:22:47 - Current CPU temperature: 53C
+2024-11-21 16:22:48 - Slept for 180 seconds
+2024-11-21 16:23:18 - Slept for 210 seconds
+2024-11-21 16:23:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:23:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:23:47 - Current CPU temperature: 54C
+2024-11-21 16:23:48 - Slept for 241 seconds
+2024-11-21 16:24:18 - Slept for 271 seconds
+2024-11-21 16:24:47 - Starting Stage 1, Pattern=00000000
+2024-11-21 16:24:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:24:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:24:47 - Current CPU temperature: 55C
+2024-11-21 16:24:49 - Finished Stage 1, Pattern=00000000
+2024-11-21 16:24:49 - Starting Stage 0, Pattern=FFFFFFFF
+2024-11-21 16:24:51 - Finished Stage 0, Pattern=FFFFFFFF
+2024-11-21 16:24:51 - Sleep start time: 7690962
+2024-11-21 16:24:51 - Sleep time: 300000
+2024-11-21 16:24:51 - Test 10 - Sleeping (299 seconds remaining)
+2024-11-21 16:25:21 - Slept for 30 seconds
+2024-11-21 16:25:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:25:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:25:47 - Current CPU temperature: 53C
+2024-11-21 16:25:51 - Slept for 60 seconds
+2024-11-21 16:26:21 - Slept for 90 seconds
+2024-11-21 16:26:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:26:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:26:47 - Current CPU temperature: 53C
+2024-11-21 16:26:51 - Slept for 120 seconds
+2024-11-21 16:27:21 - Slept for 150 seconds
+2024-11-21 16:27:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:27:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:27:47 - Current CPU temperature: 54C
+2024-11-21 16:27:51 - Slept for 180 seconds
+2024-11-21 16:28:21 - Slept for 210 seconds
+2024-11-21 16:28:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:28:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:28:47 - Current CPU temperature: 53C
+2024-11-21 16:28:52 - Slept for 240 seconds
+2024-11-21 16:29:22 - Slept for 270 seconds
+2024-11-21 16:29:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88300000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:29:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:29:47 - Current CPU temperature: 52C
+2024-11-21 16:29:51 - Starting Stage 1, Pattern=FFFFFFFF
+2024-11-21 16:29:53 - Finished Stage 1, Pattern=FFFFFFFF
+2024-11-21 16:29:53 - MtSupportRunAllTests - Test execution time: 608.238s (Test 10 cumulative error count: 0)
+2024-11-21 16:29:53 - Running test #13 (Test 13 [Hammer test])
+2024-11-21 16:29:53 - MtSupportRunAllTests - Setting random seed to 0xB20DF0E4
+2024-11-21 16:29:53 - MtSupportRunAllTests - Start time: 7993430 ms
+2024-11-21 16:29:53 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:29:53 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:29:53 - Start double-sided hammer test (0x0 - 0x41FE00000, Step size: 0x1000000)
+2024-11-21 16:29:53 - Using fixed pattern 0x00000000
+2024-11-21 16:29:55 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x100000 - 0x20100000]
+2024-11-21 16:30:00 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x20100000 - 0x40100000]
+2024-11-21 16:30:05 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x40100000 - 0x60100000]
+2024-11-21 16:30:10 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x60100000 - 0x80100000]
+2024-11-21 16:30:16 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x80100000 - 0xA0100000]
+2024-11-21 16:30:33 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x100000000 - 0x120000000]
+2024-11-21 16:30:38 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x120000000 - 0x140000000]
+2024-11-21 16:30:44 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x140000000 - 0x160000000]
+2024-11-21 16:30:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88290000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:30:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:30:47 - Current CPU temperature: 59C
+2024-11-21 16:30:49 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x160000000 - 0x180000000]
+2024-11-21 16:30:54 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x180000000 - 0x1A0000000]
+2024-11-21 16:30:59 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1A0000000 - 0x1C0000000]
+2024-11-21 16:31:04 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1C0000000 - 0x1E0000000]
+2024-11-21 16:31:09 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1E0000000 - 0x200000000]
+2024-11-21 16:31:14 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x200000000 - 0x220000000]
+2024-11-21 16:31:19 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x220000000 - 0x240000000]
+2024-11-21 16:31:24 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x240000000 - 0x260000000]
+2024-11-21 16:31:30 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x260000000 - 0x280000000]
+2024-11-21 16:31:35 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x280000000 - 0x2A0000000]
+2024-11-21 16:31:40 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2A0000000 - 0x2C0000000]
+2024-11-21 16:31:45 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2C0000000 - 0x2E0000000]
+2024-11-21 16:31:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88260000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:31:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:31:47 - Current CPU temperature: 62C
+2024-11-21 16:31:50 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2E0000000 - 0x300000000]
+2024-11-21 16:31:55 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x300000000 - 0x320000000]
+2024-11-21 16:32:00 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x320000000 - 0x340000000]
+2024-11-21 16:32:05 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x340000000 - 0x360000000]
+2024-11-21 16:32:10 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x360000000 - 0x380000000]
+2024-11-21 16:32:15 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x380000000 - 0x3A0000000]
+2024-11-21 16:32:20 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3A0000000 - 0x3C0000000]
+2024-11-21 16:32:26 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3C0000000 - 0x3E0000000]
+2024-11-21 16:32:31 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3E0000000 - 0x400000000]
+2024-11-21 16:32:36 - RunHammerTest - Running hammer test on 2 CPUs (252MB each) [0x400000000 - 0x41F8CB000]
+2024-11-21 16:32:39 - MtSupportRunAllTests - Test execution time: 165.570s (Test 13 cumulative error count: 0)
+2024-11-21 16:32:39 - Finished pass #3 (of 4) (Cumulative error count: 0)
+2024-11-21 16:32:39 - Starting pass #4 (of 4)
+2024-11-21 16:32:39 - Running test #0 (Test 0 [Address test, walking ones, 1 CPU])
+2024-11-21 16:32:39 - MtSupportRunAllTests - Setting random seed to 0x2EB313FC
+2024-11-21 16:32:39 - MtSupportRunAllTests - Start time: 8159028 ms
+2024-11-21 16:32:39 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:32:39 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:32:39 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:32:39 - MtSupportRunAllTests - Test execution time: 0.410s (Test 0 cumulative error count: 0)
+2024-11-21 16:32:39 - Running test #1 (Test 1 [Address test, own address, 1 CPU])
+2024-11-21 16:32:39 - MtSupportRunAllTests - Setting random seed to 0x8B730FBC
+2024-11-21 16:32:39 - MtSupportRunAllTests - Start time: 8159461 ms
+2024-11-21 16:32:39 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:32:39 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:32:39 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:32:42 - MtSupportRunAllTests - Test execution time: 2.834s (Test 1 cumulative error count: 0)
+2024-11-21 16:32:42 - Running test #2 (Test 2 [Address test, own address])
+2024-11-21 16:32:42 - MtSupportRunAllTests - Setting random seed to 0xEF03A524
+2024-11-21 16:32:42 - MtSupportRunAllTests - Start time: 8162320 ms
+2024-11-21 16:32:42 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:32:42 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:32:42 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:32:45 - MtSupportRunAllTests - Test execution time: 2.478s (Test 2 cumulative error count: 0)
+2024-11-21 16:32:45 - Running test #3 (Test 3 [Moving inversions, ones & zeroes])
+2024-11-21 16:32:45 - MtSupportRunAllTests - Setting random seed to 0x06E987F0
+2024-11-21 16:32:45 - MtSupportRunAllTests - Start time: 8164821 ms
+2024-11-21 16:32:45 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:32:45 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:32:45 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:32:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88250000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:32:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:32:47 - Current CPU temperature: 63C
+2024-11-21 16:33:26 - MtSupportRunAllTests - Test execution time: 41.812s (Test 3 cumulative error count: 0)
+2024-11-21 16:33:26 - Running test #4 (Test 4 [Moving inversions, 8-bit pattern])
+2024-11-21 16:33:26 - MtSupportRunAllTests - Setting random seed to 0x02868DD4
+2024-11-21 16:33:27 - MtSupportRunAllTests - Start time: 8206654 ms
+2024-11-21 16:33:27 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:33:27 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:33:27 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:33:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88240000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:33:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:33:47 - Current CPU temperature: 64C
+2024-11-21 16:34:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:34:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:34:47 - Current CPU temperature: 67C
+2024-11-21 16:35:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:35:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:35:47 - Current CPU temperature: 66C
+2024-11-21 16:36:24 - MtSupportRunAllTests - Test execution time: 177.397s (Test 4 cumulative error count: 0)
+2024-11-21 16:36:24 - Running test #5 (Test 5 [Moving inversions, random pattern])
+2024-11-21 16:36:24 - MtSupportRunAllTests - Setting random seed to 0x61A14F7C
+2024-11-21 16:36:24 - MtSupportRunAllTests - Start time: 8384073 ms
+2024-11-21 16:36:24 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:36:24 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:36:24 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:36:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:36:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:36:47 - Current CPU temperature: 65C
+2024-11-21 16:37:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:37:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:37:47 - Current CPU temperature: 65C
+2024-11-21 16:38:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:38:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:38:47 - Current CPU temperature: 66C
+2024-11-21 16:39:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:39:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:39:47 - Current CPU temperature: 67C
+2024-11-21 16:40:21 - MtSupportRunAllTests - Test execution time: 237.366s (Test 5 cumulative error count: 0)
+2024-11-21 16:40:21 - Running test #6 (Test 6 [Block move, 64-byte blocks])
+2024-11-21 16:40:21 - MtSupportRunAllTests - Setting random seed to 0xE690377C
+2024-11-21 16:40:21 - MtSupportRunAllTests - Start time: 8621460 ms
+2024-11-21 16:40:21 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:40:21 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:40:21 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:40:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:40:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:40:47 - Current CPU temperature: 65C
+2024-11-21 16:41:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88240000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:41:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:41:47 - Current CPU temperature: 64C
+2024-11-21 16:42:41 - MtSupportRunAllTests - Test execution time: 139.524s (Test 6 cumulative error count: 0)
+2024-11-21 16:42:41 - Running test #7 (Test 7 [Moving inversions, 32-bit pattern])
+2024-11-21 16:42:41 - MtSupportRunAllTests - Setting random seed to 0x9929B8F0
+2024-11-21 16:42:41 - MtSupportRunAllTests - Start time: 8761005 ms
+2024-11-21 16:42:41 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:42:41 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:42:41 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:42:47 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:42:47 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:42:47 - Current CPU temperature: 70C
+2024-11-21 16:43:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:43:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:43:48 - Current CPU temperature: 70C
+2024-11-21 16:44:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:44:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:44:48 - Current CPU temperature: 71C
+2024-11-21 16:45:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:45:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:45:48 - Current CPU temperature: 70C
+2024-11-21 16:46:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:46:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:46:48 - Current CPU temperature: 69C
+2024-11-21 16:47:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:47:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:47:48 - Current CPU temperature: 71C
+2024-11-21 16:48:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:48:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:48:48 - Current CPU temperature: 70C
+2024-11-21 16:49:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:49:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:49:48 - Current CPU temperature: 70C
+2024-11-21 16:50:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:50:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:50:48 - Current CPU temperature: 70C
+2024-11-21 16:51:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:51:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:51:48 - Current CPU temperature: 70C
+2024-11-21 16:52:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:52:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:52:48 - Current CPU temperature: 69C
+2024-11-21 16:53:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:53:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:53:48 - Current CPU temperature: 70C
+2024-11-21 16:54:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         881E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:54:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:54:48 - Current CPU temperature: 70C
+2024-11-21 16:54:58 - MtSupportRunAllTests - Test execution time: 736.843s (Test 7 cumulative error count: 0)
+2024-11-21 16:54:58 - Running test #8 (Test 8 [Random number sequence])
+2024-11-21 16:54:58 - MtSupportRunAllTests - Setting random seed to 0xD13E1E30
+2024-11-21 16:54:58 - MtSupportRunAllTests - Start time: 9497869 ms
+2024-11-21 16:54:58 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 16:54:58 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 16:54:58 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 16:55:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:55:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:55:48 - Current CPU temperature: 68C
+2024-11-21 16:56:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:56:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:56:48 - Current CPU temperature: 67C
+2024-11-21 16:57:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:57:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:57:48 - Current CPU temperature: 66C
+2024-11-21 16:58:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:58:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:58:48 - Current CPU temperature: 67C
+2024-11-21 16:59:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 16:59:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 16:59:48 - Current CPU temperature: 66C
+2024-11-21 17:00:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:00:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:00:48 - Current CPU temperature: 66C
+2024-11-21 17:01:15 - MtSupportRunAllTests - Test execution time: 377.431s (Test 8 cumulative error count: 0)
+2024-11-21 17:01:15 - Running test #9 (Test 9 [Modulo 20, ones & zeros])
+2024-11-21 17:01:15 - MtSupportRunAllTests - Setting random seed to 0x78446AE4
+2024-11-21 17:01:15 - MtSupportRunAllTests - Start time: 9875319 ms
+2024-11-21 17:01:15 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 17:01:15 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 17:01:15 - Start memory range test (0x0 - 0x41FE00000)
+2024-11-21 17:01:48 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:01:48 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:01:48 - Current CPU temperature: 65C
+2024-11-21 17:02:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:02:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:02:49 - Current CPU temperature: 65C
+2024-11-21 17:03:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:03:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:03:49 - Current CPU temperature: 66C
+2024-11-21 17:04:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:04:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:04:49 - Current CPU temperature: 67C
+2024-11-21 17:05:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88220000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:05:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:05:49 - Current CPU temperature: 66C
+2024-11-21 17:06:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:06:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:06:49 - Current CPU temperature: 67C
+2024-11-21 17:07:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88210000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:07:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:07:49 - Current CPU temperature: 67C
+2024-11-21 17:08:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:08:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:08:49 - Current CPU temperature: 68C
+2024-11-21 17:09:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:09:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:09:49 - Current CPU temperature: 65C
+2024-11-21 17:10:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:10:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:10:49 - Current CPU temperature: 65C
+2024-11-21 17:11:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:11:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:11:49 - Current CPU temperature: 65C
+2024-11-21 17:12:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88230000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:12:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:12:49 - Current CPU temperature: 65C
+2024-11-21 17:13:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88200000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:13:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:13:49 - Current CPU temperature: 68C
+2024-11-21 17:13:56 - MtSupportRunAllTests - Test execution time: 761.215s (Test 9 cumulative error count: 0)
+2024-11-21 17:13:56 - Running test #10 (Test 10 [Bit fade test, 2 patterns, 1 CPU])
+2024-11-21 17:13:56 - MtSupportRunAllTests - Setting random seed to 0x11F7AF40
+2024-11-21 17:13:56 - MtSupportRunAllTests - Start time: 10636554 ms
+2024-11-21 17:13:56 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 17:13:56 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 17:13:56 - Start bit fade test (0x0 - 0x41FE00000)
+2024-11-21 17:13:56 - Starting Stage 0, Pattern=00000000
+2024-11-21 17:13:58 - Finished Stage 0, Pattern=00000000
+2024-11-21 17:13:58 - Sleep start time: 10638210
+2024-11-21 17:13:58 - Sleep time: 300000
+2024-11-21 17:13:58 - Test 10 - Sleeping (299 seconds remaining)
+2024-11-21 17:14:28 - Slept for 30 seconds
+2024-11-21 17:14:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:14:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:14:49 - Current CPU temperature: 55C
+2024-11-21 17:14:58 - Slept for 60 seconds
+2024-11-21 17:15:28 - Slept for 90 seconds
+2024-11-21 17:15:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:15:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:15:49 - Current CPU temperature: 54C
+2024-11-21 17:15:58 - Slept for 120 seconds
+2024-11-21 17:16:28 - Slept for 150 seconds
+2024-11-21 17:16:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:16:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:16:49 - Current CPU temperature: 55C
+2024-11-21 17:16:59 - Slept for 180 seconds
+2024-11-21 17:17:29 - Slept for 210 seconds
+2024-11-21 17:17:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:17:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:17:49 - Current CPU temperature: 53C
+2024-11-21 17:17:59 - Slept for 240 seconds
+2024-11-21 17:18:29 - Slept for 270 seconds
+2024-11-21 17:18:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882E0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:18:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:18:49 - Current CPU temperature: 54C
+2024-11-21 17:18:58 - Starting Stage 1, Pattern=00000000
+2024-11-21 17:19:00 - Finished Stage 1, Pattern=00000000
+2024-11-21 17:19:00 - Starting Stage 0, Pattern=FFFFFFFF
+2024-11-21 17:19:02 - Finished Stage 0, Pattern=FFFFFFFF
+2024-11-21 17:19:02 - Sleep start time: 10942306
+2024-11-21 17:19:02 - Sleep time: 300000
+2024-11-21 17:19:02 - Test 10 - Sleeping (299 seconds remaining)
+2024-11-21 17:19:32 - Slept for 30 seconds
+2024-11-21 17:19:49 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:19:49 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:19:49 - Current CPU temperature: 53C
+2024-11-21 17:20:02 - Slept for 60 seconds
+2024-11-21 17:20:32 - Slept for 90 seconds
+2024-11-21 17:20:50 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88300000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:20:50 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:20:50 - Current CPU temperature: 52C
+2024-11-21 17:21:02 - Slept for 120 seconds
+2024-11-21 17:21:33 - Slept for 150 seconds
+2024-11-21 17:21:50 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88300000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:21:50 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:21:50 - Current CPU temperature: 52C
+2024-11-21 17:22:03 - Slept for 180 seconds
+2024-11-21 17:22:33 - Slept for 210 seconds
+2024-11-21 17:22:50 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:22:50 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:22:50 - Current CPU temperature: 53C
+2024-11-21 17:23:03 - Slept for 240 seconds
+2024-11-21 17:23:33 - Slept for 270 seconds
+2024-11-21 17:23:50 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882F0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:23:50 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:23:50 - Current CPU temperature: 53C
+2024-11-21 17:24:02 - Starting Stage 1, Pattern=FFFFFFFF
+2024-11-21 17:24:05 - Finished Stage 1, Pattern=FFFFFFFF
+2024-11-21 17:24:05 - MtSupportRunAllTests - Test execution time: 608.194s (Test 10 cumulative error count: 0)
+2024-11-21 17:24:05 - Running test #13 (Test 13 [Hammer test])
+2024-11-21 17:24:05 - MtSupportRunAllTests - Setting random seed to 0xB475E600
+2024-11-21 17:24:05 - MtSupportRunAllTests - Start time: 11244771 ms
+2024-11-21 17:24:05 - MtSupportRunAllTests - Enabling memory cache for test
+2024-11-21 17:24:05 - MtSupportRunAllTests - Enabling memory cache complete
+2024-11-21 17:24:05 - Start double-sided hammer test (0x0 - 0x41FE00000, Step size: 0x1000000)
+2024-11-21 17:24:05 - Using fixed pattern 0x00000000
+2024-11-21 17:24:06 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x100000 - 0x20100000]
+2024-11-21 17:24:12 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x20100000 - 0x40100000]
+2024-11-21 17:24:17 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x40100000 - 0x60100000]
+2024-11-21 17:24:22 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x60100000 - 0x80100000]
+2024-11-21 17:24:27 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x80100000 - 0xA0100000]
+2024-11-21 17:24:45 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x100000000 - 0x120000000]
+2024-11-21 17:24:50 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x120000000 - 0x140000000]
+2024-11-21 17:24:50 - GetIA32ArchitecturalTemp - MSR(0x19C) =         882D0000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:24:50 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:24:50 - Current CPU temperature: 55C
+2024-11-21 17:24:55 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x140000000 - 0x160000000]
+2024-11-21 17:25:00 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x160000000 - 0x180000000]
+2024-11-21 17:25:05 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x180000000 - 0x1A0000000]
+2024-11-21 17:25:10 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1A0000000 - 0x1C0000000]
+2024-11-21 17:25:15 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1C0000000 - 0x1E0000000]
+2024-11-21 17:25:20 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x1E0000000 - 0x200000000]
+2024-11-21 17:25:25 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x200000000 - 0x220000000]
+2024-11-21 17:25:31 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x220000000 - 0x240000000]
+2024-11-21 17:25:36 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x240000000 - 0x260000000]
+2024-11-21 17:25:41 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x260000000 - 0x280000000]
+2024-11-21 17:25:46 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x280000000 - 0x2A0000000]
+2024-11-21 17:25:50 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88280000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:25:50 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:25:50 - Current CPU temperature: 60C
+2024-11-21 17:25:51 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2A0000000 - 0x2C0000000]
+2024-11-21 17:25:56 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2C0000000 - 0x2E0000000]
+2024-11-21 17:26:01 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x2E0000000 - 0x300000000]
+2024-11-21 17:26:06 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x300000000 - 0x320000000]
+2024-11-21 17:26:11 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x320000000 - 0x340000000]
+2024-11-21 17:26:16 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x340000000 - 0x360000000]
+2024-11-21 17:26:22 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x360000000 - 0x380000000]
+2024-11-21 17:26:27 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x380000000 - 0x3A0000000]
+2024-11-21 17:26:32 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3A0000000 - 0x3C0000000]
+2024-11-21 17:26:37 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3C0000000 - 0x3E0000000]
+2024-11-21 17:26:42 - RunHammerTest - Running hammer test on 2 CPUs (256MB each) [0x3E0000000 - 0x400000000]
+2024-11-21 17:26:47 - RunHammerTest - Running hammer test on 2 CPUs (252MB each) [0x400000000 - 0x41F8CB000]
+2024-11-21 17:26:50 - GetIA32ArchitecturalTemp - MSR(0x19C) =         88260000 (Vendor ID: GenuineIntel 6 3C 3)
+2024-11-21 17:26:50 - MapTempIntel - MSR(0x1A2) =           641400
+2024-11-21 17:26:50 - Current CPU temperature: 62C
+2024-11-21 17:26:50 - MtSupportRunAllTests - Test execution time: 165.683s (Test 13 cumulative error count: 0)
+2024-11-21 17:26:50 - Finished pass #4 (of 4) (Cumulative error count: 0)
+2024-11-21 17:26:50 - Cleanup - Unlocking all memory ranges...
+2024-11-21 17:26:50 - All memory ranges successfully unlocked

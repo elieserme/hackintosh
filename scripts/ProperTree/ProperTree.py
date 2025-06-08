@@ -178,29 +178,32 @@ class ProperTree:
         self.mod_check = tk.IntVar()
         self.enable_mod_check = tk_or_ttk.Checkbutton(self.settings_window,text="Warn If Files Are Externally Modified",variable=self.mod_check,command=self.mod_check_command)
         self.enable_mod_check.grid(row=13,column=0,columnspan=3,stick="w",padx=10)
+        self.first_check = tk.IntVar()
+        self.enable_first_check = tk_or_ttk.Checkbutton(self.settings_window,text="Enter Edits Values Before Keys Where Possible",variable=self.first_check,command=self.first_check_command)
+        self.enable_first_check.grid(row=14,column=0,columnspan=3,stick="w",padx=10)
         self.enable_drag_and_drop = tk.BooleanVar()
         self.toggle_drag_drop = tk_or_ttk.Checkbutton(self.settings_window,text="Enable Row Drag & Drop", variable=self.enable_drag_and_drop,command=self.drag_drop_command)
-        self.toggle_drag_drop.grid(row=14,column=0,columnspan=3,sticky="w",padx=10)
+        self.toggle_drag_drop.grid(row=15,column=0,columnspan=3,sticky="w",padx=10)
         self.drag_label = tk.Label(self.settings_window,text="Drag Dead Zone (1-100 pixels):")
-        self.drag_label.grid(row=15,column=0,sticky="w",padx=10)
+        self.drag_label.grid(row=16,column=0,sticky="w",padx=10)
         self.drag_pixels = tk.Label(self.settings_window,text="20")
-        self.drag_pixels.grid(row=15,column=1,sticky="w",padx=(10,0))
+        self.drag_pixels.grid(row=16,column=1,sticky="w",padx=(10,0))
         self.drag_scale = tk_or_ttk.Scale(self.settings_window,from_=1,to=100,orient=tk.HORIZONTAL,command=self.scale_command)
         # Try to hide the value if using tk - will throw an exception in ttk
         try: self.drag_scale.configure(showvalue=False)
         except tk.TclError: pass
-        self.drag_scale.grid(row=15,column=2,sticky="we",padx=(0,10))
+        self.drag_scale.grid(row=16,column=2,sticky="we",padx=(0,10))
         self.drag_disabled = tk.Label(self.settings_window,text="[ Drag & Drop Disabled ]")
         self.drag_disabled.configure(state="disabled")
-        self.drag_disabled.grid(row=15,column=1,columnspan=2,sticky="we",padx=10)
+        self.drag_disabled.grid(row=16,column=1,columnspan=2,sticky="we",padx=10)
         undo_max_label = tk.Label(self.settings_window,text="Max Undo (0=unlim, {}=default):".format(self.max_undo))
-        undo_max_label.grid(row=16,column=0,sticky="w",padx=10)
+        undo_max_label.grid(row=17,column=0,sticky="w",padx=10)
         self.undo_max_text = plistwindow.EntryPlus(self.settings_window,self.tk,self)
-        self.undo_max_text.grid(row=16,column=1,columnspan=2,sticky="we",padx=10)
+        self.undo_max_text.grid(row=17,column=1,columnspan=2,sticky="we",padx=10)
         
         # Left/right separator:
         sep = ttk.Separator(self.settings_window,orient="vertical")
-        sep.grid(row=1,column=3,rowspan=14,sticky="ns",padx=10)
+        sep.grid(row=1,column=3,rowspan=17,sticky="ns",padx=10)
 
         # Right side - theme elements:
         t_func = ttk.Separator(self.settings_window,orient="horizontal")
@@ -289,21 +292,21 @@ class ProperTree:
         default_dark.grid(row=14,column=5,columnspan=2,sticky="we",padx=10)
 
         sep_theme = ttk.Separator(self.settings_window,orient="horizontal")
-        sep_theme.grid(row=17,column=0,columnspan=7,sticky="we",padx=10,pady=(10,0))
+        sep_theme.grid(row=18,column=0,columnspan=7,sticky="we",padx=10,pady=(10,0))
 
         # Add the check for updates checkbox and button
         self.update_int = tk.IntVar()
         self.update_check = tk_or_ttk.Checkbutton(self.settings_window,text="Check For Updates At Start",variable=self.update_int,command=self.update_command)
-        self.update_check.grid(row=18,column=0,sticky="w",padx=10,pady=(5,0))
+        self.update_check.grid(row=19,column=0,sticky="w",padx=10,pady=(5,0))
         self.notify_once_int = tk.IntVar()
         self.notify_once_check = tk_or_ttk.Checkbutton(self.settings_window,text="Only Notify Once Per Version",variable=self.notify_once_int,command=self.notify_once)
-        self.notify_once_check.grid(row=19,column=0,sticky="w",padx=10,pady=(0,10))
+        self.notify_once_check.grid(row=20,column=0,sticky="w",padx=10,pady=(0,10))
         self.update_button = tk_or_ttk.Button(self.settings_window,text="Check Now",command=lambda:self.check_for_updates(user_initiated=True))
-        self.update_button.grid(row=19,column=1,columnspan=2,sticky="w",padx=10,pady=(0,10))
+        self.update_button.grid(row=20,column=1,columnspan=2,sticky="w",padx=10,pady=(0,10))
         self.tex_button = tk_or_ttk.Button(self.settings_window,text="Get Configuration.tex",command=self.get_latest_tex)
-        self.tex_button.grid(row=19,column=4,sticky="we",padx=10,pady=(0,10))
+        self.tex_button.grid(row=20,column=4,sticky="we",padx=10,pady=(0,10))
         reset_settings = tk_or_ttk.Button(self.settings_window,text="Restore All Defaults",command=self.reset_settings)
-        reset_settings.grid(row=19,column=5,columnspan=2,sticky="we",padx=10,pady=(0,10))
+        reset_settings.grid(row=20,column=5,columnspan=2,sticky="we",padx=10,pady=(0,10))
 
         # Setup the color picker click methods
         self.r1_canvas.bind("<ButtonRelease-1>",lambda x:self.pick_color("alternating_color_1",self.r1_canvas))
@@ -423,6 +426,7 @@ class ProperTree:
             file_menu.add_command(label="Convert Window (Cmd+T)", command=lambda:self.show_window(self.tk))
             file_menu.add_command(label="Strip Comments (Cmd+M)", command=self.strip_comments)
             file_menu.add_command(label="Strip Disabled Entries (Cmd+E)", command=self.strip_disabled)
+            file_menu.add_command(label="Strip Surrounding Whitespace from Keys & Values (Cmd+K)", command=lambda:self.strip_whitespace(keys=True,values=True))
             file_menu.add_separator()
             file_menu.add_command(label="Settings (Cmd+,)",command=lambda:self.show_window(self.settings_window))
             file_menu.add_separator()
@@ -447,6 +451,7 @@ class ProperTree:
         self.tk.bind_all("<{}-Shift-Z>".format(key), self.redo)
         self.tk.bind_all("<{}-m>".format(key), self.strip_comments)
         self.tk.bind_all("<{}-e>".format(key), self.strip_disabled)
+        self.tk.bind_all("<{}-k>".format(key), lambda x:self.strip_whitespace(keys=True,values=True))
         self.tk.bind_all("<{}-r>".format(key), self.oc_snapshot)
         self.tk.bind_all("<{}-Shift-R>".format(key), self.oc_clean_snapshot)
         self.tk.bind_all("<{}-l>".format(key), self.reload_from_disk)
@@ -454,6 +459,9 @@ class ProperTree:
             # Rewrite the default Command-Q command
             self.tk.bind_all("<{}-q>".format(key), self.quit)
             self.tk.bind_all("<{}-comma>".format(key), lambda event, x=self.settings_window:self.show_window(x))
+
+        self.tk.bind("<KeyPress>", self.handle_keypress)
+        self.settings_window.bind("<KeyPress>", self.handle_keypress)
         
         cwd = os.getcwd()
         os.chdir(os.path.abspath(os.path.dirname(__file__)))
@@ -483,6 +491,7 @@ class ProperTree:
         # invert_row2_text_color:       bool
         # invert_hl_text_color:         bool
         # warn_if_modified:             bool
+        # edit_values_before_keys:      bool
         # enable_drag_and_drop:         bool
         # drag_dead_zone:               pixel distance before drag starts (default is 20)
         # open_recent:                  list, paths recently opened
@@ -805,6 +814,7 @@ class ProperTree:
                 # We pressed the button - but another check is in progress
                 self.tk.bell()
                 mb.showerror("Already Checking For Updates","An update check is already in progress.  If you consistently get this error when manually checking for updates - it may indicate a netowrk issue.")
+                self.lift_window()
             return
         self.is_checking_for_updates = True # Lock out other update checks
         self.update_button.configure(
@@ -845,6 +855,7 @@ class ProperTree:
             if user_initiated:
                 self.tk.bell()
                 mb.showerror(error,excep)
+                self.lift_window()
             return self.reset_update_button()
         # Parse the output returned
         version_dict = output_dict.get("json",{})
@@ -852,6 +863,7 @@ class ProperTree:
             if user_initiated:
                 self.tk.bell()
                 mb.showerror("An Error Occurred Checking For Updates","Data returned was malformed or nonexistent.")
+                self.lift_window()
             return self.reset_update_button()
         # At this point - we should have json data containing the version key/value
         check_version = str(version_dict["version"]).lower()
@@ -892,9 +904,7 @@ class ProperTree:
         # Reset the update button after notifying
         self.reset_update_button()
         # If we got here - we displayed some message, let's lift our window to the top
-        windows = self.stackorder(self.tk,include_defaults=True)
-        if not len(windows): return
-        self.lift_window(windows[-1])
+        self.lift_window()
 
     def get_best_tex_path(self):
         pt_path = os.path.abspath(os.path.dirname(__file__))
@@ -987,9 +997,54 @@ class ProperTree:
                     )
         self.reset_tex_button()
         # If we got here - we displayed some message, let's lift our window to the top
-        windows = self.stackorder(self.tk,include_defaults=True)
-        if not len(windows): return
-        self.lift_window(windows[-1])
+        self.lift_window()
+
+    def handle_keypress(self, event, generate=True):
+        if event.state & 0x2 and event.keysym != "Caps_Lock":
+            # Check which OS we're on and strip mod keys we don't
+            # care about
+            state_bitmask = 0xFFFFFFFF
+            if os.name == "nt":
+                state_bitmask -= 0x8  # Num Lock
+                state_bitmask -= 0x20 # Scroll Lock
+            elif sys.platform == "darwin":
+                state_bitmask -= 0x20 # Num Lock
+            else: # Assume Linux
+                state_bitmask -= 0x10 # Num Lock
+            state_bitmask -= 0x2 # Strip Caps Lock on all platforms
+            event.state &= state_bitmask
+            # Build our sequence - modified from:
+            #  - https://github.com/python/cpython/blob/3.13/Lib/tkinter/__init__.py
+            mods = ('Shift', 'Lock', 'Control',
+                    'Mod1', 'Mod2', 'Mod3', 'Mod4', 'Mod5',
+                    'Button1', 'Button2', 'Button3', 'Button4', 'Button5')
+            s = []
+            for i, n in enumerate(mods):
+                if event.state & (1 << i):
+                    s.append(n)
+            # Get the lowercase keysym if it's just one char
+            keysym = event.keysym.lower() if len(event.keysym)==1 else event.keysym
+            sequence = "<{}{}Key-{}>".format(
+                "-".join(s),
+                "-" if s else "",
+                keysym
+            )
+            # Check bind_all for the sequence we built first
+            if sequence in event.widget.bind_all():
+                # Just propagate the event
+                event.widget.event_generate(sequence)
+                return "break"
+            # Walk each widget and its parents looking for the
+            # bind sequence we just built
+            parent = event.widget
+            while True:
+                if sequence in parent.bind():
+                    parent.event_generate(sequence)
+                    return "break"
+                parent_name = parent.winfo_parent()
+                if not parent_name:
+                    return # Bail - out of widgets
+                parent = parent._nametowidget(parent_name)
 
     def text_color(self, hex_color, invert = False):
         hex_color = hex_color.lower()
@@ -1086,6 +1141,9 @@ class ProperTree:
 
     def mod_check_command(self, event = None):
         self.settings["warn_if_modified"] = True if self.mod_check.get() else False
+
+    def first_check_command(self, event = None):
+        self.settings["edit_values_before_keys"] = True if self.first_check.get() else False
 
     def update_command(self, event = None):
         self.settings["check_for_updates_at_startup"] = True if self.update_int.get() else False
@@ -1239,6 +1297,7 @@ class ProperTree:
         self.snapshot_string.set(snapshot_name if snapshot_name in snapshot_choices else "Auto-detect")
         self.force_schema.set(self.settings.get("force_snapshot_schema",False))
         self.mod_check.set(self.settings.get("warn_if_modified",True))
+        self.first_check.set(self.settings.get("edit_values_before_keys",False))
         self.comment_ignore_case.set(self.settings.get("comment_strip_ignore_case",False))
         self.comment_check_string.set(self.settings.get("comment_strip_check_string",True))
         self.update_int.set(self.settings.get("check_for_updates_at_startup",True))
@@ -1272,14 +1331,14 @@ class ProperTree:
         self.update_canvases()
 
     def update_canvas_text(self, canvas = None):
-        if canvas == None: # Update all
+        if canvas is None: # Update all
             canvas = (self.bg_canvas,self.r1_canvas,self.r2_canvas,self.hl_canvas)
         if not isinstance(canvas, (tuple,list)): canvas = (canvas,)
         for c in canvas:
             if not c in self.canvas_connect: continue # Not a recognized canvas - skip
             # Update each canvas as needed - but mind the text color
             color = self.text_color(c["background"],self.canvas_connect[c]["invert"].get())
-            if self.canvas_connect[c].get("text_id",None) == None: # We haven't drawn it yet - try to
+            if self.canvas_connect[c].get("text_id",None) is None: # We haven't drawn it yet - try to
                 # Get the size
                 w = self.settings_window.winfo_width()
                 h = c.winfo_height()
@@ -1397,6 +1456,7 @@ class ProperTree:
         if not (os.path.exists(path) and os.path.isfile(path)):
             self.tk.bell()
             mb.showerror("An Error Occurred While Opening {}".format(os.path.basename(path)), "The path '{}' does not exist.".format(path))
+            self.lift_window()
             return
         return self.pre_open_with_path(path)
 
@@ -1414,7 +1474,7 @@ class ProperTree:
                     window = self.pre_open_with_path(p)
                     if not window: continue
                     at_least_one = True
-                    if self.start_window == None:
+                    if self.start_window is None:
                         self.start_window = window
                 if not at_least_one: # If none of them opened, open a fresh plist
                     windows = self.stackorder(self.tk)
@@ -1426,6 +1486,7 @@ class ProperTree:
         except Exception as e:
             self.tk.bell()
             mb.showerror("Error in check_open() function",repr(e))
+            self.lift_window()
         self.is_opening = False
 
     def open_plist_from_app(self, *args):
@@ -1445,17 +1506,18 @@ class ProperTree:
                     self.lift_window(existing_window)
                     existing_window.reload_from_disk(None)
                     continue
-                if len(windows) == 1 and windows[0] == self.start_window and windows[0].edited == False and windows[0].current_plist == None:
+                if len(windows) == 1 and windows[0] == self.start_window and windows[0].edited == False and windows[0].current_plist is None:
                     # Fresh window - replace the contents
                     current_window = windows[0]
                 else:
                     current_window = None
                 # Let's load the plist
                 window = self.pre_open_with_path(arg,current_window)
-                if self.start_window == None: self.start_window = window
+                if self.start_window is None: self.start_window = window
         except Exception as e:
             self.tk.bell()
             mb.showerror("Error in open_plist_from_app() function",repr(e))
+            self.lift_window()
         self.is_opening = False
 
     def change_hd_type(self, value):
@@ -1549,6 +1611,16 @@ class ProperTree:
             return
         window.strip_disabled(event)
 
+    def strip_whitespace(self, event = None, keys = False, values = False):
+        windows = self.stackorder(self.tk)
+        if not len(windows):
+            # Nothing to do
+            return
+        window = windows[-1] # Get the last item (most recent)
+        if window in self.default_windows:
+            return
+        window.strip_whitespace(event,keys=keys,values=values)
+
     def change_to_type(self, value):
         self.settings["convert_to_type"] = value
         self.convert_values()
@@ -1615,6 +1687,7 @@ class ProperTree:
             if [x for x in from_value if x.lower() not in "0123456789abcdef"]:
                 self.tk.bell()
                 mb.showerror("Invalid Hex Data","Invalid character in passed hex data.") # ,parent=self.tk)
+                self.lift_window()
                 return
         try:
             if from_type in ("decimal","binary"):
@@ -1671,6 +1744,7 @@ class ProperTree:
             self.t_text.configure(state='readonly')
             self.tk.bell()
             mb.showerror("Conversion Error",str(e)) # ,parent=self.tk)
+            self.lift_window()
 
     ###                       ###
     # Save/Load Plist Functions #
@@ -1822,7 +1896,7 @@ class ProperTree:
         if not path: return # Hmmm... shouldn't happen, but just in case
         path = os.path.abspath(os.path.expanduser(path))
         windows = self.stackorder(self.tk)
-        if current_window == None and len(windows) == 1 and windows[0] == self.start_window and windows[0].edited == False and windows[0].current_plist == None:
+        if current_window is None and len(windows) == 1 and windows[0] == self.start_window and windows[0].edited == False and windows[0].current_plist is None:
             # Fresh window - replace the contents
             current_window = windows[0]
         # Verify that no other window has that file selected already
@@ -1847,6 +1921,7 @@ class ProperTree:
             # Had an issue, throw up a display box
             self.tk.bell()
             mb.showerror("An Error Occurred While Opening {}".format(os.path.basename(path)), str(e)) # ,parent=current_window)
+            self.lift_window()
             return
         # Opened it correctly - let's load it, and set our values
         if not current_window:
@@ -1891,14 +1966,19 @@ class ProperTree:
         # Return the list, omitting any windows that are withdrawn
         return [x for x in stack_order if x.wm_state() != "withdrawn"]
 
-    def lift_window(self, window=None):
+    def lift_window(self, window=None, deiconify=False):
         if window is None:
             windows = self.stackorder(self.tk,include_defaults=True)
             if windows: # Get the last window we saw
                 window = windows[-1]
         if window is None: return # No windows in the stack order?
-        window.deiconify() # Lift minimized windows as well
-        window.lift()
+        if deiconify and window.state() == "iconic":
+            window.deiconify() # Lift minimized windows as well
+        if sys.platform != "darwin":
+            # For all non-macOS platforms, lift the window
+            # whether deiconifying or not.  Don't lift on
+            # macOS as it deiconifies windows.
+            window.lift()
         window.focus_force()
         try: window._tree.focus_force()
         except: pass
@@ -1931,7 +2011,7 @@ class ProperTree:
             for window in self.stackorder(self.tk)[::-1]:
                 if window in self.default_windows or not window.edited:
                     continue
-                self.lift_window(window)
+                self.lift_window(window,deiconify=True)
                 if not window.close_window(check_saving=ask_to_save,check_close=False):
                     self.is_quitting = False # Unlock the quit
                     return # User cancelled or we failed to save, bail

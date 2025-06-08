@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 1.0.3** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.2 Sequoia** like an **iMac Pro**!
+This is the guide for **OpenCore 1.0.4** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.5 Sequoia** like an **Mac Pro**!
 
 ## Table of Contents
 
@@ -9,15 +9,12 @@ This is the guide for **OpenCore 1.0.3** Hackintosh build based on i7 9700KF | G
 	- [Warning](#warning)
 	- [Why use iMac Pro model](#why-use-imac-pro-model)
 	- [Hardware](#hardware)
-	- [BIOS settings for Windows](#bios-settings-for-windows)
-	- [Windows 11 setup](#windows-11-setup)
-	- [BIOS settings for MacOS](#bios-settings-for-macos)
+	- [BIOS settings](#bios-settings)
 	- [MacOS 15 Sequoia setup](#macos-15-sequoia-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
 	- [Final Steps](#final-steps)
 	- [Cleaning the EFI](#cleaning-the-efi)
-	- [Dual Boot](#dual-boot)
 
 ## Warning 
 **Please read** the [OpenCore Guide](https://dortania.github.io/OpenCore-Install-Guide/) to **understand the process** and make any changes if you require different settings.
@@ -39,8 +36,7 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 |     **RAM**      | **2 x [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf)** 16GB DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | **[Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6)** Dedicated Video Card                                                                         |
 |   **Wireless**   | **[Intel AC 8265NGW](https://www.intel.com.br/content/www/br/pt/products/sku/94150/intel-dual-band-wirelessac-8265/specifications.html)** WiFi and Bluetooth PCIe card onboard |
-|     **NVMe**     | **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 500GB PCIe NVMe _(for MacOS,  on the top of the motherboard)_  <br /> **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 1TB PCIe NVMe _(for Windows 11 and gamming, on the back of the motherboard)_                                                    |
-|     **HDD**      | **2 x [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/)** 2TB HDD 3.5"                                               |
+|     **NVMe**     | **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 500GB PCIe NVMe _(for MacOS,  on the top of the motherboard)_                                                     |
 |  **Coolers**  | **[Montech DT24](https://www.montechpc.com/en/products_detail.php?nid=299&s_ok2=)** CPU cooler<br />**3 x [Fractal Aspect 12](https://www.fractal-design.com/products/fans/aspect/aspect-12/black/)** 120mm case cooler _(System Fan 1 and 2)_                                                                                                      |
 | **Power Supply** | **[Super Flower LEADEX III GOLD 850W](https://www.super-flower.com.tw/ja/products/leadex-iii-gold-850w)**  _(use **[this link](https://outervision.com/power-supply-calculator)** to calculate your power supply need)_                                           |
 |     **Case**     | **[Fractal Pop Mini Silent](https://www.fractal-design.com/products/cases/pop/pop-mini-silent/black-tg-clear/)** Micro ATX and Mini ITX support                                                                                                             |
@@ -54,7 +50,7 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 > **Network Note!**
 The **Intel AT211 Ethernet is DISABLED** in MacOS, so you need to use the **Intel i219v Ethernet port** when using MacOS. On Windows both ethernet ports are functional.
 
-## BIOS settings for Windows
+## BIOS settings
 
 Gigabyte z370N WIFI using **BIOS version F12**
 
@@ -64,12 +60,12 @@ Gigabyte z370N WIFI using **BIOS version F12**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
-- BIOS &gt; Secure Boot &gt; **ENABLED**
+- BIOS &gt; Secure Boot &gt; **DISABLED**
 - Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
 - Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
-- Peripherals &gt; Intel PTT &gt; **ENABLED**
+- Peripherals &gt; Intel PTT &gt; **DISABLED**
 - Peripherals &gt; SGX &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **ENABLED**
+- Peripherals &gt; Trusted Computing &gt; **DISABLED**
 - Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
@@ -82,44 +78,6 @@ Gigabyte z370N WIFI using **BIOS version F12**
 - Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
 - Power &gt; CEC 2019 Ready &gt; **DISABLED**
 - Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
-- Save & Exit &gt; Save Profile &gt; **Windows** _(get the first entry and name it)_
-- Save & Exit &gt; **Save & Exit Setup**
-
-## Windows 11 setup
-
-You can install **Windows 11** as usual. **Drivers** for this motherboard are below:
-
-- **Download [Intel INF Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/SetupChipset.exe)** _**(required)**_
-- **Download [Latest AMD Graphics Driver](https://www.amd.com/pt/support/graphics/amd-radeon-6000-series/amd-radeon-6600-series/amd-radeon-rx-6600-xt)** _**(required)**_
-- Download [Apple TimeCapsule Driver](https://raw.github.com/elieserme/hackintosh/main/util/windows11/AirPortSetup.exe) _(optional)_
-
-> **TimeCapsule on Windows:**
-To use TimeCapsule driver, first enable the **SMB 1.0/CIFS** on Windows (use the _**Turn Windows features on or off**_ dialog for this). The same apply if you have a Windows file server that will be accessed by a MacOS machine or vice-versa.
-
-To **keep the date and time synchronized** when switching between MacOS and Windows, run the following command:
-
-```bash
-reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
-```
-
-You will want to **Turn off Memory Integrity on Windows 11** to avoid problems on Opencore boot _(and increase gamming performance)_:
-
-- Select **Start**, enter ‘**Core Isolation**’ in the taskbar, and select **Core Isolation** from the list of results to open the Windows security app;
-- On the **Core isolation** page, _**turn off** the toggle_ for **Memory Integrity**. You might need to restart the computer.
-
-If you want a **cleaner installation of Windows 11**, you can run a script to do the cleanup _(be careful, for testing only)_ using [LeDragoX's scripts](https://github.com/LeDragoX/Win-Debloat-Tools). After running the script, you may want to get the **new desktop context menu back**. Use the command below to return it to normal:
-
-```bash
-reg.exe delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f
-```
-
-To **keep your Windows drivers up to date**, Intel has a tool that can help _(it only works with Intel's basic motherboard drivers)_. You can download and install it from [Intel's website](https://www.intel.com/content/www/us/en/support/detect.html).
-
-## BIOS settings for MacOS
-
-- BIOS &gt; Secure Boot &gt; **DISABLED**
-- Peripherals &gt; Intel PTT &gt; **DISABLED**
-- Save & Exit &gt; Save Profile &gt; **MacOS** _(get the second entry and name it)_
 - Save & Exit &gt; **Save & Exit Setup**
   
 ## MacOS 15 Sequoia setup
@@ -260,7 +218,7 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 ## Final Steps
 
-The EFI folder configuration already comes with SecureBootModel and WiFi and Bluetooth Kexts disabled by default. After successfully installing MacOS you can enable these options as below.
+The EFI folder configuration already comes with SecureBootModel disabled by default. After successfully installing MacOS you can enable these options as below.
 
 > **MacOS Update:**
 Using Sonoma 14.4 and later, every time you update MacOS, you need to first disable SecureBootModel (Disabled). After the update, you can enable it again (Default). Please remind to **Clear NVRAM** each time you enable or disable this settings.
@@ -280,11 +238,4 @@ Using Sonoma 14.4 and later, every time you update MacOS, you need to first disa
 -	<true/>
 +	<false/>
 ```
-
-## Dual Boot
-
-To switch between Windows and MacOS you must **enter the BIOS** and **change the Boot order** to the Windows or MacOS disk according to your choice and also **load the BIOS settings** profile depending on the operating system you are going to start:
-
-- Save & Exit &gt; Load Profile &gt; **Windows** _or_ **MacOS**
-- Save & Exit &gt; **Save & Exit Setup**
 
