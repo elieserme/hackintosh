@@ -7,7 +7,7 @@ This is the guide for **OpenCore 1.0.4** Hackintosh build based on i7 9700KF | G
 - [Hackintosh](#hackintosh)
 	- [Table of Contents](#table-of-contents)
 	- [Warning](#warning)
-	- [Why use iMac Pro model](#why-use-imac-pro-model)
+	- [Why use Mac Pro model](#why-use-imac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
 	- [MacOS 15 Sequoia setup](#macos-15-sequoia-setup)
@@ -22,7 +22,7 @@ This is the guide for **OpenCore 1.0.4** Hackintosh build based on i7 9700KF | G
 > **Warning!**
 Custom configuration for this _specific motherboard, graphics card and NVMe listed below_. If your computer's components are different, **DO NOT USE THIS CONFIGURATION AND MAKE YOUR OWN ONE ACCORDING TO YOUR HARDWARE**.
 
-## Why use iMac Pro model
+## Why use Mac Pro model
 - **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **No DRM issues** _(you can use Apple TV+ and Safari for Netflix and PrimeVideo)_.
@@ -45,18 +45,18 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
 
 > **Config Note!**
-**RC6 Render Standby** option is missing on this motherboard BIOS when installed a _Intel CPU with F suffix (no iGPU)_. This option need to be **DISABLED** for system stability and avoid kernel panics (like NVMe errors). The opencore **forceRenderStandby=0** boot argument does the trick if missing this option on BIOS.
+**RC6 Render Standby** option is missing on this motherboard BIOS when installed a _Intel CPU with F suffix (no iGPU)_. This option need to be **DISABLED** for system stability and avoid kernel panics (like NVMe errors). The opencore **forceRenderStandby=0** boot argument does the trick for my motherboard.
 
 > **Network Note!**
-The **Intel AT211 Ethernet is DISABLED** in MacOS, so you need to use the **Intel i219v Ethernet port** when using MacOS. On Windows both ethernet ports are functional.
+The **Intel AT211 Ethernet is DISABLED** in MacOS, so you need to use the **Intel i219v Ethernet port** when using MacOS. 
 
 ## BIOS settings
 
 Gigabyte z370N WIFI using **BIOS version F12**
 
 - Save & Exit &gt; **Load optimised defaults**
-- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **PCH**
-- SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **PCH**
+- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM**
+- SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **VRM**
 - BIOS &gt; FastBoot &gt; **DISABLED**
 - BIOS &gt; CSM Support &gt; **DISABLED**
 - BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
@@ -156,7 +156,7 @@ setup_var_3 0x5A4 0x00
 
 ## USB Ports
 
-The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and iMacPro1,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
+The included **`USBMap.kext`** with USB mapping is for the **Gigabyte z370N WiFi 1.0 and MacPro7,1 SMBIOS only** with some **USB 3** ports, one **USB type C** and one **internal Bluetooth USB** port enabled.
 
 Keep in mind that **you have to choose what ports to enable**, because **MacOS has a 15 logical ports limit** and each port has 2 logical ports _(one physical port has one USB 2 and one USB 3 personality, and USB Type C has different ports for each side... so **2 logical ports per physical port**)_ and you have to **reserve a port for Bluetooth card**.
 
@@ -220,7 +220,7 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 The EFI folder configuration already comes with SecureBootModel disabled by default. After successfully installing MacOS you can enable these options as below.
 
-> **MacOS Update:**
+> **MacOS Updates:**
 Using Sonoma 14.4 and later, every time you update MacOS, you need to first disable SecureBootModel (Disabled). After the update, you can enable it again (Default). Please remind to **Clear NVRAM** each time you enable or disable this settings.
 
 - Enable the **SecureBootModel** in **`config.plist`**:
