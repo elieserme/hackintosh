@@ -7,7 +7,7 @@ This is the guide for **OpenCore 1.0.4** Hackintosh build based on i7 9700KF | G
 - [Hackintosh](#hackintosh)
 	- [Table of Contents](#table-of-contents)
 	- [Warning](#warning)
-	- [Why use Mac Pro model](#why-use-imac-pro-model)
+	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
 	- [MacOS 15 Sequoia setup](#macos-15-sequoia-setup)
