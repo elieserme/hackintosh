@@ -124,7 +124,7 @@ Download **[ProperTree](https://github.com/corpnewt/ProperTree/zipball/master/)*
 		<key>SpoofVendor</key>
 		<true/>
 		<key>SystemProductName</key>
-		<string>iMacPro1,1</string>
+		<string>MacPro7,1</string>
 		<key>SystemSerialNumber</key>
 		<string>AAAAAAAAAAAA</string>
 		<key>SystemUUID</key>
