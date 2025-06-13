@@ -1,6 +1,6 @@
 # Hackintosh
 
-This is the guide for **OpenCore 1.0.4** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.5 Sequoia** like an **Mac Pro**!
+This is the guide for **OpenCore 1.0.4** Hackintosh build based on i7 9700KF | Gigabyte Z370N WIFI | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.5 Sequoia** like an **Mac Pro** (macpro7,1 SMBIOS)!
 
 ## Table of Contents
 
