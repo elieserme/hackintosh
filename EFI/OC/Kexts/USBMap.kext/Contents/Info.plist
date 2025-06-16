@@ -41,7 +41,7 @@
 			<key>IOProviderMergeProperties</key>
 			<dict>
 				<key>kUSBMuxEnabled</key>
-				<true/>				
+				<true/>
 				<key>port-count</key>
 				<data>GgAAAA==</data>
 				<key>ports</key>

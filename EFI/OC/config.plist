@@ -16,22 +16,6 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Graphics IOPath early Fix</string>
-				<key>Enabled</key>
-				<true/>
-				<key>Path</key>
-				<string>SSDT-BRG0.aml</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Enable Ethernet with VT-d</string>
-				<key>Enabled</key>
-				<true/>
-				<key>Path</key>
-				<string>SSDT-DMAR.aml</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Fake EC Device for MacOS</string>
 				<key>Enabled</key>
 				<true/>
@@ -64,22 +48,7 @@
 			</dict>
 		</array>
 		<key>Delete</key>
-		<array>
-			<dict>
-				<key>All</key>
-				<true/>
-				<key>Comment</key>
-				<string>Disable OEM DMAR Table</string>
-				<key>Enabled</key>
-				<true/>
-				<key>OemTableId</key>
-				<data></data>
-				<key>TableLength</key>
-				<integer>0</integer>
-				<key>TableSignature</key>
-				<data>RE1BUg==</data>
-			</dict>
-		</array>
+		<array/>
 		<key>Patch</key>
 		<array>
 			<dict>
@@ -192,7 +161,56 @@
 	<key>Booter</key>
 	<dict>
 		<key>MmioWhitelist</key>
-		<array/>
+		<array>
+			<dict>
+				<key>Address</key>
+				<integer>4160749568</integer>
+				<key>Comment</key>
+				<string>MMIO devirt 0xF8000000 (0x4000 pages, 0x8000000000000000) skip 1</string>
+				<key>Enabled</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>Address</key>
+				<integer>4261412864</integer>
+				<key>Comment</key>
+				<string>MMIO devirt 0xFE000000 (0x11 pages, 0x8000000000000001) skip 1</string>
+				<key>Enabled</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>Address</key>
+				<integer>4273995776</integer>
+				<key>Comment</key>
+				<string>MMIO devirt 0xFEC00000 (0x1 pages, 0x8000000000000001) skip 1</string>
+				<key>Enabled</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>Address</key>
+				<integer>4275044352</integer>
+				<key>Comment</key>
+				<string>MMIO devirt 0xFED00000 (0x1 pages, 0x8000000000000001) skip 1</string>
+				<key>Enabled</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>Address</key>
+				<integer>4276092928</integer>
+				<key>Comment</key>
+				<string>MMIO devirt 0xFEE00000 (0x1 pages, 0x800000000000100D) skip 1</string>
+				<key>Enabled</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>Address</key>
+				<integer>4278190080</integer>
+				<key>Comment</key>
+				<string>MMIO devirt 0xFF000000 (0x1000 pages, 0x800000000000100D) skip 1</string>
+				<key>Enabled</key>
+				<true/>
+			</dict>
+		</array>
 		<key>Patch</key>
 		<array/>
 		<key>Quirks</key>
@@ -204,7 +222,7 @@
 			<key>ClearTaskSwitchBit</key>
 			<false/>
 			<key>DevirtualiseMmio</key>
-			<false/>
+			<true/>
 			<key>DisableSingleUser</key>
 			<false/>
 			<key>DisableVariableWrite</key>
@@ -234,7 +252,7 @@
 			<key>RebuildAppleMemoryMap</key>
 			<true/>
 			<key>ResizeAppleGpuBars</key>
-			<integer>0</integer>
+			<integer>-1</integer>
 			<key>SetupVirtualMap</key>
 			<true/>
 			<key>SignalAppleOS</key>
@@ -247,14 +265,16 @@
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>PciRoot(0x0)/Pci(0x1C,0x5)/Pci(0x0,0x0)</key>
+			<key>PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)</key>
 			<dict>
-				<key>IOName</key>
-				<string>#ethernet</string>
-				<key>class-code</key>
-				<data>/////w==</data>
-				<key>name</key>
-				<string>#ethernet</string>
+				<key>AAPL,slot-name</key>
+				<string>Internal@0,1,0/0,0/0,0/0,0</string>
+				<key>device_type</key>
+				<string>VGA compatible controller</string>
+				<key>model</key>
+				<string>AMD Radeon RX 6600 XT</string>
+				<key>PP_PhmSoftPowerPlayTable</key>
+				<data>pgkSAAIiA64JAAAiQwAAgwAYAAAAHAAAAAAAAHYAAAAAAAAAAAAAAAAAAQAAAAEAAAANAAAAUgsAAAAFAADoAwAACAcAAOIEAACVBQAA4gQAAJUFAACwBAAAwQQAAMEEAAAqAwAAwQQAAAAAAAAAAAAAAAAAAPQBAACiAQAAYQAAAPQBAAA8AgAAsgIAADwCAACyAgAAogEAAOcBAADnAQAALAEAAOcBAAAAAAAAAAAAAAAAAACBAAAAEAAAAB4AAAABAQEBAQEBAQEAAQEBAQEBAAAAAAAAAAAAAAAAAAAAAE4MAABODAAAAAAAAAAAAAAAAAAATgwAALAEAACwBAAAFAAAABAOAAAQDgAAbgAAAG4AAAABAAAAAQAAAAEAAAABAAAAAQAAAGQAAABkAAAAZAAAAGQAAABkAAAAZAAAAGQAAABkAAAAZAAAAGQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD0AQAA9AEAAAAAAAAAAAAAAAAAAPQBAACiAgAAogIAAAYAAAD6AAAA6AMAABkAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZAAAACgAAABkAAAAKAAAAGQAAAAoAAAAZAAAACgAAABkAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAYAAABfAF8AXwBfAHIGcgbWBtYGbAdsB8oIbAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAD//X+j4zcEAIcAAAAAAAAAAAAAAAAAAACHAAAAAAAAAAAAAAAAAAAAggASAAAAAABkAG4AZABzAHMAcwBzAAAAAAAAAAAAAAABAAAACgAAAAAAAAAAAAAAAAAAALgLSA3YDmgQwBIAAPw4AAD/PwAAMgBkAAAAuAu4CzIAAAAAAOoL6gv4EWgQgAAAATcANwC4C7gLuAu4CwUABQAAAAIAAACAPwAAAAA4FQk++MLkvS4cKD+hAQAAAAACAL6fij9I4Xo+91j6OlYO7T7vVas+ogEAAAABBABxPZo/w/UoPgBSGzsK1wM/w0eUPmEAAAAAAAIAAACAPwAAAAC5pdU6vp/aPlyPgj70AQAAAAACAPYonD8IrBw+o0AfO0JgBT/uWoI+PAIAAAAAAgDTTYI/g8BKPv2C3TpSuN4+jV2CPrICAAAAAAIA9iicPwisHD6jQB87QmAFP+5agj48AgAAAAACANNNgj+DwEo+/YLdOlK43j6NXYI+sgIAAAAAAgD5D5k/mpmZPokMKztxPQo/G2SCPqIBAAAAAAIA7FGYP3NoET4X8R07L90EP41dgj7nAQAAAAACAOxRmD9zaBE+F/EdOy/dBD+NXYI+5wEAAAAAAgDZzjc/rBw6PwAAAABEaY8+wTkTPywBAAAAAAIA7FGYP3NoET4X8R07L90EP41dgj7nAQAA9AFSCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACyApUFAAAAAAAAAAAAAAAAPALiBAAAAAAAAAAAAAAAAKIBAAUAAAAAAAAAAAAAAABhAB4CpALoA6IBsAQAAAAAAAAAAAAAAADnAcEEAAAAAAAAAAAAAAAA5wHBBAAAAAAAAAAAAAAAACwBKgMAAAAAAAAAAAAAAADnAcEEAAAAAAAAAAAAAAAA9AEIBwAAAAAAAAAAAAAAAAAAAAC+MIE/FvtLPVVqdr2+MIE/FvtLPVVqdr2+MIE/FvtLPVVqdr3zH2I/I9v5PS7/ob3Q1SY/bef7Pb72LD5SCwAAAAUAAOgDAAAIBwAA4gQAAJUFAADiBAAAlQUAALAEAADBBAAAwQQAACoDAADBBAAAAAMDAwgHAABMAfoB8AqADIwKSA1IDUgNiBMYFRgVGBX0ASAD9AEBAAECXQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABRE9cSXRLiEWgR7RBzEPkPfg8ED4kODw6+DG4LHQrMCAAAAAADAgEAAAAAAAAAAAAAAAAAAAMBBFEAawIyADwAAACQAZABkAGQAZABkAGQAZABkAEUAJgIIgsQDgAAWQD0AQAAAQAAAgAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOf7Kb2TGMQ+gue+vgAAAAAAAAAAAAAAAIGVwz1Y4oE9cF+HvQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4ADgAAEBAAAAAAAA4ADgABkAGQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABVAtYAAAA3pOJQLByaD4pXOlB6NnMPgAAAABUC1QLCAwIDLQAZABkAAAAAAAAAAAAAAAAAAAAAAAAACwIAAA3CQAAHQoAACwIAAA3CQAAHQoAAAAAAAAAAAAAAAAAAAAAGgEB9a2AGQhoAQEFSBzcAwsAAADA0ODwpQEBqhkAAAB0AQEF/////zIBAa8AAACOAQAAABcAAAAXAAAAklcrBQAAAQBlAG4AdAABAG8AaQBkAAEAZwBhAGkAAQAgAGEAdAABAE0AZQBtAAEAcgB5AAAAbgAAAAAAJG1MrwABAI4EAAAAFwAAABcAAADiASsFAABUAF8ATQBFAE0AMQAgAAEAAQBuAAEAQwABAG4AAQByAG8AbAAgAAEAYQABAG4AAABuAAAAAADebFqvAAIAjAEAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeBg==</data>
 			</dict>
 			<key>PciRoot(0x0)/Pci(0x1F,0x3)</key>
 			<dict>
@@ -269,24 +289,6 @@
 	<dict>
 		<key>Add</key>
 		<array>
-			<dict>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>BundlePath</key>
-				<string>USBMap.kext</string>
-				<key>Comment</key>
-				<string>USBMap.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string></string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string></string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
 			<dict>
 				<key>Arch</key>
 				<string>Any</string>
@@ -309,13 +311,13 @@
 				<key>Arch</key>
 				<string>Any</string>
 				<key>BundlePath</key>
-				<string>AppleALC.kext</string>
+				<string>CPUFriend.kext</string>
 				<key>Comment</key>
-				<string>AppleALC.kext</string>
+				<string>CPUFriend.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/AppleALC</string>
+				<string>Contents/MacOS/CPUFriend</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
@@ -327,67 +329,13 @@
 				<key>Arch</key>
 				<string>Any</string>
 				<key>BundlePath</key>
-				<string>WhateverGreen.kext</string>
+				<string>CPUFriendDataProvider.kext</string>
 				<key>Comment</key>
-				<string>WhateverGreen.kext</string>
+				<string>CPUFriendDataProvider.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/WhateverGreen</string>
-				<key>MaxKernel</key>
 				<string></string>
-				<key>MinKernel</key>
-				<string></string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>BundlePath</key>
-				<string>CtlnaAHCIPort.kext</string>
-				<key>Comment</key>
-				<string>CtlnaAHCIPort.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string>Contents/MacOS/CtlnaAHCIPort</string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string></string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>BundlePath</key>
-				<string>NVMeFix.kext</string>
-				<key>Comment</key>
-				<string>NVMeFix.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string>Contents/MacOS/NVMeFix</string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string></string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>BundlePath</key>
-				<string>RestrictEvents.kext</string>
-				<key>Comment</key>
-				<string>RestrictEvents.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string>Contents/MacOS/RestrictEvents</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
@@ -453,13 +401,49 @@
 				<key>Arch</key>
 				<string>Any</string>
 				<key>BundlePath</key>
-				<string>IntelMausi.kext</string>
+				<string>AppleALC.kext</string>
 				<key>Comment</key>
-				<string>IntelMausi.kext</string>
+				<string>AppleALC.kext</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
-				<string>Contents/MacOS/IntelMausi</string>
+				<string>Contents/MacOS/AppleALC</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>Any</string>
+				<key>BundlePath</key>
+				<string>RestrictEvents.kext</string>
+				<key>Comment</key>
+				<string>RestrictEvents.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/RestrictEvents</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>Any</string>
+				<key>BundlePath</key>
+				<string>NVMeFix.kext</string>
+				<key>Comment</key>
+				<string>NVMeFix.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/NVMeFix</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
@@ -539,6 +523,42 @@
 				<key>PlistPath</key>
 				<string>Contents/Info.plist</string>
 			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>Any</string>
+				<key>BundlePath</key>
+				<string>IntelMausi.kext</string>
+				<key>Comment</key>
+				<string>IntelMausi.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/IntelMausi</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>Any</string>
+				<key>BundlePath</key>
+				<string>USBMap.kext</string>
+				<key>Comment</key>
+				<string>USBMap.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string></string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
 		</array>
 		<key>Block</key>
 		<array/>
@@ -602,9 +622,9 @@
 			<key>ProvideCurrentCpuInfo</key>
 			<false/>
 			<key>SetApfsTrimTimeout</key>
-			<integer>0</integer>
+			<integer>-1</integer>
 			<key>ThirdPartyDrives</key>
-			<true/>
+			<false/>
 			<key>XhciPortLimit</key>
 			<false/>
 		</dict>
@@ -641,13 +661,13 @@
 			<key>LauncherPath</key>
 			<string>Default</string>
 			<key>PickerAttributes</key>
-			<integer>144</integer>
+			<integer>17</integer>
 			<key>PickerAudioAssist</key>
 			<false/>
 			<key>PickerMode</key>
-			<string>Builtin</string>
+			<string>External</string>
 			<key>PickerVariant</key>
-			<string>Blackosx\BsxM1</string>
+			<string>Acidanthera\GoldenGate</string>
 			<key>PollAppleHotKeys</key>
 			<true/>
 			<key>ShowPicker</key>
@@ -860,7 +880,7 @@
 				<key>SystemAudioVolume</key>
 				<data>GA==</data>
 				<key>boot-args</key>
-				<string>agdpmod=pikera forceRenderStandby=0</string>
+				<string></string>
 				<key>csr-active-config</key>
 				<data>AAAAAA==</data>
 				<key>prev-lang:kbd</key>
@@ -1061,6 +1081,18 @@
 				<false/>
 				<key>Path</key>
 				<string>OpenRuntime.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string>OpenCanopy.efi</string>
+				<key>Enabled</key>
+				<true/>
+				<key>LoadEarly</key>
+				<false/>
+				<key>Path</key>
+				<string>OpenCanopy.efi</string>
 			</dict>
 			<dict>
 				<key>Arguments</key>

@@ -44,15 +44,12 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 > **Memory Note!**
 **Do not use memory with speed beyond 2666MHz** or **XMP Profile** on this motherboard, because it have issues with **USB** and **Audio** on MacOS.
 
-> **Config Note!**
-**RC6 Render Standby** option is missing on this motherboard BIOS when installed a _Intel CPU with F suffix (no iGPU)_. This option need to be **DISABLED** for system stability and avoid kernel panics (like NVMe errors). The opencore **forceRenderStandby=0** boot argument does the trick for my motherboard.
-
 > **Network Note!**
 The **Intel AT211 Ethernet is DISABLED** in MacOS, so you need to use the **Intel i219v Ethernet port** when using MacOS. 
 
 ## BIOS settings
 
-Gigabyte z370N WIFI using **BIOS version F12**
+Gigabyte z370N WIFI using **BIOS version F11**
 
 - Save & Exit &gt; **Load optimised defaults**
 - SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM**
@@ -71,7 +68,7 @@ Gigabyte z370N WIFI using **BIOS version F12**
 - Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
 - Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
 - Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **ENABLED**
+- Chipset &gt; VT-d &gt; **DISABLED**
 - Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
 - Power &gt; AC BACK &gt; **Always Off**
 - Power &gt; ErP &gt; **DISABLED**
