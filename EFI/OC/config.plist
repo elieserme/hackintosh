@@ -32,11 +32,11 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Fake SMBUS Device for MacOS</string>
+				<string>Fix SMBUS Device for MacOS</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
-				<string>SSDT-SBUS-MCHC.aml</string>
+				<string>SSDT-SBUS.aml</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
