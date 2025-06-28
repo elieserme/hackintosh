@@ -8,22 +8,6 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>Incompatible AWAC Fix</string>
-				<key>Enabled</key>
-				<true/>
-				<key>Path</key>
-				<string>SSDT-AWAC.aml</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Fake EC Device for MacOS</string>
-				<key>Enabled</key>
-				<true/>
-				<key>Path</key>
-				<string>SSDT-EC.aml</string>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>HPET _CRS (Needs _CRS to XCRS Rename)</string>
 				<key>Enabled</key>
 				<true/>
@@ -32,25 +16,118 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Fix SMBUS Device for MacOS</string>
+				<string>Faked Embedded Controller</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
-				<string>SSDT-SBUS.aml</string>
+				<string>SSDT-EC.aml</string>
 			</dict>
 			<dict>
 				<key>Comment</key>
-				<string>Fix USB power for MacOS</string>
+				<string>Generic USBX device for USB power properties</string>
 				<key>Enabled</key>
 				<true/>
 				<key>Path</key>
 				<string>SSDT-USBX.aml</string>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Generic DMAC device</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-DMAC.aml</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Generic FWHD device</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-FWHD.aml</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>PMCR for native 300-series NVRAM</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-PMC.aml</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>SSDT to disable USB RHUB/HUBN/URTH and rename devices</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-USB-Reset.aml</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Defines an MCHC and BUS0 device for SMBus compatibility</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-SBUS-MCHC.aml</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Replacement DMAR table with Reserved Memory Regions stripped - requires DMAR table be dropped</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>DMAR.aml</string>
+			</dict>
 		</array>
 		<key>Delete</key>
-		<array/>
+		<array>
+			<dict>
+				<key>All</key>
+				<false/>
+				<key>Comment</key>
+				<string>Drop DMAR Table</string>
+				<key>Enabled</key>
+				<true/>
+				<key>OemTableId</key>
+				<data>AAAAAAAAAAA=</data>
+				<key>TableLength</key>
+				<integer>0</integer>
+				<key>TableSignature</key>
+				<data>RE1BUg==</data>
+			</dict>
+		</array>
 		<key>Patch</key>
 		<array>
+			<dict>
+				<key>Base</key>
+				<string></string>
+				<key>BaseSkip</key>
+				<integer>0</integer>
+				<key>Comment</key>
+				<string>HPET _STA to XSTA Rename</string>
+				<key>Count</key>
+				<integer>0</integer>
+				<key>Enabled</key>
+				<true/>
+				<key>Find</key>
+				<data>ABQRX1NUQQ==</data>
+				<key>Limit</key>
+				<integer>0</integer>
+				<key>Mask</key>
+				<data></data>
+				<key>OemTableId</key>
+				<data>AAAAAAAAAAA=</data>
+				<key>Replace</key>
+				<data>ABQRWFNUQQ==</data>
+				<key>ReplaceMask</key>
+				<data></data>
+				<key>Skip</key>
+				<integer>0</integer>
+				<key>TableLength</key>
+				<integer>0</integer>
+				<key>TableSignature</key>
+				<data>AAAAAA==</data>
+			</dict>
 			<dict>
 				<key>Base</key>
 				<string></string>
@@ -69,9 +146,39 @@
 				<key>Mask</key>
 				<data></data>
 				<key>OemTableId</key>
-				<data>AAAAAA==</data>
+				<data>AAAAAAAAAAA=</data>
 				<key>Replace</key>
 				<data>JVhDUlM=</data>
+				<key>ReplaceMask</key>
+				<data></data>
+				<key>Skip</key>
+				<integer>0</integer>
+				<key>TableLength</key>
+				<integer>0</integer>
+				<key>TableSignature</key>
+				<data>AAAAAA==</data>
+			</dict>
+			<dict>
+				<key>Base</key>
+				<string></string>
+				<key>BaseSkip</key>
+				<integer>0</integer>
+				<key>Comment</key>
+				<string>IPIC IRQ 2 Patch</string>
+				<key>Count</key>
+				<integer>0</integer>
+				<key>Enabled</key>
+				<true/>
+				<key>Find</key>
+				<data>IgQAeQA=</data>
+				<key>Limit</key>
+				<integer>0</integer>
+				<key>Mask</key>
+				<data></data>
+				<key>OemTableId</key>
+				<data>AAAAAAAAAAA=</data>
+				<key>Replace</key>
+				<data>IgAAeQA=</data>
 				<key>ReplaceMask</key>
 				<data></data>
 				<key>Skip</key>
@@ -99,7 +206,7 @@
 				<key>Mask</key>
 				<data></data>
 				<key>OemTableId</key>
-				<data>AAAAAA==</data>
+				<data>AAAAAAAAAAA=</data>
 				<key>Replace</key>
 				<data>IgAAeQA=</data>
 				<key>ReplaceMask</key>
@@ -129,7 +236,7 @@
 				<key>Mask</key>
 				<data></data>
 				<key>OemTableId</key>
-				<data>AAAAAA==</data>
+				<data>AAAAAAAAAAA=</data>
 				<key>Replace</key>
 				<data>IgAAeQA=</data>
 				<key>ReplaceMask</key>
@@ -164,17 +271,17 @@
 		<array>
 			<dict>
 				<key>Address</key>
-				<integer>4160749568</integer>
+				<integer>3758096384</integer>
 				<key>Comment</key>
-				<string>MMIO devirt 0xF8000000 (0x4000 pages, 0x8000000000000000) skip 1</string>
+				<string>MMIO devirt 0xE0000000 (0x10000 pages - 256 MB)</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 			</dict>
 			<dict>
 				<key>Address</key>
 				<integer>4261412864</integer>
 				<key>Comment</key>
-				<string>MMIO devirt 0xFE000000 (0x11 pages, 0x8000000000000001) skip 1</string>
+				<string>MMIO devirt 0xFE000000 (0x11 pages - 68 KB) - Within 32 MB Threshold</string>
 				<key>Enabled</key>
 				<true/>
 			</dict>
@@ -182,7 +289,7 @@
 				<key>Address</key>
 				<integer>4273995776</integer>
 				<key>Comment</key>
-				<string>MMIO devirt 0xFEC00000 (0x1 pages, 0x8000000000000001) skip 1</string>
+				<string>MMIO devirt 0xFEC00000 (0x1 page - 4 KB) - Within 32 MB Threshold</string>
 				<key>Enabled</key>
 				<true/>
 			</dict>
@@ -190,7 +297,7 @@
 				<key>Address</key>
 				<integer>4275044352</integer>
 				<key>Comment</key>
-				<string>MMIO devirt 0xFED00000 (0x1 pages, 0x8000000000000001) skip 1</string>
+				<string>MMIO devirt 0xFED00000 (0x4 pages - 16 KB) - Within 32 MB Threshold</string>
 				<key>Enabled</key>
 				<true/>
 			</dict>
@@ -198,7 +305,7 @@
 				<key>Address</key>
 				<integer>4276092928</integer>
 				<key>Comment</key>
-				<string>MMIO devirt 0xFEE00000 (0x1 pages, 0x800000000000100D) skip 1</string>
+				<string>MMIO devirt 0xFEE00000 (0x1 page - 4 KB) - Within 32 MB Threshold</string>
 				<key>Enabled</key>
 				<true/>
 			</dict>
@@ -206,7 +313,7 @@
 				<key>Address</key>
 				<integer>4278190080</integer>
 				<key>Comment</key>
-				<string>MMIO devirt 0xFF000000 (0x1000 pages, 0x800000000000100D) skip 1</string>
+				<string>MMIO devirt 0xFF000000 (0x1000 pages - 16 MB) - Within 32 MB Threshold</string>
 				<key>Enabled</key>
 				<true/>
 			</dict>
@@ -268,7 +375,7 @@
 			<key>PciRoot(0x0)/Pci(0x1F,0x3)</key>
 			<dict>
 				<key>layout-id</key>
-				<integer>5</integer>
+				<integer>1</integer>
 			</dict>
 		</dict>
 		<key>Delete</key>
@@ -354,6 +461,24 @@
 				<key>Arch</key>
 				<string>Any</string>
 				<key>BundlePath</key>
+				<string>SMCRadeonSensors.kext</string>
+				<key>Comment</key>
+				<string>SMCRadeonSensors.kext</string>
+				<key>Enabled</key>
+				<true/>
+				<key>ExecutablePath</key>
+				<string>Contents/MacOS/SMCRadeonSensors</string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>Any</string>
+				<key>BundlePath</key>
 				<string>AppleALC.kext</string>
 				<key>Comment</key>
 				<string>AppleALC.kext</string>
@@ -397,78 +522,6 @@
 				<true/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/NVMeFix</string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string></string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>BundlePath</key>
-				<string>itlwm.kext</string>
-				<key>Comment</key>
-				<string>itlwm.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string>Contents/MacOS/itlwm</string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string></string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>BundlePath</key>
-				<string>IntelBTPatcher.kext</string>
-				<key>Comment</key>
-				<string>IntelBTPatcher.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string>Contents/MacOS/IntelBTPatcher</string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string></string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>BundlePath</key>
-				<string>IntelBluetoothFirmware.kext</string>
-				<key>Comment</key>
-				<string>IntelBluetoothFirmware.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string>Contents/MacOS/IntelBluetoothFirmware</string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string></string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-			</dict>
-			<dict>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>BundlePath</key>
-				<string>BlueToolFixup.kext</string>
-				<key>Comment</key>
-				<string>BlueToolFixup.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>ExecutablePath</key>
-				<string>Contents/MacOS/BlueToolFixup</string>
 				<key>MaxKernel</key>
 				<string></string>
 				<key>MinKernel</key>
@@ -549,11 +602,11 @@
 			<key>DisableIoMapper</key>
 			<false/>
 			<key>DisableIoMapperMapping</key>
-			<false/>
+			<true/>
 			<key>DisableLinkeditJettison</key>
 			<true/>
 			<key>DisableRtcChecksum</key>
-			<false/>
+			<true/>
 			<key>ExtendBTFeatureFlags</key>
 			<false/>
 			<key>ExternalDiskIcons</key>
@@ -733,28 +786,6 @@
 				<string>OpenShell.efi</string>
 				<key>Path</key>
 				<string>OpenShell.efi</string>
-				<key>RealPath</key>
-				<false/>
-				<key>TextMode</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>Arguments</key>
-				<string></string>
-				<key>Auxiliary</key>
-				<true/>
-				<key>Comment</key>
-				<string>modGRUBShell.efi</string>
-				<key>Enabled</key>
-				<true/>
-				<key>Flavour</key>
-				<string>Auto</string>
-				<key>FullNvramAccess</key>
-				<false/>
-				<key>Name</key>
-				<string>modGRUBShell.efi</string>
-				<key>Path</key>
-				<string>modGRUBShell.efi</string>
 				<key>RealPath</key>
 				<false/>
 				<key>TextMode</key>
