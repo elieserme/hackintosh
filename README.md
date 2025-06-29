@@ -44,31 +44,20 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 
 ASUS ROG STRIX B360-G Gaming using **BIOS version 3101**
 
-- Save & Exit &gt; **Load optimised defaults**
-- SmartFan &gt; System Fan 1 &gt; Fan Control Use Temperature Input &gt; **VRM**
-- SmartFan &gt; System Fan 2 &gt; Fan Control Use Temperature Input &gt; **VRM**
-- BIOS &gt; FastBoot &gt; **DISABLED**
-- BIOS &gt; CSM Support &gt; **DISABLED**
-- BIOS &gt; Windows 8/10 Features &gt; **Windows 8/10 WHQL**
-- BIOS &gt; Secure Boot &gt; **DISABLED**
-- Peripherals &gt; Initial Display Output &gt; **PCIe 1 Slot**
-- Peripherals &gt; Above 4G Decoding &gt; **ENABLED**
-- Peripherals &gt; Intel PTT &gt; **DISABLED**
-- Peripherals &gt; SGX &gt; **DISABLED**
-- Peripherals &gt; Trusted Computing &gt; **DISABLED**
-- Peripherals &gt; SATA and RST Configuration &gt; SATA Mode Selection &gt; **AHCI**
-- Peripherals &gt; SATA and RST Configuration &gt; Aggressive LPM Support &gt; **DISABLED**
-- Peripherals &gt; USB Config &gt; Legacy &gt; **DISABLED**
-- Peripherals &gt; USB Config &gt; XHCI Handoff &gt; **ENABLED**
-- Peripherals &gt; USB Config &gt; Port 60/64 emulation &gt; **DISABLED**
-- Chipset &gt; VT-d &gt; **DISABLED**
-- Chipset &gt; Wake On Lan &gt; **DISABLED** _(remind to disable it on adapters too)_
-- Power &gt; AC BACK &gt; **Always Off**
-- Power &gt; ErP &gt; **DISABLED**
-- Power &gt; Soft-Off by PWR-BTTN &gt; **Delay 4 Sec.**
-- Power &gt; CEC 2019 Ready &gt; **DISABLED**
-- Power &gt; Platform Power Management &gt; **ENABLED** _(enable child items **PEG**, **PCH** and **DMI ASPM**)_
-- Save & Exit &gt; **Save & Exit Setup**
+- Exit &gt; **Load optimised defaults**
+- Advanced &gt; CPU Configuration &gt; Software Guard Extensions (SGX) &gt; **Disabled**
+- Advanced &gt; CPU Power Management Control &gt; CFG Lock &gt; **Disabled**
+- Advanced &gt; System Agent (SA) Configuration &gt; VT-d &gt; **Enabled**
+- Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **Legacy RTC**
+- Advanced &gt; PCH Storage Configuration &gt; SATA Mode Selection &gt; **AHCI**
+- Advanced &gt; Onboard Devices Configuration &gt; Serial Port Configuration &gt; **Off**
+- Advanced &gt; PCI Subsystem Settings &gt; Above 4G Decoding &gt; **Enabled**
+- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
+- Advanced &gt; USB Configuration &gt; XHCI Hand-off &gt; **Enabled**
+- Boot &gt; CSM (Compatibility Support Module) &gt; Launch CSM &gt; **Disabled**
+- Boot &gt; Secure Boot &gt; OS Type &gt; **Other OS**
+- Boot &gt; Fast Boot &gt; **Disabled**
+- Exit &gt; **Save Changes & Reset**
   
 ## MacOS 15 Sequoia setup
 
