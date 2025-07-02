@@ -13,7 +13,7 @@ This is the guide for **OpenCore 1.0.4** Hackintosh build based on i7 9700KF | A
 	- [MacOS 15 Sequoia setup](#macos-15-sequoia-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
- 	- [Windows Notes](#windows-notes)
+	- [Windows Notes](#windows-notes)
 	- [Final Steps](#final-steps)
 	- [Cleaning the EFI](#cleaning-the-efi)
 
@@ -53,7 +53,7 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 - Advanced &gt; PCH Storage Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Advanced &gt; Onboard Devices Configuration &gt; Serial Port Configuration &gt; **Off**
 - Advanced &gt; PCI Subsystem Settings &gt; Above 4G Decoding &gt; **Enabled**
-- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
+- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Disabled**
 - Advanced &gt; USB Configuration &gt; XHCI Hand-off &gt; **Enabled**
 - Boot &gt; CSM (Compatibility Support Module) &gt; Launch CSM &gt; **Disabled**
 - Boot &gt; Secure Boot &gt; OS Type &gt; **Other OS**
@@ -65,6 +65,7 @@ Settings for Windows 11:
 - Exit &gt; **Load optimised defaults**
 - Advanced &gt; CPU Configuration &gt; Software Guard Extensions (SGX) &gt; **Software Controlled**
 - Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **AWAC**
+- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
 - Boot &gt; Secure Boot &gt; OS Type &gt; **Windows**
 - Boot &gt; Fast Boot &gt; **Enabled**
 - Exit &gt; **Save Changes & Reset**
