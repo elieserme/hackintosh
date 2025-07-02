@@ -96,6 +96,7 @@ brew install libdvdcss
 brew install --cask handbrake
 brew install --cask zoom
 # brew install --cask istat-menus
+brew install --cask stats
 brew install docker
 brew install docker-compose
 

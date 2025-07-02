@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Battery_state</key>
+	<false/>
+	<key>CPU_updateInterval</key>
+	<integer>2</integer>
+	<key>CPU_updateTopInterval</key>
+	<integer>2</integer>
+	<key>CombinedModules</key>
+	<true/>
+	<key>CombinedModules_separator</key>
+	<true/>
+	<key>CombinedModules_spacing</key>
+	<string>none</string>
+	<key>Disk_state</key>
+	<false/>
+	<key>GPU_gpu</key>
+	<string>Radeon RX 6600 XT</string>
+	<key>GPU_showType</key>
+	<false/>
+	<key>GPU_state</key>
+	<true/>
+	<key>LaunchAtLoginNext</key>
+	<true/>
+	<key>NSStatusItem Restore Position CPU_mini</key>
+	<integer>411</integer>
+	<key>NSStatusItem Restore Position GPU_mini</key>
+	<integer>317</integer>
+	<key>NSStatusItem Restore Position RAM_mini</key>
+	<integer>364</integer>
+	<key>NSStatusItem Restore Position Sensors_mini</key>
+	<integer>458</integer>
+	<key>NSToolbar Configuration eu.exelban.Stats.Settings.Toolbar</key>
+	<dict>
+		<key>TB Display Mode</key>
+		<integer>1</integer>
+		<key>TB Icon Size Mode</key>
+		<integer>1</integer>
+		<key>TB Is Shown</key>
+		<true/>
+		<key>TB Size Mode</key>
+		<integer>1</integer>
+	</dict>
+	<key>NSWindow Frame NSNavPanelAutosaveName</key>
+	<string>1065 960 430 163 0 0 2560 1415 </string>
+	<key>Network_state</key>
+	<false/>
+	<key>RAM_updateInterval</key>
+	<integer>2</integer>
+	<key>RAM_updateTopInterval</key>
+	<integer>2</integer>
+	<key>Sensors_barChart_position</key>
+	<integer>2</integer>
+	<key>Sensors_label_position</key>
+	<integer>1</integer>
+	<key>Sensors_mini_position</key>
+	<integer>0</integer>
+	<key>Sensors_sensor</key>
+	<string>TC0P</string>
+	<key>Sensors_stack_position</key>
+	<integer>3</integer>
+	<key>Sensors_state</key>
+	<true/>
+	<key>Sensors_updateInterval</key>
+	<integer>2</integer>
+	<key>Sensors_widget</key>
+	<string>mini</string>
+	<key>dockIcon</key>
+	<false/>
+	<key>runAtLoginInitialized</key>
+	<true/>
+	<key>sensor_Average CPU_popup</key>
+	<false/>
+	<key>sensor_F2Ac_popup</key>
+	<false/>
+	<key>sensor_F3Ac_popup</key>
+	<false/>
+	<key>sensor_F5Ac_popup</key>
+	<false/>
+	<key>sensor_F6Ac_popup</key>
+	<false/>
+	<key>sensor_Fastest fan_popup</key>
+	<false/>
+	<key>sensor_Hottest CPU_popup</key>
+	<false/>
+	<key>sensor_PC0C_popup</key>
+	<false/>
+	<key>sensor_PC0G_popup</key>
+	<false/>
+	<key>sensor_PC0R_popup</key>
+	<false/>
+	<key>sensor_PCAM_popup</key>
+	<false/>
+	<key>sensor_PCEC_popup</key>
+	<false/>
+	<key>sensor_PCGC_popup</key>
+	<false/>
+	<key>sensor_PCGM_popup</key>
+	<false/>
+	<key>sensor_PCPC_popup</key>
+	<false/>
+	<key>sensor_PCPG_popup</key>
+	<false/>
+	<key>sensor_PCPR_popup</key>
+	<false/>
+	<key>sensor_PCPT_popup</key>
+	<false/>
+	<key>sensor_TC0C_popup</key>
+	<false/>
+	<key>sensor_TC0D_popup</key>
+	<false/>
+	<key>sensor_TC0E_popup</key>
+	<false/>
+	<key>sensor_TC0F_popup</key>
+	<false/>
+	<key>sensor_TC0H_popup</key>
+	<false/>
+	<key>sensor_TC0c_popup</key>
+	<false/>
+	<key>sensor_TC1C_popup</key>
+	<false/>
+	<key>sensor_TC1c_popup</key>
+	<false/>
+	<key>sensor_TC2C_popup</key>
+	<false/>
+	<key>sensor_TC2c_popup</key>
+	<false/>
+	<key>sensor_TC3C_popup</key>
+	<false/>
+	<key>sensor_TC3c_popup</key>
+	<false/>
+	<key>sensor_TC4C_popup</key>
+	<false/>
+	<key>sensor_TC4c_popup</key>
+	<false/>
+	<key>sensor_TC5C_popup</key>
+	<false/>
+	<key>sensor_TC5c_popup</key>
+	<false/>
+	<key>sensor_TC6C_popup</key>
+	<false/>
+	<key>sensor_TC6c_popup</key>
+	<false/>
+	<key>sensor_TC7C_popup</key>
+	<false/>
+	<key>sensor_TC7c_popup</key>
+	<false/>
+	<key>sensor_TG0D_popup</key>
+	<false/>
+	<key>sensor_TG0P_popup</key>
+	<false/>
+	<key>sensor_TGDD_popup</key>
+	<false/>
+	<key>setupProcess</key>
+	<true/>
+	<key>support_ts</key>
+	<integer>1751080899</integer>
+	<key>telemetry</key>
+	<false/>
+	<key>temperature_units</key>
+	<string>system</string>
+	<key>updater_check_ts</key>
+	<integer>1751240479</integer>
+	<key>version</key>
+	<string>2.11.45</string>
+</dict>
+</plist>
