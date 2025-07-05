@@ -46,28 +46,40 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 
 - Exit &gt; **Load optimised defaults**
+- Advanced &gt; Platform Misc Configuration &gt; PCI Express Native Power Management &gt; **Enabled**
+- Advanced &gt; Platform Misc Configuration &gt; Native ASPM &gt; **Enabled**
+- Advanced &gt; Platform Misc Configuration &gt; PCH DMI ASPM &gt; **Auto**
+- Advanced &gt; Platform Misc Configuration &gt; ASPM 0 &gt; **Auto**
+- Advanced &gt; Platform Misc Configuration &gt; L1 Substates &gt; **Disabled**
+- Advanced &gt; Platform Misc Configuration &gt; PCI Express Clock Gating &gt; **Enabled**
+- Advanced &gt; Platform Misc Configuration &gt; DMI Link ASPM Control &gt; **Disabled**
+- Advanced &gt; Platform Misc Configuration &gt; PEG - ASPM &gt; **Auto**
 - Advanced &gt; CPU Configuration &gt; Software Guard Extensions (SGX) &gt; **Disabled**
-- Advanced &gt; CPU Power Management Control &gt; CFG Lock &gt; **Disabled**
+- Advanced &gt; CPU Configuration &gt; Intel (VMX) Virtualization Technology &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; Intel SpeedStep &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; Intel SpeedShift Technology &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; Turbo Mode &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C-states &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; Enhanced C-states &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; Intel SpeedStep &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C3 Report &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C6 Report &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C7 Report &gt; **CPU C7s**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C8 Report &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C9 Report &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C10 Report &gt; **Enabled**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; Package C State Limit &gt; **Auto**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CFG Lock &gt; **Disabled**
 - Advanced &gt; System Agent (SA) Configuration &gt; VT-d &gt; **Enabled**
 - Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **Legacy RTC**
 - Advanced &gt; PCH Storage Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Advanced &gt; Onboard Devices Configuration &gt; Serial Port Configuration &gt; **Off**
 - Advanced &gt; PCI Subsystem Settings &gt; Above 4G Decoding &gt; **Enabled**
-- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Disabled**
+- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
 - Advanced &gt; USB Configuration &gt; XHCI Hand-off &gt; **Enabled**
 - Boot &gt; CSM (Compatibility Support Module) &gt; Launch CSM &gt; **Disabled**
 - Boot &gt; Secure Boot &gt; OS Type &gt; **Other OS**
 - Boot &gt; Fast Boot &gt; **Disabled**
-- Exit &gt; **Save Changes & Reset**
-
-Settings for Windows 11:
-
-- Exit &gt; **Load optimised defaults**
-- Advanced &gt; CPU Configuration &gt; Software Guard Extensions (SGX) &gt; **Software Controlled**
-- Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **AWAC**
-- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
-- Boot &gt; Secure Boot &gt; OS Type &gt; **Windows**
-- Boot &gt; Fast Boot &gt; **Enabled**
 - Exit &gt; **Save Changes & Reset**
   
 ## MacOS 15 Sequoia setup
@@ -174,7 +186,16 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 ## Windows Notes
 
-You can install **Windows 11** as usual. **Drivers** for this motherboard are below:
+**Important** BIOS settings for **Windows 11**:
+
+- Advanced &gt; CPU Configuration &gt; Software Guard Extensions (SGX) &gt; **Software Controlled**
+- Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **ACPI Time and Alarm Device**
+- Advanced &gt; PCI-FW Configuration &gt; TPM Device Selection &gt; **PTT**
+- Advanced &gt; Trusted Computing &gt; Secure Device Support &gt; **Enabled**
+- Boot &gt; Secure Boot &gt; OS Type &gt; **Windows EFI mode**
+- Boot &gt; Fast Boot &gt; **Enabled**
+  
+**Drivers** for this motherboard are below:
 
 - **Download [Intel INF Driver](https://raw.github.com/elieserme/hackintosh/main/b360-g/drivers/DRV_Chipset_Intel_TP_W11_64_V101188368283_20211022R.zip)** _**(required)**_
 - **Download [Latest AMD Graphics Driver](https://www.amd.com/pt/support/graphics/amd-radeon-6000-series/amd-radeon-6600-series/amd-radeon-rx-6600-xt)** _**(required)**_
