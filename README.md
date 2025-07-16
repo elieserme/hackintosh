@@ -75,7 +75,7 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 - Advanced &gt; PCH Storage Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Advanced &gt; Onboard Devices Configuration &gt; Serial Port Configuration &gt; **Off**
 - Advanced &gt; PCI Subsystem Settings &gt; Above 4G Decoding &gt; **Enabled**
-- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
+- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Disabled**
 - Advanced &gt; USB Configuration &gt; XHCI Hand-off &gt; **Enabled**
 - Boot &gt; CSM (Compatibility Support Module) &gt; Launch CSM &gt; **Disabled**
 - Boot &gt; Secure Boot &gt; OS Type &gt; **Other OS**
@@ -190,6 +190,7 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 - Advanced &gt; CPU Configuration &gt; Software Guard Extensions (SGX) &gt; **Software Controlled**
 - Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **ACPI Time and Alarm Device**
+- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
 - Advanced &gt; PCI-FW Configuration &gt; TPM Device Selection &gt; **PTT**
 - Advanced &gt; Trusted Computing &gt; Secure Device Support &gt; **Enabled**
 - Boot &gt; Secure Boot &gt; OS Type &gt; **Windows EFI mode**
