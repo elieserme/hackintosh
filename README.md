@@ -32,7 +32,7 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 
 |       Type       | Item                                                                                                                                                                                             |
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|     **CPU**      | **[Intel i7 9700KF ](https://www.intel.com.br/content/www/br/pt/products/sku/190885/intel-core-i79700kf-processor-12m-cache-up-to-4-90-ghz/specifications.html)** 9th generation 8 core 3,6GHz with Turbo Boost up to 4,9GHz          |
+|     **CPU**      | **[Intel i7 9700KF](https://www.intel.com.br/content/www/br/pt/products/sku/190885/intel-core-i79700kf-processor-12m-cache-up-to-4-90-ghz/specifications.html)** 9th gen 8 core 3,6GHz with Turbo Boost up to 4,9GHz          |
 | **Motherboard**  | **[ASUS ROG STRIX B360-G Gaming](https://rog.asus.com/motherboards/rog-strix/rog-strix-b360-g-gaming-model/)** Micro ATX                                                                                                |
 |     **RAM**      | **2 x [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf)** 16GB DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | **[Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6)** Dedicated Video Card                                                                         |
