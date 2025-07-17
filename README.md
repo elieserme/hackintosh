@@ -1,6 +1,6 @@
 # Hackintosh
 
-> **End of times for Hackintosh.**
+> **It's the End of Times for Hackintosh.**
 We knew this day would come. _Hackintosh is dead. Long live to the Hackintosh!_ But we'll see the sun rise for the Hackintosh one last time with **MacOS Tahoe**.
 
 This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.5 Sequoia** like an **Mac Pro**! _(MacPro7,1 SMBIOS)_
