@@ -1,5 +1,8 @@
 # Hackintosh
 
+> **End of times for Hackintosh**
+We knew this day would come. Hackintosh is dead. Long live Hackintosh! But we'll see the sun rise for the Hackintosh one last time with **MacOS Tahoe**.
+
 This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.5 Sequoia** like an **Mac Pro**! _(MacPro7,1 SMBIOS)_
 
 ## Table of Contents
@@ -24,6 +27,7 @@ This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | A
 Custom configuration for this _specific motherboard, graphics card and NVMe listed below_. If your computer's components are different, **DO NOT USE THIS CONFIGURATION AND MAKE YOUR OWN ONE ACCORDING TO YOUR HARDWARE**.
 
 ## Why use Mac Pro model
+- **The last standing Intel's desktop Macintosh**
 - **AMD GPU** for full performance;
 - **h264** and **h265** video **encoding** and **decoding** working;
 - **No DRM issues** _(you can use Apple TV+ and Safari for Netflix and PrimeVideo)_.
