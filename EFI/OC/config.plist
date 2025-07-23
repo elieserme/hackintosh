@@ -32,6 +32,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Generic Apple RTC device</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-ARTC.aml</string>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>Generic DMAC device</string>
 				<key>Enabled</key>
 				<true/>
