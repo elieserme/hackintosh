@@ -3,7 +3,7 @@
 > **It's the End of Times for Hackintosh.**
 We knew this day would come. _Hackintosh is dead. Long live to the Hackintosh!_ But we'll see the sun rise for the Hackintosh one last time with **MacOS Tahoe**.
 
-This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.5 Sequoia** like an **Mac Pro**! _(MacPro7,1 SMBIOS)_
+This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.6 Sequoia** like an **Mac Pro** _(MacPro7,1 SMBIOS)_ **with Multiboot support** _(Windows, MacOS and Linux)_.
 
 ## Table of Contents
 
@@ -40,9 +40,9 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 | **Motherboard**  | **[ASUS ROG STRIX B360-G Gaming](https://rog.asus.com/motherboards/rog-strix/rog-strix-b360-g-gaming-model/)** Micro ATX                                                                                                |
 |     **RAM**      | **2 x [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf)** 16GB DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | **[Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6)** Dedicated Video Card                                                                         |
-|     **NVMe**     | **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 1TB PCIe NVMe _(for MacOS)_ and 500GB PCIe NVMe _(for Windows games)_                                               |
-|     **HDD RAID**      | **2 x [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/)** 2TB HDD 3.5" in RAID 1 _(mirror)_                                               |
-|     **SSD**      | **[WD Green SATA SSD](https://documents.westerndigital.com/content/dam/doc-library/pt_br/assets/public/western-digital/product/internal-drives/wd-green-ssd/data-sheet-wd-green-ssd-2879-800083.pdf)** 480GB SSD 2.5" _(for Time Machine)_                                               |
+|     **NVMe**     | **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 1TB PCIe NVMe _(for Windows and Games)_ and 500GB PCIe NVMe _(for MacOS)_                                               |
+|     **HDD RAID**      | **2 x [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/)** 2TB HDD 3.5" in RAID 1 _(backups)_                                               |
+|     **SSD**      | **[WD Green SATA SSD](https://documents.westerndigital.com/content/dam/doc-library/pt_br/assets/public/western-digital/product/internal-drives/wd-green-ssd/data-sheet-wd-green-ssd-2879-800083.pdf)** 480GB SSD 2.5" _(for Ubuntu Linux)_                                               |
 |  **Coolers**  | **[Montech DT24](https://www.montechpc.com/en/products_detail.php?nid=299&s_ok2=)** CPU air cooler<br />**3 x [Fractal Aspect 12](https://www.fractal-design.com/products/fans/aspect/aspect-12/black/)** 120mm silent air case cooler _(System Fan 1, 2 and 2b)_                                                                                                      |
 | **Power Supply** | **[Super Flower LEADEX III GOLD 850W](https://www.super-flower.com.tw/ja/products/leadex-iii-gold-850w)**  _(use **[this link](https://outervision.com/power-supply-calculator)** to calculate your power supply need)_                                           |
 |     **Case**     | **[Fractal Pop Mini Silent](https://www.fractal-design.com/products/cases/pop/pop-mini-silent/black-tg-clear/)** Very silent Micro ATX case                |
@@ -77,11 +77,13 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 - Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; Package C State Limit &gt; **Auto**
 - Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CFG Lock &gt; **Disabled**
 - Advanced &gt; System Agent (SA) Configuration &gt; VT-d &gt; **Enabled**
-- Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **Legacy RTC**
+- Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **ACPI Time and Alarm Device**
 - Advanced &gt; PCH Storage Configuration &gt; SATA Mode Selection &gt; **AHCI**
 - Advanced &gt; Onboard Devices Configuration &gt; Serial Port Configuration &gt; **Off**
 - Advanced &gt; PCI Subsystem Settings &gt; Above 4G Decoding &gt; **Enabled**
-- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Disabled**
+- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
+- Advanced &gt; PCI-FW Configuration &gt; TPM Device Selection &gt; **PTT**
+- Advanced &gt; Trusted Computing &gt; Secure Device Support &gt; **Enabled**
 - Advanced &gt; USB Configuration &gt; XHCI Hand-off &gt; **Enabled**
 - Boot &gt; CSM (Compatibility Support Module) &gt; Launch CSM &gt; **Disabled**
 - Boot &gt; Secure Boot &gt; OS Type &gt; **Other OS**
@@ -191,16 +193,6 @@ pmset -g live
 The commands above **works on a real Mac** computer too, if you want deep sleeps just follow the same steps.
 
 ## Windows Notes
-
-**Important** BIOS settings for **Windows 11**:
-
-- Advanced &gt; CPU Configuration &gt; Software Guard Extensions (SGX) &gt; **Software Controlled**
-- Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **ACPI Time and Alarm Device**
-- Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
-- Advanced &gt; PCI-FW Configuration &gt; TPM Device Selection &gt; **PTT**
-- Advanced &gt; Trusted Computing &gt; Secure Device Support &gt; **Enabled**
-- Boot &gt; Secure Boot &gt; OS Type &gt; **Windows EFI mode**
-- Boot &gt; Fast Boot &gt; **Enabled**
   
 **Drivers** for this motherboard are below:
 
