@@ -3,7 +3,7 @@
 > **It's the End of Times for Hackintosh.**
 We knew this day would come. _Hackintosh is dead. Long live to the Hackintosh!_ But we'll see the sun rise for the Hackintosh one last time with **MacOS Tahoe**.
 
-This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.6 Sequoia** like an **Mac Pro** _(MacPro7,1 SMBIOS)_ **with Multiboot support** _(Windows, MacOS and Linux)_.
+This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.6.1 Sequoia** like an **Mac Pro** _(MacPro7,1 SMBIOS)_ **with Multiboot support** _(Windows, MacOS and Linux)_.
 
 ## Table of Contents
 
@@ -41,6 +41,7 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 |     **RAM**      | **2 x [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf)** 16GB DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | **[Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6)** Dedicated Video Card                                                                         |
 |     **NVMe**     | **[WD Black SN750](https://www.westerndigital.com/pt-br/products/internal-drives/wd-black-sn750-nvme-ssd#WDS250G3X0C)** 1TB PCIe NVMe _(for Windows and Games)_ and 500GB PCIe NVMe _(for MacOS)_                                               |
+|     **Bluetooth**     | **[TP-Link UB400 version 1.0](https://www.tp-link.com/en/home-networking/bluetooth-adapter/ub400/)** Bluetooth 4.0 USB adapter _(connected to HS07 USB port as internal)_                                               |
 |     **HDD RAID**      | **2 x [Seagate BarraCuda ST2000DM008-2FR102](https://www.seagate.com/br/pt/products/hard-drives/barracuda-hard-drive/)** 2TB HDD 3.5" in RAID 1 _(backups)_                                               |
 |     **SSD**      | **[WD Green SATA SSD](https://documents.westerndigital.com/content/dam/doc-library/pt_br/assets/public/western-digital/product/internal-drives/wd-green-ssd/data-sheet-wd-green-ssd-2879-800083.pdf)** 480GB SSD 2.5" _(for Ubuntu Linux)_                                               |
 |  **Coolers**  | **[Montech DT24](https://www.montechpc.com/en/products_detail.php?nid=299&s_ok2=)** CPU air cooler<br />**3 x [Fractal Aspect 12](https://www.fractal-design.com/products/fans/aspect/aspect-12/black/)** 120mm silent air case cooler _(System Fan 1, 2 and 2b)_                                                                                                      |
