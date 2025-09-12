@@ -58,6 +58,7 @@ brew install --cask zoom
 brew install --cask stats
 brew install --cask 1password
 brew install --cask 1password-cli
+brew install --cask spotify
 
 ### openvpn
 # brew install openvpn
