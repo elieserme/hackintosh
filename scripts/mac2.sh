@@ -15,11 +15,9 @@ export PATH=/Users/$USER/Library/Android/sdk/platform-tools:/Users/$USER/Library
 EZS3
 source ~/.zshrc
 
-### NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-
-### SDKMAN
-curl -s "https://get.sdkman.io" | bash
+### MISE
+curl https://mise.run | sh
+echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
 
 ### UV
 curl -LsSf https://astral.sh/uv/install.sh | sh
