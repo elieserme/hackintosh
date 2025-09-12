@@ -56,6 +56,8 @@ brew install --cask iina
 brew install --cask handbrake
 brew install --cask zoom
 brew install --cask stats
+brew install --cask 1password
+brew install --cask 1password-cli
 
 ### openvpn
 # brew install openvpn
