@@ -3,7 +3,7 @@
 > **It's the End of Times for Hackintosh.**
 We knew this day would come. _Hackintosh is dead. Long live to the Hackintosh!_ But we'll see the sun rise for the Hackintosh one last time with **MacOS Tahoe**.
 
-This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 15.6.1 Sequoia** like an **Mac Pro** _(MacPro7,1 SMBIOS)_ **with Multiboot support** _(Windows, MacOS and Linux ext4/btrfs)_.
+This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 26.0 Tahoe** like an **Mac Pro** _(MacPro7,1 SMBIOS)_ **with Multiboot support** _(Windows, MacOS and Linux ext4/btrfs)_.
 
 ## Table of Contents
 
@@ -25,6 +25,12 @@ This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | A
 
 > **Warning!**
 Custom configuration for this _specific motherboard, graphics card and NVMe listed below_. If your computer's components are different, **DO NOT USE THIS CONFIGURATION AND MAKE YOUR OWN ONE ACCORDING TO YOUR HARDWARE**.
+
+> **Important!**
+After the initial installation of macOS Tahoe, please **do not restart your computer**. Disable FileVault first, wait for the disk to be fully decrypted, and then restart your computer.
+
+> **Audio**
+Motherboard audio has been **disabled** on MacOS Tahoe. Please use monitor audio with HDMI or DisplayPort.
 
 ## Why use Mac Pro model
 - **The last standing Intel's desktop Macintosh**
