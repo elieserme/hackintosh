@@ -13,7 +13,7 @@ This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | A
 	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
-	- [MacOS 26 Tahoe setup](#macos-15-Tahoe-setup)
+	- [MacOS 26 Tahoe setup](#macos-26-tahoe-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
 	- [Windows Notes](#windows-notes)
