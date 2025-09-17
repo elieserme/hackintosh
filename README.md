@@ -13,7 +13,7 @@ This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | A
 	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
-	- [MacOS 15 Sequoia setup](#macos-15-sequoia-setup)
+	- [MacOS 15 Tahoe setup](#macos-15-Tahoe-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
 	- [Windows Notes](#windows-notes)
@@ -97,13 +97,15 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 - Boot &gt; Fast Boot &gt; **Disabled**
 - Exit &gt; **Save Changes & Reset**
   
-## MacOS 15 Sequoia setup
+## MacOS 15 Tahoe setup
 
-- Can be direct downloaded from Apple using **[App Store](https://www.apple.com/br/macos/macos-sequoia/)** on a regular MacOS computer; 
-- Make a **USB** install disk _(the example below uses a USB device named USB and makes Sequoia installation disk)_:
+- Can be direct downloaded from Apple using **[OSXDaily]([https://www.apple.com/br/macos/macos-Tahoe/](https://osxdaily.com/where-download-macos-installers/))** on a regular MacOS computer;
+- Open the installer and wait until the installer opens. Not needed to continue installation, just move on;
+- Make a **USB** install disk _(the example below uses a USB device named USB and makes Tahoe installation disk)_:
 ```bash
-sudo /Applications/Install\ macOS\ Sequoia.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
+sudo /Applications/Install\ macOS\ Tahoe.app/Contents/Resources/createinstallmedia --volume /Volumes/USB
 ```
+- After create de USB drive installation, just close the MacOS installer app;
 - **Download** the **[git repo sources](http://github.com/elieserme/hackintosh/zipball/main/)** and use the **EFI** folder **or clone it** with following command:
 
 ```bash
