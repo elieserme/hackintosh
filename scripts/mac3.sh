@@ -3,6 +3,8 @@
 ### Need HomeBrew installed first (https://brew.sh)
 ### /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
+### Need XCode install first
+
 ### wget like linux
 brew install wget
 brew install imagemagick
@@ -10,6 +12,8 @@ brew install graphicsmagick
 brew install yt-dlp
 brew install ffmpeg
 brew install libdvdcss
+brew install gettext
+brew install neofetch
 
 ### web navigation
 brew install --cask google-chrome
@@ -20,13 +24,12 @@ brew install --cask balenaetcher
 ### development
 brew install --cask visual-studio-code
 brew install --cask imageoptim
+brew install --cask figma
 brew install --cask insomnia
 brew install --cask discord
 brew install --cask intellij-idea
 brew install --cask pycharm
 brew install --cask microsoft-teams
-brew install gettext
-brew install neofetch
 brew install --cask dropbox
 brew install docker
 brew install --cask docker
@@ -47,38 +50,20 @@ brew install gh
 
 ### apps
 brew install --cask appcleaner
-brew install --cask monitorcontrol
-brew install --cask fliqlo
+brew install --cask betterdisplay
 brew install --cask gimp
 brew install --cask inkscape
 brew install --cask keka
 brew install --cask iina
 brew install --cask handbrake
 brew install --cask zoom
-brew install --cask stats
 brew install --cask 1password
 brew install --cask 1password-cli
 brew install --cask spotify
-
-### openvpn
-# brew install openvpn
-# brew install --cask openvpn-connect
+brew install --cask whatsapp
 
 ### hackintosh
 brew install --cask hackintool
-
-### awscli
-curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-sudo installer -pkg AWSCLIV2.pkg -target /
-rm AWSCLIV2.pkg
-
-### veracrypt
-brew install --cask macfuse
-brew install --cask veracrypt
-
-### NTFS support
-brew install gromgit/fuse/ntfs-3g-mac
-brew install --cask mounty
 
 ### YOUTUBE DOWNLOAD SCRIPT
 sudo tee /usr/local/bin/youtube-download > /dev/null << YZS1
@@ -154,8 +139,6 @@ fonts_list=(
   font-ubuntu-nerd-font
   font-victor-mono-nerd-font
 )
-
-brew tap homebrew/cask-fonts
 
 for font in "${fonts_list[@]}"
 do
