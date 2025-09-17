@@ -13,7 +13,7 @@ This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | A
 	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
-	- [MacOS 15 Tahoe setup](#macos-15-Tahoe-setup)
+	- [MacOS 26 Tahoe setup](#macos-15-Tahoe-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
 	- [Windows Notes](#windows-notes)
@@ -97,7 +97,7 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 - Boot &gt; Fast Boot &gt; **Disabled**
 - Exit &gt; **Save Changes & Reset**
   
-## MacOS 15 Tahoe setup
+## MacOS 26 Tahoe setup
 
 - Can be direct downloaded from Apple using **[OSXDaily]([https://www.apple.com/br/macos/macos-Tahoe/](https://osxdaily.com/where-download-macos-installers/))** on a regular MacOS computer;
 - Open the installer and wait until the installer opens. Not needed to continue installation, just move on;
