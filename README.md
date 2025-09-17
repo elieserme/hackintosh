@@ -99,7 +99,7 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
   
 ## MacOS 26 Tahoe setup
 
-- Can be direct downloaded from Apple using **[OSXDaily]([https://www.apple.com/br/macos/macos-Tahoe/](https://osxdaily.com/where-download-macos-installers/))** on a regular MacOS computer;
+- Can be direct downloaded from Apple using **[OSXDaily downloads](https://osxdaily.com/where-download-macos-installers/)** on a MacOS computer;
 - Open the installer and wait until the installer opens. Not needed to continue installation, just move on;
 - Make a **USB** install disk _(the example below uses a USB device named USB and makes Tahoe installation disk)_:
 ```bash
