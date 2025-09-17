@@ -79,6 +79,7 @@ brew install --cask whatsapp
 brew install --cask transmission
 brew install --cask cyberduck
 brew install --cask balenaetcher
+brew install --cask stats
 
 ### hackintosh
 brew install --cask hackintool
