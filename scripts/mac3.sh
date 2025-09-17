@@ -17,9 +17,6 @@ brew install neofetch
 
 ### web navigation
 brew install --cask google-chrome
-brew install --cask transmission
-brew install --cask cyberduck
-brew install --cask balenaetcher
 
 ### development
 brew install --cask visual-studio-code
@@ -61,6 +58,9 @@ brew install --cask 1password
 brew install --cask 1password-cli
 brew install --cask spotify
 brew install --cask whatsapp
+brew install --cask transmission
+brew install --cask cyberduck
+brew install --cask balenaetcher
 
 ### hackintosh
 brew install --cask hackintool
