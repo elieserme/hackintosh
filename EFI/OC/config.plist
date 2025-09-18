@@ -86,32 +86,9 @@
 				<key>Path</key>
 				<string>SSDT-SBUS-MCHC.aml</string>
 			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Replacement DMAR table with Reserved Memory Regions stripped</string>
-				<key>Enabled</key>
-				<true/>
-				<key>Path</key>
-				<string>DMAR.aml</string>
-			</dict>
 		</array>
 		<key>Delete</key>
-		<array>
-			<dict>
-				<key>All</key>
-				<false/>
-				<key>Comment</key>
-				<string>Drop DMAR Table</string>
-				<key>Enabled</key>
-				<true/>
-				<key>OemTableId</key>
-				<data>AAAAAAAAAAA=</data>
-				<key>TableLength</key>
-				<integer>0</integer>
-				<key>TableSignature</key>
-				<data>RE1BUg==</data>
-			</dict>
-		</array>
+		<array/>
 		<key>Patch</key>
 		<array>
 			<dict>
@@ -343,7 +320,7 @@
 			<key>AvoidRuntimeDefrag</key>
 			<true/>
 			<key>ClearTaskSwitchBit</key>
-			<false/>			
+			<false/>
 			<key>DevirtualiseMmio</key>
 			<true/>
 			<key>DisableSingleUser</key>
@@ -357,7 +334,7 @@
 			<key>EnableWriteUnprotector</key>
 			<false/>
 			<key>FixupAppleEfiImages</key>
-			<true/>			
+			<true/>
 			<key>ForceBooterSignature</key>
 			<false/>
 			<key>ForceExitBootServices</key>
@@ -397,11 +374,6 @@
 			<dict>
 				<key>pci-aspm-default</key>
 				<data>AgEAAA==</data>
-			</dict>
-			<key>PciRoot(0x0)/Pci(0x1F,0x3)</key>
-			<dict>
-				<key>layout-id</key>
-				<integer>1</integer>
 			</dict>
 		</dict>
 		<key>Delete</key>
@@ -592,7 +564,7 @@
 			<key>DisableIoMapper</key>
 			<true/>
 			<key>DisableIoMapperMapping</key>
-			<true/>			
+			<false/>
 			<key>DisableLinkeditJettison</key>
 			<true/>
 			<key>DisableRtcChecksum</key>
@@ -651,7 +623,7 @@
 			<key>HideAuxiliary</key>
 			<true/>
 			<key>InstanceIdentifier</key>
-			<string></string>			
+			<string></string>
 			<key>LauncherOption</key>
 			<string>Full</string>
 			<key>LauncherPath</key>
@@ -1141,7 +1113,7 @@
 			<key>ClearScreenOnModeSwitch</key>
 			<false/>
 			<key>ConsoleFont</key>
-			<string></string>			
+			<string></string>
 			<key>ConsoleMode</key>
 			<string></string>
 			<key>DirectGopRendering</key>
@@ -1149,13 +1121,13 @@
 			<key>ForceResolution</key>
 			<false/>
 			<key>GopBurstMode</key>
-			<false/>			
+			<false/>
 			<key>GopPassThrough</key>
 			<string>Disabled</string>
 			<key>IgnoreTextInGraphics</key>
 			<false/>
 			<key>InitialMode</key>
-			<string>Auto</string>			
+			<string>Auto</string>
 			<key>ProvideConsoleGop</key>
 			<true/>
 			<key>ReconnectGraphicsOnConnect</key>
@@ -1212,7 +1184,7 @@
 			<key>OSInfo</key>
 			<false/>
 			<key>PciIo</key>
-			<false/>			
+			<false/>
 			<key>UnicodeCollation</key>
 			<false/>
 		</dict>
@@ -1245,7 +1217,7 @@
 			<key>ResizeUsePciRbIo</key>
 			<false/>
 			<key>ShimRetainProtocol</key>
-			<false/>						
+			<false/>
 			<key>TscSyncTimeout</key>
 			<integer>0</integer>
 			<key>UnblockFsConnect</key>
@@ -1254,7 +1226,7 @@
 		<key>ReservedMemory</key>
 		<array/>
 		<key>Unload</key>
-		<array/>		
-	</dict>	
+		<array/>
+	</dict>
 </dict>
 </plist>
