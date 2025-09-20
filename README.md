@@ -26,11 +26,8 @@ This is the guide for **OpenCore 1.0.5** Hackintosh build based on i7 9700KF | A
 > **Warning!**
 Custom configuration for this _specific motherboard, graphics card and NVMe listed below_. If your computer's components are different, **DO NOT USE THIS CONFIGURATION AND MAKE YOUR OWN ONE ACCORDING TO YOUR HARDWARE**.
 
-> **Important!**
-After the initial installation of macOS Tahoe, please **do not restart your computer**. Disable FileVault first, wait for the disk to be fully decrypted, and then restart your computer.
-
-> **Audio**
-Motherboard audio has been **disabled** on MacOS Tahoe. Please use monitor audio with HDMI or DisplayPort.
+> **Audio!**
+Motherboard audio has been **disabled on MacOS Tahoe**. Please use audio through the HDMI or DisplayPort connectors on your dedicated graphics card.
 
 ## Why use Mac Pro model
 - **The last standing Intel's desktop Macintosh**
