@@ -80,9 +80,11 @@ brew install --cask transmission
 brew install --cask cyberduck
 brew install --cask balenaetcher
 brew install --cask stats
+brew install --cask fliqlo
 
 ### hackintosh
 brew install --cask hackintool
+brew install --cask silentknight
 
 ### YOUTUBE DOWNLOAD SCRIPT
 sudo tee /usr/local/bin/youtube-download > /dev/null << YZS1
