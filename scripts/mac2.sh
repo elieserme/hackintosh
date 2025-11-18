@@ -12,6 +12,12 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 sed -i'.zshrc_backup1' 's/plugins=(git)/plugins=(git zsh-autosuggestions)/g' ~/.zshrc
 sed -i'.zshrc_backup2' 's/robbyrussell/agnoster/g' ~/.zshrc
 
+### python config
+cat >> ~/.zshrc << EZS3
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONUTF8=1
+EZS3
+
 ### tools like linux
 brew install wget
 brew install imagemagick
