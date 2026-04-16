@@ -197,32 +197,11 @@ The commands above **works on a real Mac** computer too, if you want deep sleeps
 
 ## Windows Notes
   
-**Drivers** for this motherboard are below:
-
-- **Download [Intel INF Driver](https://raw.github.com/elieserme/hackintosh/main/b360-g/drivers/DRV_Chipset_Intel_TP_W11_64_V101188368283_20211022R.zip)** _**(required)**_
-- **Download [Latest AMD Graphics Driver](https://www.amd.com/pt/support/graphics/amd-radeon-6000-series/amd-radeon-6600-series/amd-radeon-rx-6600-xt)** _**(required)**_
 - **Download [Apple TimeCapsule Driver](https://raw.github.com/elieserme/hackintosh/main/b360-g/drivers/AirPortSetup.exe) _(optional)_**
 - **Download [Windows EFI Mounter](https://raw.github.com/elieserme/hackintosh/main/b360-g/drivers/WinEFIMounter-static.exe) _(optional)_**
 
 > **TimeCapsule on Windows:**
 To use TimeCapsule driver, first enable the **SMB 1.0/CIFS** on Windows (use the _**Turn Windows features on or off**_ dialog for this). The same apply if you have a Windows file server that will be accessed by a MacOS machine or vice-versa.
-
-If you experience difference in date & time on Windows, it's necessary make Windows work on GMT time using the following command:
-
-```bash
-reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_QWORD /f
-```
-
-To increase Windows performance you can disable Downfall mitigations:
-
-```bash
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 33554432 /f
-```
-
-You also can **Turn off Memory Integrity on Windows 11** to avoid problems on Opencore boot _(and increase gamming performance)_:
-
-- Select **Start**, enter ‘**Core Isolation**’ in the taskbar, and select **Core Isolation** from the list of results to open the Windows security app;
-- On the **Core isolation** page, _**turn off** the toggle_ for **Memory Integrity**. You might need to restart the computer. 
 
 ## Final Steps
 
