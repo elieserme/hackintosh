@@ -84,7 +84,7 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 - Advanced &gt; PCI Subsystem Settings &gt; Above 4G Decoding &gt; **Enabled**
 - Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
 - Advanced &gt; PCI-FW Configuration &gt; TPM Device Selection &gt; **PTT**
-- Advanced &gt; Trusted Computing &gt; Secure Device Support &gt; **Enabled**
+- Advanced &gt; Trusted Computing &gt; Secure Device Support &gt; **Disabled**
 - Advanced &gt; USB Configuration &gt; XHCI Hand-off &gt; **Enabled**
 - Boot &gt; CSM (Compatibility Support Module) &gt; Launch CSM &gt; **Disabled**
 - Boot &gt; Secure Boot &gt; OS Type &gt; **Other OS**
