@@ -3,7 +3,7 @@
 > **It's the End of Times for Hackintosh.**
 We knew this day would come. _Hackintosh is dead. Long live to the Hackintosh!_ But we'll see the sun rise for the Hackintosh one last time with **MacOS Tahoe**.
 
-This is the guide for **OpenCore 1.0.7** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 26.4.1 Tahoe** like an **Mac Pro** _(MacPro7,1 SMBIOS)_ **with Multiboot support** _(Windows, MacOS and Linux ext4/btrfs)_.
+This is the guide for **OpenCore 1.0.7** Hackintosh build based on i7 9700KF | ASUS B360-G Gaming | Radeon RX 6600XT | 32GB RAM | running **MacOS 26.4.1 Tahoe** like an **Mac Pro** _(MacPro7,1 SMBIOS)_.
 
 ## Table of Contents
 
