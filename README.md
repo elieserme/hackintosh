@@ -246,3 +246,28 @@ Using Sonoma 14.4 and later, every time you update MacOS, you need to first disa
 +	<false/>
 ```
 
+- After **disable FileVault 2** you can remove the patch enabled by default:
+
+```diff
+<dict>
+	<key>Arguments</key>
+	<string></string>
+	<key>Comment</key>
+	<string>apfs_aligned.efi</string>
+	<key>Enabled</key>
+-	<true/>
++	<false/>
+	<key>LoadEarly</key>
+	<false/>
+	<key>Path</key>
+	<string>apfs_aligned.efi</string>
+</dict>
+```
+
+and
+
+```diff
+	<key>EnableJumpstart</key>
+-	<false/>
++	<true/>
+```
