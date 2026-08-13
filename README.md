@@ -54,11 +54,12 @@ Motherboard audio has been **disabled on MacOS Tahoe**. Please use audio through
 ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 
 - Exit &gt; **Load optimised defaults**
-- Advanced &gt; Platform Misc Configuration &gt; PCI Express Native Power Management &gt; **Disabled**
-- Advanced &gt; Platform Misc Configuration &gt; PCH DMI ASPM &gt; **Disabled**
-- Advanced &gt; Platform Misc Configuration &gt; ASPM 0 &gt; **Disabled**
+- Advanced &gt; Platform Misc Configuration &gt; PCI Express Native Power Management &gt; **Enabled**
+- Advanced &gt; Platform Misc Configuration &gt; Native ASPM &gt; **Enabled**
+- Advanced &gt; Platform Misc Configuration &gt; PCH DMI ASPM &gt; **Auto**
+- Advanced &gt; Platform Misc Configuration &gt; ASPM 0 &gt; **Auto**
 - Advanced &gt; Platform Misc Configuration &gt; L1 Substates &gt; **Disabled**
-- Advanced &gt; Platform Misc Configuration &gt; PCI Express Clock Gating &gt; **Disabled**
+- Advanced &gt; Platform Misc Configuration &gt; PCI Express Clock Gating &gt; **Enabled**
 - Advanced &gt; Platform Misc Configuration &gt; DMI Link ASPM Control &gt; **Disabled**
 - Advanced &gt; Platform Misc Configuration &gt; PEG - ASPM &gt; **Disabled**
 - Advanced &gt; CPU Configuration &gt; Software Guard Extensions (SGX) &gt; **Disabled**
