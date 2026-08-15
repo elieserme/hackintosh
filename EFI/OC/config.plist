@@ -64,6 +64,14 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>SSDT-RTCAWAC.aml</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-RTCAWAC.aml</string>
+			</dict>			
+			<dict>
+				<key>Comment</key>
 				<string>SSDT to disable USB RHUB/HUBN/URTH and rename devices</string>
 				<key>Enabled</key>
 				<true/>
@@ -78,9 +86,32 @@
 				<key>Path</key>
 				<string>SSDT-SBUS-MCHC.aml</string>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Replacement DMAR table with Reserved Memory Regions stripped</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>DMAR.aml</string>
+			</dict>			
 		</array>
 		<key>Delete</key>
-		<array/>
+		<array>
+			<dict>
+				<key>All</key>
+				<false/>
+				<key>Comment</key>
+				<string>Drop DMAR Table</string>
+				<key>Enabled</key>
+				<true/>
+				<key>OemTableId</key>
+				<data>AAAAAAAAAAA=</data>
+				<key>TableLength</key>
+				<integer>0</integer>
+				<key>TableSignature</key>
+				<data>RE1BUg==</data>
+			</dict>
+		</array>
 		<key>Patch</key>
 		<array>
 			<dict>
