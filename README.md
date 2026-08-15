@@ -81,6 +81,7 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 - Advanced &gt; System Agent (SA) Configuration &gt; VT-d &gt; **Enabled**
 - Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **Legacy RTC**
 - Advanced &gt; PCH Storage Configuration &gt; SATA Mode Selection &gt; **AHCI**
+- Advanced &gt; Onboard Devices Configuration &gt; HD Audio &gt; **Disabled**
 - Advanced &gt; Onboard Devices Configuration &gt; Serial Port Configuration &gt; **Off**
 - Advanced &gt; PCI Subsystem Settings &gt; Above 4G Decoding &gt; **Enabled**
 - Advanced &gt; PCI Subsystem Settings &gt; Re-Size BAR Support &gt; **Auto**
