@@ -13,6 +13,7 @@ This is the guide for **OpenCore 1.0.7** Hackintosh build based on i7 9700KF | A
 	- [Why use Mac Pro model](#why-use-mac-pro-model)
 	- [Hardware](#hardware)
 	- [BIOS settings](#bios-settings)
+	- [Display settings](#display-settings)
 	- [MacOS 26 Tahoe setup](#macos-26-tahoe-setup)
 	- [USB Ports](#usb-ports)
 	- [Sleep](#sleep)
@@ -40,7 +41,7 @@ Motherboard audio has been **disabled on MacOS Tahoe**. Please use audio through
 |       Type       | Item                                                                                                                                                                                             |
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |     **CPU**      | **[Intel i7 9700KF](https://www.intel.com.br/content/www/br/pt/products/sku/190885/intel-core-i79700kf-processor-12m-cache-up-to-4-90-ghz/specifications.html)** 9th gen 8 core 3,6GHz with Turbo Boost up to 4,9GHz          |
-| **Motherboard**  | **[ASUS ROG STRIX B360-G Gaming](https://rog.asus.com/motherboards/rog-strix/rog-strix-b360-g-gaming-model/)** Micro ATX                                                                                                |
+| **Motherboard**  | **[ASUS ROG STRIX B360-G Gaming](https://rog.asus.com/motherboards/rog-strix/rog-strix-b360-g-gaming-model/)** Micro ATX see **[recommended settings](#bios-settings)**                                                                                               |
 |     **RAM**      | **2 x [Kingston KVR26N19D8/16](https://www.kingston.com/datasheets/KVR26N19D8_16.pdf)** 16GB DDR4 2666MHz _(native jedec speed without XMP profile)_                                                                   |
 |     **GPU**      | **[Sapphire RX 6600XT 8GB](https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-6600-xt-8g-gddr6)** Dedicated Video Card                                                                         |
 |     **NVMe**     | **[SSSTC CA5-8D256](https://www.ssstc.com)** 256GB PCIe NVMe                                               |
@@ -48,6 +49,7 @@ Motherboard audio has been **disabled on MacOS Tahoe**. Please use audio through
 |  **Coolers**  | **[Montech DT24](https://www.montechpc.com/en/products_detail.php?nid=299&s_ok2=)** CPU air cooler<br />**3 x [Fractal Aspect 12](https://www.fractal-design.com/products/fans/aspect/aspect-12/black/)** 120mm silent air case cooler _(System Fan 1, 2 and 2b)_                                                                                                      |
 | **Power Supply** | **[Corsair CX550](https://www.corsair.com/br/pt/p/psu/cp-9020121-ww/cx-series-cx550-550-watt-80-plus-bronze-certified-atx-psu-ww-cp-9020121-ww)**  _(use **[this link](https://www.corsair.com/ww/en/s/power-supply-calculator)** to calculate your power supply need)_                                           |
 |     **Case**     | **[Fractal Pop Mini Silent](https://www.fractal-design.com/products/cases/pop/pop-mini-silent/black-tg-clear/)** Very silent Micro ATX case                |
+|     **Display**     | **[Samsung LU28R55](https://www.samsung.com/br/monitors/high-resolution/uhd-monitor-28-inch-lu28r550uqlmzd//)** 28,5 inch 4K (3840x2160) see **[recommended settings](#display-settings)**               |
 
 ## BIOS settings
 
@@ -92,7 +94,11 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 - Boot &gt; Secure Boot &gt; OS Type &gt; **Other OS**
 - Boot &gt; Fast Boot &gt; **Disabled**
 - Exit &gt; **Save Changes & Reset**
-  
+
+## Display Settings
+
+- System &gt; FreeSync &gt; **Off**
+
 ## MacOS 26 Tahoe setup
 
 - Can be direct downloaded from Apple using **[OSXDaily downloads](https://osxdaily.com/where-download-macos-installers/)** on a MacOS computer;
