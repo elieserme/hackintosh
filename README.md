@@ -76,7 +76,7 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 - Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C8 Report &gt; **Enabled**
 - Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C9 Report &gt; **Enabled**
 - Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CPU C10 Report &gt; **Enabled**
-- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; Package C State Limit &gt; **Auto**
+- Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; Package C State Limit &gt; **C10**
 - Advanced &gt; CPU Configuration &gt; CPU Power Management Control &gt; CFG Lock &gt; **Disabled**
 - Advanced &gt; System Agent (SA) Configuration &gt; VT-d &gt; **Enabled**
 - Advanced &gt; PCH Configuration &gt; System Time and Alarm Source &gt; **Legacy RTC**
