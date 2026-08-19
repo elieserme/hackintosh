@@ -97,6 +97,8 @@ ASUS ROG STRIX B360-G Gaming using **BIOS version 3101** settings for MacOS:
 
 ## Display Settings
 
+Samsung 28,5" 4K model LU28R550UQLMZD **Firmware version 1007.1** settings for MacOS:
+
 - System &gt; FreeSync &gt; **Off**
 
 ## MacOS 26 Tahoe setup
