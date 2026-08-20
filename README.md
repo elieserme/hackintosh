@@ -30,6 +30,9 @@ Custom configuration for this _specific motherboard, graphics card and NVMe list
 > **Audio!**
 Motherboard audio has been **disabled on MacOS Tahoe**. Please use audio through the HDMI or DisplayPort connectors on your dedicated graphics card.
 
+> **Network!**
+This setup uses Apple VT-d and somente race condition can happen on start with DHCP client (10-20 seconds delay to obtain IP address on ethernet adapter). To avoid this lag use static IP on network config.
+
 ## Why use Mac Pro model
 - **The last standing Intel's desktop Macintosh**
 - **AMD GPU** for full performance;
